@@ -13,13 +13,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { FormularioRecuperaCuentaComponent } from './components/formulario-recupera-cuenta/formulario-recupera-cuenta.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     BaseAuthComponent,
-    MensajeLoginComponent
+    MensajeLoginComponent,
+    FormularioRecuperaCuentaComponent
   ],
   imports: [
     CommonModule,
