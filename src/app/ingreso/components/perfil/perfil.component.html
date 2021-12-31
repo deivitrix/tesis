@@ -1,0 +1,101 @@
+<div class="separador"></div>
+<div class="container-fluid wrapper fadeInDown">
+    <div class="formContent rounded">
+        <h2 class="active"> <span class="titulo">Datos del Usuario</span></h2>
+        <div class="fadeIn first">
+             <!-- body -->
+             <ng-container *ngIf="loading">
+             <app-loading></app-loading>
+             </ng-container>
+             
+             <ng-container  *ngIf="loading==false">
+                   
+                    <div class="foto-container">
+                        <div class="container-foto ">
+                            <img  class="foto" [src]="foto" alt="" width="20%">
+                        </div>
+                        
+                        <div class="container-button">
+                            <input  class="btn_enviar"type="file" (change)="fileEvent($event)" accept="image/png,image/jpeg">
+                            <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 -1 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                              </svg></p>
+                        </div>
+                     </div>
+
+                     <form [formGroup]="myForm" autocomplete="off">
+                        <div class="row container1">
+                            <div class="col-sm">
+                                    <mat-form-field class="container-fill" appearance="fill" >
+                                        <mat-label>Cedula</mat-label>
+                                        <input matInput formControlName="cedula" >
+                                      </mat-form-field>
+                                   
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Nombres</mat-label>
+                                    <input matInput  formControlName="nombres">
+                                  </mat-form-field>
+
+                                  <div *ngIf="myForm.get('nombres')?.hasError('required') && myForm.get('nombres')?.touched" style="margin-top: -20px;">
+                                      <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                                  </div>
+                           </div>
+                        </div>
+                        <div class="row container2">
+                           <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Apellidos</mat-label>
+                                <input matInput formControlName="apellidos" >
+                              </mat-form-field>
+                              <div *ngIf="myForm.get('apellidos')?.hasError('required') && myForm.get('apellidos')?.touched" style="margin-top: -20px;">
+                                <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                            </div>
+                           </div>
+                           <div class="col-sm">
+                            <mat-form-field  class="container-fill" appearance="fill">
+                                <mat-label>Correo</mat-label>
+                                <input matInput  formControlName="correo">
+                              </mat-form-field>
+                              <div *ngIf="myForm.get('correo')?.hasError('required') && myForm.get('correo')?.touched" style="margin-top: -20px;">
+                                <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                            </div>
+                          </div>
+                       </div>
+                       <div class="row container2">
+                        <div class="col-sm">
+                         <mat-form-field class="container-fill" appearance="fill">
+                             <mat-label>Telefono</mat-label>
+                             <input matInput  formControlName="telefono">
+                           </mat-form-field>
+                           <div *ngIf="myForm.get('telefono')?.hasError('required') && myForm.get('telefono')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
+                        </div>
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Genero</mat-label>
+                                <mat-select formControlName="genero">
+                                  <mat-option value="M">Masculino</mat-option>
+                                  <mat-option value="F">Femenino</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                              <div *ngIf="myForm.get('genero')?.hasError('required') && myForm.get('genero')?.touched" style="margin-top: -20px;">
+                                <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                            </div>
+                       </div>
+                    </div>
+                    <div class="col-sm">
+                        <button (click)="GuardarDatos()" class="btn-success btn-lg float-center mb-4" type="button">Guardar</button>
+                    </div>
+
+                     </form>
+             </ng-container>
+             
+             
+        </div>
+
+    </div>
+</div>
+<div class="separador2"></div>

@@ -1,0 +1,63 @@
+
+<ng-container *ngIf="loading">
+<app-loading></app-loading>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <div class="container-fluid">
+        <div class="row card-title">
+            <div class="col-sm">
+                <h6>Quienes somos</h6>
+                <h3>Departamento de Relaciones Internacionales Convenios y Becas</h3>
+                <p>
+                    <ng-container *ngFor="let lista of listaobjetivo">
+                     {{lista.descripcion}} ...
+                    </ng-container> 
+                    <ng-container *ngIf="verificar1==false">
+                        No existe Datos en el Objetivo General
+                    </ng-container>
+                </p>
+                <a (click)="opcion_seleccionado()"class="btn btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>Ver Más</a>
+            </div>
+            <div class="col-sm">
+                <img src="{{pathMision}}" width="20%">
+                <h6>Nuestra Mision</h6>
+                <p>
+                    <ng-container *ngFor="let lista of listamision">
+                        {{lista.descripcion}} ...
+                    </ng-container> 
+                    <ng-container *ngIf="verificar2==false">
+                        No existe Datos en la Mision
+                    </ng-container>
+                </p>
+                <a  (click)="opcion_seleccionado()"class="btn btn-outline-secondary" ><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                </svg>Ver Más</a>
+            </div>
+            <div class="col-sm">
+                <img src="{{pathVision}}" width="20%">
+                <h6>Nuestra Visión</h6>
+                <p>
+                    <ng-container *ngFor="let lista of listavision">
+                        {{lista.descripcion}} ...
+                    </ng-container> 
+                    <ng-container *ngIf="verificar3==false">
+                        No existe Datos en la Vision
+                    </ng-container>
+                </p>
+                <a  (click)="opcion_seleccionado()" class="btn btn-outline-secondary"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>Ver Más</a>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+

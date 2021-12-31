@@ -1,0 +1,36 @@
+.logo
+{
+    text-align: center;
+    justify-content: center;
+    align-items: unset;
+    padding-top: 1%;
+}
+.logo img{
+    width: 150px;
+    height: 150px;
+}
+
+/* titulo */
+.title{
+    padding-top: 3%;
+    text-align: center;
+    padding-bottom: 2%;
+}
+.title h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    color: rgb(78, 73, 73);
+   
+}
+
+/* descripcion */
+
+.descripcion{
+    padding-bottom: 3%;
+}
+
+.descripcion p{
+    color: rgb(78, 73, 73);
+    text-align: justify;
+}

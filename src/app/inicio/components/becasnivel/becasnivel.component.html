@@ -1,0 +1,197 @@
+<ng-container *ngIf="loading">
+    <app-loading></app-loading>
+</ng-container>
+<ng-container *ngIf="loading==false">
+    <div class="container-fluid subtitle">
+        <h1>Becas por Nivel de Estudio</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="row imagenesresponsive">
+            <div class="col-sm crs">
+                <img src="{{pathBiblioteca}}" width="20%">
+                <h5>Biblioteca <br> Virtual
+                </h5>
+                <p>Bibliotecas<br>
+                    Internacionales <br>
+                </p>
+                <a (click)="opcion_seleccionado('Bibliotecavirtual')"class="btn btn-outline-success">Ver Más</a>
+            </div>
+            <div class="col-sm crs">
+                <img src="{{pathCapacitaciones}}" width="25%">
+                <h5>Capacitaciones</h5>
+                <ng-container *ngIf="auxc==0">
+                     <p>No hay Datos<br>
+                        <br>
+                        <br>
+                     </p>
+                    <a class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxc==1">
+                    <p>{{listaC[0].nombre}} <br>
+                    <br>
+                    <br>
+                   </p>
+                   <a (click)="opcion_seleccionado('Capacitaciones')"class="btn btn-outline-success">Ver Más</a>
+                   </ng-container>
+                   <ng-container *ngIf="auxc==2">
+                    <p>{{listaC[0].nombre}} <br>
+                      {{listaC[1].nombre}} <br>
+                       <br>
+                    </p>
+                    <a (click)="opcion_seleccionado('Capacitaciones')"class="btn btn-outline-success">Ver Más</a>
+                   </ng-container>
+
+                   <ng-container *ngIf="auxc==3">
+                    <p>{{listaC[0].nombre}} <br>
+                        {{listaC[1].nombre}} <br>
+                        {{listaC[2].nombre}}
+                      </p>
+                      <a (click)="opcion_seleccionado('Capacitaciones')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+            </div>
+            <div class="col-sm crs">
+                <img src="{{pathPregrado}}" width="25%">
+                <h5>Pregrado</h5>
+                <ng-container *ngIf="auxp==0">
+                    <p>
+                    No hay Datos<br>
+                    <br>
+                    <br>
+                    </p>
+                    <a class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxp==1">
+                    <p>{{listaP[0].nombre}} <br>
+                    <br>
+                    <br>
+                   </p>
+                   <a (click)="opcion_seleccionado('Pregrado')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxp==2">
+                    <p>{{listaP[0].nombre}} <br>
+                      {{listaP[1].nombre}} <br>
+                       <br>
+                    </p>
+                    <a (click)="opcion_seleccionado('Pregrado')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxp==3">
+                    <p>{{listaP[0].nombre}} <br>
+                        {{listaP[1].nombre}} <br>
+                        {{listaP[2].nombre}}
+                      </p>
+                      <a (click)="opcion_seleccionado('Pregrado')"class="btn btn-outline-success">Ver Más</a>
+    
+                </ng-container>
+            </div>
+            <div class="col-sm crs">
+                <img src="{{pathInvestigacion}}" width="25%">
+                <h5>Investigacion</h5>
+                <ng-container *ngIf="auxi==0">
+                    <p>
+                    No hay Datos<br>
+                    <br>
+                    <br>
+                    </p>
+                    <a class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxi==1">
+                    <p>{{listaI[0].nombre}} <br>
+                    <br>
+                    <br>
+                   </p>
+                   <a (click)="opcion_seleccionado('Investigacion')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxi==2">
+                    <p>{{listaI[0].nombre}} <br>
+                      {{listaI[1].nombre}} <br>
+                       <br>
+                    </p>
+                    <a (click)="opcion_seleccionado('Investigacion')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxi==3">
+                    <p>{{listaI[0].nombre}} <br>
+                        {{listaI[1].nombre}} <br>
+                        {{listaI[2].nombre}}
+                      </p>
+                      <a (click)="opcion_seleccionado('Investigacion')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+            </div>
+            <div class="col-sm crs imagen4">
+                <img src="{{pathMaestria}}" width="25%">
+                <h5>Maestrías</h5>
+                <ng-container *ngIf="auxm==0">
+                    <p>
+                    No hay Datos<br>
+                    <br>
+                    <br>
+                    </p>
+                    <a class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxm==1">
+                    <p>{{listaM[0].nombre}} <br>
+                    <br>
+                    <br>
+                   </p>
+                   <a (click)="opcion_seleccionado('Maestrias')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxm==2">
+                    <p>{{listaM[0].nombre}} <br>
+                      {{listaM[1].nombre}} <br>
+                       <br>
+                    </p>
+                    <a (click)="opcion_seleccionado('Maestrias')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxm==3">
+                    <p>{{listaM[0].nombre}} <br>
+                        {{listaM[1].nombre}} <br>
+                        {{listaM[2].nombre}}
+                      </p>
+                      <a (click)="opcion_seleccionado('Maestrias')"class="btn btn-outline-success">Ver Más</a>
+                </ng-container>
+            </div>
+            <div class="col-sm crs imagen5">
+                <img src="{{pathDoctorado}}" width="25%">
+                <h5>Doctorados</h5>
+                <ng-container *ngIf="auxd==0">
+                   <p>
+                    No hay Datos<br>
+                    <br>
+                    <br>
+                   </p>
+                    <a  class="btn btn-outline-success" >Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxd==1">
+                    <p>{{listaD[0].nombre}} <br>
+                    <br>
+                    <br>
+                   </p>
+                   <a (click)="opcion_seleccionado('Doctorados')" class="btn btn-outline-success" >Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxd==2">
+                    <p>{{listaD[0].nombre}} <br>
+                      {{listaD[1].nombre}} <br>
+                       <br>
+                    </p>
+                    <a (click)="opcion_seleccionado('Doctorados')" class="btn btn-outline-success" >Ver Más</a>
+                </ng-container>
+                <ng-container *ngIf="auxd==3">
+                    <p>{{listaD[0].nombre}} <br>
+                        {{listaD[1].nombre}} <br>
+                        {{listaD[2].nombre}}
+                      </p>
+                      <a (click)="opcion_seleccionado('Doctorados')" class="btn btn-outline-success" >Ver Más</a>
+    
+                </ng-container>
+       
+            </div>
+
+
+        </div>
+    </div>
+    
+
+</ng-container>
+
+
+
+

@@ -1,0 +1,59 @@
+<div class="separador"></div>
+<div class="container-fluid wrapper fadeInDown"> 
+    <div class="formContent rounded">
+        <h2 class="active"> <span class="titulo">Reseteo de Contraseña</span></h2>
+        <div class="fadeIn first">
+            <ng-container *ngIf="loading">
+               <app-loadingconfiguracion></app-loadingconfiguracion>
+            </ng-container>
+            <ng-container  *ngIf="loading==false">
+                <div class="foto-container">
+                    <div class="container-foto ">
+                        <img  class="foto" [src]="foto" alt="" width="20%">
+                    </div>
+                 </div>
+                
+                 <form [formGroup]="myForm" autocomplete="off">
+                    <div class="col-sm mb-2">
+                        <mat-form-field class="container-fill" appearance="fill" >
+                            <mat-label>Contraseña actual</mat-label>
+                            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="actual">
+                            <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </mat-form-field>
+                        <div *ngIf="myForm.get('actual')?.hasError('required') && myForm.get('actual')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-sm mb-2">
+                        <mat-form-field class="container-fill" appearance="fill" >
+                            <mat-label>Contraseña nueva </mat-label>
+                            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="nueva">
+                            <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </mat-form-field>
+                        <div *ngIf="myForm.get('nueva')?.hasError('required') && myForm.get('nueva')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm mb-2">
+                        <mat-form-field class="container-fill" appearance="fill" >
+                            <mat-label>Confirmacion Contraseña nueva </mat-label> 
+                            <input matInput [type]="hide3 ? 'password' : 'text'" formControlName="confirmacion">
+                            <mat-icon matSuffix (click)="hide3 = !hide3">{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </mat-form-field>
+                        <div *ngIf="myForm.get('confirmacion')?.hasError('required') && myForm.get('confirmacion')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <button (click)="GuardarDatos()" class="btn-success btn-lg float-center mb-4" type="button">Guardar</button>
+                    </div>
+    
+                 </form> 
+
+            </ng-container>
+        
+        </div>
+    </div>
+
+</div>

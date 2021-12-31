@@ -1,0 +1,59 @@
+.logo
+{
+    text-align: center;
+    justify-content: center;
+    align-items: unset;
+    padding-top: 2%;
+    padding-bottom: 3%;
+}
+.logo img{
+    width: 150px;
+    height: 150px;
+}
+
+.marco{
+    text-align:center;
+}
+.marco-internacional{
+    text-align: center;
+}
+.especifico{
+    text-align: center;
+}
+.reglamento{
+    text-align: center;
+}
+
+@media(max-width:68.75em)
+{
+    .reglamento{
+        padding-top: 3%;
+    }
+
+}
+
+@media(max-width:52.93em){
+    .especifico{
+        padding-top: 3%;
+    }
+
+}
+
+@media(max-width:36.68em) {
+    .marco{
+        text-align: center;
+    }
+    .marco-internacional{
+        padding-right: 5%;
+        padding-top: 2%;
+        text-align: center;
+    }
+    .especifico{
+        text-align: center;
+    }
+    .reglamento{
+        text-align: center;
+    }
+
+    
+}

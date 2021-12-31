@@ -1,1 +1,160 @@
 /* You can add global styles to this file, and also import other style files */
+
+.b1{
+    border: 1px solid red;
+}
+
+.activa-link{
+    border-bottom: 2px solid green;
+    /* color: chartreuse !important; */
+}
+
+.activa-link2{
+  border-bottom: 2px solid rgb(62, 178, 207);
+}
+.activa-link3{
+  border-bottom: 2px solid rgb(62, 178, 207);
+}
+
+body{
+  
+  background-color: #fff;;
+}
+
+/* html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+.error.mat-snack-bar-container{
+    background: #c74e54;
+    color: white;
+}
+.success.mat-snack-bar-container{
+    background: #31ac41;
+    color: white;
+}
+
+ Un comentario
+ header{
+    position: fixed;
+    /* width: 100%; */
+    top: 0;
+    left: 0;
+    padding: 20px;
+    background: #dfe4e9;
+  }
+  
+  
+  
+  .navegacion{
+    position: absolute; 
+    top: 15%;
+    left: 0;
+    width: 30%;
+    background: rgb(245, 248, 245);
+  
+  }
+  
+  .navegacion ul{
+    width: 214px;
+    height: 100%;
+    background: #fff;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    left: -320px;
+  
+    transition: left .3s;
+  }
+  
+  .navegacion .menu li.title-menu{
+    padding: 20px;
+    background: #3f413f;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .navegacion .menu a{
+    display: block;
+    padding: 20px;
+    border-bottom: 1px solid #C6D0DA;
+    font-size: 18px;
+    font-weight: 200;
+    text-decoration: none;
+    color: rgb(31, 29, 29);
+
+  }
+  
+  .navegacion .menu a:hover{
+    background: #9cb2c9;
+    color: rgb(61, 57, 57);
+  }
+  
+  .navegacion .menu li span.icon-menu{
+    margin-right: 12px;
+  }
+  
+  .navegacion .menu .item-submenu > a::after{
+    /* font: normal normal normal 14px/1 FontAwesome; */
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    content: '>';
+  
+    float: right;
+    color: #3f3c3c;
+  }
+  
+  /* Submenu ============*/
+  
+  .navegacion .submenu li.title-menu{
+    background: rgb(56, 55, 55);
+    color: #d8dadd;
+    text-align: center;
+  }
+
+  .menuA{
+    height: 50%;
+
+  }
+  
+  .navegacion .submenu li.go-back{
+    padding: 10px 20px;
+    background: #5F6F81;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .navegacion .submenu li.go-back::before{
+    font: normal normal normal 14px/1 FontAwesome;
+      font-size: inherit;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    content: '<';
+    margin-right: 10px;
+  }
+  
+  .l-cero{
+    left: 0px !important;
+  }
+  
+  .l-minus-320{
+    left: -320px !important;
+  }
+  
+  .op-0{
+      opacity: 0;
+  }
+
+  .op-1{
+      opacity: 1;
+  }
+  
+  @media screen and (max-width: 320px){
+    .navegacion ul{
+      width: 100%;
+    }
+  }

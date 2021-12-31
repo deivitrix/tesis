@@ -1,0 +1,192 @@
+.header-0{
+    order:0;
+    flex:0 1 auto;
+    align-self:auto;
+    height:auto;
+    width:auto;
+    margin: 15px 0px 0px 0px;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+}
+.fondomenu{
+  padding: 2px 2px;
+  display: none;
+}
+/* menu */
+
+
+
+.uni{
+    color: white;
+    text-decoration: none;
+    font-size: 8;
+    text-decoration: none;
+}
+.mail{
+    text-decoration: none;
+    color: white;
+
+    }
+    .mail:hover{
+        color: white;
+        text-decoration: none;
+    }
+.text{
+    font-size: 2;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+}
+.fb{
+    margin: -15px 0px 0px 0px;
+    
+}
+.login{
+    margin: 0px 0px 0px -60px;
+}
+
+.tw{
+  margin: -15px 0px 0px 0px;
+  }
+.in{
+  margin: -15px 0px 0px 0px;
+  }
+
+  .header-1{
+    order:0;
+    flex:0 1 auto;
+    align-self:auto;
+    color: white;
+    text-align: start;
+  }
+
+  .headerbuttonlogin{
+      
+    order:0;
+    flex:0 1 auto;
+    align-self:auto;
+    color: white;
+    text-align: start;
+    margin-top: 5px;
+  }
+ 
+  .menu{
+    margin: 0 40px 0 0;
+    font-size: 26px;
+    line-height: 70px;
+    display: none;
+  }
+
+
+
+
+
+  /* Reposive */
+  @media  (max-width:60em)
+  {
+    .pantallaminima{
+      display: none;
+    }
+
+
+    /*menu de iconos*/
+   .fondomenu{
+     display: block;
+   }
+
+   .menupri{
+      padding: 0;
+      display: flex;
+      justify-content: center;
+   }
+
+   .container-fluid{
+    margin: 0;
+    background:#004600;
+    
+    
+   }
+
+   .fondomenu ul{
+       margin: 0;
+       padding: 0;
+       list-style: none;
+       overflow: hidden;
+       background-color: #004600;
+   }
+
+   .fondomenu ul a{
+       display: block;
+       padding: 15px;
+      
+   }
+   .fondomenu ul a:hover{
+       background-color: rgb(67, 99, 79);
+   }
+   .menupri{
+       clear: both;
+       max-height: 0;
+       transition: max-height .2s ease-out;
+   }
+   .fondomenu .menu-icon{
+      
+       padding: 18px 18px;
+       position: relative;
+       float: left;
+       cursor: pointer;
+   }
+   .fondomenu .menu-icon .nav-icon{
+       background: rgb(248, 242, 242);
+       display: block;
+       height: 2px;
+       width: 18px;
+       position: relative;
+       transition: background .2s ease-out;
+   }
+   .fondomenu .menu-icon .nav-icon:before{
+    background: rgb(248, 242, 242);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+    top: 5px;
+   }
+   .fondomenu .menu-icon .nav-icon:after{
+    background: rgb(248, 242, 242);
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+    top: -5px;
+   }
+   .fondomenu .menu-btn{
+       display: none;
+   }
+   .fondomenu .menu-btn:checked ~ .menupri{
+        max-height: 80px;
+   }
+   .fondomenu .menu-btn:checked ~.menu-icon .nav-icon{
+    background: transparent;
+   }
+   .fondomenu .menu-btn:checked ~.menu-icon .nav-icon:before{
+       transform:rotate(-45deg);
+       top: 0;
+   }
+   .fondomenu .menu-btn:checked ~.menu-icon .nav-icon:after{
+    transform:rotate(45deg);
+    top: 0;
+   }
+
+  }
+
+
+
+
+
+
+  

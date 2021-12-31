@@ -1,0 +1,181 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.header_nav2{
+    background-color: #fff;
+    box-shadow: 0.5px 0.5px 2px 0 rgba(0, 0, 0, 0.1);
+    /* position: fixed; */
+    width: 100%;
+    z-index: 3;
+}
+a{
+    color: #000;
+    text-decoration: none;
+}
+
+.menu1{
+    /* margin:10px 0px 0px 60px; */
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  .header_nav2 ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.header_nav2 ul a{
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+}
+.header_nav2 .menu1{
+    clear: both;
+}
+
+.header_nav2 li{
+    float: left;
+}
+
+    /* separador de los a href */
+.header_nav2 li a{
+    padding: 10px 20px;
+}
+
+/* menu la posicion */
+.header_nav2 .menu1{
+    clear: none;
+    max-height: none;
+    display: flex;
+    justify-content: center;
+}
+
+.menu1 li a{
+    display: block;
+    line-height: 2rem;
+    color: rgb(36, 34, 34);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu1 li a:hover{
+    background-color: rgb(185, 216, 224);
+        text-decoration: none;
+        border: 0.1px solid whitesmoke;
+        box-shadow: 0px -1px;
+}
+
+.header_nav2 .menu-btn1{
+        display: none;
+}
+
+
+
+@media  (max-width:73.75em)
+{ 
+
+    .header_nav2{
+        background-color: #fff;
+        box-shadow: 0.5px 0.5px 2px 0 rgba(0, 0, 0, 0.1);
+        /* position: fixed; */
+        width: 100%;
+        z-index: 3;
+        display: block;
+    }
+    .header_nav2 ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    .header_nav2 ul a{
+        display: block;
+        padding: 20px;
+        text-decoration: none;
+    }
+
+    .header_nav2 ul a:hover{
+        background-color: rgb(185, 216, 224);
+    }
+    .header_nav2 .menu1{
+        
+        clear: both;
+        display: block;
+        display: block;
+        justify-content: start;
+        max-height: 0;
+        transition:max-height .2s ease-out ;
+     }
+     .header_nav2 .menu-icon1{
+        padding: 30px 25px;
+        position: relative;
+        float: right;
+        cursor: pointer;
+    }
+    .header_nav2 .menu-icon1 .nav-icon1{
+        background-color: #333;
+        display: block;
+        height: 2px;
+        width: 18px;
+        position: relative;
+        transition: background .2s ease-out;
+    }
+
+    .header_nav2 .menu-icon1 .nav-icon1:before{
+        background: #333;
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        transition: all .2s ease-out;
+        top: 5px;
+    }
+    
+    .header_nav2 .menu-icon1 .nav-icon1:after{
+      background: #333;
+      content: "";
+      display: block;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      transition: all .2s ease-out;
+      top: -5px;
+    }
+    .header_nav2 .menu-btn1{
+        display: none;
+    }
+
+    .header_nav2 .menu-btn1:checked ~ .menu1{
+        max-height: 300px;
+      }
+       /* Animacion de la x */
+       /* El menu la trasaccion de desaparecer el icono del menu y aparezca el icono de la x */
+     
+      
+      /* primera linea */
+    .header_nav2 .menu-btn1:checked ~.menu-icon1 .nav-icon1:after{
+        transform:rotate(45deg);
+        top: 0;
+    } 
+       /* linea del medio */
+       .header_nav2 .menu-btn1:checked ~.menu-icon1 .nav-icon1{
+        background: transparent;
+      }
+      /* ultima linea */
+      .header_nav2 .menu-btn1:checked ~.menu-icon1 .nav-icon1:before{
+          transform:rotate(-45deg);
+          top: 0;
+    
+    }
+
+}
+

@@ -1,0 +1,150 @@
+
+
+.sidenav-container {
+    height: 100%;
+
+     } 
+  
+   .sidenav {
+    width: 215px;
+    background-color: rgb(170, 178, 182);
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .color-barra{
+     background-color: rgb(106, 202, 235);
+     border-color: #080808;
+  }
+  
+  .titulo{
+    color: rgb(245, 248, 245);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .logo{
+    justify-content: center;
+    padding-top: 20%;
+    cursor: pointer;
+  }
+  
+  .opciones{
+    padding-top: 15%;
+    
+  }
+  .color-button{
+    border: none;
+    outline:none;
+    background-color: rgb(106, 202, 235);
+  }
+
+  
+/* prueba */
+  .box {
+    margin: 50px auto;
+    width: 100%;
+    background-color:  #2c2b2c;
+    
+}
+.box .box-item {
+  border-bottom: 1px solid #666;
+  color: #eee;
+}
+
+.box .box-item a{
+  color: #eee;
+}
+
+.box .title {
+  margin: 0;
+  padding: 10px;
+  background-color: #434747;
+}
+.box-item-content{
+    height: 0;
+    overflow: hidden;
+    background-color: rgb(54, 49, 49);
+    margin: 0;
+    padding-left: 20px;
+    transition: 0.5s;
+}
+ul{
+    list-style: none;
+}
+ul li{
+    padding-top: 5px;
+}
+.box:hover .box-item:hover .box-item-content {
+    height: 100px;
+} 
+
+
+/* titulo de barra horizontal */
+.nav-izquierdo{
+  justify-content: end;
+  text-align: end;
+  color: green;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}
+
+.nav-izquierdo div h1{
+  font-size: 14px;
+}
+
+/* prueba */
+.spacer{
+  flex: 1 1 auto;
+}
+mat-toolbar a{
+  display: inline-block;
+  margin: 0 10px;
+  color: rgb(245, 248, 245);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+mat-toolbar a:hover{
+  cursor: none;
+}
+.fecha{
+  display: block;
+}
+
+.fechaop{
+  display: none;
+}
+
+.cargo{
+  display: block;
+}
+
+@media (max-width:48.063em){
+  .fecha{
+    display: none;
+  }
+  .fechaop{
+    display: block;
+  }
+  .cargo{
+    display: none;
+  }
+}
+
+@media(max-width:35.188em)
+{
+  .fechaop{
+    display: none;
+  }
+
+}
+

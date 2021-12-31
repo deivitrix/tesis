@@ -1,0 +1,45 @@
+<ng-container *ngIf="loading">
+  <app-loading></app-loading>
+</ng-container>
+
+<ng-container *ngIf="loading == false">
+  <div class="container-fluid logo">
+    <img src="{{ pathLogoUTM }}" alt="" />
+  </div>
+  <ng-container *ngIf="verificar">
+    <div class="container-fluid title">
+      <h1>Convenios {{ tipo }} UTM</h1>
+      <h3>{{ anio }}</h3>
+    </div>
+    <table class="table table-success table-striped ">
+      <thead>
+        <tr>
+          <th scope="col">Convenios</th>
+          <th class="filadescarga"scope="col">Descargar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let lista of listaconveniosAprobados">
+          <tr>
+            <td>{{lista.titulo_convenio}}</td>
+            <td class="filadescarga">
+              <a href="{{lista.PDF}}" class="btn btn-success" target="_blank"><span class="titulo-button">Descargar&nbsp;</span><svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download button" viewBox="0 2 18 18">
+                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>
+            </td>
+          </tr>
+         
+        </ng-container>
+      </tbody>
+    </table>
+
+
+
+
+  </ng-container>
+  <ng-container *ngIf="verificar == false">
+    <div class="container-fluid title">
+      <h1>No existen Datos del Convenio seleccionado</h1>
+    </div>
+  </ng-container>
+</ng-container>

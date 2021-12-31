@@ -1,0 +1,26 @@
+<div class="separador"></div>
+<div class="container-fluid wrapper fadeInDown">
+    <div class="formContent rounded">
+        <!-- titulo -->
+        <h2 class="active"> Bienvenido </h2>
+        <div class="fadeIn first">
+            <div class="">
+                <img src="{{pathLogoUTM}}" class="icon" alt="User Icon" />
+            </div>
+            <!-- body -->
+            <input type="text" id="login" class="fadeIn second" placeholder="usuario" [(ngModel)]="usuario_login">
+            <input type="password" id="password" class="fadeIn third" placeholder="contraseña" [(ngModel)]="contrasena" value="contrasena">
+            <input type="submit" (click)="ingresarlogin()" class="fadeIn fourth" value="INGRESAR">
+            
+            <!-- <button class="botoningresar">
+                Ingresar
+            </button> -->
+            
+            <!-- final -->
+        </div>
+
+    </div>
+</div>
+<div class="separador2"></div>
+<app-footer
+[opcion]="piepagina"></app-footer>

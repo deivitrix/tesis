@@ -1,0 +1,23 @@
+/* Card somos */
+.card-title{
+    margin-top: 5%;
+    margin-left: 15px;
+    /* align-items:unset;
+    align-content:initial; */
+}
+
+.card-title div h6{
+
+    opacity: 0.5;
+    height:auto;
+}
+
+.card-title div a{
+    cursor: pointer;
+}
+
+.card-title div p{
+    text-align: justify;
+    margin-top: 1%;
+}
+

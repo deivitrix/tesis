@@ -1,0 +1,52 @@
+.imagen{
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 1.5%;
+}
+
+.imagen img{
+    width: 50%; 
+    height: 38%;
+}
+
+.title h1{
+    text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 40px;
+        font-style: normal;
+        color: gray;
+        padding-bottom: 1%;
+}
+
+@media (max-width:37.5em)
+{
+    .title h1{
+        font-size: 33px;
+    }
+
+    .table{
+        font-size: 13px;
+    }
+}
+
+
+/*Tabla */
+.table
+{
+    justify-content:center;
+    padding: 30px;
+    
+    color: gray;
+}
+
+.table tr th{
+    color:aliceblue;
+}
+
+.table tr td{
+    color:aliceblue;
+}
+
+.separador{
+    padding-bottom: 60px;
+}

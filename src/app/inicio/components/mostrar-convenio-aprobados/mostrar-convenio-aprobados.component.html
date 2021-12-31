@@ -1,0 +1,60 @@
+<ng-container *ngIf="loading">
+<app-loading></app-loading>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <div class="container-fluid logo">
+        <img src="{{ pathLogoUTM }}" alt="" />
+      </div>
+      <div class="container-fluid body">
+        <div class="row ">
+           <div class="col-sm marco">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Convenios Marcos Nacionales
+              </button>
+    
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <ng-container *ngFor="let aniomacro of listaAnioMarco">
+                  <li><a (click)="indicar_anio_marco(aniomacro)" class="dropdown-item"> {{aniomacro}}</a></li>
+                </ng-container>
+                
+    
+              </ul>
+           </div>
+           <div class="col-sm marco-internacional">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Convenios Marcos Internacionales
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <ng-container *ngFor="let aniomacrointer of listaAnioMarcoInter">
+                  <li><a (click)="indicar_anio_marco_inter(aniomacrointer)" class="dropdown-item"> {{aniomacrointer}}</a></li>
+                </ng-container>
+              </ul>
+        </div>
+        <div class="col-sm especifico">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Convenios Especificos UTM
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <ng-container *ngFor="let anioespe of listaAnioEspecifico">
+                  <li><a (click)="indicar_anio_especifico(anioespe)" class="dropdown-item"> {{anioespe}}</a></li>
+                </ng-container>
+              </ul>
+        </div>
+    
+        <div class="col-sm reglamento">
+            <button  class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                Reglamentos interno UTM
+              </button>
+              
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li><a  href="2012a.html" class="dropdown-item"> 2012</a></li>
+              
+              </ul>
+        </div>
+        </div>
+    </div>
+</ng-container>
+
+
+

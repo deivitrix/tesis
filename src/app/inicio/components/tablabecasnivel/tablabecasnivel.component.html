@@ -1,0 +1,144 @@
+<div class="container-fluid logo">
+    <img src="{{ pathimagen }}" alt="" />
+</div>
+
+<ng-container *ngIf="loading">
+    <app-loading></app-loading>
+ </ng-container>
+ 
+ <ng-container *ngIf="loading==false">
+    
+    <ng-container *ngIf="verificar">
+        <div class="container fluid tabla">
+            <ng-container *ngFor="let lista of lista">
+                <div class="container-fluid title">
+                  <h1>{{lista.nombre}}</h1>
+                </div>
+                <ng-container *ngFor="let listabody of listaBecasbody2">
+                 <ng-container *ngIf="lista.id==listabody.id_becas_nivels">
+                     <table class="table tablabody">
+                         <thead>
+                             <tr>
+                              <th scope="col-md-4">Tema</th>
+                              <th scope="col-md-4">{{listabody.nombre}}</th>
+                              <th scope="col-md-4">INFO</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                              
+                              <ng-container *ngIf="listabody.pais!=null">
+                               <tr>
+                                  <td><b>Pais</b></td>
+                                  <td>{{listabody.pais}}</td>
+                               </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.idioma!=null">
+                                  <tr>
+                                     <td><b>Idioma</b></td>
+                                     <td>{{listabody.idioma}}</td>
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.area_estudio!=null">
+                                  <tr>
+                                     <td><b>Area de Estudio</b></td>
+                                     <td>
+                                        <ng-container *ngFor="let area of listaarea">
+                                            <ng-container *ngIf="listabody.id==area.id">
+                                            {{area.descripcion}} <br>
+                                            </ng-container>
+                                        </ng-container>
+                                         <!-- {{listabody.area_estudio}} -->
+                                    </td>
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.fecha_postulacion!=null">
+                                  <tr>
+                                     <td><b>Fecha de Postulacion</b></td>
+                                     <td>
+                                     <ng-container *ngFor="let postulacion of listapostulacion ">
+                                         <ng-container *ngIf="listabody.id==postulacion.id">
+                                          {{postulacion.descripcion}}. <br>
+                                          </ng-container>
+                                      </ng-container>
+                                     </td>
+                                     <!-- <td>{{listabody.fecha_postulacion}}</td> -->
+                                     <td>
+                                         <ng-container *ngIf="listabody.pdf!=null">
+                                          <a href="{{listabody.pdf}}" class="btn btn-success" target="_blank"><span class="titulo-button">Descargar&nbsp;</span><svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download button" viewBox="0 2 18 18">
+                                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>
+                                         </ng-container>
+                                         <ng-container *ngIf="listabody.pdf==null">
+                                          <a  class="btn btn-success" target="_blank"><span class="titulo-button">Descargar&nbsp;</span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-download button" viewBox="0 2 18 18">
+                                              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg></a>
+                                         </ng-container>
+                                      
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.url!=null">
+                                  <tr>
+                                     <td><b>Url</b></td>
+                                     <td>
+                                         <a  class="btn btn-outline-dark button-link"href="{{listabody.url}}" target="_black">Info
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link" viewBox="0 0 16 16">
+                                               <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9c-.086 0-.17.01-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"/>
+                                               <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4.02 4.02 0 0 1-.82 1H12a3 3 0 1 0 0-6H9z"/>
+                                             </svg>
+                                         </a>
+                                         <a class="link" href="{{listabody.url}}" target="_blank">{{listabody.url}}</a></td>
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.modalidad!=null">
+                                  <tr>
+                                     <td><b>Modalidad</b></td>
+                                     <td>{{listabody.modalidad}}</td>
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.requisitos!=null">
+                                  <tr>
+                                     <td><b>Requisitos</b></td>
+                                     <td>
+                                         <ng-container *ngFor="let requisitos of listarequisitos">
+                                             <ng-container *ngIf="listabody.id==requisitos.id">
+                                                {{requisitos.descripcion}}. <br>
+                                             </ng-container>
+    
+                                         </ng-container>
+                                     </td>
+                                  </tr>    
+                              </ng-container>
+                              <ng-container *ngIf="listabody.reconocimiento_titulo!=null">
+                                  <tr>
+                                     <td><b>Reconocimiento del titulo</b></td>
+                                     <td>{{listabody.reconocimiento_titulo}}</td>
+                                  </tr>    
+                              </ng-container>
+          
+                              
+                             
+                         </tbody>
+          
+                     </table>
+                     <div class="separador">
+          
+                  </div>
+          
+                 </ng-container>
+                </ng-container>
+            </ng-container>
+          </div>
+    </ng-container>
+
+    <ng-container *ngIf="verificar==false">
+        <div class="container-fluid title">
+            <h1>No existen Datos de {{tipo_c}} </h1>
+          </div>
+    </ng-container >
+
+    
+    
+    
+ </ng-container>
+ 
+

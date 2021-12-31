@@ -1,0 +1,120 @@
+.titulo{
+    font-size: 90%;
+}
+
+.separador{
+    margin-top: 50px;
+}
+.separador2{
+    margin-bottom: 5%;
+}
+.wrapper{
+    justify-content: center;
+    display: flex;
+}
+.formContent{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 70%;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+h2.inactive {
+    color: #cccccc;
+  }
+  
+h2.active {
+    color: gray;
+    border-bottom: 2px solid green;
+}
+.icon{
+    width: 50%;
+}
+#login{
+    margin-top: 2%;
+}
+
+@media(max-width:33.125em)
+{
+    .titulo{
+        font-size: 80%;
+    }
+
+}
+*:focus {
+    outline: none;
+} 
+
+/* perfil */
+
+.foto-container{
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    position: relative;
+    /* background-color: rgb(225, 225, 226); */
+}
+.foto{
+    overflow: hidden;
+    position: relative;
+    border-radius: 150px;
+    
+}
+.container-foto{
+    
+    border-radius: 150px;
+    /* border:1px solid rgb(32, 29, 29); */
+    object-fit: contain;
+    /* background-color: rgb(4, 4, 160); */
+    margin: auto;
+}
+
+.container-button{
+ position: absolute;
+ margin-left: 55%;
+ top: 87%;
+ background-color: rgb(49, 47, 47);
+ width: 30px;
+ height: 30px;
+ border-radius:0%;
+}
+.btn_enviar{
+ position: absolute;
+ width: 30px;
+ left: 0.1%;
+ opacity: 0;
+}
+p#texto{
+    text-align: center;
+    color:white;
+  }
+
+
+.container1{
+  margin: 4%;
+}
+.cedula{
+    text-align: center;
+}
+.nombres{
+    text-align: center;
+}
+
+.container2{
+    margin: 4%;
+}
+
+.container-fill{
+    width: 70%;
+}
+
+.mda-form-msg{
+    color: #f57c74;
+}
+

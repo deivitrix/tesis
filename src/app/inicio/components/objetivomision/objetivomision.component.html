@@ -1,0 +1,34 @@
+<ng-container *ngIf="loading">
+  <app-loading></app-loading>
+</ng-container>
+<ng-container *ngIf="loading == false">
+  <div class="container-fluid body1">
+    <div class="row">
+      <div class="col-sm objetivo">
+        <h4 class="sub-title-one">Objetivo General</h4>
+        <br />
+        <p> 
+          <ng-container *ngFor="let lista of listaobjetivo">
+             {{lista.descripcion}}
+          </ng-container>
+          <ng-container *ngIf="listaobjetivo.length==0">
+             No existe Datos en el Objetivo General
+          </ng-container>
+        
+        </p>
+      </div>
+      <div class="col-sm mision">
+        <h4>Mision</h4>
+        <br />
+        <p>
+          <ng-container *ngFor="let lista of listamision">
+            {{lista.descripcion}}
+         </ng-container>
+         <ng-container *ngIf="listamision.length==0">
+          No existe Datos en la Mision
+       </ng-container>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>
