@@ -8,6 +8,7 @@ import { NavbarconveniosComponent } from './components/navbarconvenios/navbarcon
 import { LoadingconveniosComponent } from './components/loadingconvenios/loadingconvenios.component';
 import { IngresarConveniosPaginasComponent } from './paginas/ingresar-convenios-paginas/ingresar-convenios-paginas.component';
 import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-plantilla-convenios-paginas/ingresar-plantilla-convenios-paginas.component';
+import { IngresarplantillabodyComponent } from './components/ingresarplantillabody/ingresarplantillabody.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-p
     NavbarconveniosComponent,
     LoadingconveniosComponent,
     IngresarConveniosPaginasComponent,
-    IngresarPlantillaConveniosPaginasComponent
+    IngresarPlantillaConveniosPaginasComponent,
+    IngresarplantillabodyComponent
   ],
   imports: [
     CommonModule,
