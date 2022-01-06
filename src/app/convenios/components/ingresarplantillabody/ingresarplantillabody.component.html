@@ -1,3 +1,201 @@
 <div class="container-fluid titulo">
     <h3>Ingresar Plantilla Convenios</h3>
 </div>
+ <div class="container-fluid selector">
+     <form [formGroup]="selector" autocomplete="off">
+        <div class="row">
+            <div class="col-sm">
+               <mat-form-field class="container-fill" appearance="fill">
+                   <mat-label>Convenios</mat-label>
+                   <mat-select formControlName="convenios" (selectionChange)="cambioConvenio()">
+                     <mat-option value="M">Marco</mat-option>
+                     <mat-option value="E">Especifico</mat-option>
+                   </mat-select>
+                 </mat-form-field>
+                 <div *ngIf="selector.get('convenios')?.hasError('required') && selector.get('convenios')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+            </div>
+            <div class="col-sm">
+                <mat-form-field class="container-fill" appearance="fill">
+                    <mat-label>Especifico</mat-label>
+                    <mat-select formControlName="especificos">
+                        <ng-container *ngFor="let lista of convenioEspecificos">
+                            <mat-option value="{{lista.descripcion_ce}}">{{lista.descripcion_ce}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                  </mat-form-field>
+                  <div *ngIf="selector.get('especificos')?.hasError('required') && selector.get('especificos')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                </div>
+           </div>
+           <div class="col-sm button-agregar">
+                <button  mat-flat-button color="primary"(click)="agregarcategoria()" ><mat-icon>add</mat-icon> <span class="categoria">Categoria Convenio</span></button>
+           </div>
+        </div>
+     </form>
+
+     <ng-container>
+
+     </ng-container>
+    
+ </div>
+
+ 
+
+
+<form [formGroup]="myform" autocomplete="off" >
+<div class="container-fluid wrapper">
+        <div class="formContent rounded">
+            <h4 class="active"> <span class="titulo"><h3>Formulario Plantilla</h3></span></h4>
+            <div class="fadeIn first">
+                <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label>Nombre del Convenio</mat-label>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                </div>
+    
+            </div>
+            <div class="row">
+                <div class="col-sm-">
+                    <mat-label><b><h5>Comparecientes:</h5></b></mat-label>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label>Descripcion</mat-label>
+                        <textarea matInput></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+    
+            <div class="row container1">
+                <div class="col-sm">
+                    <mat-label><b><h5>Clausulas</h5></b></mat-label>
+                </div>
+                <div class="col-sm">
+                    <button (click)=" agregarclausulas()" mat-flat-button color="primary" ><mat-icon>add</mat-icon> <span class="categoria">Clausulas</span></button>
+                </div>
+            </div>
+            <div class="border"></div>
+            <div formArrayName="clausulas" *ngFor="let clausula of clausula.controls; let i = index">
+                <div [formGroupName]="i">
+                    <div class="form-group row">
+                        <div class="col-md-5 clausula">
+                            <label ><b> <h5>{{i+1}}.-  Clausula</h5></b></label>
+                        </div>
+                         
+                        <div class="col-md col-sm">
+                            <mat-form-field class="container-fill-nombre" appearance="fill">
+                                <mat-label>Nombre Clausulas</mat-label>
+                                <mat-select formControlName="nombre">
+                                  <mat-option value="M">Masculino</mat-option>
+                                  <mat-option value="F">Femenino</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                              <button title="Agregar Nombre Clausula" mat-flat-button color="primary" style="margin: 2%;"><mat-icon>add</mat-icon><span></span></button>
+                        </div>
+
+                        
+                    </div>
+                  <div class="form-group row"> 
+                   <!-- <div class="border"></div>   -->
+                    <div class="col-md-9">
+                        <mat-form-field class="container-fill" appearance="fill">
+                            <mat-label >Descripcion Clausula</mat-label>
+                            <textarea  formControlName="descripcion" matInput></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <button title="Agregar Articulos" (click)="agregarListaArticulo(i)" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                        <button title="Eliminar Clausulas" class="btn btn-danger" (click)="removerAntecedentes(i)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                  </div>
+                    <div formArrayName="articulos" *ngFor="let articulo of getarticulocontrol(i); let j = index">
+                        <div [formGroupName]="j">
+                            <div class="form-group row">
+                                <div class="col-md-9">
+                                <mat-form-field class="container-fill-articulo" appearance="fill">
+                                    <mat-label>Articulo {{i+1}}.{{j+1}}</mat-label>
+                                    <textarea matInput formControlName="des_art"></textarea>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-danger" (click)="removerArticulo(i,j)"><mat-icon>delete</mat-icon></button>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+               <div class="border"></div>
+              </div>
+
+              <div class="border"></div>
+             <div class="row">
+                 <div class="col-sm">
+                    <mat-label><b><h5>Firma Emisor</h5></b></mat-label>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Firma Emisor</mat-label>
+                                <mat-select formControlName="selectFirmaEmisor">
+                                  <mat-option value="M">Masculino</mat-option>
+                                  <mat-option value="F">Femenino</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+
+                        </div>
+                        <div class="col-md-3">
+                            <button title="Agregar Firma Emisor"  class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="col-sm">
+                    <mat-label><b><h5>Firma Receptor</h5></b></mat-label>
+                    <div class="row">
+                        <div class="col-md-9">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Firma Receptor</mat-label>
+                                <mat-select formControlName="selectFirmaReceptor">
+                                  <mat-option value="M">Masculino</mat-option>
+                                  <mat-option value="F">Femenino</mat-option>
+                            </mat-select>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-md-3">
+                            <button title="Agregar Firma Receptor"  class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+             </div>
+
+             <div class="row">
+                 <div class="col-sm">
+                    <button title="Guardar"  class="btn btn-success" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                      </svg><span>&nbsp;Guardar</span></button>
+                    <button title="Cancelar"  class="btn btn-danger" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                      </svg><span>&nbsp;Cancelar</span></button>
+                    <button title="Vista Previa del Documento"  class="btn btn-success" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                      </svg><span>&nbsp;Vista</span></button>
+                    
+                 </div>
+             </div>
+
+    
+            
+        </div>
+
+   
+</div>
+</form>
+ 

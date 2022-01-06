@@ -48,7 +48,7 @@ export class NavbarconveniosComponent implements OnInit {
         }
       }
     });
-  console.log(this.listafuncionalidad[0].funcionalidad[0]);
+  //console.log(this.listafuncionalidad[0].funcionalidad[0]);
   
   }
 

@@ -1,0 +1,12 @@
+<div mat-dialog-content class="contenido">
+    <p class="titulo">{{data.titulo}}</p>
+    <mat-form-field class="container-fill"  appearance="fill">
+      <mat-label class="label-des">Descrip Convenio Especifico</mat-label>
+      <input matInput [(ngModel)]="data.categoria">
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions class="button-action">
+    <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+    <button mat-button  color="primary" [mat-dialog-close]="data.categoria" cdkFocusInitial>Guardar</button>
+  </div>

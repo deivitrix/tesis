@@ -130,10 +130,10 @@ export class ReseteoconfiguracionComponent implements OnInit {
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
-            titulo:'Error.....',
+            titulo:'Sucess.....',
             mensaje:res.mensaje,
            buttonText:'Contraseña',
-           icon:'warning'
+           icon:'success'
           },
           duration:1000,
           horizontalPosition:'end',
