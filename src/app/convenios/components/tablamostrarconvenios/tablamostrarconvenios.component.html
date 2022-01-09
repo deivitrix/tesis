@@ -1,0 +1,87 @@
+<div class="container-fluid titulo">
+    <h3>Convenios UTM </h3>
+</div>
+<div class="container-fluid selector">
+    <form [formGroup]="selector" autocomplete="off">
+        <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+                <mat-label>Tipos de Convenios</mat-label>
+                <mat-select  formControlName="conveniostipo" (selectionChange)="cambioConveniosTipos()">
+                  <mat-option value="A">Convenios Aprobados</mat-option>
+                  <mat-option value="G">Convenios Guardados</mat-option>
+                  <mat-option value="P">Convenios Plantillas</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="selector.get('conveniostipo')?.hasError('required') && selector.get('conveniostipo')?.touched" style="margin-top: -20px;">
+                 <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+             </div>
+        </div>
+    </form>
+</div>
+
+<ng-container *ngIf="tabla==true">
+  <form autocomplete="off">
+    <div style="margin: 15px;">
+      <mat-form-field class="mat-form-field-filtro">
+          <mat-label>Filtro</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Filtro Tabla" >
+      </mat-form-field>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+      
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef > N° </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <!--  Nombre Titulo -->
+          <ng-container matColumnDef="titulo_convenio">
+            <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Nombre Titulo </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.titulo_convenio}} </td>
+          </ng-container>
+
+        
+          <!-- Fecha Creacion Column -->
+          <ng-container matColumnDef="f_creacion">
+            <th mat-header-cell *matHeaderCellDef> Fecha Creacion </th>
+            <td mat-cell *matCellDef="let element"> {{element.f_creacion}} </td>
+          </ng-container>
+        
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;"> 
+                <ng-container *ngIf="selector.get('conveniostipo')?.value=='P'|| selector.get('conveniostipo')?.value=='G'">
+                  <a title="Observar convenio" class="pointer" style="color: rgb(56, 39, 116)!important">
+                      <mat-icon>visibility</mat-icon>
+                  </a>
+                </ng-container>
+                <ng-container *ngIf="selector.get('conveniostipo')?.value=='A'">
+                  <a title="Observar convenio" target="_blank" href="{{element.PDF}}" class="pointer" style="color: rgb(56, 39, 116)!important">
+                      <mat-icon>visibility</mat-icon>
+                  </a>
+
+              </ng-container>
+            
+           
+            </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons>
+    </mat-paginator>
+  
+  </div>
+
+
+  </form>
+    
+    
+
+</ng-container>
+

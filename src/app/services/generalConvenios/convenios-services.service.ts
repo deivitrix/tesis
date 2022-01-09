@@ -23,4 +23,22 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-especifico/crear';
     return this.http.post(url,data);
   }
+
+  getclausulas():Observable<any>
+  {
+    let url:string = this._base.getUrlApi() + 'clausulas-new';
+    return this.http.get<any>(url);
+  }
+
+  addclausulas(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'clausulas-new';
+    return this.http.post(url,data);
+  }
+
+  getconveniostipo(tipo:string):Observable<any>{
+    let url:string = this._base.getUrlApi() + 'convenio-new/'+tipo;
+    return this.http.get<any>(url);
+  }
+  
 }

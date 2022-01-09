@@ -11,6 +11,8 @@ import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-p
 import { IngresarplantillabodyComponent } from './components/ingresarplantillabody/ingresarplantillabody.component';
 import { IngresarCategoriaComponent } from './components/ingresar-categoria/ingresar-categoria.component';
 import { MensajeconveniosComponent } from './components/mensajeconvenios/mensajeconvenios.component';
+import { IngresarclausulaComponent } from './components/ingresarclausula/ingresarclausula.component';
+import { TablamostrarconveniosComponent } from './components/tablamostrarconvenios/tablamostrarconvenios.component';
 
 //material
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -27,8 +29,12 @@ import{FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 import {MatDividerModule} from '@angular/material/divider';
+
+
 
 
 
@@ -42,7 +48,9 @@ import {MatDividerModule} from '@angular/material/divider';
     IngresarPlantillaConveniosPaginasComponent,
     IngresarplantillabodyComponent,
     IngresarCategoriaComponent,
-    MensajeconveniosComponent
+    MensajeconveniosComponent,
+    IngresarclausulaComponent,
+    TablamostrarconveniosComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +70,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDialogModule,
     MatButtonModule,
     MatDividerModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   entryComponents:[IngresarCategoriaComponent],
 })

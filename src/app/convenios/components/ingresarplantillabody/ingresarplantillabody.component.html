@@ -48,12 +48,17 @@
 <div class="container-fluid wrapper">
         <div class="formContent rounded">
             <h4 class="active"> <span class="titulo"><h3>Formulario Plantilla</h3></span></h4>
+            <!-- <pre>{{myform.value |json}}</pre> -->
             <div class="fadeIn first">
                 <div class="col-sm">
                     <mat-form-field class="container-fill" appearance="fill">
                         <mat-label>Nombre del Convenio</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea matInput formControlName="nombre_convenio"></textarea>
                     </mat-form-field>
+                    <div *ngIf="myform.get('nombre_convenio')?.hasError('required') && myform.get('nombre_convenio')?.touched" style="margin-top: -20px;">
+                        <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                    </div>
+
                 </div>
     
             </div>
@@ -64,8 +69,11 @@
                 <div class="col-sm">
                     <mat-form-field class="container-fill" appearance="fill">
                         <mat-label>Descripcion</mat-label>
-                        <textarea matInput></textarea>
+                        <textarea matInput formControlName="comparecientes"></textarea>
                     </mat-form-field>
+                    <div *ngIf="myform.get('comparecientes')?.hasError('required') && myform.get('comparecientes')?.touched" style="margin-top: -20px;">
+                        <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                    </div>
                 </div>
             </div>
     
@@ -88,12 +96,15 @@
                         <div class="col-md col-sm">
                             <mat-form-field class="container-fill-nombre" appearance="fill">
                                 <mat-label>Nombre Clausulas</mat-label>
-                                <mat-select formControlName="nombre">
-                                  <mat-option value="M">Masculino</mat-option>
-                                  <mat-option value="F">Femenino</mat-option>
+                                <mat-select formControlName="nombre" (selectionChange)="insertarnombreclausula(i)">
+                                    <ng-container *ngFor="let lista of clausulasget">
+                                        <mat-option value="{{lista.id}}">{{lista.nombre_clau}}</mat-option>
+                                    </ng-container>
                                 </mat-select>
                               </mat-form-field>
-                              <button title="Agregar Nombre Clausula" mat-flat-button color="primary" style="margin: 2%;"><mat-icon>add</mat-icon><span></span></button>
+                              <button title="Agregar Nombre Clausula" (click)=" agregarclausulaDialog()" mat-flat-button color="primary" style="margin: 2%;"><mat-icon>add</mat-icon><span></span></button>
+
+
                         </div>
 
                         
@@ -108,7 +119,7 @@
                     </div>
                     <div class="col-md-2">
                         <button title="Agregar Articulos" (click)="agregarListaArticulo(i)" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
-                        <button title="Eliminar Clausulas" class="btn btn-danger" (click)="removerAntecedentes(i)"><mat-icon>delete</mat-icon></button>
+                        <button title="Eliminar Clausula" class="btn btn-danger" (click)="removerAntecedentes(i)"><mat-icon>delete</mat-icon></button>
                     </div>
                   </div>
                     <div formArrayName="articulos" *ngFor="let articulo of getarticulocontrol(i); let j = index">

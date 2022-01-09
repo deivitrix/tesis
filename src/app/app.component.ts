@@ -33,6 +33,7 @@ export class AppComponent {
     this._pathimagenes.pathpaginamaestrias=this.pathpaginamaestria;
     this._pathimagenes.pathpaginadoctorados=this.pathpaginadoctorado;
     this._pathimagenes.pathrecuperarcorreo=this.pathrecuperarcorreo;
+    this._pathimagenes.pathavatarperfil=this.pathavatarperfil;
   }
 
   //variables de las path de las imagenes del programa 
@@ -62,5 +63,7 @@ export class AppComponent {
   pathpaginadoctorado='../assets/img/DOCTORADO.jpg';
 
   pathrecuperarcorreo='../assets/img/candado1.png';
+
+  pathavatarperfil='../assets/img/avatar_perfil.png';
 
 }

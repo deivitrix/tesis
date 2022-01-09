@@ -1,3 +1,4 @@
+import { IngresarclausulaComponent } from './../ingresarclausula/ingresarclausula.component';
 import { MensajeconfiguracionComponent } from './../../../configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 import { IngresarCategoriaComponent } from './../ingresar-categoria/ingresar-categoria.component';
 import { ConveniosEspecificosModel } from './../../../models/convenios/conveniosEspecificos';
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClausulasModel } from 'src/app/models/convenios/clausulas';
 
 @Component({
   selector: 'app-ingresarplantillabody',
@@ -19,9 +21,14 @@ export class IngresarplantillabodyComponent implements OnInit {
   convenioEspecificosAux:ConveniosEspecificosModel[]=[];
   convenioEspecificos:ConveniosEspecificosModel[]=[];
   categoria="";
+  nombreclausula="";
 
   convenio=true;
   especifico=true;
+  
+  //clausulas
+  clausulasget:ClausulasModel[]=[];
+
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
@@ -45,16 +52,24 @@ export class IngresarplantillabodyComponent implements OnInit {
   get clausula() {
       return this.myform.get('clausulas') as FormArray;
   }
- 
-  
- 
 
   ngOnInit(): void {
     this.getconveniosEspecificos();
+    this.getclausulas();
 
+  }
+
+
+
+  getclausulas(){
+    this.convenios.getclausulas()
+    .subscribe((res:any) => {
+      this.clausulasget=res;
+    });
   }
   
   getconveniosEspecificos(){
+
     this.convenios.getconveniosEspecificos()
     .subscribe((res:any) => {
       this.convenioEspecificosAux=res;
@@ -92,6 +107,9 @@ export class IngresarplantillabodyComponent implements OnInit {
     }
 
   }
+
+
+
   agregarcategoria()
   {
     const dialogRef=this.dialog.open(IngresarCategoriaComponent,{
@@ -167,13 +185,12 @@ export class IngresarplantillabodyComponent implements OnInit {
   {
     const clausulasFormGroup=this.ingresar.group({
       id:'',
-      nombre:'',
-      descripcion:'',
+      nombre:['',Validators.required],
+      descripcion:['',Validators.required],
       articulos:this.ingresar.array([
       ])
     });
     this.clausula.push(clausulasFormGroup);
-    this.indice1=0;
   }
   
   
@@ -188,13 +205,6 @@ export class IngresarplantillabodyComponent implements OnInit {
     //console.log(this.clausula);
     
 
-  }
-
-  articulogroup(){
-    return this.ingresar.group({
-      des_art:'',
-      subtipo:''
-    });
   }
   
   get articulos(){
@@ -212,21 +222,62 @@ export class IngresarplantillabodyComponent implements OnInit {
   {
     this.indice1=indice;
     const articuloFormGroup=this.ingresar.group({
-      clausula:'',
-      des_art:''
+      des_art:['',Validators.required],
+      subtipo:'P'
     });
-  
       this.articulos.push(articuloFormGroup);
     // console.log(this.antecedente);
-    
-    
-    
   }
+
+  insertarnombreclausula(indice:number)
+  {
+    var id= this.clausula.value[indice].nombre;
+    var id_clausula=Number(id);
+    this.convenios.getclausulas()
+    .subscribe((res:any) => {
+      this.clausulasget=res;
+      this.actualizarnombreclausula(this.clausulasget,id_clausula,indice);
+    });
+
+  }
+  actualizarnombreclausula(original:ClausulasModel[],id:number,indice:number)
+  {
+    original.forEach((item:ClausulasModel)=>{
+      if(item.id==id)
+      {
+        this.clausula.value[indice].id=item.id;
+        this.clausula.value[indice].nombre=item.nombre_clau;
+      }
+    });
+
+
+  }
+
   removerArticulo(indice:number,articulo_indice:number)
   {
     const articulo=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
      articulo.removeAt(articulo_indice);
       
+  }
+
+  agregarclausulaDialog()
+  {
+    const dialogRef=this.dialog.open(IngresarclausulaComponent,{
+      width:'500px',
+      data:{titulo:'Ingresar Nombre de la Clausula',clausula:""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result!=null)
+      {
+      //this.categoria = result;
+      //this.agregarConveniosEspecificos();
+      }
+     
+      
+    });
+
   }
 }
 
