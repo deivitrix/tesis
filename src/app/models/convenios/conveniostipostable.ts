@@ -4,5 +4,5 @@ export interface ConveniosTiposTableModel{
     id:number;
     f_creacion:string;
     PDF:string;
-    
+    f_creaciondoc:string;
 }

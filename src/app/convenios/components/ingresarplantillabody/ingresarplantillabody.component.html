@@ -154,8 +154,10 @@
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Emisor</mat-label>
                                 <mat-select formControlName="selectFirmaEmisor">
-                                  <mat-option value="M">Masculino</mat-option>
-                                  <mat-option value="F">Femenino</mat-option>
+                                 <ng-container *ngFor="let lista of firmaEmisor">
+                                    <mat-option value="{{lista.id}}">{{lista.nombre_emisor}}</mat-option>
+                                 </ng-container>
+                                 
                                 </mat-select>
                               </mat-form-field>
 
@@ -172,8 +174,10 @@
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Receptor</mat-label>
                                 <mat-select formControlName="selectFirmaReceptor">
-                                  <mat-option value="M">Masculino</mat-option>
-                                  <mat-option value="F">Femenino</mat-option>
+                                    <ng-container *ngFor="let lista of firmaReceptor">
+                                        <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
+
+                                    </ng-container>  
                             </mat-select>
                               </mat-form-field>
                         </div>

@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -35,9 +36,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider';
 
 
-
-
-
 @NgModule({
   declarations: [
     BaseconveniosComponent,
@@ -72,7 +70,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDividerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    PipesModule
   ],
   entryComponents:[IngresarCategoriaComponent],
 })

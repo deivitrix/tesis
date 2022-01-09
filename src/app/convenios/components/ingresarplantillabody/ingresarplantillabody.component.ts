@@ -1,3 +1,5 @@
+import { FirmaReceptorModel } from './../../../models/convenios/firmareceptor';
+import { FirmaEmisorModel } from './../../../models/convenios/firmaemisor';
 import { IngresarclausulaComponent } from './../ingresarclausula/ingresarclausula.component';
 import { MensajeconfiguracionComponent } from './../../../configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 import { IngresarCategoriaComponent } from './../ingresar-categoria/ingresar-categoria.component';
@@ -29,6 +31,14 @@ export class IngresarplantillabodyComponent implements OnInit {
   //clausulas
   clausulasget:ClausulasModel[]=[];
 
+  //firmaEmisor
+  firmaEmisoraux:FirmaEmisorModel[]=[];
+  firmaEmisor:FirmaEmisorModel[]=[];
+
+
+  //firmaReceptor
+  firmaReceptoraux:FirmaReceptorModel[]=[];
+  firmaReceptor:FirmaReceptorModel[]=[];
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
@@ -41,8 +51,8 @@ export class IngresarplantillabodyComponent implements OnInit {
       nombre_convenio:['',Validators.required],
       comparecientes:['',Validators.required],
       clausulas: this.ingresar.array([]),
-      selectFirmaEmisor:[''],
-      selectFirmaReceptor:[''],
+      selectFirmaEmisor:['',Validators.required],
+      selectFirmaReceptor:['',Validators.required],
 
     });
 
@@ -56,7 +66,8 @@ export class IngresarplantillabodyComponent implements OnInit {
   ngOnInit(): void {
     this.getconveniosEspecificos();
     this.getclausulas();
-
+    this.getfirmaemisor();
+    this.getfirmareceptor();
   }
 
 
@@ -76,6 +87,21 @@ export class IngresarplantillabodyComponent implements OnInit {
       this.separarConvenios(this.convenioEspecificosAux);
   
       
+    });
+  }
+
+  getfirmaemisor(){
+    this.convenios.getfirmaEmisor()
+    .subscribe((res:any)=>{
+      this.firmaEmisor=res;
+    });
+
+  }
+
+  getfirmareceptor(){
+    this.convenios.getfirmaReceptor()
+    .subscribe((res:any)=>{
+      this.firmaReceptor=res;
     });
   }
 
@@ -193,9 +219,6 @@ export class IngresarplantillabodyComponent implements OnInit {
     this.clausula.push(clausulasFormGroup);
   }
   
-  
-  
- 
 
   removerAntecedentes(indice:number)
   {
@@ -271,7 +294,7 @@ export class IngresarplantillabodyComponent implements OnInit {
       console.log('The dialog was closed');
       if(result!=null)
       {
-      //this.categoria = result;
+      this.nombreclausula = result;
       //this.agregarConveniosEspecificos();
       }
      
@@ -279,6 +302,8 @@ export class IngresarplantillabodyComponent implements OnInit {
     });
 
   }
+
+
 }
 
 

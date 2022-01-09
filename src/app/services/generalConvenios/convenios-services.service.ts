@@ -40,5 +40,17 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-new/'+tipo;
     return this.http.get<any>(url);
   }
+
+
+  getfirmaEmisor():Observable<any>{
+    let url:string = this._base.getUrlApi() + 'firma-emisor-new';
+    return this.http.get<any>(url);
+  }
+
+  getfirmaReceptor():Observable<any>{
+    let url:string = this._base.getUrlApi() + 'firma-receptor-new';
+    return this.http.get<any>(url);
+
+  }
   
 }
