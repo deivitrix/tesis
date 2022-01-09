@@ -14,12 +14,6 @@ import { ConveniosTiposTableModel } from 'src/app/models/convenios/conveniostipo
 })
 export class TablamostrarconveniosComponent implements OnInit {
   selector: FormGroup;
-  displayedColumns: string[] = [
-    'position',
-    'titulo_convenio',
-    'f_creacion',
-    'acciones',
-  ];
   tabla = false;
   conveniotipo: ConveniosTipoModel[] = [];
   conveniotipoaux: ConveniosTipoModel[] = [];
@@ -50,6 +44,7 @@ export class TablamostrarconveniosComponent implements OnInit {
   ngOnInit(): void {}
 
   cambioConveniosTipos(event: any) {
+   
     this.convenios.getconveniostipo(event.value).subscribe((res: any) => {
       this.tabla = true;
       this.listaConv = res;

@@ -47,10 +47,23 @@ export class ConveniosServicesService {
     return this.http.get<any>(url);
   }
 
+  addfirmaEmisor(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'firma-emisor-new';
+    return this.http.post(url,data);
+
+  }
+
+  addfirmaReceptor(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'firma-receptor-new';
+    return this.http.post(url,data);
+  }
+
   getfirmaReceptor():Observable<any>{
     let url:string = this._base.getUrlApi() + 'firma-receptor-new';
     return this.http.get<any>(url);
-
   }
+  
   
 }

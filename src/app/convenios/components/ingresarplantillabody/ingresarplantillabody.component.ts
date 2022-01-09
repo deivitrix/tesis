@@ -295,9 +295,55 @@ export class IngresarplantillabodyComponent implements OnInit {
       if(result!=null)
       {
       this.nombreclausula = result;
-      //this.agregarConveniosEspecificos();
+      this.agregarClausula();
       }
      
+      
+    });
+
+  }
+
+  agregarClausula(){
+    let json={clausula:{nombre_clau:this.nombreclausula}}
+    this.convenios.addclausulas(json)
+    .subscribe((res:any) => {
+      console.log(res);
+      if(res.estado==true)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Success.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'success'     
+        });
+        this.clausulasget=[];
+        this.getclausulas();
+        return;
+        
+
+      }
+      if(res.estado==false)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
       
     });
 
