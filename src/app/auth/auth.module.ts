@@ -11,9 +11,15 @@ import { MensajeLoginComponent } from './components/mensaje-login/mensaje-login.
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
+
+
 import { FormularioRecuperaCuentaComponent } from './components/formulario-recupera-cuenta/formulario-recupera-cuenta.component';
+import { ReseteoContraComponent } from './components/reseteo-contra/reseteo-contra.component';
 
 
 @NgModule({
@@ -21,7 +27,8 @@ import { FormularioRecuperaCuentaComponent } from './components/formulario-recup
     LoginComponent,
     BaseAuthComponent,
     MensajeLoginComponent,
-    FormularioRecuperaCuentaComponent
+    FormularioRecuperaCuentaComponent,
+    ReseteoContraComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +38,10 @@ import { FormularioRecuperaCuentaComponent } from './components/formulario-recup
     MatButtonModule,
     FormsModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
   ],
   exports:[
     MatDialogModule,
