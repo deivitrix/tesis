@@ -1,3 +1,5 @@
+import { IngresarfirmareceptorComponent } from './../ingresarfirmareceptor/ingresarfirmareceptor.component';
+import { IngresarfirmaemisorComponent } from './../ingresarfirmaemisor/ingresarfirmaemisor.component';
 import { FirmaReceptorModel } from './../../../models/convenios/firmareceptor';
 import { FirmaEmisorModel } from './../../../models/convenios/firmaemisor';
 import { IngresarclausulaComponent } from './../ingresarclausula/ingresarclausula.component';
@@ -34,11 +36,15 @@ export class IngresarplantillabodyComponent implements OnInit {
   //firmaEmisor
   firmaEmisoraux:FirmaEmisorModel[]=[];
   firmaEmisor:FirmaEmisorModel[]=[];
+  firmaEmisorAgregar:FirmaEmisorModel={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
 
 
   //firmaReceptor
   firmaReceptoraux:FirmaReceptorModel[]=[];
   firmaReceptor:FirmaReceptorModel[]=[];
+  firmaReceptorAgregar:FirmaReceptorModel={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+
+
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
@@ -59,9 +65,7 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   }
 
-  get clausula() {
-      return this.myform.get('clausulas') as FormArray;
-  }
+ 
 
   ngOnInit(): void {
     this.getconveniosEspecificos();
@@ -70,7 +74,9 @@ export class IngresarplantillabodyComponent implements OnInit {
     this.getfirmareceptor();
   }
 
-
+  get clausula() {
+    return this.myform.get('clausulas') as FormArray;
+}
 
   getclausulas(){
     this.convenios.getclausulas()
@@ -133,8 +139,6 @@ export class IngresarplantillabodyComponent implements OnInit {
     }
 
   }
-
-
 
   agregarcategoria()
   {
@@ -307,7 +311,6 @@ export class IngresarplantillabodyComponent implements OnInit {
     let json={clausula:{nombre_clau:this.nombreclausula}}
     this.convenios.addclausulas(json)
     .subscribe((res:any) => {
-      console.log(res);
       if(res.estado==true)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
@@ -345,6 +348,136 @@ export class IngresarplantillabodyComponent implements OnInit {
         return;
       }
       
+    });
+
+  }
+  
+  agregarfirmaReceptorDialog(){
+    const dialogRef=this.dialog.open(IngresarfirmareceptorComponent,{
+      width:'600px',
+      data:{titulo:'Ingresar Firma del Receptor',receptor:this.firmaReceptorAgregar}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+      if(result!=null)
+      {
+        this.firmaReceptorAgregar=result;
+        if(this.firmaReceptorAgregar.nombre_receptor.length==0 || this.firmaReceptorAgregar.titulo_academico.length==0 ||
+          this.firmaReceptorAgregar.cargo_receptor.length==0 || this.firmaReceptorAgregar.institucion_receptor.length==0)
+          {
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"Datos Faltantes",
+               buttonText:'',
+               icon:'error'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'     
+            });
+            this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+            return;
+          }
+
+
+      }
+     
+      
+    });
+
+
+  }
+
+  agregarfirmaReceptor(){
+    let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
+      cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
+  }
+
+  agregarfirmaEmisorDialog(){
+    const dialogRef=this.dialog.open(IngresarfirmaemisorComponent,{
+      width:'600px',
+      data:{titulo:'Ingresar Firma del Emisor',emisor:this.firmaEmisorAgregar}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result!=null)
+      {
+        this.firmaEmisorAgregar=result;
+         if(this.firmaEmisorAgregar.nombre_emisor.length==0 || this.firmaEmisorAgregar.titulo_academico.length==0 ||
+            this.firmaEmisorAgregar.cargo_emisor.length==0 || this.firmaEmisorAgregar.institucion_emisor.length==0)
+            {
+              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+                data:{
+                  titulo:'Error.....',
+                  mensaje:"Datos Faltantes",
+                 buttonText:'',
+                 icon:'error'
+                },
+                duration:1000,
+                horizontalPosition:'end',
+                verticalPosition:'bottom',
+                panelClass:'error'     
+              });
+              this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+              return;
+            }
+         this.agregarfirmaEmisor();
+        
+      
+      }
+     
+      
+    });
+
+  }
+
+  agregarfirmaEmisor(){
+    let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
+      cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
+    this.convenios.addfirmaEmisor(json).
+    subscribe((res:any)=>{
+      if(res.estado==true)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Success.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'success'     
+        });
+        this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+        this.firmaEmisor=[];
+        this.getfirmaemisor();
+        return;
+        
+
+      }
+      if(res.estado==false)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+        return;
+      }
     });
 
   }

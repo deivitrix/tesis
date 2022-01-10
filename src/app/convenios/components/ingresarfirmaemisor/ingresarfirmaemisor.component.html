@@ -1,0 +1,41 @@
+<div mat-dialog-content class="contenido">
+    <div class="container-fluid wrapper">
+        <div class="formContent rounded">
+            <h5 class="active"><span class="titulo">{{data.titulo}}</span></h5>
+            <div>
+                <img src="{{pathavatarperfil}}" class="icon" alt="User Icon" />
+            </div>
+            <div class="body fadeIn second">
+                <div class="col-sm">
+                    <mat-form-field class="container-fill"  appearance="fill">
+                        <mat-label class="label-des">Nombres y Apellidos</mat-label>
+                        <input matInput [(ngModel)]="data.emisor.nombre_emisor">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="container-fill"  appearance="fill">
+                        <mat-label class="label-des">Titulo Academico</mat-label>
+                        <input matInput [(ngModel)]="data.emisor.titulo_academico">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="container-fill"  appearance="fill">
+                        <mat-label class="label-des">Cargo</mat-label>
+                        <input matInput [(ngModel)]="data.emisor.cargo_emisor">
+                    </mat-form-field>
+                </div>
+                <div class="col-sm">
+                    <mat-form-field class="container-fill"  appearance="fill">
+                        <mat-label class="label-des">Institucion</mat-label>
+                        <input matInput [(ngModel)]="data.emisor.institucion_emisor">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div mat-dialog-actions class="button-action">
+    <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+    <button mat-button  color="primary" [mat-dialog-close]="data.emisor" cdkFocusInitial>Guardar</button>
+  </div>

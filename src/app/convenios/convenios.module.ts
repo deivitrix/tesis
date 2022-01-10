@@ -34,6 +34,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 
 import {MatDividerModule} from '@angular/material/divider';
+import { IngresarfirmaemisorComponent } from './components/ingresarfirmaemisor/ingresarfirmaemisor.component';
+import { IngresarfirmareceptorComponent } from './components/ingresarfirmareceptor/ingresarfirmareceptor.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import {MatDividerModule} from '@angular/material/divider';
     IngresarCategoriaComponent,
     MensajeconveniosComponent,
     IngresarclausulaComponent,
-    TablamostrarconveniosComponent
+    TablamostrarconveniosComponent,
+    IngresarfirmaemisorComponent,
+    IngresarfirmareceptorComponent
   ],
   imports: [
     CommonModule,

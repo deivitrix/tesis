@@ -159,11 +159,14 @@
                                  </ng-container>
                                  
                                 </mat-select>
-                              </mat-form-field>
+                            </mat-form-field>
+                            <div *ngIf="myform.get('selectFirmaEmisor')?.hasError('required') && myform.get('selectFirmaEmisor')?.touched" style="margin-top: -20px;">
+                                <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                            </div>
 
                         </div>
                         <div class="col-md-3">
-                            <button title="Agregar Firma Emisor"  class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                            <button title="Agregar Firma Emisor" (click)="agregarfirmaEmisorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
                         </div>
                     </div>
                  </div>
@@ -178,13 +181,15 @@
                                         <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
 
                                     </ng-container>  
-                            </mat-select>
-                              </mat-form-field>
+                                </mat-select>
+                            </mat-form-field>
+                            <div *ngIf="myform.get('selectFirmaReceptor')?.hasError('required') && myform.get('selectFirmaReceptor')?.touched" style="margin-top: -20px;">
+                                <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                            </div>
                         </div>
                         <div class="col-md-3">
-                            <button title="Agregar Firma Receptor"  class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                            <button title="Agregar Firma Receptor" (click)="agregarfirmaReceptorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
                         </div>
-                        
                     </div>
                     
                 </div>
