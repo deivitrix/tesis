@@ -13,6 +13,11 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClausulasModel } from 'src/app/models/convenios/clausulas';
 
+//PDF
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+
 @Component({
   selector: 'app-ingresarplantillabody',
   templateUrl: './ingresarplantillabody.component.html',
@@ -480,6 +485,13 @@ export class IngresarplantillabodyComponent implements OnInit {
       }
     });
 
+  }
+
+  Descargar(){
+    const doc = new jsPDF();
+
+    doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
+    doc.save('Convenio plantilla.pdf');
   }
 
 
