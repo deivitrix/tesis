@@ -1,3 +1,4 @@
+import { LoginComponent } from './../../../auth/components/login/login.component';
 import { IngresarfirmareceptorComponent } from './../ingresarfirmareceptor/ingresarfirmareceptor.component';
 import { IngresarfirmaemisorComponent } from './../ingresarfirmaemisor/ingresarfirmaemisor.component';
 import { FirmaReceptorModel } from './../../../models/convenios/firmareceptor';
@@ -129,6 +130,7 @@ export class IngresarplantillabodyComponent implements OnInit {
     
   }
   cambioConvenio(){
+
     if(this.selector.get('convenios')?.value=='M')
     {
       this.selector.get('especificos')?.disable();
@@ -488,10 +490,110 @@ export class IngresarplantillabodyComponent implements OnInit {
   }
 
   Descargar(){
+
+    if(this.selector.get('convenios')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de convenio",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.selector.get('convenios')?.value=='E')
+    {
+      if(this.selector.get('especificos')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Escoger una opcion de Convenios Especificos",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+    }
+
+
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+        || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Datos Faltantes",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+  
+    
+
+    for(var i=0;i<this.clausula.length;i++)
+    {
+      
+      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar Datos en las Clausulas",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+     
+      }
+      if(this.articulos.length!=0)
+      {
+        const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+        for(var j=0;j<articulo.length;j++)
+        {
+          const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+
+        }
+        
+      }
+
+
+
+
+    }
+
     const doc = new jsPDF();
 
     doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
     doc.save('Convenio plantilla.pdf');
+    
+    
+
   }
 
 

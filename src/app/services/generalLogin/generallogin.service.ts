@@ -42,5 +42,19 @@ export class GeneralLoginService{
     return this.http.get<any>(url);
   }
 
+  //enviar correo al usuario para la recuperacion del password
+
+  emailsearch(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'email/forget-password';
+    return this.http.post(url,data);
+  }
+
+  recuperacionPassword(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'usuario/reset-password';
+    return this.http.put(url,data);
+  }
+
   
 }

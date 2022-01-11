@@ -1,7 +1,9 @@
+import { Router } from '@angular/router';
 import { PathImagenesService } from 'src/app/services/path-imagenes.service';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MensajeLoginComponent } from '../mensaje-login/mensaje-login.component';
+import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.service';
 
 @Component({
   selector: 'app-formulario-recupera-cuenta',
@@ -11,7 +13,7 @@ import { MensajeLoginComponent } from '../mensaje-login/mensaje-login.component'
 export class FormularioRecuperaCuentaComponent implements OnInit {
   correo_usuario="";
   pathrecuperar="";
-  constructor(private _path:PathImagenesService, public snackBar:MatSnackBar) { 
+  constructor(private _path:PathImagenesService, public snackBar:MatSnackBar,private login:GeneralLoginService, private router:Router) { 
     this.pathrecuperar=this._path.pathrecuperarcorreo;
   }
 
@@ -55,6 +57,50 @@ export class FormularioRecuperaCuentaComponent implements OnInit {
       return;
 
     }
+    let json={email:this.correo_usuario};
+    this.login.emailsearch(json).subscribe((res:any)=>{
+      
+      if(res.estado==true)
+      {
+        this.snackBar.openFromComponent(MensajeLoginComponent,{
+          data:{
+            titulo:'Sucess.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1500,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'success'     
+        });
+        this.router.navigate(['/auth/login']);
+        return;
+
+      }
+
+      if(res.estado==false)
+      {
+        this.snackBar.openFromComponent(MensajeLoginComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        this.router.navigate(['/auth/login']);
+        return;
+
+
+      }
+
+
+    });
   }
 
   validateEmail(email:string) {

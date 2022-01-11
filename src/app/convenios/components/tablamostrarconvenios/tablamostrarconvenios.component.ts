@@ -19,6 +19,8 @@ export class TablamostrarconveniosComponent implements OnInit {
   conveniotipoaux: ConveniosTipoModel[] = [];
   show = true;
 
+  generarReporte=true;
+
   listaConv: any[] = [];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -44,6 +46,7 @@ export class TablamostrarconveniosComponent implements OnInit {
   ngOnInit(): void {}
 
   cambioConveniosTipos(event: any) {
+    this.generarReporte=false;
    
     this.convenios.getconveniostipo(event.value).subscribe((res: any) => {
       this.tabla = true;

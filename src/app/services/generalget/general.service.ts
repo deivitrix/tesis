@@ -13,7 +13,7 @@ export class GeneralService {
     private http:HttpClient,
     private _base:BaseUrlService
   ) { }
-
+  /// Interfaces Get
   getTipoPagina(pagina:string):Observable<any>{
     let url:string = this._base.getUrlApi() + 'interfaz/contenido/'+pagina;
     return this.http.get<Interfaz_contenido[]>(url);

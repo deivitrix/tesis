@@ -21,7 +21,7 @@ const routes: Routes = [
         path:'recuperarCuenta',component:FormularioRecuperaCuentaComponent
       },
       {
-        path:'recuperarclave',component:ReseteoContraComponent
+        path:'recuperarclave/:token',component:ReseteoContraComponent
       }
     ]
   },
