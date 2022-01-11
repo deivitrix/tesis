@@ -577,7 +577,25 @@ export class IngresarplantillabodyComponent implements OnInit {
         const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
         for(var j=0;j<articulo.length;j++)
         {
-          const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+          if(articulo.controls[j].value.des_art.length==0)
+          {
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"Ingresar Datos en los Articulos",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+
+
+          }
+
 
         }
         
@@ -588,10 +606,10 @@ export class IngresarplantillabodyComponent implements OnInit {
 
     }
 
-    const doc = new jsPDF();
+    // const doc = new jsPDF();
 
-    doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
-    doc.save('Convenio plantilla.pdf');
+    // doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
+    // doc.save('Convenio plantilla.pdf');
     
     
 
