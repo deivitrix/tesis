@@ -29,6 +29,7 @@ loading=true;
   getconveniosAprobados(){
     this._conveniosAprobados.getConveniosAprobados()
     .subscribe((res:any) => {
+      
      this.listaconvenios = res;
     //  console.log(res);
      this.loading=false;
@@ -41,7 +42,7 @@ loading=true;
     if(this.tipo.length!=0)
     {
       original.forEach((item:ConveniosAprobados)=>{
-        let opcion:string = item.nombre_tc.toLowerCase();
+        let opcion:string = item.nombre_tipo.toLowerCase();
         let opcin2=this.tipo.toLowerCase();
         
         

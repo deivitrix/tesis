@@ -39,6 +39,7 @@ export class MostrarConvenioAprobadosComponent implements OnInit {
   getconveniosAprobados(){
     this._conveniosAprobados.getConveniosAprobados()
     .subscribe((res:any) => {
+      
      this.listaconvenios = res;
     //  console.log(res);
      this.loading=false;
@@ -51,17 +52,17 @@ export class MostrarConvenioAprobadosComponent implements OnInit {
     
     original.forEach((item:ConveniosAprobados)=>{
       var fecha;
-      if(item.nombre_tc=="Marco")
+      if(item.nombre_tipo=="Marco")
       {
         fecha=new Date(item.f_creaciondoc);
         this.listaAnioMarcoaux.push(fecha.getFullYear());
       }
-      if(item.nombre_tc=="Marco Internacional")
+      if(item.nombre_tipo=="Marco Internacional")
       {
         fecha=new Date(item.f_creaciondoc);
         this.listaAnioMarcoInteraux.push(fecha.getFullYear());
       }
-      if(item.nombre_tc=="Especifico")
+      if(item.nombre_tipo=="Especifico")
       {
         fecha=new Date(item.f_creaciondoc);
         this.listaAnioEspecificoaux.push(fecha.getFullYear());

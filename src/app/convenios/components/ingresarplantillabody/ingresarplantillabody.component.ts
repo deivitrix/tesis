@@ -50,7 +50,8 @@ export class IngresarplantillabodyComponent implements OnInit {
   firmaReceptor:FirmaReceptorModel[]=[];
   firmaReceptorAgregar:FirmaReceptorModel={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
 
-
+  // Nombre tipo convenios
+  //nombreTipo
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
