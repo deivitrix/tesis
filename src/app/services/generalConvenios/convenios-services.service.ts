@@ -64,6 +64,11 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'firma-receptor-new';
     return this.http.get<any>(url);
   }
+
+  getnombretipoconvenios():Observable<any>{
+    let url:string = this._base.getUrlApi() + 'nombre-tipo-convenio';
+    return this.http.get<any>(url);
+  }
   
   
 }

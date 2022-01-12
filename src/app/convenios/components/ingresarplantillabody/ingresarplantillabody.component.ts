@@ -17,6 +17,7 @@ import { ClausulasModel } from 'src/app/models/convenios/clausulas';
 //PDF
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { NombreTipoConveniosModel } from 'src/app/models/convenios/nombretipoconvenios';
 
 
 @Component({
@@ -51,7 +52,7 @@ export class IngresarplantillabodyComponent implements OnInit {
   firmaReceptorAgregar:FirmaReceptorModel={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
 
   // Nombre tipo convenios
-  //nombreTipo
+  nombretipoconvenios:NombreTipoConveniosModel[]=[];
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
@@ -75,6 +76,7 @@ export class IngresarplantillabodyComponent implements OnInit {
  
 
   ngOnInit(): void {
+    this.getnombretipoconvenios()
     this.getconveniosEspecificos();
     this.getclausulas();
     this.getfirmaemisor();
@@ -90,6 +92,14 @@ export class IngresarplantillabodyComponent implements OnInit {
     .subscribe((res:any) => {
       this.clausulasget=res;
     });
+  }
+
+  getnombretipoconvenios(){
+    this.convenios.getnombretipoconvenios()
+    .subscribe((res:any)=>{
+      this.nombretipoconvenios=res;
+    });
+
   }
   
   getconveniosEspecificos(){
@@ -132,7 +142,7 @@ export class IngresarplantillabodyComponent implements OnInit {
   }
   cambioConvenio(){
 
-    if(this.selector.get('convenios')?.value=='M')
+    if(this.selector.get('convenios')?.value==1 ||this.selector.get('convenios')?.value==3)
     {
       this.selector.get('especificos')?.disable();
       this.selector.patchValue({
@@ -140,10 +150,9 @@ export class IngresarplantillabodyComponent implements OnInit {
       });
     }
 
-    if(this.selector.get('convenios')?.value=='E')
+    if(this.selector.get('convenios')?.value==2)
     {
       this.selector.get('especificos')?.enable();
-
     }
 
   }

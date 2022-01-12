@@ -20,18 +20,6 @@ const routes: Routes = [
         path: 'principal', component: HomePaginaComponent,
       },
       {
-        path: 'ingresarconvenios', component: IngresarConveniosPaginaComponent,
-      },
-      {
-        path:'perfil',component:PerfilPaginaComponent,
-      },
-      {
-        path:'reseteocontra',component:ReseteoContraPaginaComponent
-      },
-      {
-        path:'ingresarplantillaconvenios',component:IngresarPlantillaConveniosComponent
-      },
-      {
         path:'convenios',
         loadChildren: () => import('src/app/convenios/convenios.module').then(m => m.ConveniosModule),
       },
@@ -39,6 +27,10 @@ const routes: Routes = [
         path:'configuracion',
         loadChildren: () => import('src/app/configuracion/configuracion.module').then(m => m.ConfiguracionModule),
       },
+      {
+        path:'configuracionavanzada',
+        loadChildren: () => import('src/app/configuracionavanzada/configuracionavanzada.module').then(m => m.ConfiguracionavanzadaModule),
+      }
 
 
     ]

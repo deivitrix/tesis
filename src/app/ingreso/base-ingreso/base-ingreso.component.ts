@@ -36,6 +36,8 @@ export class BaseIngresoComponent implements OnInit {
       shareReplay()
     );
 
+    
+
    
   constructor(private breakpointObserver: BreakpointObserver,private imagen:PathImagenesService,
     private _login:GeneralLoginService,private _funcionalidad:GeneralFuncionalidadService, private route:Router) {  
@@ -83,7 +85,7 @@ export class BaseIngresoComponent implements OnInit {
         if(item.funcionalidad[0].estado=="A"){
 
           this.listafuncionalidad.push(item);
-          if(item.funcionalidad[0].funcionalidad=="Configuracion Avanzada"){
+          if(item.funcionalidad[0].funcionalidad=="configuracionavanzada"){
             this.configuracionavanzada=true;
           }
         }

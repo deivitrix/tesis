@@ -8,8 +8,10 @@
                <mat-form-field class="container-fill" appearance="fill">
                    <mat-label>Convenios</mat-label>
                    <mat-select formControlName="convenios" (selectionChange)="cambioConvenio()">
-                     <mat-option value="M">Marco</mat-option>
-                     <mat-option value="E">Especifico</mat-option>
+                       <ng-container *ngFor="let lista of nombretipoconvenios">
+                        <mat-option value="{{lista.id}}">{{lista.nombre_tipo}}</mat-option>
+                       </ng-container>
+                     
                    </mat-select>
                  </mat-form-field>
                  <div *ngIf="selector.get('convenios')?.hasError('required') && selector.get('convenios')?.touched" style="margin-top: -20px;">
@@ -48,7 +50,7 @@
 <div class="container-fluid wrapper">
         <div class="formContent rounded">
             <h4 class="active"> <span class="titulo"><h3>Formulario Plantilla</h3></span></h4>
-            <pre>{{myform.value |json}}</pre>
+            <!-- <pre>{{myform.value |json}}</pre> -->
             <div class="fadeIn first">
                 <div class="col-sm">
                     <mat-form-field class="container-fill" appearance="fill">
