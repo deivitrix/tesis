@@ -1,3 +1,4 @@
+import { RegistroactividadesPaginaComponent } from './paginas/registroactividades-pagina/registroactividades-pagina.component';
 import { BaseconfiguracionavanzadaComponent } from './baseconfiguracionavanzada/baseconfiguracionavanzada.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -8,10 +9,10 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        redirectTo: 'base', pathMatch: 'full'
+        redirectTo: 'registroActividades', pathMatch: 'full'
       },
       {
-        path:'base',component:BaseconfiguracionavanzadaComponent
+        path:'registroActividades',component:RegistroactividadesPaginaComponent
       },
     ]
   }
