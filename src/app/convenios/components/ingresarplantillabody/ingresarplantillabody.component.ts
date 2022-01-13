@@ -13,11 +13,12 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClausulasModel } from 'src/app/models/convenios/clausulas';
+import { NombreTipoConveniosModel } from 'src/app/models/convenios/nombretipoconvenios';
 
 //PDF
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { NombreTipoConveniosModel } from 'src/app/models/convenios/nombretipoconvenios';
+
 
 
 @Component({
@@ -183,12 +184,11 @@ export class IngresarplantillabodyComponent implements OnInit {
     let json={convenio_especifico:{descripcion_ce:this.categoria}}
     this.convenios.addconveniosEspecificos(json)
     .subscribe((res:any) => {
-      console.log(res);
       if(res.status==true)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
-            titulo:'Error.....',
+            titulo:'Success.....',
             mensaje:res.mensaje,
            buttonText:'',
            icon:'success'
@@ -399,6 +399,7 @@ export class IngresarplantillabodyComponent implements OnInit {
             this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
             return;
           }
+          this.agregarfirmaReceptor();
 
 
       }
@@ -412,6 +413,50 @@ export class IngresarplantillabodyComponent implements OnInit {
   agregarfirmaReceptor(){
     let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
       cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
+      this.convenios.addfirmaReceptor(json)
+      .subscribe((res:any)=>{
+
+        if(res.estado==true)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Success.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'success'     
+        });
+        this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+        this.firmaReceptor=[];
+        this.getfirmareceptor();
+        return;
+        
+
+      }
+      if(res.estado==false)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+        return;
+      }
+
+
+      });
   }
 
   agregarfirmaEmisorDialog(){
@@ -443,8 +488,6 @@ export class IngresarplantillabodyComponent implements OnInit {
               return;
             }
          this.agregarfirmaEmisor();
-        
-      
       }
      
       
@@ -499,7 +542,7 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   }
 
-  Descargar(){
+  Vista(){
 
     if(this.selector.get('convenios')?.value.length==0)
     {
@@ -604,15 +647,8 @@ export class IngresarplantillabodyComponent implements OnInit {
 
 
           }
-
-
-        }
-        
+        } 
       }
-
-
-
-
     }
 
     // const doc = new jsPDF();

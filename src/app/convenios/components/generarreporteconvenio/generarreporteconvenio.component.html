@@ -1,0 +1,23 @@
+<div mat-dialog-content class="contenido">
+    <div class="container-fluid wrapper">
+        <div class="formContent rounded">
+            <h5 class="active"><span class="titulo">{{data.titulo}}</span></h5>
+            <div class="body fadeIn second">
+                <mat-form-field class="container-fill" appearance="fill">
+                    <mat-label>Ingresar Rango de Fecha</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                      <input matStartDate placeholder="Inicio Fecha" [(ngModel)]="data.fecha.fechainicio">
+                      <input matEndDate placeholder="Final Fecha" [(ngModel)]="data.fecha.fechafin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                  </mat-form-field>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions class="button-action">
+    <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+    <button mat-button  color="primary" [mat-dialog-close]="data.fecha" cdkFocusInitial>Enviar</button>
+  </div>

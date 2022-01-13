@@ -17,7 +17,7 @@ import { TablamostrarconveniosComponent } from './components/tablamostrarconveni
 
 //material
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatTreeModule} from '@angular/material/tree';
@@ -32,10 +32,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import {MatDividerModule} from '@angular/material/divider';
 import { IngresarfirmaemisorComponent } from './components/ingresarfirmaemisor/ingresarfirmaemisor.component';
 import { IngresarfirmareceptorComponent } from './components/ingresarfirmareceptor/ingresarfirmareceptor.component';
+import { GenerarreporteconvenioComponent } from './components/generarreporteconvenio/generarreporteconvenio.component';
 
 
 @NgModule({
@@ -52,7 +55,8 @@ import { IngresarfirmareceptorComponent } from './components/ingresarfirmarecept
     IngresarclausulaComponent,
     TablamostrarconveniosComponent,
     IngresarfirmaemisorComponent,
-    IngresarfirmareceptorComponent
+    IngresarfirmareceptorComponent,
+    GenerarreporteconvenioComponent
   ],
   imports: [
     CommonModule,
@@ -75,7 +79,9 @@ import { IngresarfirmareceptorComponent } from './components/ingresarfirmarecept
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    PipesModule
+    PipesModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   entryComponents:[IngresarCategoriaComponent],
 })
