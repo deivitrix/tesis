@@ -68,7 +68,8 @@ export class IngresarplantillabodyComponent implements OnInit {
       clausulas: this.ingresar.array([]),
       selectFirmaEmisor:['',Validators.required],
       selectFirmaReceptor:['',Validators.required],
-
+      firmaEmisor:this.ingresar.array([]),
+      firmaReceptor:this.ingresar.array([]),
     });
 
 
@@ -244,11 +245,6 @@ export class IngresarplantillabodyComponent implements OnInit {
   removerAntecedentes(indice:number)
   {
     this.clausula.removeAt(indice);
-    //this.articulos.controls=[];
-    
-    //console.log(this.clausula);
-    
-
   }
   
   get articulos(){
@@ -275,24 +271,25 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   insertarnombreclausula(indice:number)
   {
-    var id= this.clausula.value[indice].nombre;
-    var id_clausula=Number(id);
+    var nombre= this.clausula.value[indice].nombre;
     this.convenios.getclausulas()
     .subscribe((res:any) => {
       this.clausulasget=res;
-      this.actualizarnombreclausula(this.clausulasget,id_clausula,indice);
+      this.actualizarnombreclausula(this.clausulasget,nombre,indice);
     });
 
   }
-  actualizarnombreclausula(original:ClausulasModel[],id:number,indice:number)
+  actualizarnombreclausula(original:ClausulasModel[],nombre_c:string,indice:number)
   {
     original.forEach((item:ClausulasModel)=>{
-      if(item.id==id)
+      if(item.nombre_clau==nombre_c)
       {
-        this.clausula.value[indice].id=item.id;
-        this.clausula.value[indice].nombre=item.nombre_clau;
+        this.clausula.controls[indice].patchValue({
+          id:item.id
+        });
       }
     });
+    
 
 
   }
@@ -658,6 +655,130 @@ export class IngresarplantillabodyComponent implements OnInit {
     
     
 
+  }
+
+  get firmaEmisorArray()
+  {
+    return this.myform.get("firmaEmisor") as FormArray;
+  }
+
+  get firmaReceptorArray(){
+    return this.myform.get("firmaReceptor") as FormArray;
+  }
+
+
+  insertarobjetofirmaReceptor(event:any){
+    var id_firma=event.value;
+    var abreviatura ="";
+    var nombre="";
+   
+    if(this.firmaReceptorArray.length!=0)
+    {
+      this.firmaReceptorArray.removeAt(0);
+    }
+    this.convenios.getfirmaReceptor()
+    .subscribe((res:any)=>{
+      this.firmaReceptor=res;
+      this.firmaReceptor.forEach((item:FirmaReceptorModel)=>{
+        if(item.id==id_firma)
+        {
+
+          var separar=item.titulo_academico.split(" ");
+          abreviatura=this.abreviaturaProfesional(separar[0]);
+          nombre=abreviatura+" "+item.nombre_receptor;
+          
+          const firmaEmisor=this.ingresar.group({
+            nombre:nombre,
+            cargo:item.cargo_receptor,
+            institucion:item.institucion_receptor
+          });
+
+          this.firmaReceptorArray.push(firmaEmisor);
+
+        }
+      });
+    });
+
+  }
+
+
+  insertarobjetofirma(event:any)
+  {
+    var id_firma=event.value;
+    var abreviatura ="";
+    var nombre="";
+   
+    if(this.firmaEmisorArray.length!=0)
+    {
+      this.firmaEmisorArray.removeAt(0);
+    }
+    this.convenios.getfirmaEmisor()
+    .subscribe((res:any)=>{
+      this.firmaEmisor=res;
+      this.firmaEmisor.forEach((item:FirmaEmisorModel)=>{
+        if(item.id==id_firma)
+        {
+          var separar=item.titulo_academico.split(" ");
+          abreviatura=this.abreviaturaProfesional(separar[0]);
+          nombre=abreviatura+" "+item.nombre_emisor;
+          
+          const firmaEmisor=this.ingresar.group({
+            nombre:nombre,
+            cargo:item.cargo_emisor,
+            institucion:item.institucion_emisor
+          });
+
+          this.firmaEmisorArray.push(firmaEmisor);
+
+        }
+      });
+    });
+
+
+
+
+    
+
+  }
+
+  abreviaturaProfesional(cargo:string)
+  {
+    var cargo_m=cargo.toLocaleLowerCase();
+     var verificar=false;
+    var cargoreturn="";
+    switch(cargo_m)
+    {
+      case 'abogado':  cargoreturn="Abgdo"; break;
+      case 'abogada':  cargoreturn="Abgda"; break;
+      case 'administrador':  cargoreturn="Adm"; break;
+      case 'administradora':  cargoreturn="Adm"; break;
+      case 'analista':  cargoreturn="Anl"; break;
+      case 'arquitecto':  cargoreturn="Arq"; break;
+      case 'arquitecto':  cargoreturn="Arq"; break;
+      case 'contador':  cargoreturn="Cdor"; break;
+      case 'director':  cargoreturn="Dir"; break;
+      case 'directora':  cargoreturn="Dira"; break;
+      case 'doctor':  cargoreturn="Dr"; break;
+      case 'doctora':  cargoreturn="Dra"; break;
+      case 'economista':  cargoreturn="Econ"; break;
+      case 'enfermero':  cargoreturn="Enf"; break;
+      case 'enfermera':  cargoreturn="Enf"; break;
+      case 'ingeniero':  cargoreturn="Ing"; break;
+      case 'ingeniera':  cargoreturn="Ing"; break;
+      case 'licenciado':  cargoreturn="Lcdo"; break;
+      case 'licenciada':  cargoreturn="Lcda"; break;
+      case 'odontologo':  cargoreturn="Odont"; break;
+      case 'psicólogo':  cargoreturn="Psic"; break;
+      case 'psiquiatra':  cargoreturn="Psiq"; break;
+      case 'químico':  cargoreturn="Quim"; break;
+      case 'sociólogo':  cargoreturn="Soc"; break;
+      case 'veterinario':  cargoreturn="Vet"; break;
+      case 'nutricionista':  cargoreturn="Nut"; break;
+      case 'profesor':  cargoreturn="Prof"; break;
+      default: cargoreturn="";
+    }
+    return cargoreturn;
+  
   }
 
 

@@ -1,0 +1,19 @@
+.titulo{
+    margin-top: 2.5%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+.table td{
+    font-size: 15px;
+  }
+.centrar{
+    text-align: center;
+}
+.pointer{
+    cursor: pointer;
+}
+.mat-form-field-filtro{
+    font-size: 14px;
+    width: 100%;
+}
+

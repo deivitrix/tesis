@@ -4,6 +4,7 @@ import { BaseconveniosComponent } from './baseconvenios/baseconvenios.component'
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-plantilla-convenios-paginas/ingresar-plantilla-convenios-paginas.component';
+import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
       },
       {
         path:'ingresarplantilla',component:IngresarPlantillaConveniosPaginasComponent
+      },
+      {
+        path:'ingresarcon/:id',component:Ingresarconveniosbody2Component
       }
     ]
   }

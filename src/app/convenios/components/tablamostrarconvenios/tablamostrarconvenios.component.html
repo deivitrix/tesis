@@ -31,7 +31,10 @@
 </div>
 
 <ng-container *ngIf="tabla == true">
-  <!-- <form autocomplete="off"> -->
+  <ng-container *ngIf="loading==true">
+    <app-loadingconvenios></app-loadingconvenios>
+  </ng-container>
+<ng-container *ngIf="loading==false">
   <div style="margin: 15px">
     <mat-form-field class="mat-form-field-filtro">
       <mat-label>Filtro</mat-label>
@@ -87,5 +90,7 @@
       </mat-paginator>
     </div>
   </div>
+</ng-container>
+  
   <!-- </form> -->
 </ng-container>

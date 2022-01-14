@@ -3,10 +3,8 @@ import { element } from 'protractor';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ConveniosServicesService } from 'src/app/services/generalConvenios/convenios-services.service';
-import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ConveniosTipoModel } from 'src/app/models/convenios/conveniostipos';
-import { ConveniosTiposTableModel } from 'src/app/models/convenios/conveniostipostable';
 import { MatDialog } from '@angular/material/dialog';
 import { GenerarReporteModel } from 'src/app/models/convenios/generarreporte';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -28,6 +26,7 @@ export class TablamostrarconveniosComponent implements OnInit {
   arrayfecha:GenerarReporteModel={fechafin:'',fechainicio:'',tipo:''};
 
   listaConv: any[] = [];
+  listaConvaux:any[]=[];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -35,6 +34,7 @@ export class TablamostrarconveniosComponent implements OnInit {
   public pageNumber: number = 1;
 
   public filtro: string = '';
+  loading=true;
 
   constructor(
     private convenios: ConveniosServicesService,
@@ -58,12 +58,27 @@ export class TablamostrarconveniosComponent implements OnInit {
    
     this.convenios.getconveniostipo(event.value).subscribe((res: any) => {
       this.tabla = true;
-      this.listaConv = res;
-      this.listaConv.map((element, index) => (element.position = index + 1));
-      this.listaConv.map(
-        (element) =>
-          (element.fecha_creacion = element.f_creaciondoc.split(' ')[0])
-      );
+      this.loading=false;
+
+      this.listaConvaux=res;
+      this.loading=false;
+      if(this.listaConvaux.length!=0)
+      {
+        for(var i=0;i<this.listaConvaux.length;i++){
+          if(this.listaConvaux[i].estado=="A")
+          {
+            this.listaConv.push(this.listaConvaux[i]);
+          }
+        }
+        
+        
+        this.listaConv.map((element, index) => (element.position = index + 1));
+        this.listaConv.map(
+          (element) =>
+            (element.fecha_creacion = element.f_creaciondoc.split(' ')[0])
+        );
+
+      }
     });
   }
 

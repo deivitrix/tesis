@@ -1,5 +1,5 @@
 <div class="container-fluid titulo">
-    <h3>Ingresar Plantilla Convenios</h3>
+    <h3>Ingresar Plantilla Convenio</h3>
 </div>
  <div class="container-fluid selector">
      <form [formGroup]="selector" autocomplete="off">
@@ -100,7 +100,7 @@
                                 <mat-label>Nombre Clausulas</mat-label>
                                 <mat-select formControlName="nombre" (selectionChange)="insertarnombreclausula(i)">
                                     <ng-container *ngFor="let lista of clausulasget">
-                                        <mat-option value="{{lista.id}}">{{lista.nombre_clau}}</mat-option>
+                                        <mat-option value="{{lista.nombre_clau}}">{{lista.nombre_clau}}</mat-option>
                                     </ng-container>
                                 </mat-select>
                               </mat-form-field>
@@ -155,7 +155,7 @@
                         <div class="col-md-9">
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Emisor</mat-label>
-                                <mat-select formControlName="selectFirmaEmisor">
+                                <mat-select formControlName="selectFirmaEmisor" (selectionChange)="insertarobjetofirma($event)">
                                  <ng-container *ngFor="let lista of firmaEmisor">
                                     <mat-option value="{{lista.id}}">{{lista.nombre_emisor}}</mat-option>
                                  </ng-container>
@@ -178,7 +178,7 @@
                         <div class="col-md-9">
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Receptor</mat-label>
-                                <mat-select formControlName="selectFirmaReceptor">
+                                <mat-select formControlName="selectFirmaReceptor" (selectionChange)=" insertarobjetofirmaReceptor($event)">
                                     <ng-container *ngFor="let lista of firmaReceptor">
                                         <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
 

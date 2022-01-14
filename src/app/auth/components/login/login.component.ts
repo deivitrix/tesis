@@ -71,23 +71,49 @@ export class LoginComponent implements OnInit {
   .subscribe((res:any)=>{
     if(res.estado==true)
     {
-      this.snackBar.openFromComponent(MensajeLoginComponent,{
-        data:{
-          titulo:'Bienvenido',
-          mensaje:'Bienvenido al Sistema UTMRICB',
-         buttonText:'',
-         icon:'success'
-        },
-        duration:1500,
-        horizontalPosition:'center',
-        verticalPosition:'top',
-        panelClass:'success'     
-      });
 
-      //guardar en cache
-      sessionStorage.setItem('isRedirected','true');
-      localStorage.setItem("cedula",res.usuario.cedula);
-      this.router.navigate(['/utmricb/principal']);
+
+      if(res.usuario.estado=="A")
+      {
+        this.snackBar.openFromComponent(MensajeLoginComponent,{
+          data:{
+            titulo:'Bienvenido',
+            mensaje:'Bienvenido al Sistema UTMRICB',
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1500,
+          horizontalPosition:'center',
+          verticalPosition:'top',
+          panelClass:'success'     
+        });
+  
+        //guardar en cache
+        sessionStorage.setItem('isRedirected','true');
+        localStorage.setItem("cedula",res.usuario.cedula);
+        this.router.navigate(['/utmricb/principal']);
+
+      }
+      else
+      {
+        this.snackBar.openFromComponent(MensajeLoginComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Este usuario no encuentra activo!!!",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        this.contrasena="";
+        return;
+
+
+      }
+      
     }
     if(res.estado==false)
     {

@@ -75,7 +75,7 @@ export class QuienessomosComponent implements OnInit {
       }
     });
     
-     console.log(this.listaobjetivoaux);
+    //  console.log(this.listaobjetivoaux);
     // console.log(this.listamisionaux[0].descripcion.length);
     // console.log(this.listavisionaux[0].descripcion.substring(0,65));
 

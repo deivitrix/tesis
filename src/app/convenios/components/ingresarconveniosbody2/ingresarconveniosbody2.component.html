@@ -1,0 +1,40 @@
+<div class="container-fluid titulo">
+    <h3>Ingresar Convenio</h3>
+</div>
+<div class="container-fluid selector">
+    <form [formGroup]="selector" autocomplete="off">
+    <div class="row">
+        <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+                <mat-label>Convenios</mat-label>
+                <mat-select  formControlName="convenio" (selectionChange)="cambioConvenio()">
+                    <ng-container *ngFor="let lista of nombretipoconvenios">
+                     <mat-option value="{{lista.id}}">{{lista.nombre_tipo}}</mat-option>
+                    </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="selector.get('convenio')?.hasError('required') && selector.get('convenio')?.touched" style="margin-top: -20px;">
+                <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+            </div>
+        </div>
+        <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+                <mat-label>Especifico</mat-label>
+                <mat-select formControlName="especifico">
+                    <!-- <ng-container *ngFor="let lista of convenioEspecificos">
+                        <mat-option value="{{lista.descripcion_ce}}">{{lista.descripcion_ce}}</mat-option>
+                    </ng-container> -->
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="selector.get('especifico')?.hasError('required') && selector.get('especifico')?.touched" style="margin-top: -20px;">
+                <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+            </div>
+        </div>
+        <div class="col-sm button-agregar">
+            <button  mat-flat-button color="primary"(click)="agregarcategoria()" ><mat-icon>add</mat-icon> <span class="categoria">Categoria Convenio</span></button>
+       </div>
+
+    </div>
+    </form>
+
+</div>

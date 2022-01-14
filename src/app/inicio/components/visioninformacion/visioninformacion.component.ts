@@ -23,7 +23,6 @@ export class VisioninformacionComponent implements OnInit {
     .subscribe((res:any) => {
       this.listainterfaz=res;
       this.loading=false;
-      console.log(this.listainterfaz);
       this.separarVision(this.listainterfaz);
      
     })
