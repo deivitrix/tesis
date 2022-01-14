@@ -55,11 +55,12 @@ export class TablamostrarconveniosComponent implements OnInit {
 
   cambioConveniosTipos(event: any) {
     this.generarReporte=false;
-   
     this.convenios.getconveniostipo(event.value).subscribe((res: any) => {
       this.tabla = true;
       this.loading=false;
-
+      console.log(res);
+      this.listaConvaux=[];
+      this.listaConv=[];
       this.listaConvaux=res;
       this.loading=false;
       if(this.listaConvaux.length!=0)
@@ -70,8 +71,6 @@ export class TablamostrarconveniosComponent implements OnInit {
             this.listaConv.push(this.listaConvaux[i]);
           }
         }
-        
-        
         this.listaConv.map((element, index) => (element.position = index + 1));
         this.listaConv.map(
           (element) =>
