@@ -1,3 +1,4 @@
+import { FirmaModel } from './../../../models/convenios/firmaconvenio';
 import { IngresarfirmaComponent } from './../ingresarfirma/ingresarfirma.component';
 import { Router } from '@angular/router';
 import { LoginComponent } from './../../../auth/components/login/login.component';
@@ -59,6 +60,11 @@ export class IngresarplantillabodyComponent implements OnInit {
   firmaReceptor:FirmaReceptorModel[]=[];
   firmaReceptorAgregar:FirmaReceptorModel={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
 
+  //firmaModel
+  firmaconvenioaux:FirmaModel[]=[];
+  firmaconvenio:FirmaModel[]=[];
+  firmaAgregar:FirmaModel={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
+
   // Nombre tipo convenios
   nombretipoconvenios:NombreTipoConveniosModel[]=[];
   botonvista=false;
@@ -102,8 +108,7 @@ cedula:string;
     this.getnombretipoconvenios();
     this.getconveniosEspecificos();
     this.getclausulas();
-    this.getfirmaemisor();
-    this.getfirmareceptor();
+    this.getfirma();
   }
 
   // usuario
@@ -161,20 +166,14 @@ cedula:string;
 
 
 
-  getfirmaemisor(){
-    this.convenios.getfirmaEmisor()
+  getfirma(){
+    this.convenios.getfirmaconvenio()
     .subscribe((res:any)=>{
-      this.firmaEmisor=res;
+      this.firmaconvenio=res;
     });
 
   }
 
-  getfirmareceptor(){
-    this.convenios.getfirmaReceptor()
-    .subscribe((res:any)=>{
-      this.firmaReceptor=res;
-    });
-  }
 
   
   cambioConvenio(){
@@ -424,7 +423,7 @@ cedula:string;
   agregarfirmaDialog(){
     const dialogRef=this.dialog.open(IngresarfirmaComponent,{
       width:'600px',
-      data:{titulo:'Ingresar Firma del Receptor',receptor:this.firmaReceptorAgregar}
+      data:{titulo:'Ingresar Firma',firma:this.firmaAgregar}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -433,8 +432,8 @@ cedula:string;
       if(result!=null)
       {
         this.firmaReceptorAgregar=result;
-        if(this.firmaReceptorAgregar.nombre_receptor.length==0 || this.firmaReceptorAgregar.titulo_academico.length==0 ||
-          this.firmaReceptorAgregar.cargo_receptor.length==0 || this.firmaReceptorAgregar.institucion_receptor.length==0)
+        if(this.firmaAgregar.nombres.length==0 || this.firmaAgregar.titulo_academico.length==0 ||
+          this.firmaAgregar.cargo.length==0 || this.firmaAgregar.institucion.length==0)
           {
             this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
               data:{
@@ -448,7 +447,7 @@ cedula:string;
               verticalPosition:'bottom',
               panelClass:'error'     
             });
-            this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+            this.firmaAgregar={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
             return;
           }
           this.agregarfirma();
@@ -463,11 +462,12 @@ cedula:string;
   }
 
   agregarfirma(){
-    let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
-      cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
-      this.convenios.addfirmaReceptor(json)
+    let json={firmas:{titulo_academico:this.firmaAgregar.titulo_academico,nombres:this.firmaAgregar.nombres,
+      cargo:this.firmaAgregar.cargo,institucion:this.firmaAgregar.institucion}};
+      this.convenios.addfirmaconvenios(json)
       .subscribe((res:any)=>{
-
+        console.log(res);
+        
         if(res.estado==true)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
@@ -482,9 +482,9 @@ cedula:string;
           verticalPosition:'bottom',
           panelClass:'success'     
         });
-        this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
-        this.firmaReceptor=[];
-        this.getfirmareceptor();
+        this.firmaAgregar={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
+        this.firmaconvenio=[];
+        this.getfirma();
         return;
         
 
@@ -503,7 +503,7 @@ cedula:string;
           verticalPosition:'bottom',
           panelClass:'error'     
         });
-        this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
+        this.firmaAgregar={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
         return;
       }
 
@@ -768,6 +768,8 @@ cedula:string;
   }
 
 
+
+
   insertarobjetofirmaReceptor(event:any){
     var id_firma=event.value;
     var abreviatura ="";
@@ -777,21 +779,21 @@ cedula:string;
     {
       this.firmaReceptorArray.removeAt(0);
     }
-    this.convenios.getfirmaReceptor()
+    this.convenios.getfirmaconvenio()
     .subscribe((res:any)=>{
-      this.firmaReceptor=res;
-      this.firmaReceptor.forEach((item:FirmaReceptorModel)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
         if(item.id==id_firma)
         {
 
           var separar=item.titulo_academico.split(" ");
           abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombre_receptor;
+          nombre=abreviatura+" "+item.nombres;
           
           const firmaEmisor=this.ingresar.group({
             nombre:nombre,
-            cargo:item.cargo_receptor,
-            institucion:item.institucion_receptor
+            cargo:item.cargo,
+            institucion:item.institucion
           });
 
           this.firmaReceptorArray.push(firmaEmisor);
@@ -813,20 +815,20 @@ cedula:string;
     {
       this.firmaEmisorArray.removeAt(0);
     }
-    this.convenios.getfirmaEmisor()
+    this.convenios.getfirmaconvenio()
     .subscribe((res:any)=>{
-      this.firmaEmisor=res;
-      this.firmaEmisor.forEach((item:FirmaEmisorModel)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
         if(item.id==id_firma)
         {
           var separar=item.titulo_academico.split(" ");
           abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombre_emisor;
+          nombre=abreviatura+" "+item.nombres;
           
           const firmaEmisor=this.ingresar.group({
             nombre:nombre,
-            cargo:item.cargo_emisor,
-            institucion:item.institucion_emisor
+            cargo:item.cargo,
+            institucion:item.institucion
           });
 
           this.firmaEmisorArray.push(firmaEmisor);

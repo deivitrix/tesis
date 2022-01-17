@@ -9,25 +9,25 @@
                 <div class="col-sm">
                     <mat-form-field class="container-fill"  appearance="fill">
                         <mat-label class="label-des">Nombres y Apellidos</mat-label>
-                        <input matInput [(ngModel)]="data.receptor.nombre_receptor">
+                        <input matInput [(ngModel)]="data.firma.nombres">
                     </mat-form-field>
                 </div>
                 <div class="col-sm">
                     <mat-form-field class="container-fill"  appearance="fill">
                         <mat-label class="label-des">Titulo Academico</mat-label>
-                        <input matInput [(ngModel)]="data.receptor.titulo_academico">
+                        <input matInput [(ngModel)]="data.firma.titulo_academico">
                     </mat-form-field>
                 </div>
                 <div class="col-sm">
                     <mat-form-field class="container-fill"  appearance="fill">
                         <mat-label class="label-des">Cargo</mat-label>
-                        <input matInput [(ngModel)]="data.receptor.cargo_receptor">
+                        <input matInput [(ngModel)]="data.firma.cargo">
                     </mat-form-field>
                 </div>
                 <div class="col-sm">
                     <mat-form-field class="container-fill"  appearance="fill">
                         <mat-label class="label-des">Institucion</mat-label>
-                        <input matInput [(ngModel)]="data.receptor.institucion_receptor">
+                        <input matInput [(ngModel)]="data.firma.institucion">
                     </mat-form-field>
                 </div>
             </div>
@@ -37,5 +37,5 @@
 </div>
 <div mat-dialog-actions class="button-action">
     <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
-    <button mat-button  color="primary" [mat-dialog-close]="data.receptor" cdkFocusInitial>Guardar</button>
+    <button mat-button  color="primary" [mat-dialog-close]="data.firma" cdkFocusInitial>Guardar</button>
   </div>

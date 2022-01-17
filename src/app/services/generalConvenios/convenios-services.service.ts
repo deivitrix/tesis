@@ -80,6 +80,17 @@ export class ConveniosServicesService {
     let url:string=this._base.getUrlLocalApi()+'archivo/convenios/'+nombre;
     return url;
   }
+
+  getfirmaconvenio():Observable<any>{
+    let url:string = this._base.getUrlApi() + 'firma-new';
+    return this.http.get<any>(url);
+  }
+
+  addfirmaconvenios(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'firma-new';
+    return this.http.post(url,data);
+  }
   
   
 }

@@ -51,7 +51,7 @@
 <div class="container-fluid wrapper">
         <div class="formContent rounded">
             <h4 class="active"> <span class="titulo"><h3>Formulario Plantilla</h3></span></h4>
-            <!-- <pre>{{myform.value |json}}</pre> -->
+            <pre>{{myform.value |json}}</pre>
             <div class="fadeIn first">
                 <div class="col-sm">
                     <mat-form-field class="container-fill" appearance="fill">
@@ -159,8 +159,8 @@
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Emisor</mat-label>
                                 <mat-select formControlName="selectFirmaEmisor" (selectionChange)="insertarobjetofirma($event)">
-                                 <ng-container *ngFor="let lista of firmaEmisor">
-                                    <mat-option value="{{lista.id}}">{{lista.nombre_emisor}}</mat-option>
+                                 <ng-container *ngFor="let lista of firmaconvenio">
+                                    <mat-option value="{{lista.id}}">{{lista.nombres}}</mat-option>
                                  </ng-container>
                                  
                                 </mat-select>
@@ -182,8 +182,8 @@
                             <mat-form-field class="container-fill" appearance="fill">
                                 <mat-label>Firma Receptor</mat-label>
                                 <mat-select formControlName="selectFirmaReceptor" (selectionChange)=" insertarobjetofirmaReceptor($event)">
-                                    <ng-container *ngFor="let lista of firmaReceptor">
-                                        <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
+                                    <ng-container *ngFor="let lista of firmaconvenio">
+                                        <mat-option value="{{lista.id}}">{{lista.nombres}}</mat-option>
 
                                     </ng-container>  
                                 </mat-select>

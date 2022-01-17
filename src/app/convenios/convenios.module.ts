@@ -37,8 +37,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 
 import {MatDividerModule} from '@angular/material/divider';
-import { IngresarfirmaemisorComponent } from './components/ingresarfirmaemisor/ingresarfirmaemisor.component';
-import { IngresarfirmareceptorComponent } from './components/ingresarfirmareceptor/ingresarfirmareceptor.component';
 import { GenerarreporteconvenioComponent } from './components/generarreporteconvenio/generarreporteconvenio.component';
 import { IngresarconveniosbodyComponent } from './components/ingresarconveniosbody/ingresarconveniosbody.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
@@ -58,8 +56,6 @@ import { IngresarfirmaComponent } from './components/ingresarfirma/ingresarfirma
     MensajeconveniosComponent,
     IngresarclausulaComponent,
     TablamostrarconveniosComponent,
-    IngresarfirmaemisorComponent,
-    IngresarfirmareceptorComponent,
     GenerarreporteconvenioComponent,
     IngresarconveniosbodyComponent,
     Ingresarconveniosbody2Component,

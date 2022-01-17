@@ -13,8 +13,8 @@ import { FirmaReceptorModel } from 'src/app/models/convenios/firmareceptor';
 
 //Alertas
 import Swal from 'sweetalert2';
-import { IngresarfirmaemisorComponent } from '../ingresarfirmaemisor/ingresarfirmaemisor.component';
-import { IngresarfirmareceptorComponent } from '../ingresarfirmareceptor/ingresarfirmareceptor.component';
+import { IngresarfirmaComponent } from '../ingresarfirma/ingresarfirma.component';
+
 
 @Component({
   selector: 'app-ingresarconveniosbody2',
@@ -328,7 +328,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   // agregar firma Emisor
   agregarfirmaEmisorDialog(){
-    const dialogRef=this.dialog.open(IngresarfirmaemisorComponent,{
+    const dialogRef=this.dialog.open(IngresarfirmaComponent,{
       width:'600px',
       data:{titulo:'Ingresar Firma del Emisor',emisor:this.firmaEmisorAgregar}
     });
@@ -412,7 +412,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   //agregar firma receptor 
   agregarfirmaReceptorDialog(){
-    const dialogRef=this.dialog.open(IngresarfirmareceptorComponent,{
+    const dialogRef=this.dialog.open(IngresarfirmaComponent,{
       width:'600px',
       data:{titulo:'Ingresar Firma del Receptor',receptor:this.firmaReceptorAgregar}
     });
