@@ -1,6 +1,7 @@
+import { IngresarfirmaComponent } from './../ingresarfirma/ingresarfirma.component';
+import { Router } from '@angular/router';
 import { LoginComponent } from './../../../auth/components/login/login.component';
-import { IngresarfirmareceptorComponent } from './../ingresarfirmareceptor/ingresarfirmareceptor.component';
-import { IngresarfirmaemisorComponent } from './../ingresarfirmaemisor/ingresarfirmaemisor.component';
+
 import { FirmaReceptorModel } from './../../../models/convenios/firmareceptor';
 import { FirmaEmisorModel } from './../../../models/convenios/firmaemisor';
 import { IngresarclausulaComponent } from './../ingresarclausula/ingresarclausula.component';
@@ -15,9 +16,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClausulasModel } from 'src/app/models/convenios/clausulas';
 import { NombreTipoConveniosModel } from 'src/app/models/convenios/nombretipoconvenios';
 
+//import Swal from 'sweetalert2'
+
+//Alertas
+import Swal from 'sweetalert2';
+import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-services.service';
+
 //PDF
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+// import jsPDF from 'jspdf';
+// import html2canvas from 'html2canvas';
 
 
 
@@ -56,7 +63,13 @@ export class IngresarplantillabodyComponent implements OnInit {
   nombretipoconvenios:NombreTipoConveniosModel[]=[];
   botonvista=false;
 
-  constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
+
+// cedula del usuario
+cedula:string;
+
+  constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,
+              public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router,
+              private usuario:UsuarioServicesService) 
   {
     this.selector=this.ingresar.group({
       convenios:['',Validators.required],
@@ -64,6 +77,9 @@ export class IngresarplantillabodyComponent implements OnInit {
     });
 
     this.myform=this.ingresar.group({
+      id_usuario:[''],
+      id_tipoconvenio:[''],
+      id_tipoespecifico:[''],
       nombre_convenio:['',Validators.required],
       comparecientes:['',Validators.required],
       clausulas: this.ingresar.array([]),
@@ -72,18 +88,33 @@ export class IngresarplantillabodyComponent implements OnInit {
       firmaEmisor:this.ingresar.array([]),
       firmaReceptor:this.ingresar.array([]),
     });
-
+    this.cedula="";
+    var cedula1;
+    cedula1=localStorage.getItem("cedula") as string;  
+    this.cedula=cedula1;
 
   }
 
  
 
   ngOnInit(): void {
-    this.getnombretipoconvenios()
+    this.getusuario();
+    this.getnombretipoconvenios();
     this.getconveniosEspecificos();
     this.getclausulas();
     this.getfirmaemisor();
     this.getfirmareceptor();
+  }
+
+  // usuario
+
+  getusuario(){
+    this.usuario.getusuariosearch(this.cedula)
+    .subscribe((res:any)=>{ 
+        this.myform.patchValue({
+          id_usuario:res.usuario.id
+        });
+    });
   }
 
   get clausula() {
@@ -115,6 +146,20 @@ export class IngresarplantillabodyComponent implements OnInit {
       
     });
   }
+  separarConvenios(original:ConveniosEspecificosModel[])
+  {
+    original.forEach((item:ConveniosEspecificosModel)=>{
+
+      if(item.id!=1)
+      {
+        this.convenioEspecificos.push(item);
+      }
+    });
+
+    
+  }
+
+
 
   getfirmaemisor(){
     this.convenios.getfirmaEmisor()
@@ -131,18 +176,7 @@ export class IngresarplantillabodyComponent implements OnInit {
     });
   }
 
-  separarConvenios(original:ConveniosEspecificosModel[])
-  {
-    original.forEach((item:ConveniosEspecificosModel)=>{
-
-      if(item.id!=1)
-      {
-        this.convenioEspecificos.push(item);
-      }
-    });
-
-    
-  }
+  
   cambioConvenio(){
 
     if(this.selector.get('convenios')?.value==1 ||this.selector.get('convenios')?.value==3)
@@ -151,12 +185,31 @@ export class IngresarplantillabodyComponent implements OnInit {
       this.selector.patchValue({
         especificos:''
       });
+
+      this.myform.patchValue({
+        id_tipoconvenio:this.selector.get('convenios')?.value,
+        id_tipoespecifico:1
+      });
+      
     }
 
     if(this.selector.get('convenios')?.value==2)
     {
       this.selector.get('especificos')?.enable();
+      this.myform.patchValue({
+        id_tipoconvenio:this.selector.get('convenios')?.value,
+        id_tipoespecifico:""
+      });
     }
+
+  }
+
+  cambioConvenioEspecificos()
+  {
+    this.myform.patchValue({
+      id_tipoconvenio:this.selector.get('convenios')?.value,
+      id_tipoespecifico:this.selector.get('especificos')?.value
+    });
 
   }
 
@@ -236,6 +289,7 @@ export class IngresarplantillabodyComponent implements OnInit {
       id:'',
       nombre:['',Validators.required],
       descripcion:['',Validators.required],
+      tipo:'P',
       articulos:this.ingresar.array([
       ])
     });
@@ -367,8 +421,8 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   }
   
-  agregarfirmaReceptorDialog(){
-    const dialogRef=this.dialog.open(IngresarfirmareceptorComponent,{
+  agregarfirmaDialog(){
+    const dialogRef=this.dialog.open(IngresarfirmaComponent,{
       width:'600px',
       data:{titulo:'Ingresar Firma del Receptor',receptor:this.firmaReceptorAgregar}
     });
@@ -397,7 +451,7 @@ export class IngresarplantillabodyComponent implements OnInit {
             this.firmaReceptorAgregar={id:0,titulo_academico:'',nombre_receptor:'',cargo_receptor:'',institucion_receptor:''};
             return;
           }
-          this.agregarfirmaReceptor();
+          this.agregarfirma();
 
 
       }
@@ -408,7 +462,7 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   }
 
-  agregarfirmaReceptor(){
+  agregarfirma(){
     let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
       cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
       this.convenios.addfirmaReceptor(json)
@@ -457,88 +511,88 @@ export class IngresarplantillabodyComponent implements OnInit {
       });
   }
 
-  agregarfirmaEmisorDialog(){
-    const dialogRef=this.dialog.open(IngresarfirmaemisorComponent,{
-      width:'600px',
-      data:{titulo:'Ingresar Firma del Emisor',emisor:this.firmaEmisorAgregar}
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if(result!=null)
-      {
-        this.firmaEmisorAgregar=result;
-         if(this.firmaEmisorAgregar.nombre_emisor.length==0 || this.firmaEmisorAgregar.titulo_academico.length==0 ||
-            this.firmaEmisorAgregar.cargo_emisor.length==0 || this.firmaEmisorAgregar.institucion_emisor.length==0)
-            {
-              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-                data:{
-                  titulo:'Error.....',
-                  mensaje:"Datos Faltantes",
-                 buttonText:'',
-                 icon:'error'
-                },
-                duration:1000,
-                horizontalPosition:'end',
-                verticalPosition:'bottom',
-                panelClass:'error'     
-              });
-              this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-              return;
-            }
-         this.agregarfirmaEmisor();
-      }
+  // agregarfirmaEmisorDialog(){
+  //   const dialogRef=this.dialog.open(IngresarfirmaemisorComponent,{
+  //     width:'600px',
+  //     data:{titulo:'Ingresar Firma del Emisor',emisor:this.firmaEmisorAgregar}
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     if(result!=null)
+  //     {
+  //       this.firmaEmisorAgregar=result;
+  //        if(this.firmaEmisorAgregar.nombre_emisor.length==0 || this.firmaEmisorAgregar.titulo_academico.length==0 ||
+  //           this.firmaEmisorAgregar.cargo_emisor.length==0 || this.firmaEmisorAgregar.institucion_emisor.length==0)
+  //           {
+  //             this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+  //               data:{
+  //                 titulo:'Error.....',
+  //                 mensaje:"Datos Faltantes",
+  //                buttonText:'',
+  //                icon:'error'
+  //               },
+  //               duration:1000,
+  //               horizontalPosition:'end',
+  //               verticalPosition:'bottom',
+  //               panelClass:'error'     
+  //             });
+  //             this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+  //             return;
+  //           }
+  //        this.agregarfirmaEmisor();
+  //     }
      
       
-    });
+  //   });
 
-  }
+  // }
 
-  agregarfirmaEmisor(){
-    let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
-      cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
-    this.convenios.addfirmaEmisor(json).
-    subscribe((res:any)=>{
-      if(res.estado==true)
-      {
-        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-          data:{
-            titulo:'Success.....',
-            mensaje:res.mensaje,
-           buttonText:'',
-           icon:'success'
-          },
-          duration:1000,
-          horizontalPosition:'end',
-          verticalPosition:'bottom',
-          panelClass:'success'     
-        });
-        this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-        this.firmaEmisor=[];
-        this.getfirmaemisor();
-        return;
+  // agregarfirmaEmisor(){
+  //   let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
+  //     cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
+  //   this.convenios.addfirmaEmisor(json).
+  //   subscribe((res:any)=>{
+  //     if(res.estado==true)
+  //     {
+  //       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+  //         data:{
+  //           titulo:'Success.....',
+  //           mensaje:res.mensaje,
+  //          buttonText:'',
+  //          icon:'success'
+  //         },
+  //         duration:1000,
+  //         horizontalPosition:'end',
+  //         verticalPosition:'bottom',
+  //         panelClass:'success'     
+  //       });
+  //       this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+  //       this.firmaEmisor=[];
+  //       this.getfirmaemisor();
+  //       return;
         
 
-      }
-      if(res.estado==false)
-      {
-        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-          data:{
-            titulo:'Error.....',
-            mensaje:res.mensaje,
-           buttonText:'',
-           icon:'warning'
-          },
-          duration:1000,
-          horizontalPosition:'end',
-          verticalPosition:'bottom',
-          panelClass:'error'     
-        });
-        this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-        return;
-      }
-    });
+  //     }
+  //     if(res.estado==false)
+  //     {
+  //       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+  //         data:{
+  //           titulo:'Error.....',
+  //           mensaje:res.mensaje,
+  //          buttonText:'',
+  //          icon:'warning'
+  //         },
+  //         duration:1000,
+  //         horizontalPosition:'end',
+  //         verticalPosition:'bottom',
+  //         panelClass:'error'     
+  //       });
+  //       this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
+  //       return;
+  //     }
+  //   });
 
-  }
+  // }
 
   Vista(){
 
@@ -826,6 +880,28 @@ export class IngresarplantillabodyComponent implements OnInit {
     }
     return cargoreturn;
   
+  }
+
+  cancelar(){
+    Swal.fire({
+      title:'Cancelacion de Ingreso Plantilla',
+      text:'Desea salir de la pagina',
+      icon:'warning',
+      showCancelButton:true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si deseo salir'
+    }).then((result)=>{
+      if (result.value) {
+        Swal.fire({
+          title:'Redireccionamiento',
+          text:'Se redirecciona a la pagina Listar convenios',
+          icon:'success',
+        });
+        this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+      }
+
+    });
   }
 
 

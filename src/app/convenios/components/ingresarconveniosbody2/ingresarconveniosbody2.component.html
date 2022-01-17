@@ -21,9 +21,9 @@
             <mat-form-field class="container-fill" appearance="fill">
                 <mat-label>Especifico</mat-label>
                 <mat-select formControlName="especifico">
-                    <!-- <ng-container *ngFor="let lista of convenioEspecificos">
+                    <ng-container *ngFor="let lista of convenioEspecificos">
                         <mat-option value="{{lista.descripcion_ce}}">{{lista.descripcion_ce}}</mat-option>
-                    </ng-container> -->
+                    </ng-container>
                 </mat-select>
               </mat-form-field>
               <div *ngIf="selector.get('especifico')?.hasError('required') && selector.get('especifico')?.touched" style="margin-top: -20px;">
@@ -38,3 +38,121 @@
     </form>
 
 </div>
+
+<form [formGroup]="myform" autocomplete="off">
+    <div class="container-fluid wrapper">
+        <div class="formContent rounded">
+            <h4 class="active"> <span class="titulo"><h3>Formulario Convenio</h3></span></h4>
+            <div class="fadeIn first">
+                <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label>Nombre del Convenio</mat-label>
+                        <textarea matInput formControlName="nombre_convenio" ></textarea>
+                    </mat-form-field>
+                    <div *ngIf="myform.get('nombre_convenio')?.hasError('required') && myform.get('nombre_convenio')?.touched" style="margin-top: -20px;">
+                        <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-">
+                        <mat-label><b><h5>Comparecientes:</h5></b></mat-label>
+                    </div>
+                    <div class="col-sm">
+                        <mat-form-field class="container-fill" appearance="fill">
+                            <mat-label>Descripcion</mat-label>
+                            <textarea matInput formControlName="comparecientes"></textarea>
+                        </mat-form-field>
+                        <div *ngIf="myform.get('comparecientes')?.hasError('required') && myform.get('comparecientes')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                        </div>
+                    </div>
+                </div>
+                 <!-- clausulas boton -->
+                <div class="row container1">
+                    <div class="col-sm">
+                        <mat-label><b><h5>Clausulas</h5></b></mat-label>
+                    </div>
+                    <div class="col-sm">
+                        <button (click)=" agregarclausulas()" mat-flat-button color="primary" ><mat-icon>add</mat-icon> <span class="categoria">Clausulas</span></button>
+                    </div>
+                </div>
+    
+                <div class="border"></div>
+                
+
+                <!-- firmas -->
+                <div class="border"></div>
+                <div class="row">
+                    <div class="col-sm">
+                       <mat-label><b><h5>Firma Emisor</h5></b></mat-label>
+                       <div class="row">
+                           <div class="col-md-9">
+                               <mat-form-field class="container-fill" appearance="fill">
+                                   <mat-label>Firma Emisor</mat-label>
+                                   <mat-select formControlName="selectFirmaEmisor" (selectionChange)="insertarobjetofirma($event)">
+                                    <ng-container *ngFor="let lista of firmaEmisor">
+                                       <mat-option value="{{lista.id}}">{{lista.nombre_emisor}}</mat-option>
+                                    </ng-container>
+                                    
+                                   </mat-select>
+                               </mat-form-field>
+                               <div *ngIf="myform.get('selectFirmaEmisor')?.hasError('required') && myform.get('selectFirmaEmisor')?.touched" style="margin-top: -20px;">
+                                   <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                               </div>
+   
+                           </div>
+                           <div class="col-md-3">
+                               <button title="Agregar Firma Emisor" (click)="agregarfirmaEmisorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="col-sm">
+                       <mat-label><b><h5>Firma Receptor</h5></b></mat-label>
+                       <div class="row">
+                           <div class="col-md-9">
+                               <mat-form-field class="container-fill" appearance="fill">
+                                   <mat-label>Firma Receptor</mat-label>
+                                   <mat-select formControlName="selectFirmaReceptor" (selectionChange)=" insertarobjetofirmaReceptor($event)">
+                                       <ng-container *ngFor="let lista of firmaReceptor">
+                                           <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
+   
+                                       </ng-container>  
+                                   </mat-select>
+                               </mat-form-field>
+                               <div *ngIf="myform.get('selectFirmaReceptor')?.hasError('required') && myform.get('selectFirmaReceptor')?.touched" style="margin-top: -20px;">
+                                   <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                               </div>
+                           </div>
+                           <div class="col-md-3">
+                               <button title="Agregar Firma Receptor" (click)="agregarfirmaReceptorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
+                           </div>
+                       </div>
+                       
+                   </div>
+                </div>
+
+                <!-- botones ultimo -->
+                <div class="row">
+                    <div class="col-sm">
+                       <button title="Guardar"  class="btn btn-success" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                         </svg><span>&nbsp;Guardar</span></button>
+                       <button title="Cancelar" (click)="cancelar()" class="btn btn-danger" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                         </svg><span>&nbsp;Cancelar</span></button>
+                       <button  title="Vista Previa del Documento"   class="btn btn-success" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                           <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                         </svg><span>&nbsp;Vista</span></button>
+                       
+                    </div>
+                </div>
+
+
+    
+            </div>
+        </div>
+    </div>
+
+</form>
+

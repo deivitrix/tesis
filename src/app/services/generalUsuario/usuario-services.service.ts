@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BaseUrlService } from '../base/base-url.service';
 
 @Injectable({
@@ -27,5 +28,10 @@ export class UsuarioServicesService {
   {
     let url:string = this._base.getUrlApi() + 'usuario/update';
     return this.http.put(url,data);
+  }
+  getusuariosearch(cedula:string):Observable<any>
+  {
+    let url:string = this._base.getUrlApi() + 'usuario/search/'+cedula;
+    return this.http.get<any>(url);
   }
 }
