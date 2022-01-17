@@ -54,6 +54,7 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   // Nombre tipo convenios
   nombretipoconvenios:NombreTipoConveniosModel[]=[];
+  botonvista=false;
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,public dialog: MatDialog,public snackBar:MatSnackBar) 
   {
@@ -647,6 +648,52 @@ export class IngresarplantillabodyComponent implements OnInit {
         } 
       }
     }
+     this.botonvista=true;
+    let json={data:this.myform.value}
+
+    //console.log(json);
+    
+    this.convenios.GuardarVistaPDFconvenios(json)
+    .subscribe((res:any)=>{
+      console.log(res);
+
+      if(res.estado==true)
+      {
+        // mandar a un link externo
+        let url1 = this.convenios.VistaPDFconvenios(res.file) as string;
+         let urlToOpen:string=url1;
+        let url: string = '';
+        if (!/^http[s]?:\/\//.test(urlToOpen)) {
+          url += 'http://';
+        }
+
+        url += urlToOpen;
+        window.open(url, '_blank');
+      }
+      else{
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"No se puedo crear la vista",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+
+      }
+    this.botonvista=false;
+    
+
+       
+  
+    });
+   
+
 
     // const doc = new jsPDF();
 

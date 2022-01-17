@@ -69,6 +69,17 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'nombre-tipo-convenio';
     return this.http.get<any>(url);
   }
+
+  GuardarVistaPDFconvenios(data:any)
+  {
+    let url:string=this._base.getUrlLocalApi()+'pdf/convenio';
+    return this.http.post(url,data);
+  }
+
+  VistaPDFconvenios(nombre:string){
+    let url:string=this._base.getUrlLocalApi()+'archivo/convenios/'+nombre;
+    return url;
+  }
   
   
 }

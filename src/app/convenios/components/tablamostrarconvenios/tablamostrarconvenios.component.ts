@@ -192,15 +192,7 @@ export class TablamostrarconveniosComponent implements OnInit {
    
 
 
-   // mandar a un link externo
-  //  let urlToOpen:string='http://utmdricb.herokuapp.com/api/nombre-tipo-convenio';
-  //  let url: string = '';
-  //  if (!/^http[s]?:\/\//.test(urlToOpen)) {
-  //   url += 'http://';
-  //  }
-
-  //  url += urlToOpen;
-  //  window.open(url, '_blank');
+  
    
    
    
