@@ -98,6 +98,11 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-new';
     return this.http.post(url,data);
   }
+
+  // search conevnio
+  searchconvenio(){
+    
+  }
   
   
 }

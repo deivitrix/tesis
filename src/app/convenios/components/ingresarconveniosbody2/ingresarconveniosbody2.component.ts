@@ -23,6 +23,8 @@ import { FirmaModel } from 'src/app/models/convenios/firmaconvenio';
   styleUrls: ['./ingresarconveniosbody2.component.css']
 })
 export class Ingresarconveniosbody2Component implements OnInit {
+  
+  // id del convenio plantilla traigo por el url
   id="";
 
   // selector 
@@ -60,7 +62,9 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   constructor(private rutaActiva: ActivatedRoute, private ingresar:FormBuilder, private convenios:ConveniosServicesService,
     public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router) {
+
     this.id=rutaActiva.snapshot.params.id;
+    
     this.selector=ingresar.group({
       convenio:['',Validators.required],
       especifico:[{value:'',disabled: true},Validators.required],
