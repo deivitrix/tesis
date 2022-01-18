@@ -16,12 +16,15 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClausulasModel } from 'src/app/models/convenios/clausulas';
 import { NombreTipoConveniosModel } from 'src/app/models/convenios/nombretipoconvenios';
-
+import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-services.service';
 //import Swal from 'sweetalert2'
+
+
 
 //Alertas
 import Swal from 'sweetalert2';
-import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-services.service';
+import 'animate.css';
+
 
 //PDF
 // import jsPDF from 'jspdf';

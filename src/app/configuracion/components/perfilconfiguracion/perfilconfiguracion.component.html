@@ -64,7 +64,7 @@
                     <div class="col-sm">
                      <mat-form-field class="container-fill" appearance="fill">
                          <mat-label>Telefono</mat-label>
-                         <input matInput  formControlName="telefono">
+                         <input matInput type="tel" formControlName="telefono">
                        </mat-form-field>
                        <div *ngIf="myForm.get('telefono')?.hasError('required') && myForm.get('telefono')?.touched" style="margin-top: -20px;">
                         <span class="mda-form-msg">Este campo <strong>requerido</strong></span>

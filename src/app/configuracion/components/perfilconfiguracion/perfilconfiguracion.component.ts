@@ -122,8 +122,15 @@ export class PerfilconfiguracionComponent implements OnInit {
       //   console.log('Conservar la foto');
       // }
 
+      // if(this.myForm.get('telefono')?.hasError('required'))
+      // {
+      //   console.log('hola');
+        
+
+      // }
+
     if(this.myForm.get('nombres')?.hasError('required') || this.myForm.get('apellidos')?.hasError('required') || 
-    this.myForm.get('correo')?.hasError('required') || this.myForm.get('genero')?.hasError('required') )
+    this.myForm.get('correo')?.hasError('required') || this.myForm.get('genero')?.hasError('required') || this.myForm.get('telefono')?.hasError('required') )
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
@@ -140,8 +147,64 @@ export class PerfilconfiguracionComponent implements OnInit {
       return;
     }
 
-    this.actualizardatos();
+    var verificar=this.comprobarTelefono(this.myForm.get('telefono')?.value);
+    if(verificar==true)
+    {
+      if(this.myForm.get('telefono')?.value.length==10)
+      {
+        this.actualizardatos();
+      }
+      else
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:'Ingresar el numero correcto de digitos',
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+     
+    }
+    else
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:'En el campo telefono solo van numeros',
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
     
+    
+
+  }
+
+  comprobarTelefono(telefono:string)
+  {
+    var datos=telefono;
+    var valoresAceptados = /^[0-9]+$/;
+    if (datos.match(valoresAceptados)){
+      return true;
+      } else {
+        return false;
+      }
 
   }
   
