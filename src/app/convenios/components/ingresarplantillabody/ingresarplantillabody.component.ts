@@ -1027,20 +1027,78 @@ cedula:string;
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp'
       },
-      title: 'Do you want to save the changes?',
-      // showDenyButton: true,
-      // showCancelButton: true,
-      // confirmButtonText: 'Save',
-      // denyButtonText: `Don't save`,
+      title: 'Esta seguro que desea guarda la plantilla?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
      
-    })
-    // this.botonguardar=true;
-    // let json={data:this.myform.value}
+    }).then((result)=>{
+      if(result.isConfirmed)
+      { 
+        this.botonguardar=true;
+        let json={data:this.myform.value}
 
-    // this.convenios.addconveniosplantilla(json)
-    // .subscribe((res:any)=>{
-    
-    // });
+        this.convenios.addconveniosplantilla(json)
+        .subscribe((res:any)=>{
+
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Plantilla Guardada con exito',
+              icon:'success'
+            });
+            this.botonguardar=false;
+            this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+          }
+          
+
+        
+        },(error:any)=>{
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"No se puedo ingresar la plantilla",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error'
+          });
+          this.botonguardar=false;
+          return;
+
+        });
+
+
+      }
+      else if(result.isDenied)
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:'Se cancelo la operacion',
+          icon:'warning'
+        })
+
+       
+      }
+
+    });
+   
 
 
 

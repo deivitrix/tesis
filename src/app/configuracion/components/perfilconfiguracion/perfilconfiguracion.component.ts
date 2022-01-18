@@ -150,7 +150,7 @@ export class PerfilconfiguracionComponent implements OnInit {
     var verificar=this.comprobarTelefono(this.myForm.get('telefono')?.value);
     if(verificar==true)
     {
-      if(this.myForm.get('telefono')?.value.length==10)
+      if(this.myForm.get('telefono')?.value.length==10 || this.myForm.get('telefono')?.value.length==9)
       {
         this.actualizardatos();
       }
