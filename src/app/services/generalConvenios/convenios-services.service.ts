@@ -91,6 +91,13 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'firma-new';
     return this.http.post(url,data);
   }
+
+  // agregar convenios plantilla
+  addconveniosplantilla(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'convenio-new';
+    return this.http.post(url,data);
+  }
   
   
 }

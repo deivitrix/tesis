@@ -67,8 +67,10 @@ export class IngresarplantillabodyComponent implements OnInit {
 
   // Nombre tipo convenios
   nombretipoconvenios:NombreTipoConveniosModel[]=[];
+  
+  //botones disabled
   botonvista=false;
-
+  botonguardar=false;
 
 // cedula del usuario
 cedula:string;
@@ -594,6 +596,133 @@ cedula:string;
 
   // }
 
+  
+
+  get firmaEmisorArray()
+  {
+    return this.myform.get("firmaEmisor") as FormArray;
+  }
+
+  get firmaReceptorArray(){
+    return this.myform.get("firmaReceptor") as FormArray;
+  }
+
+
+
+
+  insertarobjetofirmaReceptor(event:any){
+    var id_firma=event.value;
+    var abreviatura ="";
+    var nombre="";
+   
+    if(this.firmaReceptorArray.length!=0)
+    {
+      this.firmaReceptorArray.removeAt(0);
+    }
+    this.convenios.getfirmaconvenio()
+    .subscribe((res:any)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
+        if(item.id==id_firma)
+        {
+
+          var separar=item.titulo_academico.split(" ");
+          abreviatura=this.abreviaturaProfesional(separar[0]);
+          nombre=abreviatura+" "+item.nombres;
+          
+          const firmaEmisor=this.ingresar.group({
+            nombre:nombre,
+            cargo:item.cargo,
+            institucion:item.institucion
+          });
+
+          this.firmaReceptorArray.push(firmaEmisor);
+
+        }
+      });
+    });
+
+  }
+
+
+  insertarobjetofirma(event:any)
+  {
+    var id_firma=event.value;
+    var abreviatura ="";
+    var nombre="";
+   
+    if(this.firmaEmisorArray.length!=0)
+    {
+      this.firmaEmisorArray.removeAt(0);
+    }
+    this.convenios.getfirmaconvenio()
+    .subscribe((res:any)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
+        if(item.id==id_firma)
+        {
+          var separar=item.titulo_academico.split(" ");
+          abreviatura=this.abreviaturaProfesional(separar[0]);
+          nombre=abreviatura+" "+item.nombres;
+          
+          const firmaEmisor=this.ingresar.group({
+            nombre:nombre,
+            cargo:item.cargo,
+            institucion:item.institucion
+          });
+
+          this.firmaEmisorArray.push(firmaEmisor);
+
+        }
+      });
+    });
+
+
+
+
+    
+
+  }
+
+  abreviaturaProfesional(cargo:string)
+  {
+    var cargo_m=cargo.toLocaleLowerCase();
+     var verificar=false;
+    var cargoreturn="";
+    switch(cargo_m)
+    {
+      case 'abogado':  cargoreturn="Abgdo"; break;
+      case 'abogada':  cargoreturn="Abgda"; break;
+      case 'administrador':  cargoreturn="Adm"; break;
+      case 'administradora':  cargoreturn="Adm"; break;
+      case 'analista':  cargoreturn="Anl"; break;
+      case 'arquitecto':  cargoreturn="Arq"; break;
+      case 'arquitecto':  cargoreturn="Arq"; break;
+      case 'contador':  cargoreturn="Cdor"; break;
+      case 'director':  cargoreturn="Dir"; break;
+      case 'directora':  cargoreturn="Dira"; break;
+      case 'doctor':  cargoreturn="Dr"; break;
+      case 'doctora':  cargoreturn="Dra"; break;
+      case 'economista':  cargoreturn="Econ"; break;
+      case 'enfermero':  cargoreturn="Enf"; break;
+      case 'enfermera':  cargoreturn="Enf"; break;
+      case 'ingeniero':  cargoreturn="Ing"; break;
+      case 'ingeniera':  cargoreturn="Ing"; break;
+      case 'licenciado':  cargoreturn="Lcdo"; break;
+      case 'licenciada':  cargoreturn="Lcda"; break;
+      case 'odontologo':  cargoreturn="Odont"; break;
+      case 'psicólogo':  cargoreturn="Psic"; break;
+      case 'psiquiatra':  cargoreturn="Psiq"; break;
+      case 'químico':  cargoreturn="Quim"; break;
+      case 'sociólogo':  cargoreturn="Soc"; break;
+      case 'veterinario':  cargoreturn="Vet"; break;
+      case 'nutricionista':  cargoreturn="Nut"; break;
+      case 'profesor':  cargoreturn="Prof"; break;
+      default: cargoreturn="";
+    }
+    return cargoreturn;
+  
+  }
   Vista(){
 
     if(this.selector.get('convenios')?.value.length==0)
@@ -758,132 +887,6 @@ cedula:string;
 
   }
 
-  get firmaEmisorArray()
-  {
-    return this.myform.get("firmaEmisor") as FormArray;
-  }
-
-  get firmaReceptorArray(){
-    return this.myform.get("firmaReceptor") as FormArray;
-  }
-
-
-
-
-  insertarobjetofirmaReceptor(event:any){
-    var id_firma=event.value;
-    var abreviatura ="";
-    var nombre="";
-   
-    if(this.firmaReceptorArray.length!=0)
-    {
-      this.firmaReceptorArray.removeAt(0);
-    }
-    this.convenios.getfirmaconvenio()
-    .subscribe((res:any)=>{
-      this.firmaconvenio=res;
-      this.firmaconvenio.forEach((item:FirmaModel)=>{
-        if(item.id==id_firma)
-        {
-
-          var separar=item.titulo_academico.split(" ");
-          abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombres;
-          
-          const firmaEmisor=this.ingresar.group({
-            nombre:nombre,
-            cargo:item.cargo,
-            institucion:item.institucion
-          });
-
-          this.firmaReceptorArray.push(firmaEmisor);
-
-        }
-      });
-    });
-
-  }
-
-
-  insertarobjetofirma(event:any)
-  {
-    var id_firma=event.value;
-    var abreviatura ="";
-    var nombre="";
-   
-    if(this.firmaEmisorArray.length!=0)
-    {
-      this.firmaEmisorArray.removeAt(0);
-    }
-    this.convenios.getfirmaconvenio()
-    .subscribe((res:any)=>{
-      this.firmaconvenio=res;
-      this.firmaconvenio.forEach((item:FirmaModel)=>{
-        if(item.id==id_firma)
-        {
-          var separar=item.titulo_academico.split(" ");
-          abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombres;
-          
-          const firmaEmisor=this.ingresar.group({
-            nombre:nombre,
-            cargo:item.cargo,
-            institucion:item.institucion
-          });
-
-          this.firmaEmisorArray.push(firmaEmisor);
-
-        }
-      });
-    });
-
-
-
-
-    
-
-  }
-
-  abreviaturaProfesional(cargo:string)
-  {
-    var cargo_m=cargo.toLocaleLowerCase();
-     var verificar=false;
-    var cargoreturn="";
-    switch(cargo_m)
-    {
-      case 'abogado':  cargoreturn="Abgdo"; break;
-      case 'abogada':  cargoreturn="Abgda"; break;
-      case 'administrador':  cargoreturn="Adm"; break;
-      case 'administradora':  cargoreturn="Adm"; break;
-      case 'analista':  cargoreturn="Anl"; break;
-      case 'arquitecto':  cargoreturn="Arq"; break;
-      case 'arquitecto':  cargoreturn="Arq"; break;
-      case 'contador':  cargoreturn="Cdor"; break;
-      case 'director':  cargoreturn="Dir"; break;
-      case 'directora':  cargoreturn="Dira"; break;
-      case 'doctor':  cargoreturn="Dr"; break;
-      case 'doctora':  cargoreturn="Dra"; break;
-      case 'economista':  cargoreturn="Econ"; break;
-      case 'enfermero':  cargoreturn="Enf"; break;
-      case 'enfermera':  cargoreturn="Enf"; break;
-      case 'ingeniero':  cargoreturn="Ing"; break;
-      case 'ingeniera':  cargoreturn="Ing"; break;
-      case 'licenciado':  cargoreturn="Lcdo"; break;
-      case 'licenciada':  cargoreturn="Lcda"; break;
-      case 'odontologo':  cargoreturn="Odont"; break;
-      case 'psicólogo':  cargoreturn="Psic"; break;
-      case 'psiquiatra':  cargoreturn="Psiq"; break;
-      case 'químico':  cargoreturn="Quim"; break;
-      case 'sociólogo':  cargoreturn="Soc"; break;
-      case 'veterinario':  cargoreturn="Vet"; break;
-      case 'nutricionista':  cargoreturn="Nut"; break;
-      case 'profesor':  cargoreturn="Prof"; break;
-      default: cargoreturn="";
-    }
-    return cargoreturn;
-  
-  }
-
   cancelar(){
     Swal.fire({
       title:'Cancelacion de Ingreso Plantilla',
@@ -904,6 +907,142 @@ cedula:string;
       }
 
     });
+  }
+
+  guardar()
+  {
+    if(this.selector.get('convenios')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de convenio",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.selector.get('convenios')?.value=='E')
+    {
+      if(this.selector.get('especificos')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Escoger una opcion de Convenios Especificos",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+    }
+
+
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+        || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Datos Faltantes",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+  
+    
+
+    for(var i=0;i<this.clausula.length;i++)
+    {
+      
+      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar Datos en las Clausulas",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+     
+      }
+      if(this.articulos.length!=0)
+      {
+        const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+        for(var j=0;j<articulo.length;j++)
+        {
+          if(articulo.controls[j].value.des_art.length==0)
+          {
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"Ingresar Datos en los Articulos",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+          }
+        } 
+      }
+    }
+
+
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Do you want to save the changes?',
+      // showDenyButton: true,
+      // showCancelButton: true,
+      // confirmButtonText: 'Save',
+      // denyButtonText: `Don't save`,
+     
+    })
+    // this.botonguardar=true;
+    // let json={data:this.myform.value}
+
+    // this.convenios.addconveniosplantilla(json)
+    // .subscribe((res:any)=>{
+    
+    // });
+
+
+
+
+
   }
 
 

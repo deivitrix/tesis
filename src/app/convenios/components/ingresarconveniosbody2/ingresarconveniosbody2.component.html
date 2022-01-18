@@ -85,13 +85,13 @@
                 <div class="row">
                     <div class="col-sm">
                        <mat-label><b><h5>Firma Emisor</h5></b></mat-label>
-                       <div class="row">
-                           <div class="col-md-9">
+                       <!-- <div class="row"> -->
+                           <div class="col-md">
                                <mat-form-field class="container-fill" appearance="fill">
                                    <mat-label>Firma Emisor</mat-label>
                                    <mat-select formControlName="selectFirmaEmisor" (selectionChange)="insertarobjetofirma($event)">
-                                    <ng-container *ngFor="let lista of firmaEmisor">
-                                       <mat-option value="{{lista.id}}">{{lista.nombre_emisor}}</mat-option>
+                                    <ng-container *ngFor="let lista of firmaconvenio">
+                                       <mat-option value="{{lista.id}}">{{lista.nombres}}</mat-option>
                                     </ng-container>
                                     
                                    </mat-select>
@@ -101,20 +101,20 @@
                                </div>
    
                            </div>
-                           <div class="col-md-3">
+                           <!-- <div class="col-md-3">
                                <button title="Agregar Firma Emisor" (click)="agregarfirmaEmisorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
-                           </div>
-                       </div>
+                           </div> -->
+                       <!-- </div> -->
                     </div>
                     <div class="col-sm">
                        <mat-label><b><h5>Firma Receptor</h5></b></mat-label>
                        <div class="row">
-                           <div class="col-md-9">
+                           <div class="col-md">
                                <mat-form-field class="container-fill" appearance="fill">
                                    <mat-label>Firma Receptor</mat-label>
                                    <mat-select formControlName="selectFirmaReceptor" (selectionChange)=" insertarobjetofirmaReceptor($event)">
-                                       <ng-container *ngFor="let lista of firmaReceptor">
-                                           <mat-option value="{{lista.id}}">{{lista.nombre_receptor}}</mat-option>
+                                       <ng-container *ngFor="let lista of firmaconvenio">
+                                           <mat-option value="{{lista.id}}">{{lista.nombres}}</mat-option>
    
                                        </ng-container>  
                                    </mat-select>
@@ -123,11 +123,10 @@
                                    <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
                                </div>
                            </div>
-                           <div class="col-md-3">
-                               <button title="Agregar Firma Receptor" (click)="agregarfirmaReceptorDialog()" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
-                           </div>
                        </div>
-                       
+                   </div>
+                   <div class="col-sm button-agregar_firma">
+                           <button  mat-flat-button color="primary" (click)="agregarfirmaDialog()"><mat-icon>add</mat-icon> <span class="categoria">Agregar Firma</span></button>
                    </div>
                 </div>
 

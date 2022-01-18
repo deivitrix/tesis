@@ -41,6 +41,9 @@ import { GenerarreporteconvenioComponent } from './components/generarreporteconv
 import { IngresarconveniosbodyComponent } from './components/ingresarconveniosbody/ingresarconveniosbody.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
 import { IngresarfirmaComponent } from './components/ingresarfirma/ingresarfirma.component';
+import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
+
+
 
 
 @NgModule({
@@ -59,7 +62,8 @@ import { IngresarfirmaComponent } from './components/ingresarfirma/ingresarfirma
     GenerarreporteconvenioComponent,
     IngresarconveniosbodyComponent,
     Ingresarconveniosbody2Component,
-    IngresarfirmaComponent
+    IngresarfirmaComponent,
+    TablamodificarComponent,
   ],
   imports: [
     CommonModule,

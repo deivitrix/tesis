@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-plantilla-convenios-paginas/ingresar-plantilla-convenios-paginas.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
+import { ModificarConveniosPaginasComponent } from './paginas/modificar-convenios-paginas/modificar-convenios-paginas.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
       },
       {
         path:'ingresarcon/:id',component:Ingresarconveniosbody2Component
+      },
+      {
+        path:'tablamodificar',component:ModificarConveniosPaginasComponent
       }
     ]
   }
