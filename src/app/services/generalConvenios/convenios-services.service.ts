@@ -98,11 +98,13 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-new';
     return this.http.post(url,data);
   }
-
-  // search conevnio
-  searchconvenio(){
-    
-  }
   
+
+  // search convenio
+  searchconvenio(id:string):Observable<any>
+  {
+    let url:string = this._base.getUrlApi() + 'convenio-new/get/'+id;
+    return this.http.get<any>(url);
+  }
   
 }

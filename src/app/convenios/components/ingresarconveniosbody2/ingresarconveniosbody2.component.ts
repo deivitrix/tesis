@@ -12,9 +12,16 @@ import { FirmaEmisorModel } from 'src/app/models/convenios/firmaemisor';
 import { FirmaReceptorModel } from 'src/app/models/convenios/firmareceptor';
 
 //Alertas
-import Swal from 'sweetalert2';
 import { IngresarfirmaComponent } from '../ingresarfirma/ingresarfirma.component';
 import { FirmaModel } from 'src/app/models/convenios/firmaconvenio';
+import { DatosConvenioModel } from 'src/app/models/convenios/datosconvenios';
+import { ClausulasModel } from 'src/app/models/convenios/clausulas';
+import { IngresarclausulaComponent } from '../ingresarclausula/ingresarclausula.component';
+
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+
 
 
 @Component({
@@ -26,6 +33,14 @@ export class Ingresarconveniosbody2Component implements OnInit {
   
   // id del convenio plantilla traigo por el url
   id="";
+
+  //tipo ingresar o Modificar
+  tipo="";
+
+  //titulo
+  titulo="";
+  tipoIngresar=false;
+  tipoModificar=false;
 
   // selector 
   selector:FormGroup;
@@ -60,10 +75,32 @@ export class Ingresarconveniosbody2Component implements OnInit {
   firmaAgregar:FirmaModel={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
 
 
+  // listar sin modelo
+  datosconvenio:any;
+
+  // loading
+  loading=true;
+
+  //indice
+  indice1=0;
+
+   //clausulas
+   clausulasget:ClausulasModel[]=[];
+
+   //nombre de la clausula que se va ingresar
+   nombreclausula="";
+
+   //boton 
+   botonguardar=false;
+   botonvista=false;
+  
+
+
   constructor(private rutaActiva: ActivatedRoute, private ingresar:FormBuilder, private convenios:ConveniosServicesService,
     public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router) {
-
     this.id=rutaActiva.snapshot.params.id;
+    this.tipo=rutaActiva.snapshot.params.tipo;
+    this.ingresoguardado();
     
     this.selector=ingresar.group({
       convenio:['',Validators.required],
@@ -72,8 +109,9 @@ export class Ingresarconveniosbody2Component implements OnInit {
     });
 
     this.myform=this.ingresar.group({
-      id_convenio:[''],
-      id_especifico:[''],
+      id_usuario:[''],
+      id_tipoconvenio:[''],
+      id_tipoespecifico:[''],
       nombre_convenio:['',Validators.required],
       comparecientes:['',Validators.required],
       clausulas: this.ingresar.array([]),
@@ -85,16 +123,126 @@ export class Ingresarconveniosbody2Component implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getclausulas();
+    this.getdatosconvenios();
     this.getnombretipoconvenio();
     this.getconveniosEspecificos();
-    this.getfirma()
-    this.getfirmaemisor();
-    this.getfirmareceptor();
+    this.getfirma();
+
+  }
+
+  // el tipo de la pagina ingreso o modificacion
+  ingresoguardado()
+  {
+
+    var tipo1=this.tipo.toLocaleLowerCase();
+    if(tipo1=="ingresar")
+    {
+      this.titulo="Ingresar Convenio"
+      this.tipoIngresar=true;
+    }
+    else if(tipo1=="modificar"){
+      this.titulo="Modificar Convenio"
+      this.tipoModificar=true;
+    }
+    
+    
+    
   }
 
 
-  /// selector
 
+
+// datos convenios
+getdatosconvenios(){
+  this.convenios.searchconvenio(this.id)
+  .subscribe((res:any)=>{
+    this.datosconvenio=res;
+    //console.log(this.datosconvenio);
+
+    this.myform.patchValue({
+      id_usuario:this.datosconvenio.id_usuario,
+      id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
+      id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
+      nombre_convenio:this.datosconvenio.nombre_convenio,
+      comparecientes:this.datosconvenio.comparecientes
+    });
+     var con=""+this.datosconvenio.id_tipoconvenio as string;
+     var espe=""+this.datosconvenio.id_tipoespecifico as string;
+
+     if(this.datosconvenio.id_tipoconvenio==2)
+     {
+       this.selector.get('especifico')?.enable();
+     }
+    this.selector.patchValue({
+      convenio:con,
+      especifico:espe
+    });
+    this.loading=false;
+    this.agregarclausulaDatos(this.datosconvenio);
+    
+    
+  })
+
+}
+
+getclausulas(){
+  this.convenios.getclausulas()
+  .subscribe((res:any) => {
+    this.clausulasget=res;
+  });
+}
+
+ // Agregar clausulas y convenios
+  agregarclausulaDatos(datosconvenio:any)
+  {
+    
+    for(var i=0;i<datosconvenio.clausulas.length;i++){
+      var descripcion="" as string;
+      if(datosconvenio.clausulas[i].descripcion.length==0)
+      {
+        descripcion=" ";
+
+      }
+      else{
+        descripcion=datosconvenio.clausulas[i].descripcion;
+      }
+      const clausulasFormGroup=this.ingresar.group({
+        id:datosconvenio.clausulas[i].id,
+        nombre:datosconvenio.clausulas[i].nombre,
+        descripcion:descripcion,
+        tipo:datosconvenio.clausulas[i].tipo,
+        articulos:this.ingresar.array([])
+      });
+      this.clausula.push(clausulasFormGroup);
+    }
+
+    
+    // articulos
+    for(var i=0;i<datosconvenio.clausulas.length;i++){
+      for(var k=0;k<this.clausula.length;k++){
+        if(datosconvenio.clausulas[k].id==this.clausula.controls[i].value.id){
+          const articulo=(<FormArray>this.myform.get('clausulas')).at(k).get('articulos') as FormArray;
+          for(var j=0;j<datosconvenio.clausulas[i].articulos.length;j++)
+          {
+            const articuloFormGroup=this.ingresar.group({
+              des_art:datosconvenio.clausulas[i].articulos[j].des_art,
+              subtipo:'P'
+            });
+            articulo.push(articuloFormGroup);
+          }
+        }
+      }
+    }
+
+   //console.log(this.clausula);
+
+  }
+
+
+
+
+  /// selector para convenios
   getnombretipoconvenio(){
     this.convenios.getnombretipoconvenios()
     .subscribe((res:any)=>{
@@ -125,22 +273,31 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
    }
 
-  
-
   cambioConvenio()
   {
     if(this.selector.get('convenio')?.value==1 ||this.selector.get('convenio')?.value==3)
     {
-      this.selector.get('especificos')?.disable();
+      this.selector.get('especifico')?.disable();
       this.selector.patchValue({
-        especificos:''
+        especifico:''
       });
+
+      this.myform.patchValue({
+        id_tipoconvenio:this.selector.get('convenio')?.value,
+        id_tipoespecifico:1
+      });
+      
     }
 
     if(this.selector.get('convenio')?.value==2)
     {
       this.selector.get('especifico')?.enable();
+      this.myform.patchValue({
+        id_tipoconvenio:this.selector.get('convenio')?.value,
+        id_tipoespecifico:""
+      });
     }
+
 
   }
   agregarcategoria()
@@ -211,6 +368,16 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   }
 
+   cambioConvenioEspecificos()
+  {
+    this.myform.patchValue({
+      id_tipoconvenio:this.selector.get('convenio')?.value,
+      id_tipoespecifico:this.selector.get('especifico')?.value
+    });
+
+  }
+
+
   // modelo clausula
   get clausula() {
     return this.myform.get('clausulas') as FormArray;
@@ -222,16 +389,136 @@ export class Ingresarconveniosbody2Component implements OnInit {
       id:'',
       nombre:['',Validators.required],
       descripcion:['',Validators.required],
-      articulos:this.ingresar.array([
-      ])
+      articulos:this.ingresar.array([])
     });
     this.clausula.push(clausulasFormGroup);
 
   }
 
+  removerClausulas(indice:number)
+  {
+    this.clausula.removeAt(indice);
+  }
+
+  //ingresar un nombre de clausula a la base de datos
+  agregarclausulaDialog()
+  {
+    const dialogRef=this.dialog.open(IngresarclausulaComponent,{
+      width:'500px',
+      data:{titulo:'Ingresar Nombre de la Clausula',clausula:""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result!=null)
+      {
+      this.nombreclausula = result;
+      this.agregarClausula();
+      }
+     
+      
+    });
+
+  }
+
+  agregarClausula(){
+    let json={clausula:{nombre_clau:this.nombreclausula}}
+    this.convenios.addclausulas(json)
+    .subscribe((res:any) => {
+      if(res.estado==true)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Success.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'success'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'success'     
+        });
+        this.clausulasget=[];
+        this.getclausulas();
+        return;
+        
+
+      }
+      if(res.estado==false)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:res.mensaje,
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+      
+    });
+
+  }
+
+  insertarnombreclausula(indice:number)
+  {
+    var nombre= this.clausula.value[indice].nombre;
+    this.convenios.getclausulas()
+    .subscribe((res:any) => {
+      this.clausulasget=res;
+      this.actualizarnombreclausula(this.clausulasget,nombre,indice);
+    });
+
+  }
+  actualizarnombreclausula(original:ClausulasModel[],nombre_c:string,indice:number)
+  {
+    original.forEach((item:ClausulasModel)=>{
+      if(item.nombre_clau==nombre_c)
+      {
+        this.clausula.controls[indice].patchValue({
+          id:item.id
+        });
+      }
+    });
+    
 
 
+  }
 
+
+ // modelo articulos 
+  get articulos(){ 
+    return (<FormArray>this.myform.get('clausulas')).at(this.indice1).get('articulos') as FormArray;
+  }
+
+  getarticulocontrol(indice:number)
+  {
+    const articulo=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
+    return articulo.controls;
+  }
+
+  removerArticulo(indice:number,articulo_indice:number)
+  {
+    const articulo=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
+     articulo.removeAt(articulo_indice);
+      
+  }
+  agregarListaArticulo(indice:number)
+  {
+    this.indice1=indice;
+    const articuloFormGroup=this.ingresar.group({
+      des_art:['',Validators.required],
+      subtipo:'P'
+    });
+      this.articulos.push(articuloFormGroup);
+    // console.log(this.antecedente);
+  }
 
 
 
@@ -268,10 +555,6 @@ export class Ingresarconveniosbody2Component implements OnInit {
     });
   }
 
-
-  
-
-
   insertarobjetofirma(event:any)
   {
     var id_firma=event.value;
@@ -282,20 +565,20 @@ export class Ingresarconveniosbody2Component implements OnInit {
     {
       this.firmaEmisorArray.removeAt(0);
     }
-    this.convenios.getfirmaEmisor()
+    this.convenios.getfirmaconvenio()
     .subscribe((res:any)=>{
-      this.firmaEmisor=res;
-      this.firmaEmisor.forEach((item:FirmaEmisorModel)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
         if(item.id==id_firma)
         {
           var separar=item.titulo_academico.split(" ");
           abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombre_emisor;
+          nombre=abreviatura+" "+item.nombres;
           
           const firmaEmisor=this.ingresar.group({
             nombre:nombre,
-            cargo:item.cargo_emisor,
-            institucion:item.institucion_emisor
+            cargo:item.cargo,
+            institucion:item.institucion
           });
 
           this.firmaEmisorArray.push(firmaEmisor);
@@ -320,21 +603,21 @@ export class Ingresarconveniosbody2Component implements OnInit {
     {
       this.firmaReceptorArray.removeAt(0);
     }
-    this.convenios.getfirmaReceptor()
+    this.convenios.getfirmaconvenio()
     .subscribe((res:any)=>{
-      this.firmaReceptor=res;
-      this.firmaReceptor.forEach((item:FirmaReceptorModel)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
         if(item.id==id_firma)
         {
 
           var separar=item.titulo_academico.split(" ");
           abreviatura=this.abreviaturaProfesional(separar[0]);
-          nombre=abreviatura+" "+item.nombre_receptor;
+          nombre=abreviatura+" "+item.nombres;
           
           const firmaEmisor=this.ingresar.group({
             nombre:nombre,
-            cargo:item.cargo_receptor,
-            institucion:item.institucion_receptor
+            cargo:item.cargo,
+            institucion:item.institucion
           });
 
           this.firmaReceptorArray.push(firmaEmisor);
@@ -482,15 +765,180 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   // boton ultimos
 
+  Vista(){
+
+    if(this.selector.get('convenio')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de convenio",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.selector.get('convenio')?.value=='E')
+    {
+      if(this.selector.get('especifico')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Escoger una opcion de Convenios Especificos",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+    }
+
+
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+        || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Datos Faltantes",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+  
+
+    for(var i=0;i<this.clausula.length;i++)
+    {
+      
+      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      {
+        console.log(this.clausula.controls[i].value.nombre);
+        
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar Datos en las Clausulas",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+     
+      }
+      if(this.articulos.length!=0)
+      {
+        const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+        for(var j=0;j<articulo.length;j++)
+        {
+          if(articulo.controls[j].value.des_art.length==0)
+          {
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"Ingresar Datos en los Articulos",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+
+
+          }
+        } 
+      }
+    }
+     this.botonvista=true;
+    let json={data:this.myform.value}
+
+    //console.log(json);
+    
+    this.convenios.GuardarVistaPDFconvenios(json)
+    .subscribe((res:any)=>{
+      console.log(res);
+
+      if(res.estado==true)
+      {
+        // mandar a un link externo
+        let url1 = this.convenios.VistaPDFconvenios(res.file) as string;
+         let urlToOpen:string=url1;
+        let url: string = '';
+        if (!/^http[s]?:\/\//.test(urlToOpen)) {
+          url += 'http://';
+        }
+
+        url += urlToOpen;
+        window.open(url, '_blank');
+      }
+      else{
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"No se puedo crear la vista",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+
+      }
+    this.botonvista=false;
+    
+
+       
+  
+    });
+   
+
+
+    // const doc = new jsPDF();
+
+    // doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
+    // doc.save('Convenio plantilla.pdf');
+    
+    
+
+  }
+
   cancelar(){
     Swal.fire({
-      title:'Cancelacion del Convenio',
-      text:'Desea cancelar el ingreso del convenio??',
+      title:'Cancelacion de Ingreso Plantilla',
+      text:'Desea salir de la pagina',
       icon:'warning',
       showCancelButton:true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si deseo cancelar'
+      confirmButtonText: 'Si deseo salir'
     }).then((result)=>{
       if (result.value) {
         Swal.fire({
@@ -503,7 +951,200 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
     });
   }
+
+  guardar()
+  {
+    if(this.selector.get('convenios')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de convenio",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.selector.get('convenios')?.value=='E')
+    {
+      if(this.selector.get('especificos')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Escoger una opcion de Convenios Especificos",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+    }
+
+
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+        || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Datos Faltantes",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
   
-  
+   
+    
+
+    for(var i=0;i<this.clausula.length;i++)
+    {
+      
+      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar Datos en las Clausulas",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'
+        });
+        return;
+     
+      }
+      if(this.articulos.length!=0)
+      {
+        const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;
+        for(var j=0;j<articulo.length;j++)
+        {
+          if(articulo.controls[j].value.des_art.length==0)
+          {
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"Ingresar Datos en los Articulos",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+          }
+        } 
+      }
+    }
+
+
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea guarda la plantilla?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+     
+    }).then((result)=>{
+      if(result.isConfirmed)
+      { 
+        this.botonguardar=true;
+        // let json={data:this.myform.value}
+
+        // this.convenios.addconveniosplantilla(json)
+        // .subscribe((res:any)=>{
+
+        //   if(res.estado==true)
+        //   {
+        //     Swal.fire({
+        //       showClass: {
+        //         popup: 'animate__animated animate__fadeInDown'
+        //       },
+        //       hideClass: {
+        //         popup: 'animate__animated animate__fadeOutUp'
+        //       },
+        //       title:'Plantilla Guardada con exito',
+        //       icon:'success'
+        //     });
+        //     this.botonguardar=false;
+        //     this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+        //   }
+          
+
+        
+        // },(error:any)=>{
+        //   this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        //     data:{
+        //       titulo:'Error.....',
+        //       mensaje:"No se puedo ingresar la plantilla",
+        //      buttonText:'',
+        //      icon:'warning'
+        //     },
+        //     duration:1000,
+        //     horizontalPosition:'end',
+        //     verticalPosition:'bottom',
+        //     panelClass:'error'
+        //   });
+        //   this.botonguardar=false;
+        //   return;
+
+        // });
+
+
+      }
+      else if(result.isDenied)
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:'Se cancelo la operacion',
+          icon:'warning'
+        })
+
+       
+      }
+
+    });
+   
+
+
+
+
+
+  }
 
 }

@@ -78,6 +78,9 @@ export class IngresarplantillabodyComponent implements OnInit {
 // cedula del usuario
 cedula:string;
 
+
+
+
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,
               public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router,
               private usuario:UsuarioServicesService) 
@@ -301,7 +304,7 @@ cedula:string;
   }
   
 
-  removerAntecedentes(indice:number)
+  removerClausulas(indice:number)
   {
     this.clausula.removeAt(indice);
   }
@@ -726,6 +729,8 @@ cedula:string;
     return cargoreturn;
   
   }
+  
+  // botones finales
   Vista(){
 
     if(this.selector.get('convenios')?.value.length==0)

@@ -20,7 +20,9 @@ export class IngresarconveniosbodyComponent implements OnInit {
 
 
   constructor( private convenios: ConveniosServicesService,
-               private router:Router) { }
+               private router:Router) {
+               
+                }
 
   ngOnInit(): void {
     this.getconveniosplantilla();
@@ -60,8 +62,8 @@ export class IngresarconveniosbodyComponent implements OnInit {
   }
   mostrarconvenio(id:number)
   {
-
-   this.router.navigate(['/utmricb/convenios/ingresarcon/'+id]);
+  
+   this.router.navigate(['/utmricb/convenios/ingresarcon/'+id+'/'+'ingresar']);
     
 
   }

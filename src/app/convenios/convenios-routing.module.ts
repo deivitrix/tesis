@@ -25,7 +25,7 @@ const routes: Routes = [
         path:'ingresarplantilla',component:IngresarPlantillaConveniosPaginasComponent
       },
       {
-        path:'ingresarcon/:id',component:Ingresarconveniosbody2Component
+        path:'ingresarcon/:id/:tipo',component:Ingresarconveniosbody2Component
       },
       {
         path:'tablamodificar',component:ModificarConveniosPaginasComponent
