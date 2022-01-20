@@ -106,5 +106,12 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-new/get/'+id;
     return this.http.get<any>(url);
   }
+
+  //guardar convenios guardados
+  addconveniosguardado(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'convenio-new-guardado';
+    return this.http.post(url,data);
+  }
   
 }
