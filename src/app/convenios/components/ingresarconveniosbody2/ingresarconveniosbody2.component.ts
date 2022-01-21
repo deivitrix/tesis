@@ -36,6 +36,9 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   //tipo ingresar o Modificar
   tipo="";
+  // tipo convenio
+  tipoconvenio="";
+
 
   //titulo
   titulo="";
@@ -93,6 +96,9 @@ export class Ingresarconveniosbody2Component implements OnInit {
    //boton 
    botonguardar=false;
    botonvista=false;
+
+   //variable titulo boton guardar
+   titulotipo="";
   
 
 
@@ -100,6 +106,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
     public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router) {
     this.id=rutaActiva.snapshot.params.id;
     this.tipo=rutaActiva.snapshot.params.tipo;
+    this.tipoconvenio=rutaActiva.snapshot.params.tipocon;
     this.ingresoguardado();
     
     this.selector=ingresar.group({
@@ -109,6 +116,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
     });
 
     this.myform=this.ingresar.group({
+      id_convenio:[''],
       id_usuario:[''],
       id_tipoconvenio:[''],
       id_tipoespecifico:[''],
@@ -134,6 +142,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
   // el tipo de la pagina ingreso o modificacion
   ingresoguardado()
   {
+    
 
     var tipo1=this.tipo.toLocaleLowerCase();
     if(tipo1=="ingresar")
@@ -142,7 +151,15 @@ export class Ingresarconveniosbody2Component implements OnInit {
       this.tipoIngresar=true;
     }
     else if(tipo1=="modificar"){
-      this.titulo="Modificar Convenio"
+
+      var tip=this.tipoconvenio.toLocaleLowerCase();
+      if(tip=='p')
+      {
+        this.titulo="Modificar Plantilla"
+      }
+      else if(tip=='a'|| tip=='g'){
+        this.titulo="Modificar Convenio"
+      }
       this.tipoModificar=true;
     }
     
@@ -161,6 +178,7 @@ getdatosconvenios(){
     //console.log(this.datosconvenio);
 
     this.myform.patchValue({
+      id_convenio:this.id,
       id_usuario:this.datosconvenio.id_usuario,
       id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
       id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
@@ -179,10 +197,94 @@ getdatosconvenios(){
       especifico:espe
     });
     this.loading=false;
+    var tipo1=this.tipo.toLocaleLowerCase();
+    if(tipo1=='modificar')
+    {
+      var emi=""+this.datosconvenio.selectFirmaEmisor as string;
+     var rece=""+this.datosconvenio.selectFirmaReceptor as string;
+
+      this.myform.patchValue({
+        selectFirmaEmisor:emi,
+        selectFirmaReceptor:rece
+      });
+      this.insertarobjetofirma_datos(emi);
+      this.insertarobjetofirma_datosReceptor(rece);
+
+
+    }
     this.agregarclausulaDatos(this.datosconvenio);
     
     
   })
+
+}
+
+insertarobjetofirma_datos(id:string)
+  {
+    
+    var id_firma= Number(id);
+    var abreviatura ="";
+    var nombre="";
+   
+    if(this.firmaEmisorArray.length!=0)
+    {
+      this.firmaEmisorArray.removeAt(0);
+    }
+    this.convenios.getfirmaconvenio()
+    .subscribe((res:any)=>{
+      this.firmaconvenio=res;
+      this.firmaconvenio.forEach((item:FirmaModel)=>{
+        if(item.id==id_firma)
+        {
+          var separar=item.titulo_academico.split(" ");
+          abreviatura=this.abreviaturaProfesional(separar[0]);
+          nombre=abreviatura+" "+item.nombres;
+          
+          const firmaEmisor=this.ingresar.group({
+            nombre:nombre,
+            cargo:item.cargo,
+            institucion:item.institucion
+          });
+
+          this.firmaEmisorArray.push(firmaEmisor);
+
+        }
+      });
+    });
+
+  }
+
+insertarobjetofirma_datosReceptor(id:any)
+{
+  var id_firma=Number(id);
+  var abreviatura ="";
+  var nombre="";
+ 
+  if(this.firmaEmisorArray.length!=0)
+  {
+    this.firmaEmisorArray.removeAt(0);
+  }
+  this.convenios.getfirmaconvenio()
+  .subscribe((res:any)=>{
+    this.firmaconvenio=res;
+    this.firmaconvenio.forEach((item:FirmaModel)=>{
+      if(item.id==id_firma)
+      {
+        var separar=item.titulo_academico.split(" ");
+        abreviatura=this.abreviaturaProfesional(separar[0]);
+        nombre=abreviatura+" "+item.nombres;
+        
+        const firmaEmisor=this.ingresar.group({
+          nombre:nombre,
+          cargo:item.cargo,
+          institucion:item.institucion
+        });
+
+        this.firmaReceptorArray.push(firmaEmisor);
+
+      }
+    });
+  });
 
 }
 
@@ -555,6 +657,8 @@ getclausulas(){
     });
   }
 
+  
+
   insertarobjetofirma(event:any)
   {
     var id_firma=event.value;
@@ -885,6 +989,7 @@ getclausulas(){
 
       if(res.estado==true)
       {
+      
         // mandar a un link externo
         let url1 = this.convenios.VistaPDFconvenios(res.file) as string;
          let urlToOpen:string=url1;
@@ -1059,7 +1164,16 @@ getclausulas(){
         } 
       }
     }
+    if(this.tipoIngresar==true)
+    {
+      this.titulotipo="Esta seguro que desea guarda el convenio?";
 
+    }
+    if(this.tipoModificar==true){
+
+      this.titulotipo="Esta seguro que desea guarda la modificacion del convenio? ";
+    }
+    
 
     Swal.fire({
       showClass: {
@@ -1068,7 +1182,7 @@ getclausulas(){
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp'
       },
-      title: 'Esta seguro que desea guarda la plantilla?',
+      title: this.titulotipo,
       icon: 'warning',
       showDenyButton: true,
       showCancelButton: true,
@@ -1077,11 +1191,14 @@ getclausulas(){
      
     }).then((result)=>{
       if(result.isConfirmed)
-      { 
+      {
+       
         this.botonguardar=true;
         let json={data:this.myform.value}
 
-        this.convenios.addconveniosguardado(json)
+        if(this.tipoIngresar==true)
+        {
+          this.convenios.addconveniosguardado(json)
         .subscribe((res:any)=>{
 
           if(res.estado==true)
@@ -1117,6 +1234,17 @@ getclausulas(){
           return;
 
         });
+
+
+        }
+        if(this.tipoModificar==true)
+        {
+          
+
+      
+        }
+
+       
       }
       else if(result.isDenied)
       {

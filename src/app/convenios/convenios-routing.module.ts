@@ -29,6 +29,9 @@ const routes: Routes = [
       },
       {
         path:'tablamodificar',component:ModificarConveniosPaginasComponent
+      },
+      {
+        path:'editcon/:id/:tipo/:tipocon',component:Ingresarconveniosbody2Component
       }
     ]
   }
