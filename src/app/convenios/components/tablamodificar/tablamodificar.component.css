@@ -1,0 +1,35 @@
+.titulo{
+    margin-top: 2.5%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+.table td{
+  font-size: 15px;
+}
+
+
+
+.selector{
+    text-align: center;
+    margin-bottom: 3%;
+}
+.container-fill{
+    width: 35%;
+}
+
+.mda-form-msg{
+    color: #f57c74;
+}
+
+table {
+    width: 100%;
+}
+.mat-form-field-filtro{
+    font-size: 14px;
+    width: 100%;
+}
+
+.pointer{
+    cursor: pointer;
+}

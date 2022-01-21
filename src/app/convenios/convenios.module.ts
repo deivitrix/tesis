@@ -42,6 +42,8 @@ import { IngresarconveniosbodyComponent } from './components/ingresarconveniosbo
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
 import { IngresarfirmaComponent } from './components/ingresarfirma/ingresarfirma.component';
 import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
+import { ModificarConveniosPaginaComponent } from './paginas/modificar-convenios-pagina/modificar-convenios-pagina.component';
+//import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 
 
 
@@ -64,6 +66,7 @@ import { TablamodificarComponent } from './components/tablamodificar/tablamodifi
     Ingresarconveniosbody2Component,
     IngresarfirmaComponent,
     TablamodificarComponent,
+    ModificarConveniosPaginaComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +92,9 @@ import { TablamodificarComponent } from './components/tablamodificar/tablamodifi
     PipesModule,
     MatDatepickerModule,
     MatNativeDateModule
+  ],
+  exports:[
+    TablamodificarComponent
   ],
   entryComponents:[IngresarCategoriaComponent],
 })

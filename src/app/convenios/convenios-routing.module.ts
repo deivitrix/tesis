@@ -1,11 +1,11 @@
 import { IngresarConveniosPaginasComponent } from './paginas/ingresar-convenios-paginas/ingresar-convenios-paginas.component';
 import { MostrarConveniosPaginasComponent } from './paginas/mostrar-convenios-paginas/mostrar-convenios-paginas.component';
 import { BaseconveniosComponent } from './baseconvenios/baseconvenios.component';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { IngresarPlantillaConveniosPaginasComponent } from './paginas/ingresar-plantilla-convenios-paginas/ingresar-plantilla-convenios-paginas.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
-import { ModificarConveniosPaginasComponent } from './paginas/modificar-convenios-paginas/modificar-convenios-paginas.component';
+import { ModificarConveniosPaginaComponent } from './paginas/modificar-convenios-pagina/modificar-convenios-pagina.component';
 
 const routes: Routes = [
   {
@@ -28,8 +28,8 @@ const routes: Routes = [
         path:'ingresarcon/:id/:tipo',component:Ingresarconveniosbody2Component
       },
       {
-        path:'tablamodificar',component:ModificarConveniosPaginasComponent
-      },
+         path:'tablamodificar',component:ModificarConveniosPaginaComponent
+       },
       {
         path:'editcon/:id/:tipo/:tipocon',component:Ingresarconveniosbody2Component
       }
@@ -39,6 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class ConveniosRoutingModule { }

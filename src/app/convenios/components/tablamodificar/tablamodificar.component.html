@@ -1,1 +1,81 @@
-<p>tablamodificar works!</p>
+<div class="container-fluid titulo">
+    <h3>Modificar Convenios UTM</h3>
+  </div>
+  <div class="container-fluid selector">
+    <form [formGroup]="selector" autocomplete="off">
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="container-fill" appearance="fill">
+            <mat-label>Tipos de Convenios</mat-label>
+            <mat-select formControlName="conveniostipo" (selectionChange)="cambioConveniosTipos($event)">
+              <mat-option value="A">Convenios Aprobados</mat-option>
+              <mat-option value="G">Convenios Guardados</mat-option>
+              <mat-option value="P">Convenios Plantillas</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="
+              selector.get('conveniostipo')?.hasError('required') &&
+              selector.get('conveniostipo')?.touched
+            " style="margin-top: -20px">
+            <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng-container *ngIf="tabla == true">
+    <ng-container *ngIf="loading">
+        <app-loadingconvenios></app-loadingconvenios>
+    </ng-container>
+    <ng-container *ngIf="loading==false">
+        <div style="margin: 15px">
+            <mat-form-field class="mat-form-field-filtro">
+                <mat-label>Filtro</mat-label>
+                <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+                <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <!-- tabla -->
+              <table class="table table-responsive" style="margin: 1px; ">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">F. Creación</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let c of listaConv | pagination :pageSize :pageNumber | buscarConvenio :filtro;">
+                    <th scope="row">{{c.position}}</th>
+                    <td>{{c.titulo_convenio}}</td>
+                    <td>{{c.fecha_creacion}}</td>
+                    <td>
+                        <a class="pointer" title="Editar"(click)="editarconvenio(c.id)" style="color: rgb(71, 111, 172);">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <a class="pointer" title="Borrar" style="color: rgb(160, 69, 69);">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- paginador -->
+              <div>
+                <mat-paginator [length]="listaConv.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                  aria-label="Select page" (page)="handlePagePending($event)">
+                </mat-paginator>
+              </div>
+        
+        </div>
+
+
+    </ng-container>
+  </ng-container>
+
+
+  
