@@ -15,6 +15,9 @@ import { MensajeconveniosComponent } from './components/mensajeconvenios/mensaje
 import { IngresarclausulaComponent } from './components/ingresarclausula/ingresarclausula.component';
 import { TablamostrarconveniosComponent } from './components/tablamostrarconvenios/tablamostrarconvenios.component';
 
+//actualizar url
+
+
 //material
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar'; 

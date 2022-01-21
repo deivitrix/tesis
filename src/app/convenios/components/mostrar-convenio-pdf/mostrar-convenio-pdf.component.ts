@@ -1,6 +1,7 @@
 import { ConveniosServicesService } from './../../../services/generalConvenios/convenios-services.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-mostrar-convenio-pdf',
@@ -26,13 +27,14 @@ export class MostrarConvenioPDFComponent implements OnInit {
 
 
    //variable PDF
-   pdfconvenio="";
+   pdfconvenio:SafeResourceUrl;
 
-   cambio="http://3.15.185.2/Contenido/ConveniosGuardados/AcuerdosGuardados/ACUERDO%20DE%20COLABORACI%C3%93N%20ENTRE%20LA%20UNIVERSIDAD%20DE%20KANSAS%20Y%20LA%20UTM.pdf";
+   cambio_u="http://3.15.185.2/Contenido/ConveniosGuardados/AcuerdosGuardados/ACUERDO%20DE%20COLABORACI%C3%93N%20ENTRE%20LA%20UNIVERSIDAD%20DE%20KANSAS%20Y%20LA%20UTM.pdf";
 
-  constructor(private rutaActiva: ActivatedRoute, private convenios:ConveniosServicesService) { 
+  constructor(private rutaActiva: ActivatedRoute, private convenios:ConveniosServicesService, private url: DomSanitizer) { 
     this.id=rutaActiva.snapshot.params.id as string;
     this.tipocon=rutaActiva.snapshot.params.tipocon as string;
+    this.pdfconvenio=this.url.bypassSecurityTrustResourceUrl("");
   }
 
   ngOnInit(): void {
@@ -62,7 +64,8 @@ export class MostrarConvenioPDFComponent implements OnInit {
     .subscribe((res:any)=>{
       this.datosAprobados=res;
       this.loading=false;
-      this.pdfconvenio=this.datosAprobados.convenio.PDF;
+
+      this.pdfconvenio=this.url.bypassSecurityTrustResourceUrl(this.datosAprobados.convenio.PDF);
       console.log(this.pdfconvenio);
     });
 
