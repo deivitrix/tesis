@@ -1,0 +1,127 @@
+.titulo{
+    margin-top: 3%;
+    text-align: center;
+    margin-bottom: 4%;
+
+}
+
+.selector{
+    text-align: center;
+    margin-bottom: 3%;
+   
+}
+
+.container-fill{
+    width: 70%;
+}
+.button-agregar{
+    margin-top: 0.7%;
+}
+
+.button-agregar_firma{
+    margin-top: 4%;
+}
+
+/* .button-agregar-body{
+    height: 65%;
+} */
+
+.mda-form-msg{
+    color: #f57c74;
+}
+/* .categoria{
+    
+} */
+
+.titulo2{
+    margin-top: 2%;
+}
+
+.titulo2_1{
+    margin-left: 2%;
+}
+
+.contenido{
+    margin-left: 2%;
+}
+.nombre-convenio{
+    text-align: center;
+}
+.container-fill{
+    width: 70%;
+}
+
+.wrapper{
+    /* position: fixed; */
+    justify-content: center;
+    display: flex;
+}
+.formContent{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 100%;
+    max-width: 90%;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+h4.inactive {
+    color: #cccccc;
+  }
+  
+h4.active {
+    color: gray;
+    border-bottom: 2px solid rgb(70, 148, 194);
+}
+
+@media(max-width:33.125em)
+{
+    .titulo{
+        font-size: 80%;
+    }
+
+}
+*:focus {
+    outline: none;
+} 
+
+.mda-form-msg{
+    color: #f57c74;
+}
+
+.container1{
+    margin-top: 2%;
+    margin-bottom: 5%;
+}
+.border{
+   
+    border-bottom: 2px solid rgb(110, 158, 182) !important;
+     margin-bottom: 2%;
+}
+
+.clausula{
+    text-align: end;
+}
+
+@media(max-width:47.938em)
+{
+    .clausula{
+        text-align: center;
+    }
+
+}
+
+.container-fill-articulo{
+    width: 50%;
+}
+
+.container-fill-nombre{
+    width: 60%;
+}
+.separador{
+    margin-top: 5%;
+}

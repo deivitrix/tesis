@@ -43,6 +43,8 @@ import { Ingresarconveniosbody2Component } from './components/ingresarconveniosb
 import { IngresarfirmaComponent } from './components/ingresarfirma/ingresarfirma.component';
 import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 import { ModificarConveniosPaginaComponent } from './paginas/modificar-convenios-pagina/modificar-convenios-pagina.component';
+import { SubirConveniosPaginaComponent } from './paginas/subir-convenios-pagina/subir-convenios-pagina.component';
+import { MostrarConvenioPDFComponent } from './components/mostrar-convenio-pdf/mostrar-convenio-pdf.component';
 //import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 
 
@@ -67,6 +69,8 @@ import { ModificarConveniosPaginaComponent } from './paginas/modificar-convenios
     IngresarfirmaComponent,
     TablamodificarComponent,
     ModificarConveniosPaginaComponent,
+    SubirConveniosPaginaComponent,
+    MostrarConvenioPDFComponent,
   ],
   imports: [
     CommonModule,

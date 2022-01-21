@@ -1,0 +1,23 @@
+<div class="separador"></div>
+
+
+
+
+
+<ng-container *ngIf="loading">
+<app-loadingconvenios></app-loadingconvenios>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <div class="container-fluid wrapper">
+        <div class="formContent rounded">
+            <h4 class="active"> <span class="titulo"><h3>{{titulo}}</h3></span></h4>
+            <div class="fadeIn first">
+                <embed src="http://3.15.185.2/Contenido/ConveniosGuardados/AcuerdosGuardados/ACUERDO%20DE%20COLABORACI%C3%93N%20ENTRE%20LA%20UNIVERSIDAD%20DE%20KANSAS%20Y%20LA%20UTM.pdf" type="application/pdf" width="90%" height="600px" />
+            </div>
+           
+        </div>
+
+    </div>
+
+</ng-container>

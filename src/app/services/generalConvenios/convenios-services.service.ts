@@ -113,5 +113,13 @@ export class ConveniosServicesService {
     let url:string = this._base.getUrlApi() + 'convenio-new-guardado';
     return this.http.post(url,data);
   }
+
+  //search convenio de la tabla convenio
+  serachconveniotabla(id:string):Observable<any>
+  {
+    let url:string = this._base.getUrlApi() + 'convenio/get/'+id;
+    return this.http.get<any>(url);
+  }
+
   
 }

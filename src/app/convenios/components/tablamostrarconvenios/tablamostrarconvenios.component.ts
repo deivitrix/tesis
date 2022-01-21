@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { GenerarreporteconvenioComponent } from './../generarreporteconvenio/generarreporteconvenio.component';
 import { element } from 'protractor';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -40,7 +41,8 @@ export class TablamostrarconveniosComponent implements OnInit {
     private convenios: ConveniosServicesService,
     private mostrar: FormBuilder,
     public dialog: MatDialog,
-    public snackBar:MatSnackBar
+    public snackBar:MatSnackBar,
+    private router:Router
   ) {
     this.selector = mostrar.group({
       conveniostipo: ['', Validators.required],
@@ -202,4 +204,15 @@ export class TablamostrarconveniosComponent implements OnInit {
    
    
   }
+
+  // visualizar convenios aprobados
+  conveniosURL(id:string)
+  {
+    var tipo=this.selector.get('conveniostipo')?.value
+    const url = this.router.createUrlTree(['/utmricb/convenios/mostrarconvenios', id,tipo]); 
+  window.open(url.toString(), '_blank')
+
+  }
+
+  
 }
