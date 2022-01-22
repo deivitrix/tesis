@@ -13,7 +13,11 @@
         <div class="formContent rounded">
             <h4 class="active"> <span class="titulo"><h3>{{titulo}}</h3></span></h4>
             <div class="fadeIn first">
-                <embed [src]="pdfconvenio" type="application/pdf" width="90%" height="600px" />
+                <ng-container *ngFor="let lista of listaCon">
+                    <embed src="{{lista.PDF}}" type="application/pdf" width="90%" height="600px" />
+                        <!-- <h5>{{lista.PDF}}</h5> -->
+                </ng-container>
+                
                 <!-- <iframe width="100%" height="100%" frameBorder="0" [src]="pdfconvenio">
                     
                 </iframe> -->
