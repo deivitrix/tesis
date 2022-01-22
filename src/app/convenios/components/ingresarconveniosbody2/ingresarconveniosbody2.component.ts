@@ -1036,25 +1036,66 @@ getclausulas(){
   }
 
   cancelar(){
-    Swal.fire({
-      title:'Cancelacion de Ingreso Plantilla',
-      text:'Desea salir de la pagina',
-      icon:'warning',
-      showCancelButton:true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si deseo salir'
-    }).then((result)=>{
-      if (result.value) {
-        Swal.fire({
-          title:'Redireccionamiento',
-          text:'Se redirecciona a la pagina Listar convenios',
-          icon:'success',
-        });
-        this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
-      }
 
-    });
+    if(this.tipoModificar==true)
+    {
+      var titulo="";
+      if(this.tipoconvenio=="P")
+      {
+        titulo="Cancelacion de la Modificacion de la Plantilla";
+
+      }
+      else if(this.tipoconvenio=="A"  ||  this.tipoconvenio=="G")
+      {
+        titulo="Cancelacion de la Modificacion del Convenio"
+
+      }
+      Swal.fire({
+        title:titulo,
+        text:'Desea salir de la pagina',
+        icon:'warning',
+        showCancelButton:true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si deseo salir'
+      }).then((result)=>{
+        if (result.value) {
+          Swal.fire({
+            title:'Redireccionamiento',
+            text:'Se redirecciona a la pagina Listar convenios',
+            icon:'success',
+          });
+          this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+        }
+  
+      });
+
+
+    }
+    if(this.tipoIngresar==true)
+    {
+      Swal.fire({
+        title:'Cancelacion del Ingreso del Convenio',
+        text:'Desea salir de la pagina',
+        icon:'warning',
+        showCancelButton:true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si deseo salir'
+      }).then((result)=>{
+        if (result.value) {
+          Swal.fire({
+            title:'Redireccionamiento',
+            text:'Se redirecciona a la pagina Listar convenios',
+            icon:'success',
+          });
+          this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+        }
+  
+      });
+
+    }
+  
   }
 
   guardar()

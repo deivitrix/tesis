@@ -27,7 +27,7 @@
             <tbody>
               <tr *ngFor="let c of listaConv | pagination :pageSize :pageNumber | buscarConvenio :filtro;">
                 <th scope="row">{{c.position}}</th>
-                <td>{{c.titulo_convenio}}</td>
+                <td class="convenio">{{c.titulo_convenio}}</td>
                 <td >{{c.fecha_creacion}}</td>
                 <td  class="centrar" >
                     <a  (click)="mostrarconvenio(c.id)" class="pointer accion" style="color: rgb(65, 115, 161);">
