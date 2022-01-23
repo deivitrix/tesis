@@ -101,6 +101,7 @@ cedula:string;
       selectFirmaReceptor:['',Validators.required],
       firmaEmisor:this.ingresar.array([]),
       firmaReceptor:this.ingresar.array([]),
+      PDF:['']
     });
     this.cedula="";
     var cedula1;
@@ -839,7 +840,7 @@ cedula:string;
         } 
       }
     }
-     this.botonvista=true;
+    this.botonvista=true;
     let json={data:this.myform.value}
 
     //console.log(json);
@@ -1041,9 +1042,40 @@ cedula:string;
      
     }).then((result)=>{
       if(result.isConfirmed)
-      { 
-        this.botonguardar=true;
+      {  
+        this.botonvista=true;
         let json={data:this.myform.value}
+    
+        //console.log(json);
+        
+        this.convenios.GuardarVistaPDFconvenios(json)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+            this.myform.patchValue({
+              PDF:res.file
+            });
+            
+          }
+          else{
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"No se puedo crear la vista",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+    
+          }
+        });
+       
+        
 
         this.convenios.addconveniosplantilla(json)
         .subscribe((res:any)=>{

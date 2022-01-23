@@ -175,7 +175,7 @@ getdatosconvenios(){
   this.convenios.searchconvenio(this.id)
   .subscribe((res:any)=>{
     this.datosconvenio=res;
-    //console.log(this.datosconvenio);
+    console.log(this.datosconvenio);
 
     this.myform.patchValue({
       id_convenio:this.id,
@@ -329,6 +329,7 @@ getclausulas(){
           for(var j=0;j<datosconvenio.clausulas[i].articulos.length;j++)
           {
             const articuloFormGroup=this.ingresar.group({
+              art_id:datosconvenio.clausulas[i].articulos[j]. art_id,
               des_art:datosconvenio.clausulas[i].articulos[j].des_art,
               subtipo:'P'
             });
