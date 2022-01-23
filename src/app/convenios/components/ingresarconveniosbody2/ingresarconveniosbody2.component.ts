@@ -281,7 +281,8 @@ insertarobjetofirma_datosReceptor(id:any)
         });
 
         this.firmaReceptorArray.push(firmaEmisor);
-
+        
+        
       }
     });
   });
