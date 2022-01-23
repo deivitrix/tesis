@@ -1043,10 +1043,8 @@ cedula:string;
     }).then((result)=>{
       if(result.isConfirmed)
       {  
-        this.botonvista=true;
+        this.botonguardar=true;
         let json={data:this.myform.value}
-    
-        //console.log(json);
         
         this.convenios.GuardarVistaPDFconvenios(json)
         .subscribe((res:any)=>{
@@ -1055,6 +1053,46 @@ cedula:string;
             this.myform.patchValue({
               PDF:res.file
             });
+            let json1={data:this.myform.value};
+            this.convenios.addconveniosplantilla(json1)
+            .subscribe((res:any)=>{
+
+              if(res.estado==true)
+              {
+                Swal.fire({
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  },
+                  title:'Plantilla Guardada con exito',
+                  icon:'success'
+                });
+                this.botonguardar=false;
+                this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+              }
+              
+
+            
+            },(error:any)=>{
+              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+                data:{
+                  titulo:'Error.....',
+                  mensaje:"No se puedo ingresar la plantilla",
+                buttonText:'',
+                icon:'warning'
+                },
+                duration:1000,
+                horizontalPosition:'end',
+                verticalPosition:'bottom',
+                panelClass:'error'
+              });
+              this.botonguardar=false;
+              return;
+
+            });
+            
             
           }
           else{
@@ -1074,48 +1112,6 @@ cedula:string;
     
           }
         });
-       
-        
-
-        this.convenios.addconveniosplantilla(json)
-        .subscribe((res:any)=>{
-
-          if(res.estado==true)
-          {
-            Swal.fire({
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              },
-              title:'Plantilla Guardada con exito',
-              icon:'success'
-            });
-            this.botonguardar=false;
-            this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
-          }
-          
-
-        
-        },(error:any)=>{
-          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-            data:{
-              titulo:'Error.....',
-              mensaje:"No se puedo ingresar la plantilla",
-             buttonText:'',
-             icon:'warning'
-            },
-            duration:1000,
-            horizontalPosition:'end',
-            verticalPosition:'bottom',
-            panelClass:'error'
-          });
-          this.botonguardar=false;
-          return;
-
-        });
-
 
       }
       else if(result.isDenied)
