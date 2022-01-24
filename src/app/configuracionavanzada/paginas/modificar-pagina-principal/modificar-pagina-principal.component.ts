@@ -4,11 +4,12 @@ import { FuncionalidadUsuario } from 'src/app/models/funcionalidad/funcionalidad
 import { GeneralFuncionalidadService } from 'src/app/services/funcionalidad/general-funcionalidad.service';
 
 @Component({
-  selector: 'app-ingresar-convenios-paginas',
-  templateUrl: './ingresar-convenios-paginas.component.html',
-  styleUrls: ['./ingresar-convenios-paginas.component.css']
+  selector: 'app-modificar-pagina-principal',
+  templateUrl: './modificar-pagina-principal.component.html',
+  styleUrls: ['./modificar-pagina-principal.component.css']
 })
-export class IngresarConveniosPaginasComponent implements OnInit {
+export class ModificarPaginaPrincipalComponent implements OnInit {
+
   cedula:string;
   loading=true;
   listafuncionalidadaux:FuncionalidadUsuario[]=[];
@@ -51,10 +52,9 @@ export class IngresarConveniosPaginasComponent implements OnInit {
     var verificar=false;
     this.listafuncionalidad.forEach((item:FuncionalidadUsuario)=>{
 
-      if(item.funcionalidad[0].funcionalidad=='ingresarconvenios')
+      if(item.funcionalidad[0].funcionalidad=='modificarpaginaprincipal')
       {
        verificar=true;
-        
       }
     });
 
@@ -66,5 +66,4 @@ export class IngresarConveniosPaginasComponent implements OnInit {
     
     
   }
-
 }

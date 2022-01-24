@@ -1,3 +1,4 @@
+import { ModificarPaginaPrincipalComponent } from './paginas/modificar-pagina-principal/modificar-pagina-principal.component';
 import { RegistroactividadesPaginaComponent } from './paginas/registroactividades-pagina/registroactividades-pagina.component';
 import { BaseconfiguracionavanzadaComponent } from './baseconfiguracionavanzada/baseconfiguracionavanzada.component';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,9 @@ const routes: Routes = [
       {
         path:'registroActividades',component:RegistroactividadesPaginaComponent
       },
+      {
+        path:'modificarPaginaPrincipal',component:ModificarPaginaPrincipalComponent
+      }
     ]
   }
 ];

@@ -51,6 +51,7 @@ import { SubirConveniosPaginaComponent } from './paginas/subir-convenios-pagina/
 import { MostrarConvenioPDFComponent } from './components/mostrar-convenio-pdf/mostrar-convenio-pdf.component';
 import { EditarconveniosaprobadosComponent } from './components/editarconveniosaprobados/editarconveniosaprobados.component';
 import { TablasubirComponent } from './components/tablasubir/tablasubir.component';
+import { SpinnerconveniosComponent } from './components/spinnerconvenios/spinnerconvenios.component';
 //import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 
 
@@ -79,6 +80,7 @@ import { TablasubirComponent } from './components/tablasubir/tablasubir.componen
     MostrarConvenioPDFComponent,
     EditarconveniosaprobadosComponent,
     TablasubirComponent,
+    SpinnerconveniosComponent,
   ],
   imports: [
     CommonModule,

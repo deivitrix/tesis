@@ -23,7 +23,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MensajeconfiguracionComponent } from './components/mensajeconfiguracion/mensajeconfiguracion.component';                
+import { MensajeconfiguracionComponent } from './components/mensajeconfiguracion/mensajeconfiguracion.component';
+import { SpinnerconfiguracionComponent } from './components/spinnerconfiguracion/spinnerconfiguracion.component';                
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MensajeconfiguracionComponent } from './components/mensajeconfiguracion
     PerfilConfiguracionPaginaComponent,
     ReseteoConfiguracionPaginaComponent,
     LoadingconfiguracionComponent,
-    MensajeconfiguracionComponent
+    MensajeconfiguracionComponent,
+    SpinnerconfiguracionComponent
   ],
   imports: [
     CommonModule,

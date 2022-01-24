@@ -1,12 +1,11 @@
+<ng-container *ngIf="loading==true">
+ <app-spinnerconfiguracion></app-spinnerconfiguracion>
+</ng-container>
 <div class="separador"></div>
 <div class="container-fluid wrapper fadeInDown">
     <div class="formContent rounded">
         <h2 class="active"> <span class="titulo">Datos del Usuario</span></h2>
         <div class="fadeIn first">
-            <ng-container *ngIf="loading">
-                <app-loadingconfiguracion></app-loadingconfiguracion>
-            </ng-container>
-                
             <ng-container  *ngIf="loading==false">
                 <div class="foto-container">
                     <div class="container-foto ">
