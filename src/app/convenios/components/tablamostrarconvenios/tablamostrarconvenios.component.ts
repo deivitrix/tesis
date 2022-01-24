@@ -247,24 +247,51 @@ export class TablamostrarconveniosComponent implements OnInit {
     url += urlToOpen;
     window.open(url, '_blank');
    }
+   
    if(tipo=='G')
    {
      this.botonvista=true;
-      this.myform=this.mostrar.group({
-      id_convenio:[''],
-      id_usuario:[''],
-      id_tipoconvenio:[''],
-      id_tipoespecifico:[''],
-      nombre_convenio:['',Validators.required],
-      comparecientes:['',Validators.required],
-      clausulas: this.mostrar.array([]),
-      selectFirmaEmisor:['',Validators.required],
-      selectFirmaReceptor:['',Validators.required],
-      firmaEmisor:this.mostrar.array([]),
-      firmaReceptor:this.mostrar.array([]),
-    });
-     this.getdatosconvenios(id);
+     // mandar a un link externo
+
+     this.convenios.eliminarpdf().
+     subscribe((res:any)=>{
+      if(res.estado==true)
+      {
+        let url1 = this.convenios.VistaPDFconvenios(pdf) as string;
+        let urlToOpen:string=url1;
+       let url: string = '';
+       if (!/^http[s]?:\/\//.test(urlToOpen)) {
+         url += 'http://';
+       }
+       this.botonvista=false;
+       url += urlToOpen;
+       window.open(url, '_blank');
+
+
+      }
+     });
+    
+
    }
+
+  //  if(tipo=='G')
+  //  {
+  //    this.botonvista=true;
+  //     this.myform=this.mostrar.group({
+  //     id_convenio:[''],
+  //     id_usuario:[''],
+  //     id_tipoconvenio:[''],
+  //     id_tipoespecifico:[''],
+  //     nombre_convenio:['',Validators.required],
+  //     comparecientes:['',Validators.required],
+  //     clausulas: this.mostrar.array([]),
+  //     selectFirmaEmisor:['',Validators.required],
+  //     selectFirmaReceptor:['',Validators.required],
+  //     firmaEmisor:this.mostrar.array([]),
+  //     firmaReceptor:this.mostrar.array([]),
+  //   });
+  //    this.getdatosconvenios(id);
+  //  }
   
 
   }

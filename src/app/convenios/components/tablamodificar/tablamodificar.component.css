@@ -5,7 +5,7 @@
 }
 
 .table td{
-  font-size: 15px;
+  font-size: 13.5px;
 }
 
 
@@ -32,4 +32,13 @@ table {
 
 .pointer{
     cursor: pointer;
+
+}
+
+.disabled{
+    pointer-events: none;
+}
+.enable{
+    pointer-events: auto;
+
 }

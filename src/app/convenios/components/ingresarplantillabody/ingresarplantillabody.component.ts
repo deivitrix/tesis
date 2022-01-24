@@ -913,6 +913,14 @@ cedula:string;
           icon:'success',
         });
         this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+        // this.convenios.eliminarpdf()
+        // .subscribe((res:any)=>{
+        //   if(res.estado==true)
+        //   {
+           
+        //   }
+        // })
+        
       }
 
     });
@@ -1059,18 +1067,25 @@ cedula:string;
 
               if(res.estado==true)
               {
-                Swal.fire({
-                  showClass: {
-                    popup: 'animate__animated animate__fadeInDown'
-                  },
-                  hideClass: {
-                    popup: 'animate__animated animate__fadeOutUp'
-                  },
-                  title:'Plantilla Guardada con exito',
-                  icon:'success'
-                });
-                this.botonguardar=false;
-                this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+                this.convenios.eliminarpdf()
+                .subscribe((res:any)=>{
+                  if(res.estado==true)
+                  {
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:'Plantilla Guardada con exito',
+                      icon:'success'
+                    });
+                    this.botonguardar=false;
+                    this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+                  }
+                })
+                
               }
               
 

@@ -121,5 +121,39 @@ export class ConveniosServicesService {
     return this.http.get<any>(url);
   }
 
+  //eliminar archivos del servidor
+  eliminarpdf():Observable<any>{
+    let url:string=this._base.getUrlLocalApi()+'eliminar-archivo';
+    return this.http.get<any>(url);
+  }
+
+  //eliminar convenios
+  eliminarconvenio(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'convenio/eliminar';
+    return this.http.put(url,data);
+  }
+
+  //ftp modificar
+  ftparchivoPDF(file:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'documento/upload-document';
+    return this.http.post(url,file); 
+  }
+
+  //modificar el convenio aprobados
+  modificarconveniosaprobados(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'convenio/update/aprobado';
+    return this.http.put(url,data);
+  }
+
+  //modificar convenios Guardados a Aprobados
+  modificarconveniosguardados(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'convenio/update/pdf';
+    return this.http.put(url,data);
+
+  }
   
 }

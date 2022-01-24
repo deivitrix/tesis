@@ -37,6 +37,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
 
 
 import {MatDividerModule} from '@angular/material/divider';
@@ -48,6 +49,8 @@ import { TablamodificarComponent } from './components/tablamodificar/tablamodifi
 import { ModificarConveniosPaginaComponent } from './paginas/modificar-convenios-pagina/modificar-convenios-pagina.component';
 import { SubirConveniosPaginaComponent } from './paginas/subir-convenios-pagina/subir-convenios-pagina.component';
 import { MostrarConvenioPDFComponent } from './components/mostrar-convenio-pdf/mostrar-convenio-pdf.component';
+import { EditarconveniosaprobadosComponent } from './components/editarconveniosaprobados/editarconveniosaprobados.component';
+import { TablasubirComponent } from './components/tablasubir/tablasubir.component';
 //import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 
 
@@ -74,6 +77,8 @@ import { MostrarConvenioPDFComponent } from './components/mostrar-convenio-pdf/m
     ModificarConveniosPaginaComponent,
     SubirConveniosPaginaComponent,
     MostrarConvenioPDFComponent,
+    EditarconveniosaprobadosComponent,
+    TablasubirComponent,
   ],
   imports: [
     CommonModule,
@@ -98,7 +103,8 @@ import { MostrarConvenioPDFComponent } from './components/mostrar-convenio-pdf/m
     MatSortModule,
     PipesModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule
   ],
   exports:[
     TablamodificarComponent

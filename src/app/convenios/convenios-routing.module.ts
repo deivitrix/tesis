@@ -1,3 +1,4 @@
+import { EditarconveniosaprobadosComponent } from './components/editarconveniosaprobados/editarconveniosaprobados.component';
 import { SubirConveniosPaginaComponent } from './paginas/subir-convenios-pagina/subir-convenios-pagina.component';
 import { IngresarConveniosPaginasComponent } from './paginas/ingresar-convenios-paginas/ingresar-convenios-paginas.component';
 import { MostrarConveniosPaginasComponent } from './paginas/mostrar-convenios-paginas/mostrar-convenios-paginas.component';
@@ -40,6 +41,12 @@ const routes: Routes = [
       },
       {
         path:'mostrarconvenios/:id/:tipocon',component:MostrarConvenioPDFComponent
+      },
+      {
+        path:'editarconveniosaprovados/:id',component:EditarconveniosaprobadosComponent
+      },
+      {
+        path:'subirconvenios/:id/:tipo',component:EditarconveniosaprobadosComponent
       }
     ]
   }

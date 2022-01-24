@@ -15,7 +15,7 @@
     margin-bottom: 3%;
 }
 .container-fill{
-    width: 55%;
+    width: 35%;
 }
 
 .mda-form-msg{
@@ -32,4 +32,18 @@ table {
 
 .pointer{
     cursor: pointer;
+
 }
+
+.disabled{
+    pointer-events: none;
+}
+.enable{
+    pointer-events: auto;
+
+}
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 50px;
+  }
