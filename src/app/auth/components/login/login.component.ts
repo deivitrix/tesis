@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   piepagina="Flotante";
   usuario_login='';
   contrasena="";
+  loading=false;
   userLogin:LoginModel={correo:'',contrasena:''};
   constructor(private _pathimagenes:PathImagenesService,public dialog: MatDialog,public snackBar:MatSnackBar,private router:Router,
     private _login:GeneralLoginService) { 
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
       });
       return;
     }
+    this.loading=true;
   this.userLogin.correo=this.usuario_login;
   this.userLogin.contrasena=this.contrasena;
   let json={usuario:this.userLogin};
@@ -87,7 +89,7 @@ export class LoginComponent implements OnInit {
           verticalPosition:'top',
           panelClass:'success'     
         });
-  
+          this.loading=false;
         //guardar en cache
         sessionStorage.setItem('isRedirected','true');
         localStorage.setItem("cedula",res.usuario.cedula);

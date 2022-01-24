@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 
 import { FormularioRecuperaCuentaComponent } from './components/formulario-recupera-cuenta/formulario-recupera-cuenta.component';
 import { ReseteoContraComponent } from './components/reseteo-contra/reseteo-contra.component';
+import { LoadingloginComponent } from './components/loadinglogin/loadinglogin.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ReseteoContraComponent } from './components/reseteo-contra/reseteo-cont
     BaseAuthComponent,
     MensajeLoginComponent,
     FormularioRecuperaCuentaComponent,
-    ReseteoContraComponent
+    ReseteoContraComponent,
+    LoadingloginComponent
   ],
   imports: [
     CommonModule,

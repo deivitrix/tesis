@@ -21,7 +21,7 @@ export class PerfilconfiguracionComponent implements OnInit {
   foto="";
   modeSelect="";
   datosUsuario:Usuario[]=[];
-  loading=true;
+  loading=false;
   verificar=false;
   datos:Usuario={id:0,cedula:"",nombres:"",apellidos:"",genero:"",telefono:"",correo:"",estado:"",foto:""};
 
@@ -82,9 +82,6 @@ export class PerfilconfiguracionComponent implements OnInit {
    base.then((imagen:any)=>{
      this.foto=imagen;
    });
-  console.log(this.archivofoto);
-  
-   
   }
   toBase64 = (file: File) => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -94,6 +91,7 @@ export class PerfilconfiguracionComponent implements OnInit {
   });
 
   GuardarDatos(){
+
     const requered=this.validateEmail(this.myForm.get('correo')?.value);
     if(requered==false)
     {
@@ -111,24 +109,7 @@ export class PerfilconfiguracionComponent implements OnInit {
       });
       return;
     }
-      // if(this.verificar==true)
-      // {
-      //   //subir la foto
-      //   console.log('subir foto');
-      // }
-      // else
-      // {
-      //   //conservar la foto
-      //   console.log('Conservar la foto');
-      // }
-
-      // if(this.myForm.get('telefono')?.hasError('required'))
-      // {
-      //   console.log('hola');
-        
-
-      // }
-
+     
     if(this.myForm.get('nombres')?.hasError('required') || this.myForm.get('apellidos')?.hasError('required') || 
     this.myForm.get('correo')?.hasError('required') || this.myForm.get('genero')?.hasError('required') || this.myForm.get('telefono')?.hasError('required') )
     {
@@ -152,6 +133,17 @@ export class PerfilconfiguracionComponent implements OnInit {
     {
       if(this.myForm.get('telefono')?.value.length==10 || this.myForm.get('telefono')?.value.length==9)
       {
+        if(this.verificar==true)
+        {
+          //subir la foto
+          
+        }
+        else
+        {
+          //conservar la foto
+          console.log('Conservar la foto');
+        }
+        this.loading=true;
         this.actualizardatos();
       }
       else

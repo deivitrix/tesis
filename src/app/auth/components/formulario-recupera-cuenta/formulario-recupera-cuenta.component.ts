@@ -13,6 +13,7 @@ import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.
 export class FormularioRecuperaCuentaComponent implements OnInit {
   correo_usuario="";
   pathrecuperar="";
+  loading=false;
   constructor(private _path:PathImagenesService, public snackBar:MatSnackBar,private login:GeneralLoginService, private router:Router) { 
     this.pathrecuperar=this._path.pathrecuperarcorreo;
   }
@@ -57,6 +58,7 @@ export class FormularioRecuperaCuentaComponent implements OnInit {
       return;
 
     }
+    this.loading=true;
     let json={email:this.correo_usuario};
     this.login.emailsearch(json).subscribe((res:any)=>{
       
@@ -75,6 +77,7 @@ export class FormularioRecuperaCuentaComponent implements OnInit {
           panelClass:'success'     
         });
         this.router.navigate(['/auth/login']);
+        this.loading=false;
         return;
 
       }
@@ -94,9 +97,8 @@ export class FormularioRecuperaCuentaComponent implements OnInit {
           panelClass:'error'     
         });
         this.router.navigate(['/auth/login']);
+        this.loading=false;
         return;
-
-
       }
 
 
