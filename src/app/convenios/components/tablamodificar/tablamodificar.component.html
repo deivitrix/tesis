@@ -53,10 +53,11 @@
                     <td>{{c.titulo_convenio}}</td>
                     <td>{{c.fecha_creacion}}</td>
                     <td>
-                        <a class="pointer" title="Editar"(click)="editarconvenio(c.id)" style="color: rgb(71, 111, 172);">
+                       
+                        <a  class="pointer" title="Editar"(click)="editarconvenio(c.id)" style="color: rgb(71, 111, 172);">
                             <mat-icon>edit</mat-icon>
                         </a>
-                        <a class="pointer" title="Borrar" style="color: rgb(160, 69, 69);">
+                        <a [ngClass]="botoneliminar === true?'disabled':'enable'" class="pointer"(click)="eliminarconvenio(c.id, c.tipo_documento)" title="Borrar" style="color: rgb(160, 69, 69);">
                             <mat-icon>delete</mat-icon>
                         </a>
                     </td>
