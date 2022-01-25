@@ -17,3 +17,84 @@
 {
     width: 100%;
 }
+
+.boton-container{
+        display: inline-block;
+        position: relative;
+        margin-top: 5%;
+}
+
+.container-button{
+    position: absolute;
+    margin-left: 97%;
+    margin-top: -4%;
+    background-color: rgb(143, 138, 138);
+    width: 35px;
+    height: 35px;
+    border-radius:0%;
+   }
+   .btn_enviar{
+    position: absolute;
+    width: 30px;
+    left: 0.1%;
+    opacity: 0;
+   }
+   p#texto{
+       text-align: center;
+       color:white;
+}
+
+.boton_eliminar{
+    text-align: end;
+     margin-bottom: 2%;
+}
+
+
+@media(max-width:80.813em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 97%;
+        margin-top: -6%;
+        background-color: rgb(143, 138, 138);
+        width: 35px;
+        height: 35px;
+        border-radius:0%;
+       }
+
+}
+    @media(max-width:51.753em)
+    { 
+        .container-button{
+            position: absolute;
+            margin-left: 97%;
+            margin-top: -10%;
+            background-color: rgb(143, 138, 138);
+            width: 30px;
+            height: 30px;
+            border-radius:0%;
+        }
+        .boton_eliminar{
+            text-align: end;
+            margin-bottom: 4%;
+        }
+
+    }
+    @media(max-width:29.375em)
+    { 
+        .container-button{
+            position: absolute;
+            margin-left: 97%;
+            margin-top: -15%;
+            background-color: rgb(143, 138, 138);
+            width: 25px;
+            height: 25px;
+            border-radius:0%;
+        }
+        .boton_eliminar{
+            text-align: end;
+            margin-bottom: 10%;
+        }
+
+    }
+

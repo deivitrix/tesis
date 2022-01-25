@@ -70,7 +70,8 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
            nombre:item.nombre,
            descripcion:item.descripcion,
            urlimagen:item.urlimagen,
-           file:new File([""],"")
+           file:new File([""],""),
+           verficar:false
           });
           this.imagen.push(imagen_publi);
       });
@@ -91,15 +92,30 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   }
 
   agregarCarrosel(){
+    this.verificar=true;
     const imagen_iniciO=this.ingresar.group({
      id:0,
      nombre:['',Validators.required],
      descripcion:['',Validators.required],
      urlimagen:this.pathimagendefecto,
-     file:new File([""],"")
+     file:new File([""],""),
+     verficar:false
     });
 
     this.imagen.push(imagen_iniciO);
   }
+
+  fileEvent(event:any,id:number)
+  {
+
+
+
+  }
+  toBase64 = (file: File) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 
 }
