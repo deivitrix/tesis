@@ -5,31 +5,48 @@
             <mat-card-title>Pagina Inicio</mat-card-title>
         </div>
         <div class="col-sm titulo">
-            <button mat-raised-button color="primary">Agregar Imagen</button>
+            <button mat-raised-button color="primary"> <mat-icon>add</mat-icon> Agregar Imagen</button>
         </div>
     </div>
   
 </div>
 
-<div class="container-fluid">
-    <!-- <div class="row"> -->
-        <div class="col-sm">
-            <mat-card  class="card">
-                  <div class="col-sm">
-                    <img width="20%" mat-card-image src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png">
-                  </div>
-                  <div class="col-sm">
-                    <mat-label>Nombre</mat-label>
-                  </div>
-                  <div class="col-sm">
-                    <mat-label>Descripcion</mat-label>
-                  </div>
+<!-- falta login -->
 
-                  
-            </mat-card>
-            
-          
+<form [formGroup]="myform" autocomplete="off">
+  <div class="container-fluid">
+    <!-- <div class="row"> -->
+      <div formArrayName="imagen" *ngFor="let clausula of imagen.controls; let i = index">
+        <div [formGroupName]="i">
+          <div class="form-group row">
+            <div class="col-sm">
+              <mat-card  class="card">
+                    <div class="col-sm">
+                      <label ><b> <h5>{{i+1}}.-  Imagen</h5></b></label>
+                      <img width="20%" mat-card-image [src]="getImagen(i)">
+                    </div>
+                    <div class="col-sm">
+                      <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label >Nombre</mat-label>
+                        <textarea  formControlName="nombre" matInput></textarea>
+                    </mat-form-field>
+                    </div>
+                    <div class="col-sm">
+                      <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label >Descripcion</mat-label>
+                        <textarea  formControlName="descripcion" matInput></textarea>
+                    </mat-form-field>
+                    </div>
+              </mat-card>
+          </div>
+          <div style="margin-top: 5%;"></div>
+          <div class="border"></div>
+
+          </div>
         </div>
+      </div>
+        
+        
         <!-- <div style="margin-top: 3%;"></div>
         <div class="col-sm">
             <mat-card style="width: 50%; justify-content: center; text-align: center;">
@@ -60,3 +77,6 @@
         </div> -->
     <!-- </div> -->
 </div>
+
+</form>
+
