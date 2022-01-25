@@ -8,6 +8,37 @@ import { RegistroactividadesPaginaComponent } from './paginas/registroactividade
 import { ModificarPaginaPrincipalComponent } from './paginas/modificar-pagina-principal/modificar-pagina-principal.component';
 import { LoadingconfiguracionavanzadaComponent } from './components/loadingconfiguracionavanzada/loadingconfiguracionavanzada.component';
 import { SpinnerconfiguracionavanzadaComponent } from './components/spinnerconfiguracionavanzada/spinnerconfiguracionavanzada.component';
+import { SelectormodificarpaginaprincipalComponent } from './components/selectormodificarpaginaprincipal/selectormodificarpaginaprincipal.component';
+
+//material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import{FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+
+
+
+import { IniciopaginaprincipalmodificarComponent } from './components/iniciopaginaprincipalmodificar/iniciopaginaprincipalmodificar.component';
+import { NosotrospaginaprincipalmodificarComponent } from './components/nosotrospaginaprincipalmodificar/nosotrospaginaprincipalmodificar.component';
+import { ConveniospaginaprincipalmodificarComponent } from './components/conveniospaginaprincipalmodificar/conveniospaginaprincipalmodificar.component';
+import { BecaspaginaprincipalmodificarComponent } from './components/becaspaginaprincipalmodificar/becaspaginaprincipalmodificar.component';
+import { MovilidadpaginaprincipalmodificarComponent } from './components/movilidadpaginaprincipalmodificar/movilidadpaginaprincipalmodificar.component';
 
 
 @NgModule({
@@ -17,11 +48,39 @@ import { SpinnerconfiguracionavanzadaComponent } from './components/spinnerconfi
     RegistroactividadesPaginaComponent,
     ModificarPaginaPrincipalComponent,
     LoadingconfiguracionavanzadaComponent,
-    SpinnerconfiguracionavanzadaComponent
+    SpinnerconfiguracionavanzadaComponent,
+    SelectormodificarpaginaprincipalComponent,
+    IniciopaginaprincipalmodificarComponent,
+    NosotrospaginaprincipalmodificarComponent,
+    ConveniospaginaprincipalmodificarComponent,
+    BecaspaginaprincipalmodificarComponent,
+    MovilidadpaginaprincipalmodificarComponent
   ],
   imports: [
     CommonModule,
-    ConfiguracionavanzadaRoutingModule
+    ConfiguracionavanzadaRoutingModule,
+    CommonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatTreeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    FormsModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule
   ]
 })
 export class ConfiguracionavanzadaModule { }

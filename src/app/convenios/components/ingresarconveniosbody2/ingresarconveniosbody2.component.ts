@@ -80,6 +80,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
   // listar sin modelo
   datosconvenio:any;
+  datosconvenioaux:any;
 
   // loading
   loading=true;
@@ -127,6 +128,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
       selectFirmaReceptor:['',Validators.required],
       firmaEmisor:this.ingresar.array([]),
       firmaReceptor:this.ingresar.array([]),
+      eliminacion:this.ingresar.array([])
     });
    }
 
@@ -175,7 +177,7 @@ getdatosconvenios(){
   this.convenios.searchconvenio(this.id)
   .subscribe((res:any)=>{
     this.datosconvenio=res;
-    console.log(this.datosconvenio);
+    //console.log(this.datosconvenio);
 
     this.myform.patchValue({
       id_convenio:this.id,
@@ -313,6 +315,7 @@ getclausulas(){
       const clausulasFormGroup=this.ingresar.group({
         id:datosconvenio.clausulas[i].id,
         nombre:datosconvenio.clausulas[i].nombre,
+        id_contenido:datosconvenio.clausulas[i].id_contenido,
         descripcion:descripcion,
         tipo:datosconvenio.clausulas[i].tipo,
         articulos:this.ingresar.array([])
@@ -481,6 +484,11 @@ getclausulas(){
 
   }
 
+  //modelo eliminar
+ get eliminar(){
+  return this.myform.get('eliminacion') as FormArray;
+ }
+
 
   // modelo clausula
   get clausula() {
@@ -501,7 +509,79 @@ getclausulas(){
 
   removerClausulas(indice:number)
   {
-    this.clausula.removeAt(indice);
+    var verificar=false;
+    var indice_eliminar=0;
+    for(var k=0;k<this.eliminar.length;k++)
+    {
+      if(this.eliminar.controls[k].value.id==this.clausula.controls[indice].value.id_contenido)
+      {
+        verificar=true;
+        this.eliminar.controls[k].value.estado="D"
+        indice_eliminar=k;
+      }
+    }
+    if(verificar==true)
+    {
+      const articulo=(<FormArray>this.myform.get('eliminacion')).at(indice_eliminar).get('articulos') as FormArray;
+      const artic=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
+
+      for(var i=0;i<artic.length;i++)
+      {
+        var id=artic.controls[i].value.art_id;
+        const articuloFormGroup=this.ingresar.group({
+          art_id:id,
+          estado:'D'
+        });
+        articulo.push(articuloFormGroup);
+      }
+    }
+    else
+    {
+    
+      const clausulaseliminacionFormGroup=this.ingresar.group({
+        id_clausula:this.clausula.controls[indice].value.id,
+        id_contenido:this.clausula.controls[indice].value.id_contenido,
+        estado:'D',
+        articulos:this.ingresar.array([])
+      });
+  
+      this.eliminar.push(clausulaseliminacionFormGroup);
+
+    
+      if(this.clausula.controls[indice].value.articulos.length!=0)
+      {
+        console.log(this.clausula.controls[indice].value.articulos.length);
+        
+        this.convenios.searchconvenio(this.id)
+        .subscribe((res:any)=>{
+          this.datosconvenioaux=res;
+         
+          for(var i=0;i<this.datosconvenioaux.clausulas.length;i++)
+          {
+            for(var k=0;k<this.eliminar.length;k++){
+          if(this.eliminar.controls[k].value.id==this.datosconvenioaux.clausulas[i].id_contenido)
+            {
+            const articulo=(<FormArray>this.myform.get('eliminacion')).at(k).get('articulos') as FormArray;
+            
+            for(var j=0;j<this.datosconvenioaux.clausulas[i].articulos.length;j++)
+            {
+              const articuloFormGroup=this.ingresar.group({
+                art_id:this.datosconvenioaux.clausulas[i].articulos[j].art_id,
+                estado:'D'
+              });
+              articulo.push(articuloFormGroup);
+            }
+          }
+          }
+        }
+
+        }); 
+      }
+    }
+
+   this.clausula.removeAt(indice);
+    //console.log(this.clausula.controls[indice].value.articulos.length);
+   
   }
 
   //ingresar un nombre de clausula a la base de datos
@@ -609,6 +689,59 @@ getclausulas(){
 
   removerArticulo(indice:number,articulo_indice:number)
   {
+    var verificar=false;
+    var indice_eliminar=0;
+    for(var k=0;k<this.eliminar.length;k++)
+    {
+      if(this.eliminar.controls[k].value.id==this.clausula.controls[indice].value.id_contenido)
+      {
+        verificar=true;
+        indice_eliminar=k;
+        //this.eliminar.controls[k].value.estado="D"
+      }
+    }
+
+    if(verificar==true)
+    {
+      const articulo=(<FormArray>this.myform.get('eliminacion')).at(indice_eliminar).get('articulos') as FormArray;
+      const artic=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
+      const articuloFormGroup=this.ingresar.group({
+        art_id:artic.controls[articulo_indice].value.art_id,
+        estado:'D'
+      });
+      articulo.push(articuloFormGroup);
+    }else
+    {
+      const clausulaseliminacionFormGroup=this.ingresar.group({
+        id_clausula:this.clausula.controls[indice].value.id,
+        id_contenido:this.clausula.controls[indice].value.id_contenido,
+        estado:'A',
+        articulos:this.ingresar.array([])
+      });
+  
+      this.eliminar.push(clausulaseliminacionFormGroup);
+
+      for(var i=0;i<this.eliminar.length;i++)
+      {
+        if(this.clausula.controls[indice].value.id_contenido==this.eliminar.controls[i].value.id)
+        {
+          
+          const articulo=(<FormArray>this.myform.get('eliminacion')).at(i).get('articulos') as FormArray;
+          const artic=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
+         // console.log(artic.controls[articulo_indice].value.art_id);
+          const articuloFormGroup=this.ingresar.group({
+            art_id:artic.controls[articulo_indice].value.art_id,
+            estado:'D'
+          });
+          articulo.push(articuloFormGroup);
+        }
+
+      }
+
+    }
+
+
+
     const articulo=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
      articulo.removeAt(articulo_indice);
       

@@ -1,0 +1,44 @@
+<div class="container-fluid titulo">
+    <h3></h3>
+    <mat-card-title>Modificacion de la pagina Principal</mat-card-title>
+</div>
+<div class="container-fluid selector">
+    <div class="row">
+        <div class="col-sm">
+            <mat-form-field class="container-fill"  appearance="fill">
+                <mat-label>Paginas</mat-label>
+                <mat-select (selectionChange)="escogerPagina($event)">
+                  <mat-option value="I">Inicio</mat-option>
+                  <mat-option value="N">Nosotros</mat-option>
+                  <mat-option value="C">Convenios</mat-option>
+                  <mat-option value="B">Becas</mat-option>
+                  <mat-option value="M">Movilidad</mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="pagina=='I'">
+    <app-iniciopaginaprincipalmodificar></app-iniciopaginaprincipalmodificar>
+</ng-container>
+
+<ng-container *ngIf="pagina=='N'">
+    <app-nosotrospaginaprincipalmodificar></app-nosotrospaginaprincipalmodificar>
+</ng-container>
+
+<ng-container *ngIf="pagina=='C'">
+    <app-conveniospaginaprincipalmodificar></app-conveniospaginaprincipalmodificar>
+</ng-container>
+
+<ng-container *ngIf="pagina=='B'">
+    <app-becaspaginaprincipalmodificar></app-becaspaginaprincipalmodificar>
+</ng-container>
+
+<ng-container *ngIf="pagina=='M'">
+    <app-movilidadpaginaprincipalmodificar></app-movilidadpaginaprincipalmodificar>
+</ng-container>
+
+
+
+

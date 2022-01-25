@@ -38,9 +38,9 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
-
-
 import {MatDividerModule} from '@angular/material/divider';
+
+
 import { GenerarreporteconvenioComponent } from './components/generarreporteconvenio/generarreporteconvenio.component';
 import { IngresarconveniosbodyComponent } from './components/ingresarconveniosbody/ingresarconveniosbody.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
