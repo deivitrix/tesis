@@ -8,3 +8,8 @@
     border-bottom: 2px solid rgb(110, 158, 182) !important;
      margin-bottom: 2%;
 }
+.card
+{
+    margin-left: 25%;
+    width: 50%;
+}

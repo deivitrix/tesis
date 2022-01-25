@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ConveniosAprobados } from 'src/app/models/convenios/conveniosaprobados';
 import { ConveniosaprobadosService } from 'src/app/services/conveniosaprobados/conveniosaprobados.service';
 import { PathImagenesService } from 'src/app/services/path-imagenes.service';
+import { Interfaz_contenido } from 'src/app/models/Interfaz_contenido.model';
+import { GeneralService } from 'src/app/services/generalget/general.service';
 
 @Component({
   selector: 'app-mostrar-convenio-aprobados',
@@ -17,6 +19,7 @@ export class MostrarConvenioAprobadosComponent implements OnInit {
   listaAnioMarcoInter:number[]=[];
   listaAnioEspecifico:number[]=[];
   loading=true;
+  loadingf=true;
 
   //lista auxiliares
   listaAnioMarcoaux:number[]=[];
@@ -26,20 +29,76 @@ export class MostrarConvenioAprobadosComponent implements OnInit {
   listaAnioMarcoaux2:number[]=[];
   listaAnioMarcoInteraux2:number[]=[];
   listaAnioEspecificoaux2:number[]=[];
+
+  //interfaces
+  listainterfaz:Interfaz_contenido[]=[];
+  listaMarco:Interfaz_contenido[]=[];
+  listaMarcoInter:Interfaz_contenido[]=[];
+  listaEspecifico:Interfaz_contenido[]=[];
+  listareglamento:Interfaz_contenido[]=[];
   
-  
-  constructor(private _pathimagenes:PathImagenesService, private _conveniosAprobados:ConveniosaprobadosService,private router:Router ) { 
+  constructor(private _pathimagenes:PathImagenesService, private _conveniosAprobados:ConveniosaprobadosService,private router:Router,private _general:GeneralService ) { 
     this.pathLogoUTM=this._pathimagenes.pathlogoutm;
   }
 
   ngOnInit(): void {
     this.getconveniosAprobados();
+    this.getPaginas();
   }
+  getPaginas(){
+    this._general.getTipoPagina("Convenios")
+    .subscribe((res:any) => {
+      this.listainterfaz=res;
+      this.loadingf=false;
+      // console.log(this.listainterfaz);
+      this.separarConvenios(this.listainterfaz);
+     
+    })
+  }
+
+  separarConvenios(original:Interfaz_contenido[])
+  {
+    original.forEach((item:Interfaz_contenido)=>{
+      if(item.interfaz.nombre=="Etiqueta-Convenios"){
+         if(item.nombre=="Etiqueta Marco")
+         {
+           if(item.estado=="A"){
+            this.listaMarco.push(item);
+           }
+          
+         }
+
+         if(item.nombre=="Etiqueta Marco Internacional")
+         {
+          if(item.estado=="A"){ 
+            this.listaMarcoInter.push(item);
+          }
+         }
+
+         if(item.nombre=="Etiqueta Especificos")
+         {
+          if(item.estado=="A"){ 
+            this.listaEspecifico.push(item);
+          }
+         }
+         
+         if(item.nombre=="Etiqueta Reglamento")
+         {
+          if(item.estado=="A"){ 
+            this.listareglamento.push(item);
+          }
+         }
+
+      }
+    });
+
+    
+  }
+
 
   getconveniosAprobados(){
     this._conveniosAprobados.getConveniosAprobados()
     .subscribe((res:any) => {
-      
      this.listaconvenios = res;
     //  console.log(res);
      this.loading=false;

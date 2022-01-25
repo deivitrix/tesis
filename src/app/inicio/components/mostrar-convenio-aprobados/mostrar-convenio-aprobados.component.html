@@ -1,8 +1,8 @@
-<ng-container *ngIf="loading">
+<ng-container *ngIf="loading && loadingf">
 <app-loading></app-loading>
 </ng-container>
 
-<ng-container *ngIf="loading==false">
+<ng-container *ngIf="loading==false && loadingf==false">
     <div class="container-fluid logo">
         <img src="{{ pathLogoUTM }}" alt="" />
       </div>
@@ -10,7 +10,9 @@
         <div class="row ">
            <div class="col-sm marco">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Convenios Marcos Nacionales
+              <ng-container *ngFor="let lista of listaMarco">
+                {{lista.descripcion}}
+             </ng-container>
               </button>
     
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -23,7 +25,9 @@
            </div>
            <div class="col-sm marco-internacional">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Convenios Marcos Internacionales
+              <ng-container *ngFor="let lista of listaMarcoInter">
+                {{lista.descripcion}}
+             </ng-container>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <ng-container *ngFor="let aniomacrointer of listaAnioMarcoInter">
@@ -33,7 +37,9 @@
         </div>
         <div class="col-sm especifico">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Convenios Especificos UTM
+              <ng-container *ngFor="let lista of listaEspecifico">
+                {{lista.descripcion}}
+             </ng-container>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <ng-container *ngFor="let anioespe of listaAnioEspecifico">
@@ -44,7 +50,9 @@
     
         <div class="col-sm reglamento">
             <button  class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Reglamentos interno UTM
+              <ng-container *ngFor="let lista of listareglamento">
+                {{lista.descripcion}}
+             </ng-container>
               </button>
               
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
