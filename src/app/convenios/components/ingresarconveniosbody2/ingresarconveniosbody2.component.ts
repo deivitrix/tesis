@@ -499,6 +499,7 @@ getclausulas(){
   {
     const clausulasFormGroup=this.ingresar.group({
       id:'',
+      id_contenido:0,
       nombre:['',Validators.required],
       descripcion:['',Validators.required],
       articulos:this.ingresar.array([])
@@ -750,6 +751,7 @@ getclausulas(){
   {
     this.indice1=indice;
     const articuloFormGroup=this.ingresar.group({
+      art_id:0,
       des_art:['',Validators.required],
       subtipo:'P'
     });
