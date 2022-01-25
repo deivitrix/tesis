@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Interfaz_contenido } from 'src/app/models/Interfaz_contenido.model';
 import { GeneralService } from 'src/app/services/generalget/general.service';
+import { PathImagenesService } from 'src/app/services/path-imagenes.service';
 
 @Component({
   selector: 'app-iniciopaginaprincipalmodificar',
@@ -18,12 +19,15 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
 
   loading=true;
   verificar=true;
-  
-  constructor(private ingresar:FormBuilder,private _general:GeneralService) { 
+
+  //path imagen
+  pathimagendefecto="";
+  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService) { 
     this.myform=ingresar.group({
       imagen:ingresar.array([]),
       eliminar:ingresar.array([])
     });
+    this.pathimagendefecto=_pathimagenes.pathimagendefecto;
   }
 
   ngOnInit(): void {
@@ -84,6 +88,18 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
     var url=this.imagen.controls[index].value.urlimagen;
     return url;
 
+  }
+
+  agregarCarrosel(){
+    const imagen_iniciO=this.ingresar.group({
+     id:0,
+     nombre:['',Validators.required],
+     descripcion:['',Validators.required],
+     urlimagen:this.pathimagendefecto,
+     file:new File([""],"")
+    });
+
+    this.imagen.push(imagen_iniciO);
   }
 
 }

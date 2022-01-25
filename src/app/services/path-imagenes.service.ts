@@ -29,6 +29,7 @@ export class PathImagenesService {
   pathpaginadoctorados:string;
   pathrecuperarcorreo:string;
   pathavatarperfil:string;
+  pathimagendefecto:string;
   constructor() { 
     this.path='';
     this.pathtwiter='';
@@ -55,5 +56,6 @@ export class PathImagenesService {
     this.pathpaginadoctorados='';
     this.pathrecuperarcorreo="";
     this.pathavatarperfil="";
+    this.pathimagendefecto="";
   }
 }
