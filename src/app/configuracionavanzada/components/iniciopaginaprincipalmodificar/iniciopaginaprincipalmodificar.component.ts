@@ -9,6 +9,7 @@ import { PathImagenesService } from 'src/app/services/path-imagenes.service';
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.service';
 
 @Component({
   selector: 'app-iniciopaginaprincipalmodificar',
@@ -26,36 +27,57 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   loading=true;
   verificar=true;
 
-  
+  //id carrosel
+  id=0;
 
-  //foto
+  //usuario
+  cedula:string;
+  usuario_id:string="";
   
 
   //path imagen
   pathimagendefecto="";
-  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService,public snackBar:MatSnackBar) { 
+
+  //boton
+  botonvista=false;
+  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService,public snackBar:MatSnackBar,private _login:GeneralLoginService) { 
     this.myform=ingresar.group({
       imagen:ingresar.array([]),
       eliminar:ingresar.array([])
     });
     this.pathimagendefecto=_pathimagenes.pathimagendefecto;
+    this.cedula="";
+    var cedula1;
+    cedula1=localStorage.getItem("cedula") as string;  
+    this.cedula=cedula1;
   }
 
   ngOnInit(): void {
+    this.getusuario();
     this.getPaginas()
+  }
+
+  getusuario(){
+    this._login.getusuariosearch(this.cedula)
+    .subscribe((res:any) => {
+      //this.loading=false;
+      // console.log(res);
+      this.usuario_id=res.usuario.id;   
+    });
   }
   getPaginas(){
     this._general.getTipoPagina("Inicio")
     .subscribe((res:any) => {
-      this.listainterfaz=res;
-     //console.log(this.listainterfaz);
-     
+    this.listainterfaz=res;
+    // console.log(this.listainterfaz);
+     this.id=this.listainterfaz[0].interfaz.id;
      this.loading=false;
      this.separarcarosel(this.listainterfaz);
     });
   }
   separarcarosel(original:Interfaz_contenido[])
   {
+
     original.forEach((item:Interfaz_contenido)=>{
       if(item.interfaz.nombre=="Carrusel")
       {
@@ -77,11 +99,12 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
     {
       this.listacarrosel.forEach((item:Interfaz_contenido)=>{
           const imagen_publi=this.ingresar.group({
-           id:item.id,
+          id:item.id,
+          id_interfaz:item.interfaz.id,
+          usuario_id:this.usuario_id,
            nombre:[item.nombre,Validators.required],
            descripcion:[item.descripcion,Validators.required],
            urlimagen:item.urlimagen,
-           cambio:0,
            file:new File([""],""),
            verificar:false
           });
@@ -109,6 +132,8 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
     this.verificar=true;
     const imagen_iniciO=this.ingresar.group({
      id:0,
+     id_interfaz:this.id,
+     usuario_id:this.usuario_id,
      nombre:['',Validators.required],
      descripcion:['',Validators.required],
      urlimagen:this.pathimagendefecto,
@@ -133,8 +158,6 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
       foto.onload=function(){
         const imgWidth = foto.naturalWidth;
         const imgHeight = foto.naturalHeight;
-        console.log(imgWidth);
-        console.log(imgHeight);
         
         if(imgWidth==1200&&imgHeight==500)
         {
@@ -195,7 +218,8 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
     if(this.imagen.controls[id].value.id!=0)
     {
       const eliminar_card=this.ingresar.group({
-       id:this.imagen.controls[id].value.id
+       id:this.imagen.controls[id].value.id,
+       id_interfaz:this.id,
       });
       this.eliminar.push(eliminar_card);
     }
@@ -289,56 +313,45 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
       denyButtonText: `No guardar`,
      
     }).then((result)=>{
-      var confirmar=0;
+      var con=0;
       if(result.isConfirmed)
       {
+        var numero=0;
         for(var i=0;i<this.imagen.length;i++)
         {
+          con++;
           if(this.imagen.controls[i].value.verificar==true)
           { 
             const formData = new FormData();
-            console.log(this.imagen.controls[i].value.file);
-            
             formData.append('img_carrusel', this.imagen.controls[i].value.file);
-            var base64=this.imagen.controls[i].value.urlimagen;
+            var base64=this.imagen.controls[i].value.file;
+            
             this._general.subirImagenCarroselftp(formData)
             .subscribe((res:any)=>{
               if(res.estado==true)
               {
-                //console.log(base64);
-                
-                // console.log(res.imagen);
                 var url=res.imagen;
                 var url1=url.replace(' ','%20');
-                // console.log(url1);
-
-                console.log(this.imagen.length);
-
                 for(var j=0;j<this.imagen.length;j++)
                 {
-                  if(base64==this.imagen.controls[j].value.urlimagen)
+                  if(base64==this.imagen.controls[j].value.file)
                   {
                     this.imagen.controls[j].patchValue({
                     urlimagen:url1
                   });
-
-
+                  console.log(this.imagen.controls[j].value);
+                  numero++;
                   }
                 }
+               //console.log(this.imagen.value);
+               
                 
-                  
               }
             });
+            console.log(numero);
             
-            
-            
-
-
           }
-
         }
-
-
 
       }
       else if(result.isDenied)
@@ -355,6 +368,11 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
         })
       }
     })
+
+    // if(con==this.imagen.length)
+    //     {
+          // console.log(this.myform.value);
+        // }
 
 
   }

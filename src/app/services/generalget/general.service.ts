@@ -24,5 +24,16 @@ export class GeneralService {
     return this.http.post(url,data);
   }
 
+  updateCarrosel(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'update/carrosel';
+    return this.http.post(url,data);
+  }
+
+  deleteCarrosel(data:any){
+    let url:string = this._base.getUrlApi() + 'delete/carrosel';
+    return this.http.put(url,data);
+  }
+
 
 }
