@@ -18,4 +18,11 @@ export class GeneralService {
     let url:string = this._base.getUrlApi() + 'interfaz/contenido/'+pagina;
     return this.http.get<Interfaz_contenido[]>(url);
   }
+
+  subirImagenCarroselftp(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'imagen-carrusel';
+    return this.http.post(url,data);
+  }
+
+
 }

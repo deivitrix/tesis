@@ -54,7 +54,8 @@ import { MovilidadpaginaprincipalmodificarComponent } from './components/movilid
     NosotrospaginaprincipalmodificarComponent,
     ConveniospaginaprincipalmodificarComponent,
     BecaspaginaprincipalmodificarComponent,
-    MovilidadpaginaprincipalmodificarComponent
+    MovilidadpaginaprincipalmodificarComponent,
+    
   ],
   imports: [
     CommonModule,
