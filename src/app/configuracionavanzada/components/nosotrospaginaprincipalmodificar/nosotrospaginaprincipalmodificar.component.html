@@ -1,1 +1,13 @@
-<p>nosotrospaginaprincipalmodificar works!</p>
+<div class="border"></div>
+<ng-container *ngIf="loading">
+    <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
+  </ng-container>
+
+  <ng-container *ngIf="loading==false">
+    <div class="container-fluid ">
+        <div class="col-sm titulo">
+            <mat-card-title>Pagina Nosotros</mat-card-title>
+        </div>
+    </div>
+    
+  </ng-container>

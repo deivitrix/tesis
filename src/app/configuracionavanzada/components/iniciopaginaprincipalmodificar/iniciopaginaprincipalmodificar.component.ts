@@ -39,11 +39,17 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   pathimagendefecto="";
 
   //boton
-  botonvista=false;
+  botonguardar=false;
+
+  botonsubir=false;
+  botoneliminarcard=false;
+
   constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService,public snackBar:MatSnackBar,private _login:GeneralLoginService) { 
     this.myform=ingresar.group({
       imagen:ingresar.array([]),
-      eliminar:ingresar.array([])
+      eliminar:ingresar.array([]),
+      botonsubir:false,
+      botoneliminar:false,
     });
     this.pathimagendefecto=_pathimagenes.pathimagendefecto;
     this.cedula="";
@@ -68,6 +74,8 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   getPaginas(){
     this._general.getTipoPagina("Inicio")
     .subscribe((res:any) => {
+      this.listacarrosel=[];
+    this.listainterfaz=[];
     this.listainterfaz=res;
     // console.log(this.listainterfaz);
      this.id=this.listainterfaz[0].interfaz.id;
@@ -77,7 +85,7 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   }
   separarcarosel(original:Interfaz_contenido[])
   {
-
+   
     original.forEach((item:Interfaz_contenido)=>{
       if(item.interfaz.nombre=="Carrusel")
       {
@@ -146,12 +154,13 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
 
   fileEvent(event:any,id:number)
   {
-     const i=this.myform.get('imagen') as FormArray;
+    const boton=this.myform;
+    const i=this.myform.get('imagen') as FormArray;
     const foto=new Image();
     const archivoCapturado=event.target.files[0]; 
+    const general=this._general;
     if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
     {
-   
      let base=this.toBase64(archivoCapturado);
      base.then((imagen1:any)=>{
       foto.src=imagen1;
@@ -161,11 +170,78 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
         
         if(imgWidth==1200&&imgHeight==500)
         {
-           i.controls[id].patchValue({
-            verificar:true,
-            file:archivoCapturado,
-            urlimagen:imagen1
-           })
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title: 'Esta seguro que desea subir la imagen...??',
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Subir',
+            denyButtonText: `No Subir`,
+           
+          }).then((result)=>{
+
+            if(result.isConfirmed)
+            {
+               boton.patchValue({
+                 botonsubir:true,
+                 botoneliminar:true,
+               });
+               const formData = new FormData();
+               formData.append('img_carrusel', archivoCapturado);
+               general.subirImagenCarroselftp(formData)
+               .subscribe((res:any)=>{
+                console.log(res);
+                 if(res.estado==true)
+                 { 
+                    var url=res.imagen;
+                    var url1=url.replace(' ','%20');
+                    i.controls[id].patchValue({
+                      verificar:true,
+                      file:archivoCapturado,
+                      urlimagen:url1
+                     });
+                     boton.patchValue({
+                      botonsubir:false,
+                      botoneliminar:false,
+                    });
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:'Se subio la imagen con exito',
+                      icon:'success'
+                    });
+                 }
+
+               });
+            }
+            else if(result.isDenied)
+            {
+              Swal.fire({
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                title:'Se cancelo la operacion',
+                icon:'warning'
+              })
+            }
+
+          })
+
+
+           
              
         }
         else
@@ -313,45 +389,74 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
       denyButtonText: `No guardar`,
      
     }).then((result)=>{
-      var con=0;
       if(result.isConfirmed)
       {
-        var numero=0;
-        for(var i=0;i<this.imagen.length;i++)
-        {
-          con++;
-          if(this.imagen.controls[i].value.verificar==true)
-          { 
-            const formData = new FormData();
-            formData.append('img_carrusel', this.imagen.controls[i].value.file);
-            var base64=this.imagen.controls[i].value.file;
-            
-            this._general.subirImagenCarroselftp(formData)
-            .subscribe((res:any)=>{
-              if(res.estado==true)
-              {
-                var url=res.imagen;
-                var url1=url.replace(' ','%20');
-                for(var j=0;j<this.imagen.length;j++)
-                {
-                  if(base64==this.imagen.controls[j].value.file)
-                  {
-                    this.imagen.controls[j].patchValue({
-                    urlimagen:url1
-                  });
-                  console.log(this.imagen.controls[j].value);
-                  numero++;
-                  }
-                }
-               //console.log(this.imagen.value);
-               
-                
-              }
-            });
-            console.log(numero);
-            
-          }
+        this.botonguardar=true;
+        this.myform.patchValue({
+          botonsubir:true,
+          botoneliminar:true,
+        });
+        if(this.myform.get('imagen')?.value.length==0&&this.myform.get('eliminar')?.value.length==0){
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Debe existir informacion para guardar',
+            icon:'warning'
+          });
+          this.botonguardar=false;
+          this.myform.patchValue({
+            botonsubir:false,
+            botoneliminar:false,
+          });
+          return;
         }
+        let json={data:this.myform.value}
+        this._general.updateCarrosel(json)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Se modifico el carrosel con exito!!....',
+              icon:'success'
+            });
+            this.botonguardar=false;
+            this.myform.patchValue({
+              botonsubir:false,
+              botoneliminar:false,
+            });
+            while(this.imagen.controls.length!=0){
+              for(var i=0;i<this.imagen.controls.length;i++)
+              {
+                this.imagen.removeAt(i);
+              }
+    
+              }
+              while(this.eliminar.controls.length!=0)
+              {
+                for(var i=0;i<this.eliminar.controls.length;i++)
+                {
+                  this.eliminar.removeAt(i);
+                }
+    
+              }
+              this.loading=true;
+              this.getPaginas()
+            return;
+          }
+        })
+     
+
+        
 
       }
       else if(result.isDenied)
@@ -366,16 +471,87 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
           title:'Se cancelo la operacion',
           icon:'warning'
         })
+        return;
       }
     })
 
-    // if(con==this.imagen.length)
-    //     {
-          // console.log(this.myform.value);
+    
+
+  }
+
+  cancelar(){
+    Swal.fire({
+      title:"Cancelar la operacion del Carrosel",
+      text:'Desea cancelar la operacion',
+      icon:'warning',
+      showCancelButton:true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si deseo cancelar'
+    }).then((result)=>{
+      if (result.value) {
+
+        while(this.imagen.controls.length!=0){
+          for(var i=0;i<this.imagen.controls.length;i++)
+          {
+            this.imagen.removeAt(i);
+          }
+
+          }
+          while(this.eliminar.controls.length!=0)
+          {
+            for(var i=0;i<this.eliminar.controls.length;i++)
+            {
+              this.eliminar.removeAt(i);
+            }
+
+          }
+          this.loading=true;
+          this.getPaginas()
+        Swal.fire({
+          title:'Cancelacion',
+          text:'Se cancela la operacion',
+          icon:'success',
+        });
+        // console.log(this.imagen.controls.length);
+
+        
+         
+
+        
+
+
+        
+        
+        // for(var i=0;i<this.imagen.controls.length;i++)
+        // {
+        //   console.log(i);
+        //   this.imagen.removeAt(i);
         // }
+
+        // if(this.imagen.controls.length==0)
+        // {
+        //   this.getPaginas()
+        // }
+        // else
+        // {
+         
+        // }
+        // for(var i=0;i<this.eliminar.controls.length;i++)
+        // {
+        //   this.eliminar.removeAt(i);
+        // }
+        // 
+      }
+
+    });
 
 
   }
+ 
+
+  
+  
   
 
 
