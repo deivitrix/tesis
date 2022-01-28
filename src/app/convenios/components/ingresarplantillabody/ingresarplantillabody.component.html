@@ -55,14 +55,19 @@
             <h4 class="active"> <span class="titulo"><h3>Formulario Plantilla</h3></span></h4>
             <!-- <pre>{{myform.value |json}}</pre> -->
             <div class="fadeIn first">
-                <div class="col-sm">
-                    <mat-form-field class="container-fill" appearance="fill">
+                <div class="col-sm" style="margin-top: 5%;margin-bottom: 3%;">
+                    <mat-label><b><h5>Nombre del Convenio:</h5></b></mat-label>
+                    <div class="container-fill" style="margin-left: 15%;" >
+                        <ckeditor  formControlName="nombre_convenio" [editor]="Editor" ></ckeditor>
+                    </div>
+                    
+                    <!-- <mat-form-field class="container-fill" appearance="fill">
                         <mat-label>Nombre del Convenio</mat-label>
                         <textarea matInput formControlName="nombre_convenio"></textarea>
                     </mat-form-field>
                     <div *ngIf="myform.get('nombre_convenio')?.hasError('required') && myform.get('nombre_convenio')?.touched" style="margin-top: -20px;">
                         <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
-                    </div>
+                    </div> -->
 
                 </div>
     
@@ -72,13 +77,17 @@
                     <mat-label><b><h5>Comparecientes:</h5></b></mat-label>
                 </div>
                 <div class="col-sm">
-                    <mat-form-field class="container-fill" appearance="fill">
+                    <div class="container-fill" style="margin-left: 15%;" >
+                        <ckeditor  formControlName="comparecientes" [editor]="Editor" ></ckeditor>
+                    </div>
+
+                    <!-- <mat-form-field class="container-fill" appearance="fill">
                         <mat-label>Descripcion</mat-label>
                         <textarea matInput formControlName="comparecientes"></textarea>
                     </mat-form-field>
                     <div *ngIf="myform.get('comparecientes')?.hasError('required') && myform.get('comparecientes')?.touched" style="margin-top: -20px;">
                         <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     
@@ -116,13 +125,21 @@
 
                         
                     </div>
-                  <div class="form-group row"> 
+                  <div class="form-group row" style="margin-bottom: 2%;"> 
                    <!-- <div class="border"></div>   -->
                     <div class="col-md-9">
-                        <mat-form-field class="container-fill" appearance="fill">
+                        <div >
+                            <mat-label ><b><h6>Descripcion Clausula:</h6></b></mat-label>
+                        </div>
+                       
+                        <div class="container-fill" style="margin-left: 15%; margin-top: 3%;" >
+                            <ckeditor  formControlName="descripcion" [editor]="Editor" ></ckeditor>
+                        </div>
+                        
+                        <!-- <mat-form-field class="container-fill" appearance="fill">
                             <mat-label >Descripcion Clausula</mat-label>
                             <textarea  formControlName="descripcion" matInput></textarea>
-                        </mat-form-field>
+                        </mat-form-field> -->
                     </div>
                     <div class="col-md-2">
                         <button title="Agregar Articulos" (click)="agregarListaArticulo(i)" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
@@ -131,15 +148,23 @@
                   </div>
                     <div formArrayName="articulos" *ngFor="let articulo of getarticulocontrol(i); let j = index">
                         <div [formGroupName]="j">
-                            <div class="form-group row">
+                            <div class="form-group row" style="margin-bottom: 2%;">
                                 <div class="col-md-9">
-                                <mat-form-field class="container-fill-articulo" appearance="fill">
+                                    <div >
+                                        <mat-label ><b><h6>Articulo {{i+1}}.{{j+1}}</h6></b></mat-label>
+                                    </div>
+                                   
+                                    <div class="container-fill-articulo" style="margin-left: 35%; margin-top: 3%;" >
+                                        <ckeditor  formControlName="des_art" [editor]="Editor" ></ckeditor>
+                                    </div>
+
+                                <!-- <mat-form-field class="container-fill-articulo" appearance="fill">
                                     <mat-label>Articulo {{i+1}}.{{j+1}}</mat-label>
                                     <textarea matInput formControlName="des_art"></textarea>
-                                  </mat-form-field>
+                                  </mat-form-field> -->
                                 </div>
-                                <div class="col-md-2">
-                                    <button class="btn btn-danger" (click)="removerArticulo(i,j)"><mat-icon>delete</mat-icon></button>
+                                <div class="col-md-2" style="margin-top: 6%;" >
+                                    <button title="Eliminar Articulo" class="btn btn-danger" (click)="removerArticulo(i,j)"><mat-icon>delete</mat-icon></button>
 
                                 </div>
                             </div>

@@ -54,6 +54,9 @@ import { TablasubirComponent } from './components/tablasubir/tablasubir.componen
 import { SpinnerconveniosComponent } from './components/spinnerconvenios/spinnerconvenios.component';
 //import { TablamodificarComponent } from './components/tablamodificar/tablamodificar.component';
 
+//editor de texto
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 
 
 
@@ -106,7 +109,8 @@ import { SpinnerconveniosComponent } from './components/spinnerconvenios/spinner
     PipesModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    CKEditorModule
   ],
   exports:[
     TablamodificarComponent

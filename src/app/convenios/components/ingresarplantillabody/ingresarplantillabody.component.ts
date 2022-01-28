@@ -25,6 +25,8 @@ import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-
 import Swal from 'sweetalert2';
 import 'animate.css';
 
+//editor de texto 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 //PDF
 // import jsPDF from 'jspdf';
@@ -77,6 +79,8 @@ export class IngresarplantillabodyComponent implements OnInit {
 
 // cedula del usuario
 cedula:string;
+
+public Editor = ClassicEditor;
 
 
 
