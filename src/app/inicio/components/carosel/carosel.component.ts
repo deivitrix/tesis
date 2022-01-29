@@ -29,7 +29,7 @@ export class CaroselComponent implements OnInit {
     this._general.getTipoPagina("Inicio")
     .subscribe((res:any) => {
       this.listainterfaz=res;
-    
+     
      this.loading=false;
      this.separarcarosel(this.listainterfaz);
     });

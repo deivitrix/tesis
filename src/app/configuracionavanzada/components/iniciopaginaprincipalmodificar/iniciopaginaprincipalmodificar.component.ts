@@ -112,7 +112,7 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
           usuario_id:this.usuario_id,
            nombre:[item.nombre,Validators.required],
            descripcion:[item.descripcion,Validators.required],
-           urlimagen:item.urlimagen,
+           urlimagen:item.imagen.url_imagen,
            file:new File([""],""),
            verificar:false
           });

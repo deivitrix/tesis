@@ -96,6 +96,10 @@ public Editor = ClassicEditor;
 
     this.myform=this.ingresar.group({
       id_usuario:[''],
+      id_imagen1:[''],
+      id_imagen2:[''],
+      urlimagen1:['http://3.15.185.2/Contenido/Imagenes/escudo.png'],
+      urlimagen2:['http://3.15.185.2/Contenido/Imagenes/escudo.png'],
       id_tipoconvenio:[''],
       id_tipoespecifico:[''],
       nombre_convenio:['',Validators.required],
@@ -801,12 +805,12 @@ public Editor = ClassicEditor;
     for(var i=0;i<this.clausula.length;i++)
     {
       
-      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      if(this.clausula.controls[i].value.nombre.length==0)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
             titulo:'Error.....',
-            mensaje:"Ingresar Datos en las Clausulas",
+            mensaje:"Ingresar el nombre en las Clausulas",
            buttonText:'',
            icon:'warning'
           },
@@ -816,8 +820,15 @@ public Editor = ClassicEditor;
           panelClass:'error'
         });
         return;
-     
       }
+      if(this.clausula.controls[i].value.descripcion.length==0)
+      {
+         this.clausula.controls[i].patchValue({
+          descripcion:'<p>&nbsp;</p>'
+         });
+      }
+
+
       if(this.articulos.length!=0)
       {
         const articulo=(<FormArray>this.myform.get('clausulas')).at(i).get('articulos') as FormArray;

@@ -1,3 +1,4 @@
+import { ImagenModel } from './imagen';
 import { Interfaz } from "./Interfaz.model";
 
 export interface Interfaz_contenido{
@@ -5,7 +6,9 @@ export interface Interfaz_contenido{
     id_interfazs:string;
     nombre:string;
     descripcion:string;
-    urlimagen:string;
     estado:string;
     interfaz:Interfaz
+    imagen_id:number;
+    usuario_id:number;
+    imagen:ImagenModel;
 }
