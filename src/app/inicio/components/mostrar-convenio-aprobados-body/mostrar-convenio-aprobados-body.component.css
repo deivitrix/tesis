@@ -32,6 +32,9 @@
 .filadescarga{
     text-align: center;
 }
+.nombre{
+    font-size: 13.5px;
+}
 
 @media(max-width:70em)
 {

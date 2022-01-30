@@ -53,7 +53,20 @@ loading=true;
           this.listaconveniosAprobados.push(item);
         }
       });
+
+      this.listaconveniosAprobados.forEach((item:ConveniosAprobados)=>{
+         var etiqueta1=item.titulo_convenio.replace("<p>","");
+         var etiqueta2=etiqueta1.replace("</p>","");
+         var etiqueta3=etiqueta2.replace("<i>","");
+         var etiqueta4=etiqueta3.replace("</i>","");
+         var etiqueta5=etiqueta4.replace("<strong>","");
+         var etiqueta6=etiqueta5.replace("</strong>","");
+         var etiqueta7=etiqueta6.replace("&nbsp;"," ");
+         item.titulo_convenio=etiqueta7;
+      });
     }
+
+
     if(this.tipo.length==0)
     {
       this.verificar=false;
