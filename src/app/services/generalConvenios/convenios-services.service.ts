@@ -155,5 +155,18 @@ export class ConveniosServicesService {
     return this.http.put(url,data);
 
   }
+
+  // obtener imagenes convenio
+  getimagenesconvenios():Observable<any>{
+    let url:string=this._base.getUrlApi()+'imagen-convenio';
+    return this.http.get<any>(url);
+  }
+
+  //agregar una imagen
+  addimagenconvenio(data:any)
+  {
+    let url:string=this._base.getUrlApi()+'imagen-convenio/subir';
+    return this.http.post(url,data); 
+  }
   
 }

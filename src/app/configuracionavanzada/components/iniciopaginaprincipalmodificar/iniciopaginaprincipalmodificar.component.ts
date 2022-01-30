@@ -193,10 +193,10 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
                  botoneliminar:true,
                });
                const formData = new FormData();
-               formData.append('img_carrusel', archivoCapturado);
+               formData.append('img', archivoCapturado);
                general.subirImagenCarroselftp(formData)
                .subscribe((res:any)=>{
-                console.log(res);
+               // console.log(res);
                  if(res.estado==true)
                  { 
                     var url=res.imagen;
@@ -253,7 +253,7 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
             hideClass: {
               popup: 'animate__animated animate__fadeOutUp'
             },
-            title:'Error.. Solo se puede subir imagenes de dimensiones 1200x500',
+            title:'Error.. Solo se puede subir imagenes de dimensiones 1200x500 pixeles',
             icon:'warning'
           });
           return;

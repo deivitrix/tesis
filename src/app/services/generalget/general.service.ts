@@ -24,6 +24,11 @@ export class GeneralService {
     return this.http.post(url,data);
   }
 
+  subirImagenConveniosftp(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'imagen-carrusel';
+    return this.http.post(url,data);
+  }
+
   updateCarrosel(data:any)
   {
     let url:string = this._base.getUrlApi() + 'update/carrosel';
@@ -34,6 +39,7 @@ export class GeneralService {
     let url:string = this._base.getUrlApi() + 'delete/carrosel';
     return this.http.put(url,data);
   }
+
 
 
 }

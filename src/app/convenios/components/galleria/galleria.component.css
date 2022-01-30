@@ -1,0 +1,24 @@
+.titulo{
+    text-align: center;
+}
+.titulo h1{
+    color: rgb(46, 46, 158);
+}
+
+.contenido{
+    border: 1px solid rgb(78, 119, 138) !important;
+    border-radius: 10px;
+   background-color: rgb(146, 194, 196);
+   
+}
+.card{
+    border-radius: 10px;
+}
+  .button-container {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+  }
+  .button-action{
+    justify-content: end;
+}

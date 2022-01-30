@@ -41,6 +41,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 
 
+
 import { GenerarreporteconvenioComponent } from './components/generarreporteconvenio/generarreporteconvenio.component';
 import { IngresarconveniosbodyComponent } from './components/ingresarconveniosbody/ingresarconveniosbody.component';
 import { Ingresarconveniosbody2Component } from './components/ingresarconveniosbody2/ingresarconveniosbody2.component';
@@ -56,6 +57,7 @@ import { SpinnerconveniosComponent } from './components/spinnerconvenios/spinner
 
 //editor de texto
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { GalleriaComponent } from './components/galleria/galleria.component';
 
 
 
@@ -84,6 +86,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     EditarconveniosaprobadosComponent,
     TablasubirComponent,
     SpinnerconveniosComponent,
+    GalleriaComponent,
   ],
   imports: [
     CommonModule,

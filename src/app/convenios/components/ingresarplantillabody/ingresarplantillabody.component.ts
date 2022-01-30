@@ -1,3 +1,4 @@
+import { GalleriaComponent } from './../galleria/galleria.component';
 import { FirmaModel } from './../../../models/convenios/firmaconvenio';
 import { IngresarfirmaComponent } from './../ingresarfirma/ingresarfirma.component';
 import { Router } from '@angular/router';
@@ -27,6 +28,8 @@ import 'animate.css';
 
 //editor de texto 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { PathImagenesService } from 'src/app/services/path-imagenes.service';
+import { GeneralService } from 'src/app/services/generalget/general.service';
 
 //PDF
 // import jsPDF from 'jspdf';
@@ -82,13 +85,23 @@ cedula:string;
 
 public Editor = ClassicEditor;
 
+//path imagen
+pathimagendefecto="";
+
+//url_ escoger
+url_escoger="";
+//data
+data:any={id:0,url_escoger:this.url_escoger};
+
 
 
 
   constructor(private ingresar:FormBuilder,private convenios:ConveniosServicesService,
               public dialog: MatDialog,public snackBar:MatSnackBar, private router:Router,
-              private usuario:UsuarioServicesService) 
+              private usuario:UsuarioServicesService,private _pathimagenes:PathImagenesService,
+              private _general:GeneralService) 
   {
+    this.pathimagendefecto=_pathimagenes.pathimagendefecto;
     this.selector=this.ingresar.group({
       convenios:['',Validators.required],
        especificos:[{value:'',disabled: true},Validators.required]
@@ -98,8 +111,12 @@ public Editor = ClassicEditor;
       id_usuario:[''],
       id_imagen1:[''],
       id_imagen2:[''],
-      urlimagen1:['http://3.15.185.2/Contenido/Imagenes/escudo.png'],
-      urlimagen2:['http://3.15.185.2/Contenido/Imagenes/escudo.png'],
+      urlimagen1:[_pathimagenes.pathimagendefecto],
+      urlimagen2:[_pathimagenes.pathimagendefecto],
+      botonsubir1:false,
+      botonsubir2:false,
+      escoger1:false,
+      escoger2:false,
       id_tipoconvenio:[''],
       id_tipoespecifico:[''],
       nombre_convenio:['',Validators.required],
@@ -181,6 +198,183 @@ public Editor = ClassicEditor;
     
   }
 
+//imagen
+fileEvent(event:any)
+{
+  const form=this.myform;
+  const foto=new Image();
+  const archivoCapturado=event.target.files[0]; 
+  const general=this._general;
+  const conve=this.convenios;
+  if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
+  {
+    let base=this.toBase64(archivoCapturado);
+    base.then((imagen1:any)=>{
+      foto.src=imagen1;
+      foto.onload=function(){ 
+        const imgWidth = foto.naturalWidth;
+        const imgHeight = foto.naturalHeight;
+        if(imgWidth==450&&imgHeight==500)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title: 'Esta seguro que desea subir la imagen...??',
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Subir',
+            denyButtonText: `No Subir`,
+           
+          }).then((result)=>{
+            if(result.isConfirmed)
+            {
+              form.patchValue({
+                botonsubir1:true,
+                botonsubir2:true,
+                escoger1:true,
+                escoger2:true
+              });
+              //console.log(archivoCapturado.name);
+              const formData = new FormData();
+              formData.append('img', archivoCapturado);
+              general.subirImagenConveniosftp(formData)
+              .subscribe((res:any)=>{
+                if(res.estado==true)
+                {
+                  let json={data:{nombre:archivoCapturado.name,url_imagen:res.imagen}};
+                   conve.addimagenconvenio(json)
+                   .subscribe((res:any)=>{
+                     if(res.estado==true)
+                     {
+                      Swal.fire({
+                        showClass: {
+                          popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                          popup: 'animate__animated animate__fadeOutUp'
+                        },
+                        title:'Se subio la imagen con exito',
+                        icon:'success'
+                      });
+                      form.patchValue({
+                        botonsubir1:false,
+                        botonsubir2:false,
+                        escoger1:false,
+                        escoger2:false
+                      });
+
+                     }
+                   })
+
+                }
+              })
+
+
+              
+
+
+            }
+            if(result.isDenied)
+            {
+              form.patchValue({
+                botonsubir1:false,
+                botonsubir2:false,
+                escoger1:false,
+                escoger2:false
+              });
+              Swal.fire({
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                title:'Se cancelo la operacion',
+                icon:'warning'
+              })
+            }
+          
+          })
+         }
+         else{
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Error.. Solo se puede subir imagenes de dimensiones 450x500 pixeles',
+            icon:'warning'
+          });
+          form.patchValue({
+            botonsubir1:false,
+            botonsubir2:false,
+            escoger1:false,
+            escoger2:false
+          });
+          return;
+         }
+      }
+    })
+
+  }
+ 
+}
+
+toBase64 = (file: File) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+
+escoger(id:number){
+  this.data={id:0,url_escoger:this.url_escoger};
+  
+  const dialogRef=this.dialog.open(GalleriaComponent,{
+    width:'700px',
+    data:{titulo:'Galeria Convenios',url:this.data}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if(result!=null)
+    {
+      if(id==1)
+      {
+        if(result.url_escoger.length!=0){
+          this.myform.patchValue({
+            id_imagen1:result.id,
+            urlimagen1:result.url_escoger
+          });
+        }
+      }
+      if(id==2)
+      {
+        if(result.url_escoger.length!=0)
+        {
+          this.myform.patchValue({
+            id_imagen2:result.id,
+            urlimagen2:result.url_escoger
+  
+          });
+        }
+        
+       
+      }
+
+    }
+   
+    
+  });
+
+}
 
 
   getfirma(){
@@ -528,90 +722,7 @@ public Editor = ClassicEditor;
       });
   }
 
-  // agregarfirmaEmisorDialog(){
-  //   const dialogRef=this.dialog.open(IngresarfirmaemisorComponent,{
-  //     width:'600px',
-  //     data:{titulo:'Ingresar Firma del Emisor',emisor:this.firmaEmisorAgregar}
-  //   });
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     if(result!=null)
-  //     {
-  //       this.firmaEmisorAgregar=result;
-  //        if(this.firmaEmisorAgregar.nombre_emisor.length==0 || this.firmaEmisorAgregar.titulo_academico.length==0 ||
-  //           this.firmaEmisorAgregar.cargo_emisor.length==0 || this.firmaEmisorAgregar.institucion_emisor.length==0)
-  //           {
-  //             this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-  //               data:{
-  //                 titulo:'Error.....',
-  //                 mensaje:"Datos Faltantes",
-  //                buttonText:'',
-  //                icon:'error'
-  //               },
-  //               duration:1000,
-  //               horizontalPosition:'end',
-  //               verticalPosition:'bottom',
-  //               panelClass:'error'     
-  //             });
-  //             this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-  //             return;
-  //           }
-  //        this.agregarfirmaEmisor();
-  //     }
-     
-      
-  //   });
-
-  // }
-
-  // agregarfirmaEmisor(){
-  //   let json={firma_emisor:{titulo_academico:this.firmaEmisorAgregar.titulo_academico,nombre_emisor:this.firmaEmisorAgregar.nombre_emisor,
-  //     cargo_emisor:this.firmaEmisorAgregar.cargo_emisor,institucion_emisor:this.firmaEmisorAgregar.institucion_emisor}};
-  //   this.convenios.addfirmaEmisor(json).
-  //   subscribe((res:any)=>{
-  //     if(res.estado==true)
-  //     {
-  //       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-  //         data:{
-  //           titulo:'Success.....',
-  //           mensaje:res.mensaje,
-  //          buttonText:'',
-  //          icon:'success'
-  //         },
-  //         duration:1000,
-  //         horizontalPosition:'end',
-  //         verticalPosition:'bottom',
-  //         panelClass:'success'     
-  //       });
-  //       this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-  //       this.firmaEmisor=[];
-  //       this.getfirmaemisor();
-  //       return;
-        
-
-  //     }
-  //     if(res.estado==false)
-  //     {
-  //       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-  //         data:{
-  //           titulo:'Error.....',
-  //           mensaje:res.mensaje,
-  //          buttonText:'',
-  //          icon:'warning'
-  //         },
-  //         duration:1000,
-  //         horizontalPosition:'end',
-  //         verticalPosition:'bottom',
-  //         panelClass:'error'     
-  //       });
-  //       this.firmaEmisorAgregar={id:0,titulo_academico:'',nombre_emisor:'',cargo_emisor:'',institucion_emisor:''};
-  //       return;
-  //     }
-  //   });
-
-  // }
-
-  
+    
 
   get firmaEmisorArray()
   {
@@ -778,6 +889,24 @@ public Editor = ClassicEditor;
         return;
 
       }
+
+    }
+
+    if(this.myform.get('urlimagen1')?.value==this.pathimagendefecto || this.myform.get('urlimagen2')?.value==this.pathimagendefecto)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Debe escoger una imagen",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
 
     }
 
@@ -1006,7 +1135,7 @@ public Editor = ClassicEditor;
     for(var i=0;i<this.clausula.length;i++)
     {
       
-      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      if(this.clausula.controls[i].value.nombre.length==0)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
@@ -1022,6 +1151,13 @@ public Editor = ClassicEditor;
         });
         return;
      
+      }
+      
+      if(this.clausula.controls[i].value.descripcion.length==0)
+      {
+         this.clausula.controls[i].patchValue({
+          descripcion:'<p>&nbsp;</p>'
+         });
       }
       if(this.articulos.length!=0)
       {
