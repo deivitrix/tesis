@@ -144,7 +144,8 @@ export class Ingresarconveniosbody2Component implements OnInit {
       selectFirmaReceptor:['',Validators.required],
       firmaEmisor:this.ingresar.array([]),
       firmaReceptor:this.ingresar.array([]),
-      eliminacion:this.ingresar.array([])
+      eliminacion:this.ingresar.array([]),
+      PDF:['']
     });
    }
 
@@ -1517,10 +1518,6 @@ escoger(id:number){
       });
       return;
     }
-  
-   
-    
-
     for(var i=0;i<this.clausula.length;i++)
     {
       
@@ -1605,42 +1602,73 @@ escoger(id:number){
 
         if(this.tipoIngresar==true)
         {
-          this.convenios.addconveniosguardado(json)
+          let json={data:this.myform.value}
+        
+        this.convenios.GuardarVistaPDFconvenios(json)
         .subscribe((res:any)=>{
-
           if(res.estado==true)
           {
-            Swal.fire({
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              },
-              title:'Convenio Guardado con exito',
-              icon:'success'
+            this.myform.patchValue({
+              PDF:res.file
             });
-            this.botonguardar=false;
-            this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
-          }
-        
-        },(error:any)=>{
-          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-            data:{
-              titulo:'Error.....',
-              mensaje:"No se puedo ingresar la plantilla",
-             buttonText:'',
-             icon:'warning'
-            },
-            duration:1000,
-            horizontalPosition:'end',
-            verticalPosition:'bottom',
-            panelClass:'error'
-          });
-          this.botonguardar=false;
-          return;
+            let json1={data:this.myform.value};
+            this.convenios.addconveniosguardado(json1)
+            .subscribe((res:any)=>{
+    
+              if(res.estado==true)
+              {
+                Swal.fire({
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  },
+                  title:'Convenio Guardado con exito',
+                  icon:'success'
+                });
+                this.botonguardar=false;
+                this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+              }
+            
+            },(error:any)=>{
+              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+                data:{
+                  titulo:'Error.....',
+                  mensaje:"No se puedo ingresar la plantilla",
+                 buttonText:'',
+                 icon:'warning'
+                },
+                duration:1000,
+                horizontalPosition:'end',
+                verticalPosition:'bottom',
+                panelClass:'error'
+              });
+              this.botonguardar=false;
+              return;
+    
+            });
 
-        });
+          }
+          else{
+            this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+              data:{
+                titulo:'Error.....',
+                mensaje:"No se puedo Guardar el PDF",
+               buttonText:'',
+               icon:'warning'
+              },
+              duration:1000,
+              horizontalPosition:'end',
+              verticalPosition:'bottom',
+              panelClass:'error'
+            });
+            return;
+    
+          }
+
+        })
+         
 
 
         }

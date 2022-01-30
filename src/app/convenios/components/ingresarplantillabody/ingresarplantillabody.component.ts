@@ -1267,8 +1267,6 @@ escoger(id:number){
                 })
                 
               }
-              
-
             
             },(error:any)=>{
               this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
