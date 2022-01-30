@@ -1110,6 +1110,23 @@ escoger(id:number){
       }
 
     }
+    if(this.myform.get('urlimagen1')?.value==this.pathimagendefecto || this.myform.get('urlimagen2')?.value==this.pathimagendefecto)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Debe escoger una imagen",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
 
 
     if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
