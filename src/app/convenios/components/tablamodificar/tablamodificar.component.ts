@@ -66,6 +66,23 @@ export class TablamodificarComponent implements OnInit {
               this.listaConv.push(this.listaConvaux[i]);
             }
           }
+          this.listaConv.forEach((item:any)=>{
+            // const etiquetas=[,'</p>','<i>','</i>','<strong>','</strong>']
+            var etiqueta1="";
+            etiqueta1=item.titulo_convenio.replace("<p>","");
+            // for(var i=0;i<etiquetas.length;i++)
+            // {
+            //   etiqueta1=etiqueta1.replace(etiqueta1[i],"");
+            // }
+  
+             var etiqueta2=etiqueta1.replace("</p>","");
+             var etiqueta3=etiqueta2.replace("<i>","");
+             var etiqueta4=etiqueta3.replace("</i>","");
+             var etiqueta5=etiqueta4.replace("<strong>","");
+             var etiqueta6=etiqueta5.replace("</strong>","");
+             var etiqueta7=etiqueta6.replace("&nbsp;"," ");
+             item.titulo_convenio=etiqueta7;
+          })
           this.listaConv.map((element, index) => (element.position = index + 1));
           this.listaConv.map(
             (element) =>
@@ -97,9 +114,10 @@ export class TablamodificarComponent implements OnInit {
     {
       var g=this.selector.get('conveniostipo')?.value;
       this.router.navigate(['/utmricb/convenios/editcon/'+id+'/'+'modificar'+'/'+g]);
-
+       
     }
   }
+ 
   //eliminar
   eliminarconvenio(id:string, tipo:string)
   {

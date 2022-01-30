@@ -699,7 +699,7 @@ escoger(id:number){
   agregarclausulas()
   {
     const clausulasFormGroup=this.ingresar.group({
-      id:'',
+      id:0,
       id_contenido:0,
       nombre:['',Validators.required],
       descripcion:['',Validators.required],
@@ -713,6 +713,8 @@ escoger(id:number){
   {
     var verificar=false;
     var indice_eliminar=0;
+    
+    
     for(var k=0;k<this.eliminar.length;k++)
     {
       if(this.eliminar.controls[k].value.id==this.clausula.controls[indice].value.id_contenido)
@@ -726,9 +728,10 @@ escoger(id:number){
     {
       const articulo=(<FormArray>this.myform.get('eliminacion')).at(indice_eliminar).get('articulos') as FormArray;
       const artic=(<FormArray>this.myform.get('clausulas')).at(indice).get('articulos') as FormArray;
-
+      
       for(var i=0;i<artic.length;i++)
       {
+        
         var id=artic.controls[i].value.art_id;
         const articuloFormGroup=this.ingresar.group({
           art_id:id,
@@ -752,7 +755,6 @@ escoger(id:number){
     
       if(this.clausula.controls[indice].value.articulos.length!=0)
       {
-        console.log(this.clausula.controls[indice].value.articulos.length);
         
         this.convenios.searchconvenio(this.id)
         .subscribe((res:any)=>{
@@ -760,8 +762,10 @@ escoger(id:number){
          
           for(var i=0;i<this.datosconvenioaux.clausulas.length;i++)
           {
+            
+             
             for(var k=0;k<this.eliminar.length;k++){
-          if(this.eliminar.controls[k].value.id==this.datosconvenioaux.clausulas[i].id_contenido)
+            if(this.eliminar.controls[k].value.id_clausula==this.datosconvenioaux.clausulas[i].id)
             {
             const articulo=(<FormArray>this.myform.get('eliminacion')).at(k).get('articulos') as FormArray;
             
@@ -773,7 +777,7 @@ escoger(id:number){
               });
               articulo.push(articuloFormGroup);
             }
-          }
+            }
           }
         }
 
@@ -920,12 +924,11 @@ escoger(id:number){
         estado:'A',
         articulos:this.ingresar.array([])
       });
-  
       this.eliminar.push(clausulaseliminacionFormGroup);
 
       for(var i=0;i<this.eliminar.length;i++)
       {
-        if(this.clausula.controls[indice].value.id_contenido==this.eliminar.controls[i].value.id)
+        if(this.clausula.controls[indice].value.id==this.eliminar.controls[i].value.id_clausula)
         {
           
           const articulo=(<FormArray>this.myform.get('eliminacion')).at(i).get('articulos') as FormArray;
@@ -1247,9 +1250,15 @@ escoger(id:number){
       }
 
     }
+    if(this.myform.get('comparecientes')?.value.length==0)
+    {
+         this.myform.patchValue({
+          comparecientes:'<p>&nbsp;</p>'
+         });
+    }
 
 
-    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.clausula.length==0
         || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
@@ -1483,8 +1492,15 @@ escoger(id:number){
 
     }
 
+    if(this.myform.get('comparecientes')?.value.length==0)
+    {
+         this.myform.patchValue({
+          comparecientes:'<p>&nbsp;</p>'
+         });
+    }
 
-    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.clausula.length==0
         || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{

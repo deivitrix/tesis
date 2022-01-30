@@ -910,8 +910,14 @@ escoger(id:number){
 
     }
 
+    if(this.myform.get('comparecientes')?.value.length==0)
+    {
+         this.myform.patchValue({
+          comparecientes:'<p>&nbsp;</p>'
+         });
+    }
 
-    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.clausula.length==0
         || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
@@ -1127,9 +1133,15 @@ escoger(id:number){
       return;
 
     }
+    if(this.myform.get('comparecientes')?.value.length==0)
+    {
+         this.myform.patchValue({
+          comparecientes:'<p>&nbsp;</p>'
+         });
+    }
 
 
-    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.myform.get('comparecientes')?.value.length==0 ||this.clausula.length==0
+    if( this.myform.get('nombre_convenio')?.value.length==0 ||this.clausula.length==0
         || this.myform.get('selectFirmaEmisor')?.value.length==0 || this.myform.get('selectFirmaReceptor')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
