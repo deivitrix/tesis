@@ -50,26 +50,67 @@
                 <h4 class="active"> <span class="titulo"><h3>Formulario Convenio</h3></span></h4>
                 <div class="fadeIn first">
                         <!-- <pre>{{myform.value | json}}</pre> -->
-                    <div class="col-sm">
-                        <mat-form-field class="container-fill" appearance="fill">
-                            <mat-label>Nombre del Convenio</mat-label>
-                            <textarea matInput formControlName="nombre_convenio" ></textarea>
-                        </mat-form-field>
-                        <div *ngIf="myform.get('nombre_convenio')?.hasError('required') && myform.get('nombre_convenio')?.touched" style="margin-top: -20px;">
-                            <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                        <div class="row" style="margin-top: 5%;">
+                            <div class="col-sm">
+                                <mat-card  class="card">
+                                    <div class="col-sm" style="margin-bottom: 6%;">
+                                        <label ><b> <h5>Escudo 1</h5></b></label>
+                                    </div>
+                                    <div class="col-sm">
+                                        
+                                        <div class="boton-container">
+                                            <img   mat-card-image [src]="this.myform.get('urlimagen1')?.value">
+                                            <div class="container-button">
+                                                <input [disabled]="myform.get('botonsubir1')?.value" type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event)"  accept="image/png,image/jpeg">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                  <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <button [disabled]="myform.get('escoger1')?.value" (click)="escoger(1)" class="btn-escoger" mat-flat-button color="primary"><mat-icon>collections icon</mat-icon><span> Escoger Imagen</span></button>
+                                    </div>
+        
+                              </mat-card>
+                            </div>
+                            <div class="col-sm">
+                              <mat-card  class="card">
+                                  <div class="col-sm" style="margin-bottom: 6%;">
+                                    <label ><b> <h5>Escudo 2</h5></b></label>
+                                  </div>
+                                    <div class="col-sm">
+                                        <div class="boton-container">
+                                            <img   mat-card-image [src]="this.myform.get('urlimagen2')?.value">
+                                            <div class="container-button">
+                                                <input [disabled]="myform.get('botonsubir2')?.value" type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event)"  accept="image/png,image/jpeg">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                  <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-sm">
+                                        <button [disabled]="myform.get('escoger2')?.value" (click)="escoger(2)" class="btn-escoger" mat-flat-button color="primary"><mat-icon>collections icon</mat-icon><span> Escoger Imagen</span> </button>
+                                    </div>
+                                    
+                              </mat-card>
+                            </div>
                         </div>
-                    </div>
+                        <div class="col-sm" style="margin-top: 5%;margin-bottom: 3%;">
+                            <mat-label><b><h5>Nombre del Convenio:</h5></b></mat-label>
+                            <div class="container-fill" style="margin-left: 15%;" >
+                                <ckeditor  formControlName="nombre_convenio" [editor]="Editor" ></ckeditor>
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-sm-">
                             <mat-label><b><h5>Comparecientes:</h5></b></mat-label>
                         </div>
                         <div class="col-sm">
-                            <mat-form-field class="container-fill" appearance="fill">
-                                <mat-label>Descripcion</mat-label>
-                                <textarea matInput formControlName="comparecientes"></textarea>
-                            </mat-form-field>
-                            <div *ngIf="myform.get('comparecientes')?.hasError('required') && myform.get('comparecientes')?.touched" style="margin-top: -20px;">
-                                <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
+                            <div class="container-fill" style="margin-left: 15%;" >
+                                <ckeditor  formControlName="comparecientes" [editor]="Editor" ></ckeditor>
                             </div>
                         </div>
                     </div>
@@ -102,13 +143,16 @@
                                       <button title="Agregar Nombre Clausula" (click)=" agregarclausulaDialog()" mat-flat-button color="primary" style="margin: 2%;"><mat-icon>add</mat-icon><span></span></button>
                                 </div>
                             </div>
-                          <div class="form-group row"> 
+                          <div class="form-group row" style="margin-bottom: 2%;"> 
                            <!-- <div class="border"></div>   -->
                             <div class="col-md-9">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label >Descripcion Clausula</mat-label>
-                                    <textarea  formControlName="descripcion" matInput></textarea>
-                                </mat-form-field>
+                                <div >
+                                    <mat-label ><b><h6>Descripcion Clausula:</h6></b></mat-label>
+                                </div>
+                               
+                                <div class="container-fill" style="margin-left: 15%; margin-top: 3%;" >
+                                    <ckeditor  formControlName="descripcion" [editor]="Editor" ></ckeditor>
+                                </div>
                             </div>
                             <div class="col-md-2">
                                 <button title="Agregar Articulos" (click)="agregarListaArticulo(i)" class="btn btn-secondary" style="margin: 2%;"><mat-icon>add</mat-icon></button>
@@ -117,12 +161,15 @@
                           </div>
                             <div formArrayName="articulos" *ngFor="let articulo of getarticulocontrol(i); let j = index">
                                 <div [formGroupName]="j">
-                                    <div class="form-group row">
+                                    <div class="form-group row" style="margin-bottom: 2%;">
                                         <div class="col-md-9">
-                                        <mat-form-field class="container-fill-articulo" appearance="fill">
-                                            <mat-label>Articulo {{i+1}}.{{j+1}}</mat-label>
-                                            <textarea matInput formControlName="des_art"></textarea>
-                                          </mat-form-field>
+                                            <div >
+                                                <mat-label ><b><h6>Articulo {{i+1}}.{{j+1}}</h6></b></mat-label>
+                                            </div>
+                                           
+                                            <div class="container-fill-articulo" style="margin-left: 35%; margin-top: 3%;" >
+                                                <ckeditor  formControlName="des_art" [editor]="Editor" ></ckeditor>
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-danger" (click)="removerArticulo(i,j)"><mat-icon>delete</mat-icon></button>

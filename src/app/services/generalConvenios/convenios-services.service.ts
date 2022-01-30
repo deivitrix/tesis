@@ -162,6 +162,12 @@ export class ConveniosServicesService {
     return this.http.get<any>(url);
   }
 
+  //subir ftp imagen convenio
+  subirImagenConveniosftp(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'imagen-carrusel';
+    return this.http.post(url,data);
+  }
+
   //agregar una imagen
   addimagenconvenio(data:any)
   {

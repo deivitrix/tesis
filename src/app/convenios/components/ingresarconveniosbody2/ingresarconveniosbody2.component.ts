@@ -21,7 +21,10 @@ import { IngresarclausulaComponent } from '../ingresarclausula/ingresarclausula.
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { GalleriaComponent } from '../galleria/galleria.component';
 
+//editor de texto 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 @Component({
@@ -31,6 +34,7 @@ import 'animate.css';
 })
 export class Ingresarconveniosbody2Component implements OnInit {
   
+  public Editor = ClassicEditor;
   // id del convenio plantilla traigo por el url
   id="";
 
@@ -100,7 +104,11 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
    //variable titulo boton guardar
    titulotipo="";
-  
+   //url_ escoger
+    url_escoger="";
+    //data
+    data:any={id:0,url_escoger:this.url_escoger};
+
 
 
   constructor(private rutaActiva: ActivatedRoute, private ingresar:FormBuilder, private convenios:ConveniosServicesService,
@@ -119,6 +127,14 @@ export class Ingresarconveniosbody2Component implements OnInit {
     this.myform=this.ingresar.group({
       id_convenio:[''],
       id_usuario:[''],
+      id_imagen1:[''],
+      id_imagen2:[''],
+      urlimagen1:[''],
+      urlimagen2:[''],
+      botonsubir1:false,
+      botonsubir2:false,
+      escoger1:false,
+      escoger2:false,
       id_tipoconvenio:[''],
       id_tipoespecifico:[''],
       nombre_convenio:['',Validators.required],
@@ -172,20 +188,26 @@ export class Ingresarconveniosbody2Component implements OnInit {
 
 
 
+
 // datos convenios
 getdatosconvenios(){
   this.convenios.searchconvenio(this.id)
   .subscribe((res:any)=>{
     this.datosconvenio=res;
-    //console.log(this.datosconvenio);
+    console.log(this.datosconvenio);
 
     this.myform.patchValue({
       id_convenio:this.id,
       id_usuario:this.datosconvenio.id_usuario,
+      id_imagen1:this.datosconvenio.id_imagen1,
+      id_imagen2:this.datosconvenio.id_imagen2,
+      urlimagen1:this.datosconvenio.urlimagen1,
+      urlimagen2:this.datosconvenio.urlimagen2,
       id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
       id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
       nombre_convenio:this.datosconvenio.nombre_convenio,
-      comparecientes:this.datosconvenio.comparecientes
+      comparecientes:this.datosconvenio.comparecientes,
+
     });
      var con=""+this.datosconvenio.id_tipoconvenio as string;
      var espe=""+this.datosconvenio.id_tipoespecifico as string;
@@ -483,6 +505,185 @@ getclausulas(){
     });
 
   }
+
+
+  //imagen
+  fileEvent(event:any)
+{
+  const form=this.myform;
+  const foto=new Image();
+  const archivoCapturado=event.target.files[0]; 
+  // const general=this._general;
+  const conve=this.convenios;
+  if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
+  {
+    let base=this.toBase64(archivoCapturado);
+    base.then((imagen1:any)=>{
+      foto.src=imagen1;
+      foto.onload=function(){ 
+        const imgWidth = foto.naturalWidth;
+        const imgHeight = foto.naturalHeight;
+        if(imgWidth==450&&imgHeight==500)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title: 'Esta seguro que desea subir la imagen...??',
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Subir',
+            denyButtonText: `No Subir`,
+           
+          }).then((result)=>{
+            if(result.isConfirmed)
+            {
+              form.patchValue({
+                botonsubir1:true,
+                botonsubir2:true,
+                escoger1:true,
+                escoger2:true
+              });
+              //console.log(archivoCapturado.name);
+              const formData = new FormData();
+              formData.append('img', archivoCapturado);
+              conve.subirImagenConveniosftp(formData)
+              .subscribe((res:any)=>{
+                if(res.estado==true)
+                {
+                  let json={data:{nombre:archivoCapturado.name,url_imagen:res.imagen}};
+                   conve.addimagenconvenio(json)
+                   .subscribe((res:any)=>{
+                     if(res.estado==true)
+                     {
+                      Swal.fire({
+                        showClass: {
+                          popup: 'animate__animated animate__fadeInDown'
+                        },
+                        hideClass: {
+                          popup: 'animate__animated animate__fadeOutUp'
+                        },
+                        title:'Se subio la imagen con exito',
+                        icon:'success'
+                      });
+                      form.patchValue({
+                        botonsubir1:false,
+                        botonsubir2:false,
+                        escoger1:false,
+                        escoger2:false
+                      });
+
+                     }
+                   })
+
+                }
+              })
+
+
+              
+
+
+            }
+            if(result.isDenied)
+            {
+              form.patchValue({
+                botonsubir1:false,
+                botonsubir2:false,
+                escoger1:false,
+                escoger2:false
+              });
+              Swal.fire({
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                title:'Se cancelo la operacion',
+                icon:'warning'
+              })
+            }
+          
+          })
+         }
+         else{
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Error.. Solo se puede subir imagenes de dimensiones 450x500 pixeles',
+            icon:'warning'
+          });
+          form.patchValue({
+            botonsubir1:false,
+            botonsubir2:false,
+            escoger1:false,
+            escoger2:false
+          });
+          return;
+         }
+      }
+    })
+
+  }
+ 
+}
+
+toBase64 = (file: File) => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
+
+escoger(id:number){
+  this.data={id:0,url_escoger:this.url_escoger};
+  
+  const dialogRef=this.dialog.open(GalleriaComponent,{
+    width:'700px',
+    data:{titulo:'Galeria Convenios',url:this.data}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if(result!=null)
+    {
+      if(id==1)
+      {
+        if(result.url_escoger.length!=0){
+          this.myform.patchValue({
+            id_imagen1:result.id,
+            urlimagen1:result.url_escoger
+          });
+        }
+      }
+      if(id==2)
+      {
+        if(result.url_escoger.length!=0)
+        {
+          this.myform.patchValue({
+            id_imagen2:result.id,
+            urlimagen2:result.url_escoger
+  
+          });
+        }
+        
+       
+      }
+
+    }
+   
+    
+  });
+
+}
 
   //modelo eliminar
  get eliminar(){
@@ -1070,7 +1271,7 @@ getclausulas(){
     for(var i=0;i<this.clausula.length;i++)
     {
       
-      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      if(this.clausula.controls[i].value.nombre.length==0)
       {
         console.log(this.clausula.controls[i].value.nombre);
         
@@ -1088,6 +1289,12 @@ getclausulas(){
         });
         return;
      
+      }
+      if(this.clausula.controls[i].value.descripcion.length==0)
+      {
+         this.clausula.controls[i].patchValue({
+          descripcion:'<p>&nbsp;</p>'
+         });
       }
       if(this.articulos.length!=0)
       {
@@ -1301,7 +1508,7 @@ getclausulas(){
     for(var i=0;i<this.clausula.length;i++)
     {
       
-      if(this.clausula.controls[i].value.nombre.length==0 || this.clausula.controls[i].value.descripcion.length==0)
+      if(this.clausula.controls[i].value.nombre.length==0)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
@@ -1317,6 +1524,12 @@ getclausulas(){
         });
         return;
      
+      }
+      if(this.clausula.controls[i].value.descripcion.length==0)
+      {
+         this.clausula.controls[i].patchValue({
+          descripcion:'<p>&nbsp;</p>'
+         });
       }
       if(this.articulos.length!=0)
       {

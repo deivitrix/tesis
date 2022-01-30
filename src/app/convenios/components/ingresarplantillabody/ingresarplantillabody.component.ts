@@ -204,7 +204,7 @@ fileEvent(event:any)
   const form=this.myform;
   const foto=new Image();
   const archivoCapturado=event.target.files[0]; 
-  const general=this._general;
+ // const general=this._general;
   const conve=this.convenios;
   if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
   {
@@ -242,7 +242,7 @@ fileEvent(event:any)
               //console.log(archivoCapturado.name);
               const formData = new FormData();
               formData.append('img', archivoCapturado);
-              general.subirImagenConveniosftp(formData)
+              conve.subirImagenConveniosftp(formData)
               .subscribe((res:any)=>{
                 if(res.estado==true)
                 {
