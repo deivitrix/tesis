@@ -1,0 +1,33 @@
+<ng-container *ngIf="loading"> 
+  <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
+    </ng-container>
+    
+    <ng-container *ngIf="loading==false">
+      <div mat-dialog-content class="contenido">
+        <div class="titulo">
+            <h1>{{data.titulo}}</h1>
+        </div>
+      <div class="row row-cols-1 row-cols-md-2 g-4" style="margin-top: 2%;">
+         <div *ngFor="let imagen of lista; let i= index" class="col">
+          <div class="card">
+              <img [src]="imagen.url_imagen" alt="">
+              <div class="card-body">
+                  <h5 class="card-title">{{i+1}}.-Imagen</h5>
+                  <div class="button-container">
+                    <button (click)="agregar(imagen.url_imagen,imagen.id)" mat-fab color="primary" title="Agregar Imagen">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+              </div>
+          </div>
+         </div>
+      </div>
+       
+    </div>
+    <div mat-dialog-actions class="button-action">
+        <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+        <button mat-button  color="primary" [mat-dialog-close]="data.url" cdkFocusInitial>Guardar</button>
+      </div>
+    
+    
+    </ng-container>

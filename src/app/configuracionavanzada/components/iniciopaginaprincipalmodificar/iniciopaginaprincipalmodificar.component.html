@@ -24,14 +24,15 @@
     </div>
   </div>
 </ng-container>
-
+<!-- <pre>{{myform.value| json}}</pre> -->
 <ng-container *ngIf="verificar==true">
   
   <form [formGroup]="myform" autocomplete="off">
     <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-md-2 g-4">
         <div formArrayName="imagen" *ngFor="let clausula of imagen.controls; let i = index">
           <div [formGroupName]="i">
-            <div class="form-group row">
+            <div class="form-group">
               <div class="col-sm">
                 <mat-card  class="card">
                       <div class="col-sm">
@@ -54,6 +55,9 @@
                           </div>
                           </div>
                       </div>
+                      <div class="col-sm" style="margin-left: 35%;" >
+                        <button [disabled]="myform.get('escoger')?.value" (click)="escoger(i)" class="btn-escoger" mat-flat-button color="primary"><mat-icon>collections icon</mat-icon><span> Escoger Imagen</span></button>
+                    </div>
                       <div class="col-sm" style="margin-top: 5%;">
                         <mat-form-field class="container-fill" appearance="fill">
                           <mat-label >Titulo</mat-label>
@@ -69,11 +73,12 @@
                 </mat-card>
             </div>
             <div style="margin-top: 5%;"></div>
-            <div class="border"></div>
-  
+            <!-- <div class="border"></div>
+   -->
             </div>
           </div>
         </div>
+    </div>
   </div>
   </form>
 

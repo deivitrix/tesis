@@ -1,3 +1,4 @@
+import { GaleriaInterfazComponent } from './../galeria-interfaz/galeria-interfaz.component';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,6 +11,7 @@ import { PathImagenesService } from 'src/app/services/path-imagenes.service';
 import Swal from 'sweetalert2';
 import 'animate.css';
 import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-iniciopaginaprincipalmodificar',
@@ -44,12 +46,18 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   botonsubir=false;
   botoneliminarcard=false;
 
-  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService,public snackBar:MatSnackBar,private _login:GeneralLoginService) { 
+  //url_ escoger
+url_escoger="";
+//data
+data:any={id:0,url_escoger:this.url_escoger};
+
+  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _pathimagenes:PathImagenesService,public snackBar:MatSnackBar,private _login:GeneralLoginService, public dialog: MatDialog) { 
     this.myform=ingresar.group({
       imagen:ingresar.array([]),
       eliminar:ingresar.array([]),
       botonsubir:false,
       botoneliminar:false,
+      escoger:false
     });
     this.pathimagendefecto=_pathimagenes.pathimagendefecto;
     this.cedula="";
@@ -281,12 +289,42 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
     
 
   }
+
   toBase64 = (file: File) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = error => reject(error);
   });
+
+  // escoger la imagenes ya subidas
+  escoger(id:number){
+  this.data={id:0,url_escoger:this.url_escoger};
+  
+  const dialogRef=this.dialog.open(GaleriaInterfazComponent,{
+    width:'700px',
+    data:{titulo:'Galeria Interfaz',url:this.data}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    if(result!=null)
+    {
+        if(result.url_escoger.length!=0){
+
+          this.imagen.controls[id].patchValue({
+            urlimagen:result.url_escoger
+          });
+          // this.myform.patchValue({
+          //   id_imagen1:result.id,
+          //   urlimagen1:result.url_escoger
+          // });
+        }
+    }
+   
+    
+  });
+  }
   
   eliminarCard(id:number)
   {

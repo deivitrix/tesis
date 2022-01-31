@@ -24,9 +24,9 @@ export class GeneralService {
     return this.http.post(url,data);
   }
 
-  subirImagenConveniosftp(data:any){
-    let url:string = this._base.getUrlLocalApi() + 'imagen-carrusel';
-    return this.http.post(url,data);
+  getimagenesinterfaz():Observable<any>{
+    let url:string=this._base.getUrlApi()+'imagen-interfaces';
+    return this.http.get<any>(url);
   }
 
   updateCarrosel(data:any)

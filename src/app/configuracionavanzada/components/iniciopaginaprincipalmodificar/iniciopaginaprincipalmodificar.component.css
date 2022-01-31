@@ -10,8 +10,8 @@
 }
 .card
 {
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 10%;
+    width: 75%;
 }
 .container-fill
 {
@@ -27,7 +27,7 @@
 .container-button{
     position: absolute;
     margin-left: 97%;
-    margin-top: -4%;
+    margin-top: -8%;
     background-color: rgb(143, 138, 138);
     width: 35px;
     height: 35px;
@@ -57,14 +57,19 @@
     .container-button{
         position: absolute;
         margin-left: 97%;
-        margin-top: -6%;
+        margin-top: -7%;
         background-color: rgb(143, 138, 138);
         width: 35px;
         height: 35px;
         border-radius:0%;
        }
+       .btn-escoger span{
+        display: none;
+    }   
+
 
 }
+
     @media(max-width:51.753em)
     { 
         .container-button{

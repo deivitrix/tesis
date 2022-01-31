@@ -335,6 +335,7 @@ toBase64 = (file: File) => new Promise((resolve, reject) => {
 });
 
 escoger(id:number){
+  
   this.data={id:0,url_escoger:this.url_escoger};
   
   const dialogRef=this.dialog.open(GalleriaComponent,{

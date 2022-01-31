@@ -39,6 +39,7 @@ import { NosotrospaginaprincipalmodificarComponent } from './components/nosotros
 import { ConveniospaginaprincipalmodificarComponent } from './components/conveniospaginaprincipalmodificar/conveniospaginaprincipalmodificar.component';
 import { BecaspaginaprincipalmodificarComponent } from './components/becaspaginaprincipalmodificar/becaspaginaprincipalmodificar.component';
 import { MovilidadpaginaprincipalmodificarComponent } from './components/movilidadpaginaprincipalmodificar/movilidadpaginaprincipalmodificar.component';
+import { GaleriaInterfazComponent } from './components/galeria-interfaz/galeria-interfaz.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { MovilidadpaginaprincipalmodificarComponent } from './components/movilid
     ConveniospaginaprincipalmodificarComponent,
     BecaspaginaprincipalmodificarComponent,
     MovilidadpaginaprincipalmodificarComponent,
+    GaleriaInterfazComponent,
     
   ],
   imports: [
