@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { unescape } from 'querystring';
 import { ConveniosServicesService } from 'src/app/services/generalConvenios/convenios-services.service';
 
+//editor de texto 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
@@ -48,6 +51,9 @@ export class EditarconveniosaprobadosComponent implements OnInit {
 
   //titulo
   titulo="";
+
+  public Editor = ClassicEditor;
+
   constructor(private rutaActiva: ActivatedRoute, private editar:FormBuilder, private convenios:ConveniosServicesService,
                private router:Router) {
     this.id=rutaActiva.snapshot.params.id;
@@ -84,7 +90,6 @@ export class EditarconveniosaprobadosComponent implements OnInit {
   }
 
   getconvenio(){
-
     var separar;
     var dec;
     var nombre="";
@@ -92,6 +97,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     .subscribe((res:any)=>{
      if(res.estado==true)
      {
+       console.log(res);
        
        this.loading=false;
        this.datoconvenio=res.convenio;
@@ -106,6 +112,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     
       if(this.tipo=='G')
       {
+        
         this.myform.patchValue({
           id:this.id,
           nombre_convenio:this.datoconvenio.titulo_convenio,

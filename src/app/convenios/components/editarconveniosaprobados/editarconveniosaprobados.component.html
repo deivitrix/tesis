@@ -11,14 +11,18 @@
             <div class="formContent rounded">
                 <h4 class="active"> <span class="titulo"><h3>Convenio</h3></span></h4>
                 <div class="fadeIn first">
-                    <div class="col-sm">
-                        <mat-form-field class="container-fill" appearance="fill">
+                    <div class="col-sm" style="margin-left: 15%; margin-top: 3%;">
+                        <div style="width: 80%;">
+                            <ckeditor  formControlName="nombre_convenio" [editor]="Editor" ></ckeditor>
+                        </div>
+                       
+                        <!-- <mat-form-field class="container-fill" appearance="fill">
                             <mat-label>Nombre del Convenio</mat-label>
                             <textarea matInput formControlName="nombre_convenio" ></textarea>
                         </mat-form-field>
                         <div *ngIf="myform.get('nombre_convenio')?.hasError('required') && myform.get('nombre_convenio')?.touched" style="margin-top: -20px;">
                             <span class="mda-form-msg">Este campo es <strong>requerido</strong></span>
-                        </div>
+                        </div> -->
                     </div>
                    
                     <div class="col-sm">
