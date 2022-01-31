@@ -10,17 +10,36 @@
     margin-bottom: 3%;
    
 }
+.card{
+    border: none;
+    width: 25%; 
+    margin-left: 38%;
+    margin-top: 2%;
+    /* background-color: rgb(220, 230, 228); */
+}
+
+.icon{
+    width: 30%; 
+    height: 30%;
+}
+
+.container-fill{
+    width: 10%;
+}
 
 .icon-container{
-    margin-top: 2%;
+    margin-top: 4%;
     display: inline-block;
     position: relative;
+}
+.mda-form-msg{
+    color: #f57c74;
 }
 
 .container-button{
     position: absolute;
-    margin-left: 52%;
-    top: 48%;
+    margin-left: 55%;
+    top: 78%;
     background-color: rgb(71, 168, 112);
     width: 25px;
     height: 25px;
@@ -150,12 +169,51 @@ h4.active {
     width: 60%;
 }
 
-@media(max-width:69.313em)
+/* @media(max-width:69.313em)
 {
     .container-button{
         position: absolute;
-        margin-left: 52%;
-        top: 50%;
+        margin-left: 51%;
+        top: 24%;
+        background-color: rgb(71, 168, 112);
+        width: 25px;
+        height: 25px;
+        border-radius:0%;
+    }
+}
+
+@media(max-width:52.313em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 51%;
+        top: 23%;
+        background-color: rgb(71, 168, 112);
+        width: 25px;
+        height: 25px;
+        border-radius:0%;
+    }
+}
+
+@media(max-width:45.688em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 51%;
+        top: 21%;
+        background-color: rgb(71, 168, 112);
+        width: 25px;
+        height: 25px;
+        border-radius:0%;
+    }
+}
+
+@media(max-width:42.188em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 51%;
+        top: 19%;
         background-color: rgb(71, 168, 112);
         width: 25px;
         height: 25px;
@@ -164,12 +222,14 @@ h4.active {
     
 
 }
+
+
 @media(max-width:39.375em)
 {
     .container-button{
         position: absolute;
-        margin-left: 52%;
-        top: 52%;
+        margin-left: 51%;
+        top: 21%;
         background-color: rgb(71, 168, 112);
         width: 25px;
         height: 25px;
@@ -178,6 +238,32 @@ h4.active {
     
 
 }
+
+@media(max-width:30.063em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 51%;
+        top: 20%;
+        background-color: rgb(71, 168, 112);
+        width: 25px;
+        height: 25px;
+        border-radius:0%;
+    }
+}
+@media(max-width:24.563em)
+{
+    .container-button{
+        position: absolute;
+        margin-left: 51%;
+        top: 19%;
+        background-color: rgb(71, 168, 112);
+        width: 25px;
+        height: 25px;
+        border-radius:0%;
+    }
+} */
+
 
 
 

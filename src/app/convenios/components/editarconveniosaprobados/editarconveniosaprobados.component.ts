@@ -11,6 +11,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 
 @Component({
   selector: 'app-editarconveniosaprobados',
@@ -54,15 +56,22 @@ export class EditarconveniosaprobadosComponent implements OnInit {
 
   public Editor = ClassicEditor;
 
+  //
+
   constructor(private rutaActiva: ActivatedRoute, private editar:FormBuilder, private convenios:ConveniosServicesService,
-               private router:Router) {
+               private router:Router,public snackBar:MatSnackBar) {
     this.id=rutaActiva.snapshot.params.id;
     this.tipo=rutaActiva.snapshot.params.tipo;
     this.myform=editar.group({
       id:[''],
       nombre_convenio:['',Validators.required],
       nombre_file:[{value:'',disabled: true},Validators.required],
-      PDF:['']
+      PDF:[''],
+      fecha_inicio:['',Validators.required],
+      fecha_final:[''],
+      año:['',Validators.required],
+      mes:['',Validators.required],
+      dia:['',Validators.required],
     });
     this.archivosubir=editar.group({
      document:['']
@@ -80,8 +89,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
      
       this.titulo="Subir Convenio";
       this.myform.get('nombre_convenio')?.disable();
-     
-  
+
     }
     else
     {
@@ -97,7 +105,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     .subscribe((res:any)=>{
      if(res.estado==true)
      {
-       console.log(res);
+      
        
        this.loading=false;
        this.datoconvenio=res.convenio;
@@ -186,6 +194,49 @@ export class EditarconveniosaprobadosComponent implements OnInit {
   Guardar(){
 
     if(this.tipo=="G"){
+
+      if(this.myform.get('fecha_inicio')?.value.length==0){
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"El convenio debe tener una fecha inicio",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+
+      if(this.myform.get('año')?.value.length==0 ||this.myform.get('mes')?.value.length==0 || this.myform.get('dia')?.value.length==0 )
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar correctamente la duracion del convenio",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+
+      }
+
+      
+            
+        // console.log(fechainicio);
+        // console.log(fechafinal);
+    
+
+
       Swal.fire({
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
@@ -204,7 +255,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
         if(result.isConfirmed)
         {
           if(this.verificar==true)
-          {
+          { 
             this.botonguardar=true;
             const formData = new FormData();
             formData.append('document', this.archivo);
@@ -212,12 +263,94 @@ export class EditarconveniosaprobadosComponent implements OnInit {
             .subscribe((res:any)=>{
               if(res.estado==true)
               {
+                var dias_sumado=0;
+      if(this.myform.get('año')?.value!=0)
+      {
+         dias_sumado=dias_sumado+((this.myform.get('año')?.value)*(365/1));
+
+      }
+      if(this.myform.get('mes')?.value!=0)
+      {
+        dias_sumado=dias_sumado+((this.myform.get('mes')?.value*30.4)/(1));
+        dias_sumado=Math.round(dias_sumado);
+      }
+
+      if(this.myform.get('dia')?.value!=0)
+      {
+        dias_sumado=dias_sumado+this.myform.get('dia')?.value
+      }
+
+      //console.log(dias_sumado);
+       
+
+
+      //console.log(dias_sumado);
+      var fecha=new Date(this.myform.get('fecha_inicio')?.value);
+      var fecha_final=fecha.setDate(fecha.getDate()+dias_sumado);
+      var fecha_final_1=new Date(fecha_final);
+      //console.log(fecha_final_1);
+
+        // obtener la fecha en string
+        var fechai=this.myform.get('fecha_inicio')?.value;
+        var fechaf=fecha_final_1;
+        // transformar en Date
+        var fechaiaux=new Date(fechai);
+        var fechafaux=new Date(fechaf);
+
+        // Fecha inicio string
+        var diainicioaux=fechaiaux.getDate();
+        var mesinicioaux=(fechaiaux.getMonth()+1);
+        var diainicio="";
+        var mesinicio="";
+        
+        if(diainicioaux<=9){
+          diainicio="0"+diainicioaux
+        }
+        else{
+          diainicio=""+diainicioaux;
+        }
+
+        if(mesinicioaux<=9){
+
+        mesinicio="0"+mesinicioaux;
+        }
+        else{
+        mesinicio=""+mesinicioaux;
+        }
+
+        //fecha final string
+        var diafinalaux=fechafaux.getDate();
+        var mesfinalaux=(fechafaux.getMonth()+1);
+        var diafinal="";
+        var mesfinal="";
+        
+        if(diafinalaux<=9){
+          diafinal="0"+diafinalaux
+        }
+        else{
+          diafinal=""+diafinalaux;
+        }
+
+        if(mesfinalaux<=9){
+
+        mesfinal="0"+mesfinalaux;
+        }
+        else{
+        mesfinal=""+mesfinalaux;
+        }
+        
+        
+
+        var fechainicio=fechaiaux.getFullYear()+"-"+mesinicio+"-"+diainicio;
+        var fechafinal=fechafaux.getFullYear()+"-"+mesfinal+"-"+diafinal;
                 this.nombreArchivo=res.documento;
                 this.myform.get('PDF')?.setValue(this.nombreArchivo);
                 let json={data:{
                   id_convenio:this.myform.get('id')?.value,
                   PDF:this.myform.get('PDF')?.value,
-                }}
+                  fecha_inicio:fechainicio,
+                  fecha_fin:fechafinal
+                }};
                 this.convenios.modificarconveniosguardados(json)
                 .subscribe((res:any)=>{
                   if(res.estado==true)
