@@ -43,6 +43,8 @@ import {MatDividerModule} from '@angular/material/divider';
 
 //editor de texto
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SpinneringresoComponent } from './components/spinneringreso/spinneringreso.component';
+import { PipesModule } from './../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MensajeLoginComponent,
     IngresarconveniosBodyComponent,
     IngresarPlantillaConveniosComponent,
-    ConveniosPaginaComponent
+    ConveniosPaginaComponent,
+    SpinneringresoComponent
   ],
   imports: [
     CommonModule,
@@ -95,7 +98,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    CKEditorModule
+    CKEditorModule,
+    PipesModule
   ]
 })
 export class IngresoModule { }
