@@ -85,7 +85,7 @@ data:any={id:0,url_escoger:this.url_escoger};
       this.listacarrosel=[];
     this.listainterfaz=[];
     this.listainterfaz=res;
-    // console.log(this.listainterfaz);
+     console.log(this.listainterfaz);
      this.id=this.listainterfaz[0].interfaz.id;
      this.loading=false;
      this.separarcarosel(this.listainterfaz);
@@ -118,6 +118,7 @@ data:any={id:0,url_escoger:this.url_escoger};
           id:item.id,
           id_interfaz:item.interfaz.id,
           usuario_id:this.usuario_id,
+          id_imagen:item.imagen.id,
            nombre:[item.nombre,Validators.required],
            descripcion:[item.descripcion,Validators.required],
            urlimagen:item.imagen.url_imagen,
@@ -150,6 +151,7 @@ data:any={id:0,url_escoger:this.url_escoger};
      id:0,
      id_interfaz:this.id,
      usuario_id:this.usuario_id,
+     id_imagen:[''],
      nombre:['',Validators.required],
      descripcion:['',Validators.required],
      urlimagen:this.pathimagendefecto,
@@ -199,6 +201,7 @@ data:any={id:0,url_escoger:this.url_escoger};
                boton.patchValue({
                  botonsubir:true,
                  botoneliminar:true,
+                 escoger:true,
                });
                const formData = new FormData();
                formData.append('img', archivoCapturado);
@@ -208,26 +211,31 @@ data:any={id:0,url_escoger:this.url_escoger};
                  if(res.estado==true)
                  { 
                     var url=res.imagen;
-                    var url1=url.replace(' ','%20');
-                    i.controls[id].patchValue({
-                      verificar:true,
-                      file:archivoCapturado,
-                      urlimagen:url1
-                     });
-                     boton.patchValue({
-                      botonsubir:false,
-                      botoneliminar:false,
-                    });
-                    Swal.fire({
-                      showClass: {
-                        popup: 'animate__animated animate__fadeInDown'
-                      },
-                      hideClass: {
-                        popup: 'animate__animated animate__fadeOutUp'
-                      },
-                      title:'Se subio la imagen con exito',
-                      icon:'success'
-                    });
+                    let json={data:{nombre:archivoCapturado.name,url_imagen:res.imagen}};
+                    general.addimagenesinterfaz(json)
+                    .subscribe((res:any)=>{
+                      if(res.estado==true)
+                      {
+                        Swal.fire({
+                          showClass: {
+                            popup: 'animate__animated animate__fadeInDown'
+                          },
+                          hideClass: {
+                            popup: 'animate__animated animate__fadeOutUp'
+                          },
+                          title:'Se subio la imagen con exito',
+                          icon:'success'
+                        });
+                        boton.patchValue({
+                          botonsubir:false,
+                          botoneliminar:false,
+                          escoger:false
+                        });
+
+                      }
+                    })
+                    
+                   
                  }
 
                });
@@ -313,12 +321,9 @@ data:any={id:0,url_escoger:this.url_escoger};
         if(result.url_escoger.length!=0){
 
           this.imagen.controls[id].patchValue({
+            id_imagen:result.id,
             urlimagen:result.url_escoger
           });
-          // this.myform.patchValue({
-          //   id_imagen1:result.id,
-          //   urlimagen1:result.url_escoger
-          // });
         }
     }
    
@@ -348,6 +353,7 @@ data:any={id:0,url_escoger:this.url_escoger};
 
   guardar(){
     
+      console.log(this.imagen.length);
       
     for(var i=0;i<this.imagen.length;i++)
     {
