@@ -91,7 +91,9 @@ export class HomePaginaComponent implements OnInit {
         this.listaConv.map((element, index) => (element.position = index + 1));
         this.listaConv.map(
           (element) =>(
-            element.fecha_creacion = element.f_creaciondoc.split(' ')[0]
+
+            
+            element.duracion = element.f_creaciondoc.split(' ')[0]
             
           )
         );

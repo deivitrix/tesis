@@ -4,6 +4,10 @@ import { Interfaz_contenido } from 'src/app/models/Interfaz_contenido.model';
 import { GeneralService } from 'src/app/services/generalget/general.service';
 import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.service';
 
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+
 @Component({
   selector: 'app-nosotrospaginaprincipalmodificar',
   templateUrl: './nosotrospaginaprincipalmodificar.component.html',
@@ -28,12 +32,15 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
    // 
    myform:FormGroup;
 
+   //guardar
+   botonguardar=false;
   constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService) { 
     this.cedula="";
     var cedula1;
     cedula1=localStorage.getItem("cedula") as string;  
     this.cedula=cedula1;
     this.myform=ingresar.group({
+      id_usuario:0,
       id_objetivo:0,
       objetivo:[''],
       id_mision:0,
@@ -59,7 +66,10 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
   getusuario(){
     this._login.getusuariosearch(this.cedula)
     .subscribe((res:any) => {
-      this.usuario_id=res.usuario.id;   
+      this.usuario_id=res.usuario.id;
+      this.myform.patchValue({
+       id_usuario:res.usuario.id
+      });   
     });
   }
   getPaginas(){
@@ -67,7 +77,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
     .subscribe((res:any) => {
     this.listainterfaz=[];
     this.listainterfaz=res;
-    console.log(this.listainterfaz);
+   // console.log(this.listainterfaz);
      this.id=this.listainterfaz[0].interfaz.id;
      this.loading=false;
      this.separarcarosel(this.listainterfaz);
@@ -84,7 +94,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
         {
           this.myform.patchValue({
             id_objetivo:item.id,
-            objetivo:item.descripcion,
+            objetivo:item.descripcion.substring(65),
           })
           
         } 
@@ -96,7 +106,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
         {
           this.myform.patchValue({
             id_mision:item.id,
-            mision:item.descripcion,
+            mision:item.descripcion.substring(65),
           })
          
         } 
@@ -107,7 +117,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
         {
           this.myform.patchValue({
             id_vision:item.id,
-            vision:item.descripcion,
+            vision:item.descripcion.substring(65),
           })
           
         } 
@@ -210,4 +220,39 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
     
   }
 
+  //mas informacion
+  PDF(){
+    let url1 = this.myform.get('pdfmasinformacion')?.value as string;
+    let urlToOpen:string=url1;
+   let url: string = '';
+   if (!/^http[s]?:\/\//.test(urlToOpen)) {
+     url += 'http://';
+   }
+
+   url += urlToOpen;
+   window.open(url, '_blank');
+  }
+
+  cancelar(){
+    Swal.fire({
+      title:'Cancelacion de Ingreso Plantilla',
+      text:'Desea salir de la pagina',
+      icon:'warning',
+      showCancelButton:true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si deseo salir'
+    }).then((result)=>{
+      if (result.value) {
+        Swal.fire({
+          title:'La operacion queda cancelada',
+          text:'',
+          icon:'success',
+        });
+        this.getPaginas();
+        this.getPaginasInicio(); 
+       }
+    });
+
+  } 
 }
