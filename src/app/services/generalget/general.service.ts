@@ -31,7 +31,7 @@ export class GeneralService {
 
   updateCarrosel(data:any)
   {
-    let url:string = this._base.getUrlLocalApi() + 'update/carrosel';
+    let url:string = this._base.getUrlApi() + 'update/carrosel';
     return this.http.post(url,data);
   }
 
@@ -43,7 +43,7 @@ export class GeneralService {
  // mandar a la base de datos
   addimagenesinterfaz(data:any)
   {
-    let url:string = this._base.getUrlLocalApi() + 'imagen-interfaces/subir';
+    let url:string = this._base.getUrlApi() + 'imagen-interfaces/subir';
     return this.http.post(url,data);
   }
 
