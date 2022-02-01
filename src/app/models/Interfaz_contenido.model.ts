@@ -11,4 +11,5 @@ export interface Interfaz_contenido{
     imagen_id:number;
     usuario_id:number;
     imagen:ImagenModel;
+    PDF:string;
 }
