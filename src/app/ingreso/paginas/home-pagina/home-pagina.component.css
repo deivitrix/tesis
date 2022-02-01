@@ -88,3 +88,9 @@ span {
     font-size: 14px;
     width: 100%;
 }
+.table tr{
+    font-size: 13.5px;
+}
+.border{
+    border-bottom: 2px solid rgb(103, 155, 185) !important;
+}
