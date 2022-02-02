@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Interfaz_contenido } from 'src/app/models/Interfaz_contenido.model';
 import { GeneralService } from 'src/app/services/generalget/general.service';
@@ -7,6 +7,8 @@ import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 
 @Component({
   selector: 'app-nosotrospaginaprincipalmodificar',
@@ -34,7 +36,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
 
    //guardar
    botonguardar=false;
-  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService) { 
+  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService,public snackBar:MatSnackBar) { 
     this.cedula="";
     var cedula1;
     cedula1=localStorage.getItem("cedula") as string;  
@@ -42,11 +44,11 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
     this.myform=ingresar.group({
       id_usuario:0,
       id_objetivo:0,
-      objetivo:[''],
+      objetivo:['',Validators.required],
       id_mision:0,
-      mision:[''],
+      mision:['',Validators.required],
       id_vision:0,
-      vision:[''],
+      vision:['',Validators.required],
       id_masInformacion:0,
       masInformacion:[''],
       pdfmasinformacion:[''],
@@ -233,6 +235,123 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
    window.open(url, '_blank');
   }
 
+  guardar(){
+
+   if(this.myform.get('objetivo')?.value.length==0 || this.myform.get('mision')?.value.length==0 || this.myform.get('vision')?.value.length==0)
+   {
+    this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+      data:{
+        titulo:'Error.....',
+        mensaje:'Datos Faltantes......!!!',
+       buttonText:'',
+       icon:'warning'
+      },
+      duration:1000,
+      horizontalPosition:'end',
+      verticalPosition:'bottom',
+      panelClass:'error'     
+    });
+    return;
+
+   }
+  
+   Swal.fire({
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    },
+    title: 'Esta seguro que desea Guardar...??',
+    icon: 'warning',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Guardar',
+    denyButtonText: `No guardar`,
+   
+  }).then((result)=>{
+    if(result.isConfirmed)
+    {
+      this.botonguardar=true;
+      var utm="El Departamento de Relaciones Internacionales, Convenios y Becas ";
+      var descripcion1=this.myform.get('objetivo')?.value
+      var separar1=utm+descripcion1.charAt(0).toLowerCase()+descripcion1.slice(1);
+      var descripcion2=this.myform.get('mision')?.value
+      var separar2=utm+descripcion2.charAt(0).toLowerCase()+descripcion2.slice(1);
+      var descripcion3=this.myform.get('vision')?.value
+      var separar3=utm+descripcion3.charAt(0).toLowerCase()+descripcion3.slice(1);
+
+      this.myform.patchValue({
+        objetivo:separar1,
+        mision:separar2,
+        vision:separar3
+      });
+      let json={data:this.myform.value};
+
+      this._general.updatePaginaNosotros(json)
+      .subscribe((res:any)=>{
+        if(res.estado==true)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:res.mensaje,
+            icon:'success'
+          });
+          this.botonguardar=false;
+          this.getPaginas()
+          this.getPaginasInicio()
+          return;
+
+
+        }
+        else
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:res.mensaje,
+            icon:'warning'
+          });
+          this.botonguardar=false;
+          return;
+
+        }
+        
+
+      })
+            
+
+    }
+    else if(result.isDenied)
+    {
+      Swal.fire({
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        title:'Se cancelo la operacion',
+        icon:'warning'
+      })
+      return;
+
+    }
+  })
+
+
+
+  }
+
   cancelar(){
     Swal.fire({
       title:'Cancelacion de Ingreso Plantilla',
@@ -241,7 +360,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
       showCancelButton:true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si deseo salir'
+      confirmButtonText: 'Si deseo cancelar'
     }).then((result)=>{
       if (result.value) {
         Swal.fire({

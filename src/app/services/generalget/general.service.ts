@@ -47,5 +47,10 @@ export class GeneralService {
     return this.http.post(url,data);
   }
 
+  //modificar la pagina Nosotros
+  updatePaginaNosotros(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'pagina-nosotros/update';
+    return this.http.put(url,data);
+  }
 
 }

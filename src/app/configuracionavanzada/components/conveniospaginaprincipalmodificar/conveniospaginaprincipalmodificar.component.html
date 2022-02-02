@@ -24,6 +24,9 @@
                             <mat-label>Convenio Marco</mat-label>
                             <input formControlName="marco" matInput>
                           </mat-form-field>
+                          <div *ngIf="myform.get('marco')?.hasError('required') && myform.get('marco')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
                        </div>
                    </div>
                 </div>
@@ -37,6 +40,9 @@
                              <mat-label>Convenio Marco Internacional</mat-label>
                              <input formControlName="marcoInt" matInput>
                            </mat-form-field>
+                           <div *ngIf="myform.get('marcoInt')?.hasError('required') && myform.get('marcoInt')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -50,6 +56,9 @@
                              <mat-label>Convenio Especifico UTM</mat-label>
                              <input formControlName="especifico" matInput>
                            </mat-form-field>
+                           <div *ngIf="myform.get('especifico')?.hasError('required') && myform.get('especifico')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -63,6 +72,9 @@
                              <mat-label>Reglamento Interno UTM</mat-label>
                              <input formControlName="reglamento" matInput>
                            </mat-form-field>
+                           <div *ngIf="myform.get('reglamento')?.hasError('required') && myform.get('reglamento')?.touched" style="margin-top: -20px;">
+                            <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                        </div>
                         </div>
                     </div>
                 </div>
