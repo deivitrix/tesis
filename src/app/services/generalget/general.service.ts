@@ -57,7 +57,13 @@ export class GeneralService {
   masInformaciondocumento(data:any){
     let url:string = this._base.getUrlLocalApi() + 'documento/mas-informacion';
     return this.http.post(url,data);
+  }
 
+  //modoficar la pagina Convenios
+  updatePaginaConvenio(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'pagina-convenios/update';
+    return this.http.put(url,data);
   }
 
 }

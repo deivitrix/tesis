@@ -7,6 +7,8 @@ import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 
 @Component({
   selector: 'app-conveniospaginaprincipalmodificar',
@@ -31,7 +33,10 @@ listainterfazaux:Interfaz_contenido[]=[];
 
  //guardar
  botonguardar=false;
-  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService) {   
+
+ //cancelar
+ botoneliminar=false;
+  constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService,public snackBar:MatSnackBar) {   
     this.cedula="";
     var cedula1;
     cedula1=localStorage.getItem("cedula") as string;  
@@ -154,6 +159,83 @@ listainterfazaux:Interfaz_contenido[]=[];
   }
 
   //boton
+
+  guardar(){
+    if(this.myform.get('marco')?.value.length==0 || this.myform.get('marcoInt')?.value.length==0 || this.myform.get('especifico')?.value.length==0 || this.myform.get('reglamento')?.value.length==0)
+   {
+    this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+      data:{
+        titulo:'Error.....',
+        mensaje:'Datos Faltantes......!!!',
+       buttonText:'',
+       icon:'warning'
+      },
+      duration:1000,
+      horizontalPosition:'end',
+      verticalPosition:'bottom',
+      panelClass:'error'     
+    });
+    return;
+   }
+   Swal.fire({
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    },
+    title: 'Esta seguro que desea Guardar...??',
+    icon: 'warning',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Guardar',
+    denyButtonText: `No guardar`,
+   
+  }).then((result)=>{
+
+    if(result.isConfirmed)
+    {
+      this.botonguardar=true;
+      this.botoneliminar=true;
+      let json={data:this.myform.value}
+      this._general.updatePaginaConvenio(json)
+      .subscribe((res:any)=>{
+        if(res.estado==true)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:res.mensaje,
+            icon:'success'
+          });
+          this.botonguardar=false;
+          this.botoneliminar=false;
+        }
+        else
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:res.mensaje,
+            icon:'success'
+          });
+          this.botonguardar=false;
+          this.botoneliminar=false;
+        }
+      });
+    }
+
+  });
+
+  }
   cancelar(){
     Swal.fire({
       title:'Cancelacion de Ingreso Plantilla',
@@ -168,7 +250,7 @@ listainterfazaux:Interfaz_contenido[]=[];
         Swal.fire({
           title:'La operacion queda cancelada',
           text:'',
-          icon:'success',
+          icon:'warning',
         });
         this.getPaginas();
        }

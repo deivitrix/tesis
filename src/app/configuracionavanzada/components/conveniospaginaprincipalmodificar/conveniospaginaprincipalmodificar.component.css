@@ -46,3 +46,7 @@ h4.active {
     color: gray;
     border-bottom: 2px solid rgb(70, 148, 194);
 }
+
+.mda-form-msg{
+    color: #f57c74;
+}
