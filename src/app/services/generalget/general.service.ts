@@ -49,8 +49,15 @@ export class GeneralService {
 
   //modificar la pagina Nosotros
   updatePaginaNosotros(data:any){
-    let url:string = this._base.getUrlLocalApi() + 'pagina-nosotros/update';
+    let url:string = this._base.getUrlApi() + 'pagina-nosotros/update';
     return this.http.put(url,data);
+  }
+
+  //subir archivo mas informacion
+  masInformaciondocumento(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/mas-informacion';
+    return this.http.post(url,data);
+
   }
 
 }

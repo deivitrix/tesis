@@ -157,12 +157,12 @@ listainterfazaux:Interfaz_contenido[]=[];
   cancelar(){
     Swal.fire({
       title:'Cancelacion de Ingreso Plantilla',
-      text:'Desea salir de la pagina',
+      text:'Desea cancelar el proceso de la pagina',
       icon:'warning',
       showCancelButton:true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si deseo salir'
+      confirmButtonText: 'Si deseo cancelar'
     }).then((result)=>{
       if (result.value) {
         Swal.fire({

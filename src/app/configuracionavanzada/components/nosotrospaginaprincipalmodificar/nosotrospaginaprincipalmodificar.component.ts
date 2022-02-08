@@ -36,6 +36,9 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
 
    //guardar
    botonguardar=false;
+
+    //archivo
+  archivo:File=new File([""],"");
   constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService,public snackBar:MatSnackBar) { 
     this.cedula="";
     var cedula1;
@@ -55,6 +58,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
       id_objetivo_inicio:0,
       id_mision_inicio:0,
       id_vision_inicio:0,
+      boton_subir:false
 
       
      });
@@ -220,6 +224,91 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
 
 
     
+  }
+
+  //escoger el archivo
+  fileEvent(event:any)
+  {
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea Subir el archivo...??',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+     
+    }).then((result)=>{
+      if(result.isConfirmed)
+      {
+        this.myform.patchValue({
+          boton_subir:true
+        })
+        const archivoCapturado=event.target.files[0];
+        this.archivo=archivoCapturado;
+        if(this.archivo.type=="application/pdf"){
+          const formData = new FormData();
+          formData.append('document', this.archivo);
+          this._general.masInformaciondocumento(formData)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+             
+              this.myform.patchValue({
+                boton_subir:false,
+                pdfmasinformacion:res.documento
+              });
+              Swal.fire({
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                title:'Se subio correctamente el archivo PDF',
+                icon:'success'
+              });
+
+            }
+    
+             
+          });
+    
+        }
+        else
+        {
+          this.archivo=new File([""],"");
+          // this.verificar=false;
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Error.. Solo se puede subir archivos PDF',
+            icon:'warning'
+          });
+          this.myform.patchValue({
+            boton_subir:false
+          })
+          return;
+    
+    
+        }
+      }
+      
+    })
+
+
+   
+    
+
   }
 
   //mas informacion

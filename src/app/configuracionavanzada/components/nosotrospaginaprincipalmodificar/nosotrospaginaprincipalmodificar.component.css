@@ -19,6 +19,10 @@
     margin-bottom: 4%;
 
 }
+.card_1
+{
+    width: 65%;
+}
 
 .wrapper{
     /* position: fixed; */
@@ -49,4 +53,49 @@ h4.active {
 
 .mda-form-msg{
     color: #f57c74;
+}
+.boton-container{
+    margin-top: 2%;
+    margin-bottom: 3%;
+    display: inline-block;
+    position: relative;
+    /* background-color: rgb(225, 225, 226); */
+}
+
+.container-button{
+    position: absolute;
+    margin-left: 120%;
+    margin-top: -55%;
+    background-color: rgb(56, 91, 168);
+    width: 65px;
+    height: 37px;
+    border-radius:6%;
+    cursor: pointer;
+   }
+
+   .btn_enviar{
+    position: absolute;
+    width: 63px;
+    height: 38px;
+    left: 0.1%;
+    opacity: 0;
+    cursor: pointer;
+   }
+   p#texto{
+       margin-top: 8px;
+       text-align: center;
+       color:white;
+}
+
+.boton_c{
+    text-align: start;
+}
+
+@media(max-width:47.938em)
+{
+    .boton_c{
+        text-align: center;
+    }
+
+
 }
