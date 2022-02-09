@@ -17,12 +17,24 @@ export class BecasnivelService {
     ) { }
   
   getBecas():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'becas2'
+    let url:string = this._base.getUrlLocalApi() + 'becas2'
     return this.http.get<any>(url);
   }
   
   getBecasNivelbody():Observable<any>{
     let url:string = this._base.getUrlApi() + 'becas_body2'; 
     return this.http.get<any>(url);
+  }
+
+  //agregar categoria becas
+  addcategoriabecas(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas/add';
+    return this.http.post(url,data);
+  }
+
+  updatecategoriabecasestado(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas/update/estado';
+    return this.http.put(url,data);
   }
 }

@@ -35,6 +35,11 @@ export class AppComponent {
     this._pathimagenes.pathrecuperarcorreo=this.pathrecuperarcorreo;
     this._pathimagenes.pathavatarperfil=this.pathavatarperfil;
     this._pathimagenes.pathimagendefecto=this.pathimagendefecto;
+    this._pathimagenes.pathimagencapacitaciones=this.pathimagencapacitaciones;
+    this._pathimagenes.pathimagenpregrado=this.pathimagenpreprado;
+    this._pathimagenes.pathimageninvestigacion=this.pathimageninvestigacion;
+    this._pathimagenes.pathimagenmaestria=this.pathimagenmaestria;
+    this._pathimagenes.pathimagendoctorado=this.pathimagendoctorado;
   }
 
   //variables de las path de las imagenes del programa 
@@ -67,5 +72,12 @@ export class AppComponent {
 
   pathavatarperfil='../assets/img/avatar_perfil.png';
   pathimagendefecto='../assets/img/imagendefecto.jpg';
+  
+  pathimagencapacitaciones='../assets/img/capacitaciones1.png';
+  pathimagenpreprado='../assets/img/pregrado.png';
+  pathimageninvestigacion='../assets/img/investigacion.png';
+  pathimagenmaestria='../assets/img/maestria.png';
+  pathimagendoctorado='../assets/img/doctorado.png';
+
 
 }

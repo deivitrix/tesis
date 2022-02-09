@@ -1,3 +1,4 @@
+import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas.component';
 import { ModificarPaginaPrincipalComponent } from './paginas/modificar-pagina-principal/modificar-pagina-principal.component';
 import { RegistroactividadesPaginaComponent } from './paginas/registroactividades-pagina/registroactividades-pagina.component';
 import { BaseconfiguracionavanzadaComponent } from './baseconfiguracionavanzada/baseconfiguracionavanzada.component';
@@ -17,6 +18,9 @@ const routes: Routes = [
       },
       {
         path:'modificarPaginaPrincipal',component:ModificarPaginaPrincipalComponent
+      },
+      {
+         path:'ingresarbecas/:tipo',component:IngresarbecasComponent
       }
     ]
   }

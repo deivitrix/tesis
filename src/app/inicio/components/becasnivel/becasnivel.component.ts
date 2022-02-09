@@ -77,36 +77,57 @@ export class BecasnivelComponent implements OnInit {
       if(opcion =='c')
       {
         if(this.auxc<3){
-          this.listaC.push(item);
-          this.auxc++;
+          if(item.estado=="A"){
+            this.listaC.push(item);
+            this.auxc++;
+          }
+          
         }
       }
       else if(opcion=='p'){
         if(this.auxp<3)
         {
-          this.listaP.push(item);
-          this.auxp++;
+          if(item.estado=="A")
+          {
+            this.listaP.push(item);
+            this.auxp++;
+          }
+          
         }
         
       }
       else if(opcion=='i'){
         if(this.auxi<3){
-          this.listaI.push(item);
-          this.auxi++;
+          if(item.estado=="A")
+          {
+           this.listaI.push(item);
+           this.auxi++;
+
+          }
+          
         }
       }
       else if(opcion=='m'){
         if(this.auxm<3){
-          this.listaM.push(item);
-          this.auxm++;
+          if(item.estado=="A")
+          {
+            this.listaM.push(item);
+            this.auxm++;
+
+          }
+         
         }
         
       }
       else if(opcion=='d'){
         if(this.auxd<3)
         {
-          this.listaD.push(item);
-          this.auxd++;
+          if(item.estado=="A")
+          {
+            this.listaD.push(item);
+            this.auxd++;
+          }
+         
         }
        
       }

@@ -99,16 +99,21 @@ export class TablabecasnivelComponent implements OnInit {
     let opcion:string = item.tipo.toLowerCase();
     if(opcion ==this.tipo)
       {
-        body.forEach((item2:BecasNivelBody)=>{
-          if(item.id==item2.id_becas_nivels){   
-           this.aux=1;
+        if(item.estado=="A")
+        {
+          body.forEach((item2:BecasNivelBody)=>{
+            if(item.id==item2.id_becas_nivels){   
+             this.aux=1;
+            }
+          });
+          console.log(this.aux);
+          if(this.aux==1){
+            this.lista.push(item);
+            this.aux=0;
           }
-        });
-        console.log(this.aux);
-        if(this.aux==1){
-          this.lista.push(item);
-          this.aux=0;
+
         }
+        
        
       }
    });

@@ -1,0 +1,57 @@
+<div class="container-fluid titulo">
+    <h3>{{titulo}}</h3>
+  </div>
+  <ng-container *ngIf="loading==true">
+   <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
+  </ng-container>
+
+  <ng-container *ngIf="loading==false">
+      <div class="container-fluid" style="justify-content: end; text-align: end; margin-bottom: 3%;">
+        <button [disabled]="botoncategoria" (click)="addBecasnivel()" mat-flat-button color="primary"><mat-icon>add</mat-icon>Categoria Beca</button>
+      </div>
+  <!-- <pre>{{myform.value | json}}</pre> -->
+      <div class="container-fluid">
+        <table class="table table-responsive table-primary" style="margin: 1px; ">
+            <thead>
+              <tr>
+                <th style="width: 20%;" scope="col">#</th>
+                <th  style="width: 50%; text-align: start;" scope="col">Nombre</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of listatipo | pagination :pageSize :pageNumber ">
+                <th scope="row">{{c.position}}</th>
+                <td style="text-align: start;">{{c.nombre}}</td>
+                <td>
+                    <mat-form-field class="container-fill" appearance="fill">
+                        <mat-label>Estado</mat-label>
+                        <mat-select [disabled]="botonestado" [(value)]="c.estado" (selectionChange)="actualizar($event,c.id)">
+                          <mat-option value="A">Activo</mat-option>
+                          <mat-option value="D">Desactivado</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </td>
+                <td>
+                    <a  class="pointer" title="Editar" style="color: rgb(71, 111, 172); margin: 3px;">
+                        <mat-icon>edit</mat-icon>
+                    </a>
+
+                    <a  class="pointer" title="Agregar Becas en la categoria" style="color: rgb(151, 83, 65); margin: 3px;">
+                        <mat-icon >add_circle</mat-icon>
+                    </a>
+      
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <mat-paginator [length]="listatipo.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page" (page)="handlePagePending($event)">
+            </mat-paginator>
+          </div>
+
+      </div>
+    
+  </ng-container>

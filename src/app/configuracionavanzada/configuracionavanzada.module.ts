@@ -40,6 +40,9 @@ import { ConveniospaginaprincipalmodificarComponent } from './components/conveni
 import { BecaspaginaprincipalmodificarComponent } from './components/becaspaginaprincipalmodificar/becaspaginaprincipalmodificar.component';
 import { MovilidadpaginaprincipalmodificarComponent } from './components/movilidadpaginaprincipalmodificar/movilidadpaginaprincipalmodificar.component';
 import { GaleriaInterfazComponent } from './components/galeria-interfaz/galeria-interfaz.component';
+import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { DialogingresarbecasComponent } from './components/dialogingresarbecas/dialogingresarbecas.component';
 
 
 @NgModule({
@@ -57,6 +60,8 @@ import { GaleriaInterfazComponent } from './components/galeria-interfaz/galeria-
     BecaspaginaprincipalmodificarComponent,
     MovilidadpaginaprincipalmodificarComponent,
     GaleriaInterfazComponent,
+    IngresarbecasComponent,
+    DialogingresarbecasComponent,
     
   ],
   imports: [
@@ -83,7 +88,8 @@ import { GaleriaInterfazComponent } from './components/galeria-interfaz/galeria-
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    PipesModule,
   ]
 })
 export class ConfiguracionavanzadaModule { }

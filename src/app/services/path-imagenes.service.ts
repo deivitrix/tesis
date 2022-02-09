@@ -30,6 +30,12 @@ export class PathImagenesService {
   pathrecuperarcorreo:string;
   pathavatarperfil:string;
   pathimagendefecto:string;
+  pathimagencapacitaciones:string;
+  pathimagenpregrado:string;
+  pathimageninvestigacion:string;
+  pathimagenmaestria:string;
+  pathimagendoctorado:string;
+
   constructor() { 
     this.path='';
     this.pathtwiter='';
@@ -57,5 +63,11 @@ export class PathImagenesService {
     this.pathrecuperarcorreo="";
     this.pathavatarperfil="";
     this.pathimagendefecto="";
+    this.pathimagencapacitaciones="";
+    this.pathimagenpregrado="";
+    this.pathimageninvestigacion="";
+    this.pathimagenmaestria="";
+    this.pathimagendoctorado="";
+
   }
 }
