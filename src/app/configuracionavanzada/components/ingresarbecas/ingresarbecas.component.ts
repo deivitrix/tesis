@@ -30,7 +30,7 @@ export class IngresarbecasComponent implements OnInit {
   cedula:string;
 
   //
-  data:any={nombre:''}
+  data:any={nombre:'',tipo:''}
 
   //myform
   myform:FormGroup;
@@ -110,8 +110,6 @@ export class IngresarbecasComponent implements OnInit {
   }
   separarListatipo(original:BecasNivel[])
   {
-    console.log('si llego');
-    
      original.forEach((item:BecasNivel)=>{
        if(item.tipo==this.tipo)
        {
@@ -124,16 +122,23 @@ export class IngresarbecasComponent implements OnInit {
 
   //dialog 
   addBecasnivel(){
+   this.data={nombre:'', tipo:'I'};
     const dialogRef=this.dialog.open(DialogingresarbecasComponent,{
       width:'500px',
-      data:{titulo:'Agregar Categoria Becas',url:this.data}
+      data:{titulo:'Agregar Categoria Becas',objeto:this.data}
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result!=null)
       {
-        this.botoncategoria=true;
-        let json={data:{id_usuario:this.myform.get('id_usuario')?.value,nombre:result,tipo:this.tipo}}
+        
+        if(result.objeto.tipo=="I")
+        {
+          if(result.objeto.nombre.length!=0)
+          {
+            this.botoncategoria=true;
+            this.botonestado=true;
+        let json={data:{id_usuario:this.myform.get('id_usuario')?.value,nombre:result.objeto.nombre,tipo:this.tipo}}
         this._becasnivel.addcategoriabecas(json)
         .subscribe((res:any)=>{
            if(res.estado==true)
@@ -151,6 +156,7 @@ export class IngresarbecasComponent implements OnInit {
             this.loading=true;
             this.getbecas();
             this.botoncategoria=false;
+            this.botonestado=false;
            }
            else{
             Swal.fire({
@@ -164,9 +170,17 @@ export class IngresarbecasComponent implements OnInit {
               icon:'warning'
             });
             this.botoncategoria=false;
+            this.botonestado=false;
 
            }
         });
+            
+
+          }
+
+        }
+        
+        
         
       }
      
@@ -198,6 +212,11 @@ export class IngresarbecasComponent implements OnInit {
     }
    });
     
+    
+  }
+
+  //editar categoria
+  editarcategoria(){
     
   }
 

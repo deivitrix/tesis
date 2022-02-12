@@ -11,6 +11,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 
