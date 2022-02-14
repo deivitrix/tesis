@@ -1,3 +1,4 @@
+import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/tablabecasnivelbody.component';
 import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas.component';
 import { ModificarPaginaPrincipalComponent } from './paginas/modificar-pagina-principal/modificar-pagina-principal.component';
 import { RegistroactividadesPaginaComponent } from './paginas/registroactividades-pagina/registroactividades-pagina.component';
@@ -21,6 +22,9 @@ const routes: Routes = [
       },
       {
          path:'ingresarbecas/:tipo',component:IngresarbecasComponent
+      },
+      {
+        path:'becasnivelbody/:id',component:TablabecasnivelbodyComponent
       }
     ]
   }

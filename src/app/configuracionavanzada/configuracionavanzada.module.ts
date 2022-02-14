@@ -43,6 +43,7 @@ import { GaleriaInterfazComponent } from './components/galeria-interfaz/galeria-
 import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { DialogingresarbecasComponent } from './components/dialogingresarbecas/dialogingresarbecas.component';
+import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/tablabecasnivelbody.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { DialogingresarbecasComponent } from './components/dialogingresarbecas/d
     GaleriaInterfazComponent,
     IngresarbecasComponent,
     DialogingresarbecasComponent,
+    TablabecasnivelbodyComponent,
     
   ],
   imports: [

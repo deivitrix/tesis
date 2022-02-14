@@ -34,11 +34,11 @@
                       </mat-form-field>
                 </td>
                 <td>
-                    <a (click)="editarcategoria()" class="pointer" title="Editar" style="color: rgb(71, 111, 172); margin: 3px;">
+                    <a (click)="editarcategoria(c.id)" class="pointer" title="Editar" style="color: rgb(71, 111, 172); margin: 3px;">
                         <mat-icon>edit</mat-icon>
                     </a>
 
-                    <a  class="pointer" title="Agregar Becas en la categoria" style="color: rgb(151, 83, 65); margin: 3px;">
+                    <a  (click)="agregarBecasNivelBody(c.id)" class="pointer" title="Agregar Becas en la categoria" style="color: rgb(151, 83, 65); margin: 3px;">
                         <mat-icon >add_circle</mat-icon>
                     </a>
       

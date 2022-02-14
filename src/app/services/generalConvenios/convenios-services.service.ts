@@ -174,5 +174,10 @@ export class ConveniosServicesService {
     let url:string=this._base.getUrlApi()+'imagen-convenio/subir';
     return this.http.post(url,data); 
   }
+
+  // modificar convenio
+  updateconvenio(){
+    
+  }
   
 }

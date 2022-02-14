@@ -161,9 +161,7 @@ export class Ingresarconveniosbody2Component implements OnInit {
   // el tipo de la pagina ingreso o modificacion
   ingresoguardado()
   {
-    
-
-    var tipo1=this.tipo.toLocaleLowerCase();
+     var tipo1=this.tipo.toLocaleLowerCase();
     if(tipo1=="ingresar")
     {
       this.titulo="Ingresar Convenio"
@@ -1454,7 +1452,7 @@ escoger(id:number){
 
   guardar()
   {
-    if(this.selector.get('convenios')?.value.length==0)
+    if(this.selector.get('convenio')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
@@ -1471,9 +1469,10 @@ escoger(id:number){
       return;
     }
 
-    if(this.selector.get('convenios')?.value=='E')
+    if(this.selector.get('convenio')?.value=='2')
     {
-      if(this.selector.get('especificos')?.value.length==0)
+
+      if(this.selector.get('especifico')?.value.length==0)
       {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{

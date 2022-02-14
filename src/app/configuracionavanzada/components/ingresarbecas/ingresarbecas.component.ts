@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ignoreElements } from 'rxjs/operators';
 import { BecasNivel } from 'src/app/models/becasnivel';
 import { BecasnivelService } from 'src/app/services/becasnivel.service';
@@ -19,8 +19,10 @@ import 'animate.css';
 })
 export class IngresarbecasComponent implements OnInit {
   tipo="";
-
+  
+  //listado
   listabecasnivel:BecasNivel[]=[];
+  listabecasnivelaux:BecasNivel[]=[];
   listatipo:any[]=[];
   loading=true;
 
@@ -29,8 +31,12 @@ export class IngresarbecasComponent implements OnInit {
   // usuario
   cedula:string;
 
-  //
+  //ingresar categoria
   data:any={nombre:'',tipo:''}
+
+
+  // editar categoria
+  editardata:any={nombre:'',tipo:''}
 
   //myform
   myform:FormGroup;
@@ -50,7 +56,7 @@ export class IngresarbecasComponent implements OnInit {
   //estado
   botonestado=false;
 
-  constructor(private rutaActiva: ActivatedRoute,private _becasnivel:BecasnivelService,private usuario:UsuarioServicesService
+  constructor(private rutaActiva: ActivatedRoute,private router:Router,private _becasnivel:BecasnivelService,private usuario:UsuarioServicesService
     ,private ingresar:FormBuilder,public dialog: MatDialog) { 
     this.tipo=rutaActiva.snapshot.params.tipo;
     this.cedula="";
@@ -214,10 +220,95 @@ export class IngresarbecasComponent implements OnInit {
     
     
   }
-
   //editar categoria
-  editarcategoria(){
-    
+  editarcategoria(id:number){
+    this.editardata={nombre:"",tipo:"M"};
+    this._becasnivel.getBecas()
+    .subscribe((res:any)=>{
+     this.listabecasnivelaux=res;
+     this.listabecasnivelaux.forEach((item:BecasNivel)=>{
+       if(item.id==id)
+       {
+         this.editardata.nombre=item.nombre;
+         this.editardata.tipo="M";
+         const dialogRef=this.dialog.open(DialogingresarbecasComponent,{
+          width:'500px',
+          data:{titulo:'Modificar la categoria Becas',objeto:this.editardata}
+        });
+        dialogRef.afterClosed().subscribe(result=>{
+          console.log('The dialog was closed');
+          if(result!=null)
+          {
+            if(result.objeto.tipo=="M")
+            {
+              if(result.objeto.nombre.length!=0)
+              {
+                this.botoncategoria=true;
+                this.botonestado=true;
+                let json={data:{id:id,nombre:result.objeto.nombre}};
+                this._becasnivel.updatecategoriabecasNombre(json)
+                .subscribe((res:any)=>{
+                  if(res.estado==true)
+                  {
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:res.mensaje,
+                      icon:'success'
+                    });
+                    this.loading=true;
+                    this.getbecas();
+                    this.botoncategoria=false;
+                    this.botonestado=false;
+                  }
+                  else
+                  {
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:res.mensaje,
+                      icon:'warning'
+                    });
+                    this.botoncategoria=false;
+                    this.botonestado=false;
+
+                  }
+                });
+              }
+              else{
+                Swal.fire({
+                  showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                  },
+                  hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                  },
+                  title:"No se puede actulizar el nombre",
+                  icon:'warning'
+                });
+
+              }
+
+            }
+            
+          }
+        })
+       }
+     })
+    });
+  }
+
+  agregarBecasNivelBody(id:number)
+  {
+    this.router.navigate(['/utmricb/configuracionavanzada/becasnivelbody/'+id]);
   }
 
 }
