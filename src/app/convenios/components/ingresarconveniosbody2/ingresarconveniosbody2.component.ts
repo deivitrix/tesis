@@ -1228,7 +1228,7 @@ escoger(id:number){
       return;
     }
 
-    if(this.selector.get('convenio')?.value=='E')
+    if(this.selector.get('convenio')?.value=='2')
     {
       if(this.selector.get('especifico')?.value.length==0)
       {

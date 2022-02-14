@@ -871,7 +871,7 @@ escoger(id:number){
       return;
     }
 
-    if(this.selector.get('convenios')?.value=='E')
+    if(this.selector.get('convenios')?.value=='2')
     {
       if(this.selector.get('especificos')?.value.length==0)
       {
@@ -1096,7 +1096,7 @@ escoger(id:number){
       return;
     }
 
-    if(this.selector.get('convenios')?.value=='E')
+    if(this.selector.get('convenios')?.value=='2')
     {
       if(this.selector.get('especificos')?.value.length==0)
       {
