@@ -73,8 +73,6 @@ export class LoginComponent implements OnInit {
   .subscribe((res:any)=>{
     if(res.estado==true)
     {
-
-
       if(res.usuario.estado=="A")
       {
         this.snackBar.openFromComponent(MensajeLoginComponent,{
@@ -98,6 +96,8 @@ export class LoginComponent implements OnInit {
       }
       else
       {
+
+        this.loading=false;
         this.snackBar.openFromComponent(MensajeLoginComponent,{
           data:{
             titulo:'Error.....',
@@ -119,6 +119,7 @@ export class LoginComponent implements OnInit {
     }
     if(res.estado==false)
     {
+      this.loading=false;
       this.snackBar.openFromComponent(MensajeLoginComponent,{
         data:{
           titulo:'Error.....',

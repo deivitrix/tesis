@@ -176,8 +176,9 @@ export class ConveniosServicesService {
   }
 
   // modificar convenio
-  updateconvenio(){
+  updateconvenio(data:any){
     
+
   }
   
 }
