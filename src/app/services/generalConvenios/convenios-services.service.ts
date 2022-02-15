@@ -177,7 +177,9 @@ export class ConveniosServicesService {
 
   // modificar convenio
   updateconvenio(data:any){
-    
+    //convenio/all/update
+    let url:string=this._base.getUrlApi()+'convenio/all/update';
+    return this.http.put(url,data); 
 
   }
   

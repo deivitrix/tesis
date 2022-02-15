@@ -206,6 +206,7 @@ getdatosconvenios(){
       id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
       nombre_convenio:this.datosconvenio.nombre_convenio,
       comparecientes:this.datosconvenio.comparecientes,
+      PDF:this.datosconvenio.PDF
 
     });
      var con=""+this.datosconvenio.id_tipoconvenio as string;
@@ -1414,10 +1415,10 @@ escoger(id:number){
         if (result.value) {
           Swal.fire({
             title:'Redireccionamiento',
-            text:'Se redirecciona a la pagina Listar convenios',
+            text:'Se redirecciona a la pagina Modificar Convenios',
             icon:'success',
           });
-          this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+          this.router.navigate(['/utmricb/convenios/tablamodificar']);
         }
   
       });
@@ -1438,10 +1439,10 @@ escoger(id:number){
         if (result.value) {
           Swal.fire({
             title:'Redireccionamiento',
-            text:'Se redirecciona a la pagina Listar convenios',
+            text:'Se redirecciona a la pagina Ingresar Convenios',
             icon:'success',
           });
-          this.router.navigate(['/utmricb/convenios/mostrarconvenios']);
+          this.router.navigate(['/utmricb/convenios/ingresarconvenios']);
         }
   
       });
@@ -1662,6 +1663,7 @@ escoger(id:number){
               verticalPosition:'bottom',
               panelClass:'error'
             });
+            this.botonguardar=false;
             return;
     
           }
@@ -1673,6 +1675,61 @@ escoger(id:number){
         }
         if(this.tipoModificar==true)
         {
+          let json={data:this.myform.value}
+          this.convenios.GuardarVistaPDFconvenios(json)
+          .subscribe((res:any)=>{
+
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                PDF:res.file
+              });
+              let json1={data:this.myform.value};
+              this.convenios.updateconvenio(json1)
+              .subscribe((res:any)=>{
+                if(res.status==true)
+                {
+                  Swal.fire({
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    },
+                    title:'Convenio Modificado con exito',
+                    icon:'success'
+                  });
+                  this.botonguardar=false;
+                  this.router.navigate(['/utmricb/convenios/tablamodificar']);
+
+                }
+
+              });
+
+              
+
+            }
+            else{
+              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+                data:{
+                  titulo:'Error.....',
+                  mensaje:"No se puedo Guardar el PDF",
+                 buttonText:'',
+                 icon:'warning'
+                },
+                duration:1000,
+                horizontalPosition:'end',
+                verticalPosition:'bottom',
+                panelClass:'error'
+              });
+              this.botonguardar=false;
+              return;
+      
+            }
+
+
+          });
+
           
 
       

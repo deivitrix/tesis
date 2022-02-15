@@ -162,7 +162,6 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     this.archivo=archivoCapturado;
     if(this.archivo.type=="application/pdf"){
       this.verificar=true;
-      console.log(this.archivo);
       this.myform.patchValue({
         nombre_file:this.archivo.name
       });
@@ -230,13 +229,6 @@ export class EditarconveniosaprobadosComponent implements OnInit {
 
 
       }
-
-      
-            
-        // console.log(fechainicio);
-        // console.log(fechafinal);
-    
-
 
       Swal.fire({
         showClass: {
@@ -567,6 +559,71 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     
 
 
+  }
+
+  cancelar(){
+
+    if(this.tipo=="G"){ Swal.fire({
+      title:'Cancelacion de Subir Convenios',
+      text:'Desea salir de la pagina',
+      icon:'warning',
+      showCancelButton:true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si deseo salir'
+    }).then((result)=>{
+      if (result.value) {
+        Swal.fire({
+          title:'Redireccionamiento',
+          text:'Se redirecciona a la pagina Subir convenios',
+          icon:'success',
+        });
+        this.router.navigate(['/utmricb/convenios/tablasubir']);
+        // this.convenios.eliminarpdf()
+        // .subscribe((res:any)=>{
+        //   if(res.estado==true)
+        //   {
+           
+        //   }
+        // })
+        
+      }
+
+    });
+
+    }
+    else{
+     
+      Swal.fire({
+        title:'Cancelacion de Modificar Convenios Aprobados',
+        text:'Desea salir de la pagina',
+        icon:'warning',
+        showCancelButton:true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si deseo salir'
+      }).then((result)=>{
+        if (result.value) {
+          Swal.fire({
+            title:'Redireccionamiento',
+            text:'Se redirecciona a la pagina Modificar',
+            icon:'success',
+          });
+          this.router.navigate(['/utmricb/convenios/tablamodificar']);
+          // this.convenios.eliminarpdf()
+          // .subscribe((res:any)=>{
+          //   if(res.estado==true)
+          //   {
+             
+          //   }
+          // })
+          
+        }
+  
+      });
+
+    }
+   
   }
 
 
