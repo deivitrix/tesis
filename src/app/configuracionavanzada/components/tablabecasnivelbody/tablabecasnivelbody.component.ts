@@ -15,6 +15,8 @@ export class TablabecasnivelbodyComponent implements OnInit {
   // usuario
   cedula:string;
 
+  loading=true;
+
   //listas
   listabecasbody:BecasNivelBody[]=[];
 
@@ -37,6 +39,9 @@ export class TablabecasnivelbodyComponent implements OnInit {
       if(res.estado==true)
       {
         console.log(res.becas);
+        this.listabecasbody=res.becas;
+
+
         
 
       }
