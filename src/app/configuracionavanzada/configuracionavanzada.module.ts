@@ -31,6 +31,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+//editor de texto
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -44,6 +46,7 @@ import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas
 import { PipesModule } from '../pipes/pipes.module';
 import { DialogingresarbecasComponent } from './components/dialogingresarbecas/dialogingresarbecas.component';
 import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/tablabecasnivelbody.component';
+import { DialogingresarbecasbodyComponent } from './components/dialogingresarbecasbody/dialogingresarbecasbody.component';
 
 
 @NgModule({
@@ -64,6 +67,7 @@ import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/t
     IngresarbecasComponent,
     DialogingresarbecasComponent,
     TablabecasnivelbodyComponent,
+    DialogingresarbecasbodyComponent,
     
   ],
   imports: [
@@ -92,6 +96,7 @@ import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/t
     MatNativeDateModule,
     MatCardModule,
     PipesModule,
+    CKEditorModule
   ]
 })
 export class ConfiguracionavanzadaModule { }

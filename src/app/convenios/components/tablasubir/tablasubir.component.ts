@@ -62,11 +62,6 @@ export class TablasubirComponent implements OnInit {
           const etiquetas=[,'</p>','<i>','</i>','<strong>','</strong>']
           var etiqueta1="";
           etiqueta1=item.titulo_convenio.replace("<p>","");
-          // for(var i=0;i<etiquetas.length;i++)
-          // {
-          //   etiqueta1=etiqueta1.replace(etiqueta1[i],"");
-          // }
-
            var etiqueta2=etiqueta1.replace("</p>","");
            var etiqueta3=etiqueta2.replace("<i>","");
            var etiqueta4=etiqueta3.replace("</i>","");

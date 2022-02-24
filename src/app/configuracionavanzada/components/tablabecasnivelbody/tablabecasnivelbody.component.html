@@ -1,1 +1,46 @@
-<p>tablabecasnivelbody works!</p>
+<div class="container-fluid titulo">
+    <h3>Becas por nivel</h3>
+  </div>
+  <ng-container *ngIf="loading==true">
+    <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
+   </ng-container>
+   <ng-container *ngIf="loading==false">
+    <div class="container-fluid" style="justify-content: end; text-align: end; margin-bottom: 3%;">
+        <button [disabled]="botonagregar" (click)="DialogBecas()" mat-flat-button color="primary"><mat-icon>add</mat-icon>Becas</button>
+    </div>
+    <div class="container-fluid">
+        <table class="table table-responsive table-primary table-striped table-bordered " style="margin: 1px; ">
+            <thead>
+                <tr>
+                  <th style="width: 2%;" scope="col">#</th>
+                  <th  style="width: 50%; text-align: start;" scope="col">Nombre</th>
+                  <th scope="col">Pais</th>
+                  <th scope="col">Idioma</th>
+                  <th style="width: 10%; text-align: start;"scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of listabecasbody | pagination :pageSize :pageNumber ">
+                    <th scope="row">{{c.position}}</th>
+                    <td style="text-align: justify;">{{c.nombre}}</td>
+                    <td style="text-align: justify;">{{c.pais}}</td>
+                    <td style="text-align: justify;">{{c.idioma}}</td>
+                    <td style="text-align: center;">
+                        <a [ngClass]="botoneditar === true ? 'disabled':'enabled' " (click)="editar(c.id)" class="pointer">
+                           <mat-icon>edit</mat-icon>
+                        </a>
+                        <a [ngClass]="botoneliminar === true ? 'disabled':'enabled' " class="pointer" style="color: brown;">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+
+                    </td>
+                </tr>
+              </tbody>
+        </table>
+        <div>
+            <mat-paginator [length]="listabecasbody.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page" (page)="handlePagePending($event)">
+            </mat-paginator>
+          </div>
+    </div>
+   </ng-container>

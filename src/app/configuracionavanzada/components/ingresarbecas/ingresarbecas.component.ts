@@ -308,7 +308,7 @@ export class IngresarbecasComponent implements OnInit {
 
   agregarBecasNivelBody(id:number)
   {
-    this.router.navigate(['/utmricb/configuracionavanzada/becasnivelbody/'+id]);
+    this.router.navigate(['/utmricb/configuracionavanzada/becasnivelbody/'+id+'/'+this.tipo]);
   }
 
 }

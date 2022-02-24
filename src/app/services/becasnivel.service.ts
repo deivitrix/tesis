@@ -20,6 +20,13 @@ export class BecasnivelService {
     let url:string = this._base.getUrlApi() + 'becas2'
     return this.http.get<any>(url);
   }
+
+
+  //becas por nivel
+  getBecasv2(tipo:string):Observable<any>{
+    let url:string = this._base.getUrlLocalApi() + 'beca-v2/'+tipo
+    return this.http.get<any>(url);
+  }
   
   getBecasNivelbody():Observable<any>{
     let url:string = this._base.getUrlApi() + 'becas_body2'; 
@@ -49,5 +56,43 @@ export class BecasnivelService {
     return this.http.get<any>(url);
   }
 
+  //ftp 
+  documentoftpCapacitaciones(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/Capacitaciones'; 
+    return this.http.post(url,data);
+  }
+  documentoftpPregrado(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/Pregrado'; 
+    return this.http.post(url,data);
+  }
+  documentoftpInvestigacion(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/Investigacion'; 
+    return this.http.post(url,data);
+  }
+  documentoftpMaestria(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/Maestria'; 
+    return this.http.post(url,data);
+  }
+  documentoftpDoctorado(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/Doctorado'; 
+    return this.http.post(url,data);
+  }
 
+
+
+
+
+
+  //creacion
+  addBecasNivelBody(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/add'; 
+    return this.http.post(url,data);
+  }
+
+  //modificar
+  updateBecasNivelBody(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/update'; 
+    return this.http.put(url,data);
+  }
 }

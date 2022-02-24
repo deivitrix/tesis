@@ -1,0 +1,25 @@
+.titulo{
+    margin-top: 2.5%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+.pointer{
+    cursor: pointer;
+}
+.container-fill{
+    width: 80%;
+    height: 2%;
+}
+
+.table tr td{
+    font-size: 14.5px;
+}
+
+.disabled{
+    pointer-events: none; 
+    cursor: default; 
+}
+.enabled{
+    pointer-events:auto;
+    cursor: pointer;
+}

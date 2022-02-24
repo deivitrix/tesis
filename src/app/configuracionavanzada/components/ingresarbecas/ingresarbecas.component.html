@@ -23,7 +23,7 @@
             <tbody>
               <tr *ngFor="let c of listatipo | pagination :pageSize :pageNumber ">
                 <th scope="row">{{c.position}}</th>
-                <td style="text-align: start;">{{c.nombre}}</td>
+                <td style="text-align: justify;">{{c.nombre}}</td>
                 <td>
                     <mat-form-field class="container-fill" appearance="fill">
                         <mat-label>Estado</mat-label>
