@@ -8,6 +8,10 @@ import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.
 import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-services.service';
 import { Router } from '@angular/router';
 
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+
 @Component({
   selector: 'app-perfilconfiguracion',
   templateUrl: './perfilconfiguracion.component.html',
@@ -39,7 +43,10 @@ export class PerfilconfiguracionComponent implements OnInit {
       correo:['',Validators.required],
       telefono:['',Validators.required],
       genero:['',Validators.required],
-      estado:['',Validators.required]
+      estado:['',Validators.required],
+      foto:[''],
+      botonsubir:[false],
+      botonguardar:[false]
     });
    
 
@@ -66,22 +73,92 @@ export class PerfilconfiguracionComponent implements OnInit {
         correo:this.datosUsuario[0].correo,
         telefono:this.datosUsuario[0].telefono,
         genero:this.datosUsuario[0].genero,
-        estado:this.datosUsuario[0].estado
+        estado:this.datosUsuario[0].estado,
+        foto:this.datosUsuario[0].foto
       });
-
-     
-      
     });
   }
   fileEvent(event:any)
   {
    this.verificar=true;
    const archivoCapturado=event.target.files[0];
-   this.archivofoto=archivoCapturado;
-   let base=this.toBase64(archivoCapturado);
-   base.then((imagen:any)=>{
-     this.foto=imagen;
-   });
+  //  this.archivofoto=archivoCapturado;
+   const foto=new Image();
+   const boton=this.myForm;
+   const usuario_ser=this._usuario;
+   if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
+    { 
+      let base=this.toBase64(archivoCapturado);
+      base.then((imagen1:any)=>{
+        foto.src=imagen1;
+        foto.onload=function(){
+          const imgWidth = foto.naturalWidth;
+          const imgHeight = foto.naturalHeight;
+          if(imgWidth==1200&&imgHeight==1200)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea subir la imagen...??',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Subir',
+              denyButtonText: `No Subir`,
+             
+            }).then((result)=>{
+              if(result.isConfirmed)
+              {
+                boton.patchValue({
+                  botonguardar:true,
+                  botonsubir:true
+                });
+                const formData = new FormData();
+                formData.append('img_user', archivoCapturado);
+                
+
+
+
+              }
+            })
+
+          }
+         else{
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Error.. Solo se puede subir imagenes de dimensiones 1200x1200 pixeles',
+            icon:'warning'
+          });
+          return;
+         }
+
+        }
+
+      })
+
+    }
+    else{
+      Swal.fire({
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        title:'Error.. Solo se puede subir imagenes',
+        icon:'warning'
+      });
+      return;
+    }
   }
   toBase64 = (file: File) => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -133,16 +210,6 @@ export class PerfilconfiguracionComponent implements OnInit {
     {
       if(this.myForm.get('telefono')?.value.length==10 || this.myForm.get('telefono')?.value.length==9)
       {
-        if(this.verificar==true)
-        {
-          //subir la foto
-          
-        }
-        else
-        {
-          //conservar la foto
-          console.log('Conservar la foto');
-        }
         this.loading=true;
         this.actualizardatos();
       }
@@ -208,7 +275,7 @@ export class PerfilconfiguracionComponent implements OnInit {
     this.datos.correo=this.myForm.get('correo')?.value;
     this.datos.telefono=this.myForm.get('telefono')?.value;
     this.datos.genero=this.myForm.get('genero')?.value;
-    this.datos.foto=this.foto;
+    this.datos.foto=this.myForm.get('foto')?.value;
 
 
     let json={usuario:this.datos};
