@@ -40,7 +40,12 @@ export class IngresarbecasComponent implements OnInit {
 
   //myform
   myform:FormGroup;
+  public filtro: string = '';
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  
+  applyFilter(event: any) {
+    this.filtro = event.target.value;
+  }
 
   public pageSize: number = 10;
   public pageNumber: number = 1;
@@ -81,7 +86,7 @@ export class IngresarbecasComponent implements OnInit {
       this.titulo='Becas por Capacitaciones';
     }
     else if(this.tipo=='P'){
-      this.titulo='Becas por Pregrado';
+      this.titulo='Becas por Movilidad';
     }
     else if(this.tipo=='I'){
       this.titulo='Becas por Investigacion';
@@ -306,9 +311,9 @@ export class IngresarbecasComponent implements OnInit {
     });
   }
 
-  agregarBecasNivelBody(id:number)
+  agregarBecasNivelBody(id:number,nombre:string)
   {
-    this.router.navigate(['/utmricb/configuracionavanzada/becasnivelbody/'+id+'/'+this.tipo]);
+    this.router.navigate(['/utmricb/configuracionavanzada/becasnivelbody/'+id+'/'+this.tipo+'/'+nombre]);
   }
 
 }

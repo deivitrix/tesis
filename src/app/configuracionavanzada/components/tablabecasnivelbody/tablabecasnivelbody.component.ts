@@ -21,9 +21,13 @@ export class TablabecasnivelbodyComponent implements OnInit {
   //id_becas
   id_becas="";
   tipo="";
+  nombre_beca="";
 
   // usuario
   cedula:string;
+
+  //titulo
+  titulo="";
 
   loading=true;
 
@@ -68,7 +72,10 @@ export class TablabecasnivelbodyComponent implements OnInit {
   botoneditar=false;
   botoneliminar=false;
   botonagregar=false;
-
+  public filtro: string = '';
+  applyFilter(event: any) {
+    this.filtro = event.target.value;
+  }
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -83,6 +90,7 @@ export class TablabecasnivelbodyComponent implements OnInit {
   constructor(private rutaActiva: ActivatedRoute,private router:Router,private _becas:BecasnivelService,public dialog: MatDialog, public snackBar:MatSnackBar) { 
     this.id_becas=rutaActiva.snapshot.params.id;
     this.tipo=rutaActiva.snapshot.params.tipo;
+    this.nombre_beca=rutaActiva.snapshot.params.nombre;
     this.cedula="";
     var cedula1;
     cedula1=localStorage.getItem("cedula") as string;  
@@ -92,6 +100,8 @@ export class TablabecasnivelbodyComponent implements OnInit {
   ngOnInit(): void {
     this.getBecasNivelBody()
   }
+
+ 
   
 
   getBecasNivelBody()

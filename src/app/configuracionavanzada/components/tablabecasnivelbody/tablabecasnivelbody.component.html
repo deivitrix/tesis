@@ -1,5 +1,5 @@
 <div class="container-fluid titulo">
-    <h3>Becas por nivel</h3>
+    <h3>{{nombre_beca}}</h3>
   </div>
   <ng-container *ngIf="loading==true">
     <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
@@ -9,6 +9,13 @@
         <button [disabled]="botonagregar" (click)="DialogBecas()" mat-flat-button color="primary"><mat-icon>add</mat-icon>Becas</button>
     </div>
     <div class="container-fluid">
+      <mat-form-field class="mat-form-field-filtro">
+        <mat-label>Filtro</mat-label>
+        <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+        <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
         <table class="table table-responsive table-primary table-striped table-bordered " style="margin: 1px; ">
             <thead>
                 <tr>
@@ -20,7 +27,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let c of listabecasbody | pagination :pageSize :pageNumber ">
+                <tr *ngFor="let c of listabecasbody | pagination :pageSize :pageNumber | buscarBecasBody :filtro;">
                     <th scope="row">{{c.position}}</th>
                     <td style="text-align: justify;">{{c.nombre}}</td>
                     <td style="text-align: justify;">{{c.pais}}</td>

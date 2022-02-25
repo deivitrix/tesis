@@ -24,7 +24,7 @@ const routes: Routes = [
          path:'ingresarbecas/:tipo',component:IngresarbecasComponent
       },
       {
-        path:'becasnivelbody/:id/:tipo',component:TablabecasnivelbodyComponent
+        path:'becasnivelbody/:id/:tipo/:nombre',component:TablabecasnivelbodyComponent
       }
     ]
   }
