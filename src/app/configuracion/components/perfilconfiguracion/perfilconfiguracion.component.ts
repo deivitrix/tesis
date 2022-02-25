@@ -344,7 +344,7 @@ export class PerfilconfiguracionComponent implements OnInit {
             icon:'success'
           });
          this.loading=true;
-         this.actualizardatos();
+         this.getusuario();
         }
         else
         {
