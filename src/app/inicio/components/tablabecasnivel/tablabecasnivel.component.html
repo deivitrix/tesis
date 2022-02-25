@@ -11,11 +11,15 @@
     <ng-container *ngIf="verificar">
         <ng-container *ngFor="let lista of lista_becas;">
             <div >
-                <div class="container-fluid title">
-                    <h1>{{lista.nombre}}</h1>
-                </div>
+                <ng-container *ngIf="lista.becas_nivel_body.length!=0">
+                    <div class="container-fluid title">
+                        <h1>{{lista.nombre}}</h1>
+                    </div>
+                </ng-container>
+                
 
                 <ng-container *ngFor="let lista_body of lista.becas_nivel_body">
+                    
                     <ng-container *ngIf="lista_body.estado=='A'">
                         <div>
                             <table class="table tablabody">
