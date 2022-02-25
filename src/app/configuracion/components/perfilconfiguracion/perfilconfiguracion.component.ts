@@ -62,11 +62,12 @@ export class PerfilconfiguracionComponent implements OnInit {
   getusuario(){
     this._login.getusuariosearch(this.cedula)
     .subscribe((res:any) => {
+      this.datosUsuario=[];
       this.datosUsuario.push(res.usuario);
       this.loading=false;
-      this.foto=this.datosUsuario[0].foto;
       this.modeSelect=this.datosUsuario[0].genero;
-
+      console.log(this.datosUsuario);
+      
       this.myForm.patchValue({
         id:this.datosUsuario[0].id,
         cedula:this.datosUsuario[0].cedula,
