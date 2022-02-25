@@ -66,7 +66,6 @@ export class PerfilconfiguracionComponent implements OnInit {
       this.datosUsuario.push(res.usuario);
       this.loading=false;
       this.modeSelect=this.datosUsuario[0].genero;
-      console.log(this.datosUsuario);
       
       this.myForm.patchValue({
         id:this.datosUsuario[0].id,
