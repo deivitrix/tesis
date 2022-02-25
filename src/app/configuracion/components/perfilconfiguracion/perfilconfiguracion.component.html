@@ -9,11 +9,11 @@
             <ng-container  *ngIf="loading==false">
                 <div class="foto-container">
                     <div class="container-foto ">
-                        <img  class="foto" [src]="foto" alt="" width="20%">
+                        <img  class="foto" [src]="myForm.get('foto')?.value" alt="" width="20%">
                     </div>
                     
                     <div class="container-button">
-                        <input  class="btn_enviar"type="file" (change)="fileEvent($event)" accept="image/png,image/jpeg">
+                        <input [disabled]="this.myForm.get('botonsubir')?.value" class="btn_enviar"type="file" (change)="fileEvent($event)" accept="image/png,image/jpeg">
                         <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 -1 16 16">
                             <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
                           </svg></p>
@@ -83,7 +83,7 @@
                    </div>
                 </div>
                 <div class="col-sm">
-                    <button (click)="GuardarDatos()" class="btn-success btn-lg float-center mb-4" type="button">Guardar</button>
+                    <button [disabled]="this.myForm.get('botonguardar')?.value" (click)="GuardarDatos()" class="btn-success btn-lg float-center mb-4" type="button">Guardar</button>
                 </div>
 
                  </form>

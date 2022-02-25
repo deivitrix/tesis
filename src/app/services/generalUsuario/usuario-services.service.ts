@@ -15,7 +15,7 @@ export class UsuarioServicesService {
 
   updateusuarioimagen(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'usuario/upload-image';
+    let url:string = this._base.getUrlLocalApi() + 'usuario/upload-image';
     return this.http.post(url,data);
   }
 

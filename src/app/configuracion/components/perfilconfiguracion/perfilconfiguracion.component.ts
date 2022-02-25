@@ -45,8 +45,10 @@ export class PerfilconfiguracionComponent implements OnInit {
       genero:['',Validators.required],
       estado:['',Validators.required],
       foto:[''],
+      fotoarchivo:[new File([""],"")],
       botonsubir:[false],
-      botonguardar:[false]
+      botonguardar:[false],
+      subir:false
     });
    
 
@@ -85,7 +87,6 @@ export class PerfilconfiguracionComponent implements OnInit {
   //  this.archivofoto=archivoCapturado;
    const foto=new Image();
    const boton=this.myForm;
-   const usuario_ser=this._usuario;
    if(archivoCapturado.type=='image/png'|| archivoCapturado.type=='image/jpeg')
     { 
       let base=this.toBase64(archivoCapturado);
@@ -103,26 +104,30 @@ export class PerfilconfiguracionComponent implements OnInit {
               hideClass: {
                 popup: 'animate__animated animate__fadeOutUp'
               },
-              title: 'Esta seguro que desea subir la imagen...??',
+              title: 'Esta seguro que desea esta la imagen...??',
               icon: 'warning',
               showDenyButton: true,
               showCancelButton: true,
-              confirmButtonText: 'Subir',
-              denyButtonText: `No Subir`,
+              confirmButtonText: 'Aceptar',
+              denyButtonText: `No Aceptar`,
              
             }).then((result)=>{
               if(result.isConfirmed)
               {
-                boton.patchValue({
-                  botonguardar:true,
-                  botonsubir:true
+                 var toBase64 = (file: File) => new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.readAsDataURL(file);
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = error => reject(error);
                 });
-                const formData = new FormData();
-                formData.append('img_user', archivoCapturado);
-                
-
-
-
+                const fotobase64=toBase64(archivoCapturado);
+                fotobase64.then((imagen2:any)=>{
+                  boton.patchValue({
+                    fotoarchivo:archivoCapturado,
+                    foto:imagen2,
+                    subir:true
+                  });
+                });
               }
             })
 
@@ -210,6 +215,41 @@ export class PerfilconfiguracionComponent implements OnInit {
     {
       if(this.myForm.get('telefono')?.value.length==10 || this.myForm.get('telefono')?.value.length==9)
       {
+
+        if(this.myForm.get('subir')?.value==true)
+        {
+          const formData = new FormData();
+          formData.append('img_user', this.myForm.get('fotoarchivo')?.value);
+          this._usuario.updateusuarioimagen(formData)
+          .subscribe((res:any)=>{
+
+            if(res.estado==true)
+            {
+              this.myForm.patchValue({
+                foto:res.imagen
+              });
+            }
+            else{
+              Swal.fire({
+                showClass: {
+                  popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                  popup: 'animate__animated animate__fadeOutUp'
+                },
+                title:res.mensaje,
+                icon:'warning'
+              });
+              return;
+
+            }
+
+          });
+
+        
+
+
+        }
         this.loading=true;
         this.actualizardatos();
       }
