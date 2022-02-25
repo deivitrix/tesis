@@ -29,7 +29,7 @@
                         <a [ngClass]="botoneditar === true ? 'disabled':'enabled' " (click)="editar(c.id)" class="pointer">
                            <mat-icon>edit</mat-icon>
                         </a>
-                        <a [ngClass]="botoneliminar === true ? 'disabled':'enabled' " class="pointer" style="color: brown;">
+                        <a [ngClass]="botoneliminar === true ? 'disabled':'enabled' "(click)="eliminar(c.id)"  class="pointer" style="color: brown;">
                             <mat-icon>delete</mat-icon>
                         </a>
 

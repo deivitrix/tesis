@@ -194,6 +194,9 @@ export class TablabecasnivelbodyComponent implements OnInit {
             {
               this.data.reconomiento="";
             }
+            this.botoneditar=true;
+            this.botoneliminar=true;
+            this.botonagregar=true;
 
          let json={
            data:{
@@ -227,12 +230,20 @@ export class TablabecasnivelbodyComponent implements OnInit {
               });
               this.loading=true;
               this.getBecasNivelBody();
-
+              this.botoneditar=false;
+              this.botoneliminar=false;
+              this.botonagregar=false;
             }
+            this.botoneditar=false;
+            this.botoneliminar=false;
+            this.botonagregar=false;
           })
 
       }
       else{
+        this.botoneditar=false;
+        this.botoneliminar=false;
+        this.botonagregar=false;
         this.verificar=false;
       }
      
@@ -290,10 +301,7 @@ export class TablabecasnivelbodyComponent implements OnInit {
 
               if(result!=null)
               {
-                
                   this.editadata=result.objeto;
-
-                  console.log(this.editadata);
                   if(this.editadata.nombre.length==0 || this.editadata.pais.length==0 || this.editadata.idioma.length==0 || this.editadata.fecha_postulacion.length==0)
                   {
                     this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
@@ -375,6 +383,74 @@ export class TablabecasnivelbodyComponent implements OnInit {
       this.botoneliminar=false;
       this.botonagregar=false;
     })
+
+
+  }
+
+  eliminar(id:string)
+  {
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea Eliminar...??',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
+    }).then((result)=>{
+     if(result.isConfirmed)
+     {
+      this.botoneditar=true;
+      this.botoneliminar=true;
+      this.botonagregar=true;
+
+      let json={data:{id:id}};
+      this._becas.updateEstadoBecasNivelBody(json)
+      .subscribe((res:any)=>{
+        if(res.estado==true)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Se elimino correctamente....!!!',
+            icon:'success'
+          });
+          this.loading=true;
+          this.getBecasNivelBody();
+          this.botoneditar=false;
+          this.botoneliminar=false;
+          this.botonagregar=false;
+        }
+        else
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'No se puedo elimino correctamente....!!!',
+            icon:'warning'
+          });
+          this.botoneditar=false;
+          this.botoneliminar=false;
+          this.botonagregar=false;
+
+        }
+      })
+
+     }
+    });
 
 
   }

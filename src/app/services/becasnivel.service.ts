@@ -95,4 +95,11 @@ export class BecasnivelService {
     let url:string = this._base.getUrlApi() + 'pagina-becas-body/update'; 
     return this.http.put(url,data);
   }
+
+  //updateEstado NIvel Becas Body
+  updateEstadoBecasNivelBody(data:any)
+  {
+    let url:string = this._base.getUrlApi() + 'pagina-becas-body/update/estado'; 
+    return this.http.put(url,data);
+  }
 }
