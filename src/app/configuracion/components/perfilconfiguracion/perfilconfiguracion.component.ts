@@ -228,6 +228,9 @@ export class PerfilconfiguracionComponent implements OnInit {
               this.myForm.patchValue({
                 foto:res.imagen
               });
+              this.loading=true;
+              this.actualizardatos();
+
             }
             else{
               Swal.fire({
@@ -250,8 +253,12 @@ export class PerfilconfiguracionComponent implements OnInit {
 
 
         }
-        this.loading=true;
-        this.actualizardatos();
+        else
+        {
+          this.loading=true;
+          this.actualizardatos();
+        }
+       
       }
       else
       {
@@ -326,33 +333,30 @@ export class PerfilconfiguracionComponent implements OnInit {
       {
         if(res.email==true)
         {
-          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-            data:{
-              titulo:'Error.....',
-              mensaje:"Datos del usuario actualizado",
-             buttonText:'',
-             icon:'success'
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
             },
-            duration:1000,
-            horizontalPosition:'end',
-            verticalPosition:'bottom',
-            panelClass:'success'     
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:"Datos del usuario actualizado",
+            icon:'success'
           });
-          window.location.reload();
+         this.loading=true;
+         this.actualizardatos();
         }
         else
         {
-          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-            data:{
-              titulo:'Error.....',
-              mensaje:"Datos del usuario actualizado",
-             buttonText:'',
-             icon:'success'
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
             },
-            duration:1000,
-            horizontalPosition:'end',
-            verticalPosition:'bottom',
-            panelClass:'success'     
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:"Datos del usuario actualizado",
+            icon:'success'
           });
           this._login.logout();
           this.router.navigateByUrl('/auth');
