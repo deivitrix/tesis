@@ -1,5 +1,5 @@
 import { Usuario } from './../../models/usuario/usuario_model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -16,11 +16,37 @@ export class GeneralLoginService{
     private _base:BaseUrlService
   ) { }
   
+  // header
+  HeadersUTM(){
+    let headers=new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "X-Api-Key":this._base.getApikey()
+    })
+    return headers;
+  }
+  
+  // utm api
+  loginUTM(data:any)
+  {
+    let option=this.HeadersUTM();
+    let url:string = this._base.getUrlUTMApi() + 'publico/IniciaSesion';
+    return this.http.post(url,data,{headers:option});
+    // return fetch(url)
+
+  }
 
 
   //Login obtener el usuario
-  login(data:any)
+  login(cedula:string)
   {
+    let url:string = this._base.getUrlApi() + 'usuario/login'+cedula;
+    return this.http.get(url);
+  }
+
+  login2(data:any){
     let url:string = this._base.getUrlApi() + 'usuario/login';
     return this.http.post(url,data);
   }

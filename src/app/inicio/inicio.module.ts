@@ -29,6 +29,7 @@ import { DoctoradoPaginaComponent } from './paginas/doctorado-pagina/doctorado-p
 import { ConveniosAprobadosPaginaComponent } from './paginas/convenios-aprobados-pagina/convenios-aprobados-pagina.component';
 import { MostrarConvenioAprobadosComponent } from './components/mostrar-convenio-aprobados/mostrar-convenio-aprobados.component';
 import { MostrarConvenioAprobadosBodyComponent } from './components/mostrar-convenio-aprobados-body/mostrar-convenio-aprobados-body.component';
+import { MovilidadInformacionComponent } from './components/movilidad-informacion/movilidad-informacion.component';
 
 
 
@@ -61,6 +62,7 @@ import { MostrarConvenioAprobadosBodyComponent } from './components/mostrar-conv
     ConveniosAprobadosPaginaComponent,
     MostrarConvenioAprobadosComponent,
     MostrarConvenioAprobadosBodyComponent,
+    MovilidadInformacionComponent,
   ],
   imports: [
     CommonModule,

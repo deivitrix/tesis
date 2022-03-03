@@ -35,7 +35,7 @@ export class PathImagenesService {
   pathimageninvestigacion:string;
   pathimagenmaestria:string;
   pathimagendoctorado:string;
-
+  pathimagenmovilidad:string;
   constructor() { 
     this.path='';
     this.pathtwiter='';
@@ -68,6 +68,7 @@ export class PathImagenesService {
     this.pathimageninvestigacion="";
     this.pathimagenmaestria="";
     this.pathimagendoctorado="";
+    this.pathimagenmovilidad="";
 
   }
 }

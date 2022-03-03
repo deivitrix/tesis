@@ -68,8 +68,11 @@ export class LoginComponent implements OnInit {
   this.userLogin.correo=this.usuario_login;
   this.userLogin.contrasena=this.contrasena;
   let json={usuario:this.userLogin};
+  // let json={usaurio:this.usuario_login,clave:this.contrasena};
+
+
   
-  this._login.login(json)
+  this._login.login2(json)
   .subscribe((res:any)=>{
     if(res.estado==true)
     {
