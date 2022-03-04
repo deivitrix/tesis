@@ -15,7 +15,10 @@
  text-align: end;
 }
 
-reloj
+.negativo{
+    background-color: rgb(192, 133, 133);
+}
+
 .clock {
     display: grid;
     grid-gap: 1px 5px;

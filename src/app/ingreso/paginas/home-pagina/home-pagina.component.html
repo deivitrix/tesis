@@ -35,15 +35,15 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Titulo</th>
+                    <th style="width: 90%;" scope="col">Titulo</th>
                     <th scope="col">Duracion</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let c of listaConv | pagination :pageSize :pageNumber | buscarconvenionombre :filtro;">
-                    <th scope="row">{{c.position}}</th>
-                    <td>{{c.titulo_convenio}}</td>
-                    <td>{{c.fecha_fin}}</td>
+                    <th  [ngClass]="c.duracion_class === true ? 'negativo':''" scope="row">{{c.position}}</th>
+                    <td [ngClass]="c.duracion_class === true ? 'negativo':''"> {{c.titulo_convenio}}</td>
+                    <td [ngClass]="c.duracion_class === true ? 'negativo':''">{{c.fecha_fin}}</td>
                   </tr>
                 </tbody>
               </table>

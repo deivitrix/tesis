@@ -37,7 +37,7 @@ export class ConveniosServicesService {
   }
 
   getconveniostipo(tipo:string):Observable<any>{
-    let url:string = this._base.getUrlApi() + 'convenio-new/'+tipo;
+    let url:string = this._base.getUrlLocalApi() + 'convenio-new/'+tipo;
     return this.http.get<any>(url);
   }
 

@@ -5,6 +5,8 @@ import { valorReloj } from 'src/app/models/reloj/reloj';
 import { ConveniosServicesService } from 'src/app/services/generalConvenios/convenios-services.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-home-pagina',
   templateUrl: './home-pagina.component.html',
@@ -80,61 +82,24 @@ export class HomePaginaComponent implements OnInit {
         });
 
         this.listaConv.map((element, index) => (element.position = index + 1));
+        this.listaConv.map((element, index) => (element.duracion_class = false));
 
         this.listaConv.forEach((item: any) => {
           //fecha actual
           var fechaactual = new Date();
-          var diaactual = fechaactual.getDate();
-          var mesactual = fechaactual.getMonth() + 1;
           var añoactual = fechaactual.getFullYear();
 
           //fecha fin
           var fechafin = new Date(item.fecha_fin);
-          var dia = fechafin.getDate();
-          var mes = fechafin.getMonth() + 1;
           var año = fechafin.getFullYear();
 
           var anioduracion = año - añoactual;
           if (anioduracion < 0) {
-            item.fecha_fin = '0y-' + '0M-0D';
+            item.fecha_fin = '0y-' + '0m-0d';
+            item.duracion_class=true;
+
           } else {
-            // anio
-
-            if(anioduracion!=0)
-            {
-              if (mesactual < mes) {
-                anioduracion--;
-              }
-              if (mes == mesactual && diaactual < dia) {
-                anioduracion--;
-              }
-  
-              if(anioduracion<0)
-              {
-                anioduracion=0;
-              }
-
-
-            }
-           
-            // calculamos los meses
-            var meses = 0;
-            if (mesactual > mes && dia > diaactual) meses = mesactual - mes - 1;
-            else if (mesactual > mes) meses = mesactual - mes;
-            if (mesactual < mes && dia < diaactual)
-              meses = 12 - (mes - mesactual);
-            else if (mesactual < mes) meses = 12 - (mes - mesactual + 1);
-            if (mesactual == mes && dia > diaactual) meses = 11;
-
-            // calculamos los dias
-            var dias = 0;
-            if (diaactual > dia) dias = diaactual - dia;
-            if (diaactual < dia) {
-               var ultimoDiaMes = new Date(añoactual, mesactual - 1, 0);
-              dias = ultimoDiaMes.getDate() - (dia - diaactual);
-            }
-
-                 item.fecha_fin = anioduracion+'y-' + meses+'M-'+ dias+'D';
+            item.fecha_fin=item.duracion;
 
           }
         });
