@@ -4,6 +4,7 @@ import { PaginationPipe } from './pagination/pagination.pipe';
 import { BuscarConvenioPipe } from './buscarConvenio/buscar-convenio.pipe';
 import { BuscarBecasPipe } from './buscarBecas/buscar-becas.pipe';
 import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
+import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenionombre.pipe';
 
 
 
@@ -12,7 +13,8 @@ import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
     PaginationPipe,
     BuscarConvenioPipe,
     BuscarBecasPipe,
-    BuscarBecasBodyPipe
+    BuscarBecasBodyPipe,
+    BuscarconvenionombrePipe
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
     PaginationPipe,
     BuscarConvenioPipe,
     BuscarBecasPipe,
-    BuscarBecasBodyPipe
+    BuscarBecasBodyPipe,
+    BuscarconvenionombrePipe
   ]
 })
 export class PipesModule { }

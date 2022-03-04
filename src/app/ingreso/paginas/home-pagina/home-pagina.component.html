@@ -40,10 +40,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let c of listaConv | pagination :pageSize :pageNumber | buscarConvenio :filtro;">
+                  <tr *ngFor="let c of listaConv | pagination :pageSize :pageNumber | buscarconvenionombre :filtro;">
                     <th scope="row">{{c.position}}</th>
                     <td>{{c.titulo_convenio}}</td>
-                    <td></td>
+                    <td>{{c.fecha_fin}}</td>
                   </tr>
                 </tbody>
               </table>
