@@ -5,7 +5,7 @@ import { valorReloj } from 'src/app/models/reloj/reloj';
 import { ConveniosServicesService } from 'src/app/services/generalConvenios/convenios-services.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
-import * as moment from 'moment';
+// import * as moment from 'moment';
 
 @Component({
   selector: 'app-home-pagina',
