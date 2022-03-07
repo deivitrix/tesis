@@ -88,16 +88,19 @@ export class HomePaginaComponent implements OnInit {
           //fecha actual
           var fechaactual = new Date();
           var añoactual = fechaactual.getFullYear();
+          var mesactual=fechaactual.getMonth()+1;
 
           //fecha fin
           var fechafin = new Date(item.fecha_fin);
           var año = fechafin.getFullYear();
+          var mes=fechafin.getMonth()+1;
+
 
           var anioduracion = año - añoactual;
+          var mesduracion= mesactual-mes;
           if (anioduracion < 0) {
             item.fecha_fin = '0y-' + '0m-0d';
             item.duracion_class=true;
-
           } else {
             item.fecha_fin=item.duracion;
 

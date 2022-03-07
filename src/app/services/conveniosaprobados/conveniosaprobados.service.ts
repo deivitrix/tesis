@@ -17,7 +17,7 @@ export class ConveniosaprobadosService {
   }
 
   getConveniosAprobados():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'tipocon2'
+    let url:string = this._base.getUrlLocalApi() + 'tipocon2'
     return this.http.get<any>(url);
   }
 }

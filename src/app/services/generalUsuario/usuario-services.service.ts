@@ -20,18 +20,18 @@ export class UsuarioServicesService {
   }
 
   updatepassword(data:any){
-    let url:string = this._base.getUrlApi() + 'usuario/update-password';
+    let url:string = this._base.getUrlLocalApi() + 'usuario/update-password';
     return this.http.post(url,data);
   }
 
   updateusuario(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'usuario/update';
+    let url:string = this._base.getUrlLocalApi() + 'usuario/update';
     return this.http.put(url,data);
   }
   getusuariosearch(cedula:string):Observable<any>
   {
-    let url:string = this._base.getUrlApi() + 'usuario/search/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'usuario/search/'+cedula;
     return this.http.get<any>(url);
   }
 }

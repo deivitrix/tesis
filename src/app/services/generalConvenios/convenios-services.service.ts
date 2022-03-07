@@ -14,59 +14,59 @@ export class ConveniosServicesService {
   ) { }
 
   getconveniosEspecificos():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'convenio-especifico/get';
+    let url:string = this._base.getUrlLocalApi() + 'convenio-especifico/get';
     return this.http.get<any>(url);
   }
 
   addconveniosEspecificos(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio-especifico/crear';
+    let url:string = this._base.getUrlLocalApi() + 'convenio-especifico/crear';
     return this.http.post(url,data);
   }
 
   getclausulas():Observable<any>
   {
-    let url:string = this._base.getUrlApi() + 'clausulas-new';
+    let url:string = this._base.getUrlLocalApi() + 'clausulas-new';
     return this.http.get<any>(url);
   }
 
   addclausulas(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'clausulas-new';
+    let url:string = this._base.getUrlLocalApi() + 'clausulas-new';
     return this.http.post(url,data);
   }
 
   getconveniostipo(tipo:string):Observable<any>{
-    let url:string = this._base.getUrlApi() + 'convenio-new/'+tipo;
+    let url:string = this._base.getUrlLocalApi() + 'convenio-new/'+tipo;
     return this.http.get<any>(url);
   }
 
 
   getfirmaEmisor():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'firma-emisor-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-emisor-new';
     return this.http.get<any>(url);
   }
 
   addfirmaEmisor(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'firma-emisor-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-emisor-new';
     return this.http.post(url,data);
 
   }
 
   addfirmaReceptor(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'firma-receptor-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-receptor-new';
     return this.http.post(url,data);
   }
 
   getfirmaReceptor():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'firma-receptor-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-receptor-new';
     return this.http.get<any>(url);
   }
 
   getnombretipoconvenios():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'nombre-tipo-convenio';
+    let url:string = this._base.getUrlLocalApi() + 'nombre-tipo-convenio';
     return this.http.get<any>(url);
   }
 
@@ -82,20 +82,20 @@ export class ConveniosServicesService {
   }
 
   getfirmaconvenio():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'firma-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-new';
     return this.http.get<any>(url);
   }
 
   addfirmaconvenios(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'firma-new';
+    let url:string = this._base.getUrlLocalApi() + 'firma-new';
     return this.http.post(url,data);
   }
 
   // agregar convenios plantilla
   addconveniosplantilla(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio-new';
+    let url:string = this._base.getUrlLocalApi() + 'convenio-new';
     return this.http.post(url,data);
   }
   
@@ -103,21 +103,21 @@ export class ConveniosServicesService {
   // search convenio
   searchconvenio(id:string):Observable<any>
   {
-    let url:string = this._base.getUrlApi() + 'convenio-new/get/'+id;
+    let url:string = this._base.getUrlLocalApi() + 'convenio-new/get/'+id;
     return this.http.get<any>(url);
   }
 
   //guardar convenios guardados
   addconveniosguardado(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio-new-guardado';
+    let url:string = this._base.getUrlLocalApi() + 'convenio-new-guardado';
     return this.http.post(url,data);
   }
 
   //search convenio de la tabla convenio
   serachconveniotabla(id:string):Observable<any>
   {
-    let url:string = this._base.getUrlApi() + 'convenio/get/'+id;
+    let url:string = this._base.getUrlLocalApi() + 'convenio/get/'+id;
     return this.http.get<any>(url);
   }
 
@@ -130,7 +130,7 @@ export class ConveniosServicesService {
   //eliminar convenios
   eliminarconvenio(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio/eliminar';
+    let url:string = this._base.getUrlLocalApi() + 'convenio/eliminar';
     return this.http.put(url,data);
   }
 
@@ -144,21 +144,21 @@ export class ConveniosServicesService {
   //modificar el convenio aprobados
   modificarconveniosaprobados(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio/update/aprobado';
+    let url:string = this._base.getUrlLocalApi() + 'convenio/update/aprobado';
     return this.http.put(url,data);
   }
 
   //modificar convenios Guardados a Aprobados
   modificarconveniosguardados(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'convenio/update/pdf';
+    let url:string = this._base.getUrlLocalApi() + 'convenio/update/pdf';
     return this.http.put(url,data);
 
   }
 
   // obtener imagenes convenio
   getimagenesconvenios():Observable<any>{
-    let url:string=this._base.getUrlApi()+'imagen-convenio';
+    let url:string=this._base.getUrlLocalApi()+'imagen-convenio';
     return this.http.get<any>(url);
   }
 

@@ -106,8 +106,6 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     .subscribe((res:any)=>{
      if(res.estado==true)
      {
-      
-       
        this.loading=false;
        this.datoconvenio=res.convenio;
      // separar=utf8Encode(this.datoconvenio.PDF)

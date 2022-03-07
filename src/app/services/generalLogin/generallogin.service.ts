@@ -16,26 +16,13 @@ export class GeneralLoginService{
     private _base:BaseUrlService
   ) { }
   
-  // header
-  HeadersUTM(){
-    let headers=new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": "true",
-    "X-Api-Key":this._base.getApikey()
-    })
-    return headers;
-  }
   
+
   // utm api
   loginUTM(data:any)
   {
-    let option=this.HeadersUTM();
-    let url:string = this._base.getUrlUTMApi() + 'publico/IniciaSesion';
-    return this.http.post(url,data,{headers:option});
-    // return fetch(url)
-
+    let url:string = this._base.getUrlLocalApi() + 'login-UTM';
+    return this.http.post(url,data);
   }
 
 
@@ -56,7 +43,7 @@ export class GeneralLoginService{
   }
 
   logout(){
-    localStorage.removeItem("cedula");
+    localStorage.removeItem("id_personal");
     this.loggedId.next(false);
   }
 

@@ -14,7 +14,7 @@ export class SesionGuardGuard implements CanActivate {
     state: RouterStateSnapshot
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      let cedula = localStorage.getItem('cedula');
+      let cedula = localStorage.getItem('id_personal');
 
       if(cedula){
         this.router.navigateByUrl('/utmricb');

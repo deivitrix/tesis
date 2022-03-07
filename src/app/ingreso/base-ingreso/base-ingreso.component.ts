@@ -128,7 +128,6 @@ export class BaseIngresoComponent implements OnInit {
   }
   salir(){
     this._login.logout();
-    sessionStorage.setItem('isRedirected','true');
     this.route.navigate(['/principal/inicio']);
   }
 }

@@ -17,35 +17,35 @@ export class BecasnivelService {
     ) { }
   
   getBecas():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'becas2'
+    let url:string = this._base.getUrlLocalApi() + 'becas2'
     return this.http.get<any>(url);
   }
 
 
   //becas por nivel
   getBecasv2(tipo:string):Observable<any>{
-    let url:string = this._base.getUrlApi() + 'beca-v2/'+tipo
+    let url:string = this._base.getUrlLocalApi() + 'beca-v2/'+tipo
     return this.http.get<any>(url);
   }
   
   getBecasNivelbody():Observable<any>{
-    let url:string = this._base.getUrlApi() + 'becas_body2'; 
+    let url:string = this._base.getUrlLocalApi() + 'becas_body2'; 
     return this.http.get<any>(url);
   }
 
   //agregar categoria becas
   addcategoriabecas(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'pagina-becas/add';
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas/add';
     return this.http.post(url,data);
   }
 
   updatecategoriabecasestado(data:any){
-    let url:string = this._base.getUrlApi() + 'pagina-becas/update/estado';
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas/update/estado';
     return this.http.put(url,data);
   }
   updatecategoriabecasNombre(data:any){
-    let url:string = this._base.getUrlApi() + 'pagina-becas/update';
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas/update';
     return this.http.put(url,data);
   }
 
@@ -85,21 +85,21 @@ export class BecasnivelService {
 
   //creacion
   addBecasNivelBody(data:any){
-    let url:string = this._base.getUrlApi() + 'pagina-becas-body/add'; 
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/add'; 
     return this.http.post(url,data);
   }
 
   //modificar
   updateBecasNivelBody(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'pagina-becas-body/update'; 
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/update'; 
     return this.http.put(url,data);
   }
 
   //updateEstado NIvel Becas Body
   updateEstadoBecasNivelBody(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'pagina-becas-body/update/estado'; 
+    let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/update/estado'; 
     return this.http.put(url,data);
   }
 }

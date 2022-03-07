@@ -13,7 +13,7 @@ export class ExistSesionGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
-      let cedula = localStorage.getItem('cedula');
+      let cedula = localStorage.getItem('id_personal');
       if(cedula){
         return true;
       }else{

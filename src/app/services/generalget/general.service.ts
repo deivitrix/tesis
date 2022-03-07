@@ -15,7 +15,7 @@ export class GeneralService {
   ) { }
   /// Interfaces Get
   getTipoPagina(pagina:string):Observable<any>{
-    let url:string = this._base.getUrlApi() + 'interfaz/contenido/'+pagina;
+    let url:string = this._base.getUrlLocalApi() + 'interfaz/contenido/'+pagina;
     return this.http.get<Interfaz_contenido[]>(url);
   }
 
@@ -25,31 +25,31 @@ export class GeneralService {
   }
 
   getimagenesinterfaz():Observable<any>{
-    let url:string=this._base.getUrlApi()+'imagen-interfaces';
+    let url:string=this._base.getUrlLocalApi()+'imagen-interfaces';
     return this.http.get<any>(url);
   }
 
   updateCarrosel(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'update/carrosel';
+    let url:string = this._base.getUrlLocalApi() + 'update/carrosel';
     return this.http.post(url,data);
   }
 
   deleteCarrosel(data:any){
-    let url:string = this._base.getUrlApi() + 'delete/carrosel';
+    let url:string = this._base.getUrlLocalApi() + 'delete/carrosel';
     return this.http.put(url,data);
   }
 
  // mandar a la base de datos
   addimagenesinterfaz(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'imagen-interfaces/subir';
+    let url:string = this._base.getUrlLocalApi() + 'imagen-interfaces/subir';
     return this.http.post(url,data);
   }
 
   //modificar la pagina Nosotros
   updatePaginaNosotros(data:any){
-    let url:string = this._base.getUrlApi() + 'pagina-nosotros/update';
+    let url:string = this._base.getUrlLocalApi() + 'pagina-nosotros/update';
     return this.http.put(url,data);
   }
 
@@ -62,7 +62,7 @@ export class GeneralService {
   //modoficar la pagina Convenios
   updatePaginaConvenio(data:any)
   {
-    let url:string = this._base.getUrlApi() + 'pagina-convenios/update';
+    let url:string = this._base.getUrlLocalApi() + 'pagina-convenios/update';
     return this.http.put(url,data);
   }
 

@@ -13,7 +13,7 @@ export class GeneralFuncionalidadService {
   ) { }
 
   getfuncionalidad(cedula:string){
-    let url:string = this._base.getUrlApi() + 'usuario/funcionalidad/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'usuario/funcionalidad/'+cedula;
     return this.http.get<any>(url);
   }
 }
