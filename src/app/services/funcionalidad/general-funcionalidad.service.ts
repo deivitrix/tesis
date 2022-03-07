@@ -12,8 +12,8 @@ export class GeneralFuncionalidadService {
     private _base:BaseUrlService
   ) { }
 
-  getfuncionalidad(cedula:string){
-    let url:string = this._base.getUrlLocalApi() + 'usuario/funcionalidad/'+cedula;
+  getfuncionalidad(id:string){
+    let url:string = this._base.getUrlLocalApi() + 'usuario/funcionalidad/'+id;
     return this.http.get<any>(url);
   }
 }

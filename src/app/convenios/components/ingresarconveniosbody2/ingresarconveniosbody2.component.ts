@@ -193,7 +193,7 @@ getdatosconvenios(){
   this.convenios.searchconvenio(this.id)
   .subscribe((res:any)=>{
     this.datosconvenio=res;
-    console.log(this.datosconvenio);
+    //console.log(this.datosconvenio);
 
     this.myform.patchValue({
       id_convenio:this.id,
@@ -209,6 +209,8 @@ getdatosconvenios(){
       PDF:this.datosconvenio.PDF
 
     });
+    //console.log(this.myform.value);
+    
      var con=""+this.datosconvenio.id_tipoconvenio as string;
      var espe=""+this.datosconvenio.id_tipoespecifico as string;
 
@@ -1602,6 +1604,11 @@ escoger(id:number){
 
         if(this.tipoIngresar==true)
         {
+          var id_personal;
+          id_personal=localStorage.getItem("id_personal") as string;
+          this.myform.patchValue({
+            id_usuario:id_personal
+          });
           let json={data:this.myform.value}
         
         this.convenios.GuardarVistaPDFconvenios(json)

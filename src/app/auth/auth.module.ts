@@ -18,8 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 
 
 
-import { FormularioRecuperaCuentaComponent } from './components/formulario-recupera-cuenta/formulario-recupera-cuenta.component';
-import { ReseteoContraComponent } from './components/reseteo-contra/reseteo-contra.component';
+
 import { LoadingloginComponent } from './components/loadinglogin/loadinglogin.component';
 
 
@@ -28,8 +27,6 @@ import { LoadingloginComponent } from './components/loadinglogin/loadinglogin.co
     LoginComponent,
     BaseAuthComponent,
     MensajeLoginComponent,
-    FormularioRecuperaCuentaComponent,
-    ReseteoContraComponent,
     LoadingloginComponent
   ],
   imports: [

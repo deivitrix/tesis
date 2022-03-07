@@ -109,93 +109,70 @@ export class LoginComponent implements OnInit {
       }
 
       if (res.error == false) {
-        console.log(res);
+        
+        this._login.login(res.id_personal)
+        .subscribe((res:any)=>{
 
-        Swal.fire({
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown',
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp',
-          },
-          title: 'Bienvenido al sistema ',
-          icon: 'success',
-        });
+          if(res.estado==true)
+          {
+            if(res.usuario.estado=="A")
+            {
+              this.snackBar.openFromComponent(MensajeLoginComponent,{
+                        data:{
+                          titulo:'Bienvenido',
+                          mensaje:'Bienvenido al Sistema UTMRICB',
+                         buttonText:'',
+                         icon:'success'
+                        },
+                        duration:1500,
+                        horizontalPosition:'center',
+                        verticalPosition:'top',
+                        panelClass:'success'
+                      });
+                        this.loading=false;
+                        // guardar en cache
+                     sessionStorage.setItem('isRedirected','true');
+                     localStorage.setItem("id_personal",res.usuario.id);
+                    this.router.navigate(['/utmricb/principal']);
+            }
+            else{
+                     this.loading=false;
+          this.snackBar.openFromComponent(MensajeLoginComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Este usuario no encuentra activo!!!",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error'
+          });
+          this.contrasena="";
+          return;
 
-        // verificar si el usuario existe en la base de datos del dricb
-        // guardar en cache
-                 sessionStorage.setItem('isRedirected','true');
-                localStorage.setItem("id_personal",res.id_personal);
-                this.router.navigate(['/utmricb/principal']);
+            }
+            
+          }
+          else{
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown',
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp',
+              },
+              title: res.mensaje,
+              icon: 'warning',
+            });
+
+          }
+        })
+
       }
     });
 
-    // this._login.login2(json)
-    // .subscribe((res:any)=>{
-    //   if(res.estado==true)
-    //   {
-    //     if(res.usuario.estado=="A")
-    //     {
-    //       this.snackBar.openFromComponent(MensajeLoginComponent,{
-    //         data:{
-    //           titulo:'Bienvenido',
-    //           mensaje:'Bienvenido al Sistema UTMRICB',
-    //          buttonText:'',
-    //          icon:'success'
-    //         },
-    //         duration:1500,
-    //         horizontalPosition:'center',
-    //         verticalPosition:'top',
-    //         panelClass:'success'
-    //       });
-    //         this.loading=false;
-    //       //guardar en cache
-    //       sessionStorage.setItem('isRedirected','true');
-    //       localStorage.setItem("cedula",res.usuario.cedula);
-    //       this.router.navigate(['/utmricb/principal']);
-
-    //     }
-    //     else
-    //     {
-
-    //       this.loading=false;
-    //       this.snackBar.openFromComponent(MensajeLoginComponent,{
-    //         data:{
-    //           titulo:'Error.....',
-    //           mensaje:"Este usuario no encuentra activo!!!",
-    //          buttonText:'',
-    //          icon:'warning'
-    //         },
-    //         duration:1000,
-    //         horizontalPosition:'end',
-    //         verticalPosition:'bottom',
-    //         panelClass:'error'
-    //       });
-    //       this.contrasena="";
-    //       return;
-
-    //     }
-
-    //   }
-    //   if(res.estado==false)
-    //   {
-    //     this.loading=false;
-    //     this.snackBar.openFromComponent(MensajeLoginComponent,{
-    //       data:{
-    //         titulo:'Error.....',
-    //         mensaje:res.mensaje,
-    //        buttonText:'',
-    //        icon:'warning'
-    //       },
-    //       duration:1000,
-    //       horizontalPosition:'end',
-    //       verticalPosition:'bottom',
-    //       panelClass:'error'
-    //     });
-    //     this.contrasena="";
-    //     return;
-
-    //   }
-    // });
+    
   }
 }

@@ -27,7 +27,7 @@ export class BaseIngresoComponent implements OnInit {
   cargos:CargoModel[]=[];
   listafuncionalidadaux:FuncionalidadUsuario[]=[];
   listafuncionalidad:FuncionalidadUsuario[]=[];
-  cedula:string;
+  id_personal:string;
   configuracionavanzada=false;
   loading=true;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -45,9 +45,9 @@ export class BaseIngresoComponent implements OnInit {
     this.fecha_ac="";
     this.fecha_op="";
     this.cargo_usuario="";
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id;
     this.fecha_actual();
     let isRedirected = sessionStorage.getItem('isRedirected');
     if(isRedirected=='true')
@@ -58,19 +58,12 @@ export class BaseIngresoComponent implements OnInit {
     }
   }
   
-  getusuariosearch(){
-    this._login.getusuariosearch(this.cedula)
-   .subscribe((res:any) => {
-     //console.log(res.cargos.length);
-     this.cargos.push(res.cargos[0]);
-     this.cargo_usuario=this.cargos[0].cargo;
-   });
-  }
+  
 
   getfuncionalidad(){
-    this._funcionalidad.getfuncionalidad(this.cedula)
+    this._funcionalidad.getfuncionalidad(this.id_personal)
    .subscribe((res:any) => {
-    //  console.log(res.data);
+     //console.log(res.data);
      this.listafuncionalidadaux=res.data;
      this.recorreFuncionalidad(this.listafuncionalidadaux);
    });
@@ -123,7 +116,6 @@ export class BaseIngresoComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getusuariosearch();
     this.getfuncionalidad();
   }
   salir(){

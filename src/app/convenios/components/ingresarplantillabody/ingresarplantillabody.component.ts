@@ -81,7 +81,7 @@ export class IngresarplantillabodyComponent implements OnInit {
   botonguardar=false;
 
 // cedula del usuario
-cedula:string;
+id:string;
 
 public Editor = ClassicEditor;
 
@@ -128,10 +128,10 @@ data:any={id:0,url_escoger:this.url_escoger};
       firmaReceptor:this.ingresar.array([]),
       PDF:['']
     });
-    this.cedula="";
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    this.id="";
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id=id_personal;
 
   }
 
@@ -148,7 +148,7 @@ data:any={id:0,url_escoger:this.url_escoger};
   // usuario
 
   getusuario(){
-    this.usuario.getusuariosearch(this.cedula)
+    this.usuario.getusuariosearch(this.id)
     .subscribe((res:any)=>{ 
         this.myform.patchValue({
           id_usuario:res.usuario.id

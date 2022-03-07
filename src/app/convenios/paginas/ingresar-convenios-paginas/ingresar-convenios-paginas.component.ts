@@ -9,15 +9,15 @@ import { GeneralFuncionalidadService } from 'src/app/services/funcionalidad/gene
   styleUrls: ['./ingresar-convenios-paginas.component.css']
 })
 export class IngresarConveniosPaginasComponent implements OnInit {
-  cedula:string;
+  id:string;
   loading=true;
   listafuncionalidadaux:FuncionalidadUsuario[]=[];
   listafuncionalidad:FuncionalidadUsuario[]=[];
 
   constructor(private _funcionalidad:GeneralFuncionalidadService,private route:Router) { 
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id=id_personal;
   }
 
 
@@ -26,7 +26,7 @@ export class IngresarConveniosPaginasComponent implements OnInit {
   }
 
   getfuncionalidad(){
-    this._funcionalidad.getfuncionalidad(this.cedula)
+    this._funcionalidad.getfuncionalidad(this.id)
    .subscribe((res:any) => {
      //console.log(res.data);
      this.loading=false;

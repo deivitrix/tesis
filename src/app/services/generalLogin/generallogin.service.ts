@@ -27,16 +27,16 @@ export class GeneralLoginService{
 
 
   //Login obtener el usuario
-  login(cedula:string)
+  login(personal_id:string)
   {
-    let url:string = this._base.getUrlApi() + 'usuario/login'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'usuario/login/'+personal_id;
     return this.http.get(url);
   }
 
-  login2(data:any){
-    let url:string = this._base.getUrlApi() + 'usuario/login';
-    return this.http.post(url,data);
-  }
+  // login2(data:any){
+  //   let url:string = this._base.getUrlApi() + 'usuario/login';
+  //   return this.http.post(url,data);
+  // }
 
   get isLogged():Observable<boolean>{
     return this.loggedId.asObservable();
@@ -49,25 +49,24 @@ export class GeneralLoginService{
 
   // buscar usuario
 
-  getusuariosearch(cedula:string):Observable<any>
+  getusuariosearch(id:string):Observable<any>
   {
-    let url:string = this._base.getUrlApi() + 'usuario/search/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'usuario/search/'+id;
     return this.http.get<any>(url);
   }
 
   //enviar correo al usuario para la recuperacion del password
+  // emailsearch(data:any)
+  // {
+  //   let url:string = this._base.getUrlLocalApi() + 'email/forget-password';
+  //   return this.http.post(url,data);
+  // }
 
-  emailsearch(data:any)
-  {
-    let url:string = this._base.getUrlApi() + 'email/forget-password';
-    return this.http.post(url,data);
-  }
-
-  recuperacionPassword(data:any)
-  {
-    let url:string = this._base.getUrlApi() + 'usuario/reset-password';
-    return this.http.put(url,data);
-  }
+  // recuperacionPassword(data:any)
+  // {
+  //   let url:string = this._base.getUrlLocalApi() + 'usuario/reset-password';
+  //   return this.http.put(url,data);
+  // }
 
   
 }

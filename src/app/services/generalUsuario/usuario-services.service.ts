@@ -29,9 +29,9 @@ export class UsuarioServicesService {
     let url:string = this._base.getUrlLocalApi() + 'usuario/update';
     return this.http.put(url,data);
   }
-  getusuariosearch(cedula:string):Observable<any>
+  getusuariosearch(id:string):Observable<any>
   {
-    let url:string = this._base.getUrlLocalApi() + 'usuario/search/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'usuario/search/'+id;
     return this.http.get<any>(url);
   }
 }
