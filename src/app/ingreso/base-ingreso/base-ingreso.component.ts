@@ -118,6 +118,7 @@ export class BaseIngresoComponent implements OnInit {
   ngOnInit(): void {
     this.getfuncionalidad();
   }
+  
   salir(){
     this._login.logout();
     this.route.navigate(['/principal/inicio']);
