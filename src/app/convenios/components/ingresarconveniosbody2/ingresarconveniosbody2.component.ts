@@ -195,20 +195,47 @@ getdatosconvenios(){
     this.datosconvenio=res;
     //console.log(this.datosconvenio);
 
-    this.myform.patchValue({
-      id_convenio:this.id,
-      id_usuario:this.datosconvenio.id_usuario,
-      id_imagen1:this.datosconvenio.id_imagen1,
-      id_imagen2:this.datosconvenio.id_imagen2,
-      urlimagen1:this.datosconvenio.urlimagen1,
-      urlimagen2:this.datosconvenio.urlimagen2,
-      id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
-      id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
-      nombre_convenio:this.datosconvenio.nombre_convenio,
-      comparecientes:this.datosconvenio.comparecientes,
-      PDF:this.datosconvenio.PDF
+    if(this.tipoModificar==true)
+    {
+      this.myform.patchValue({
+        id_convenio:this.id,
+        id_usuario:this.datosconvenio.id_usuario,
+        id_imagen1:this.datosconvenio.id_imagen1,
+        id_imagen2:this.datosconvenio.id_imagen2,
+        urlimagen1:this.datosconvenio.urlimagen1,
+        urlimagen2:this.datosconvenio.urlimagen2,
+        id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
+        id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
+        nombre_convenio:this.datosconvenio.nombre_convenio,
+        comparecientes:this.datosconvenio.comparecientes,
+        PDF:this.datosconvenio.PDF
+  
+      });
 
-    });
+
+    }
+    if(this.tipoIngresar==true)
+    {
+      var id_personal;
+      id_personal=localStorage.getItem("id_personal") as string;
+      this.myform.patchValue({
+        id_convenio:this.id,
+        id_usuario:id_personal,
+        id_imagen1:this.datosconvenio.id_imagen1,
+        id_imagen2:this.datosconvenio.id_imagen2,
+        urlimagen1:this.datosconvenio.urlimagen1,
+        urlimagen2:this.datosconvenio.urlimagen2,
+        id_tipoconvenio:this.datosconvenio.id_tipoconvenio,
+        id_tipoespecifico:this.datosconvenio.id_tipoespecifico,
+        nombre_convenio:this.datosconvenio.nombre_convenio,
+        comparecientes:this.datosconvenio.comparecientes,
+        PDF:this.datosconvenio.PDF
+      });
+
+
+    }
+
+   
     //console.log(this.myform.value);
     
      var con=""+this.datosconvenio.id_tipoconvenio as string;
@@ -1340,7 +1367,7 @@ escoger(id:number){
     
     this.convenios.GuardarVistaPDFconvenios(json)
     .subscribe((res:any)=>{
-      console.log(res);
+     // console.log(res);
 
       if(res.estado==true)
       {
@@ -1373,21 +1400,7 @@ escoger(id:number){
 
       }
     this.botonvista=false;
-    
-
-       
-  
     });
-   
-
-
-    // const doc = new jsPDF();
-
-    // doc.text(this.myform.get('nombre_convenio')?.value, 10, 10);
-    // doc.save('Convenio plantilla.pdf');
-    
-    
-
   }
 
   cancelar(){
@@ -1604,11 +1617,6 @@ escoger(id:number){
 
         if(this.tipoIngresar==true)
         {
-          var id_personal;
-          id_personal=localStorage.getItem("id_personal") as string;
-          this.myform.patchValue({
-            id_usuario:id_personal
-          });
           let json={data:this.myform.value}
         
         this.convenios.GuardarVistaPDFconvenios(json)

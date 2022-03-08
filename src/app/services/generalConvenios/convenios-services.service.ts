@@ -171,14 +171,14 @@ export class ConveniosServicesService {
   //agregar una imagen
   addimagenconvenio(data:any)
   {
-    let url:string=this._base.getUrlApi()+'imagen-convenio/subir';
+    let url:string=this._base.getUrlLocalApi()+'imagen-convenio/subir';
     return this.http.post(url,data); 
   }
 
   // modificar convenio
   updateconvenio(data:any){
     //convenio/all/update
-    let url:string=this._base.getUrlApi()+'convenio/all/update';
+    let url:string=this._base.getUrlLocalApi()+'convenio/all/update';
     return this.http.put(url,data); 
 
   }
