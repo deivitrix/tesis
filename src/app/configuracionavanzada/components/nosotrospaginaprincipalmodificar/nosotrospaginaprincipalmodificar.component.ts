@@ -28,7 +28,7 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
   id=0;
 
    //usuario
-   cedula:string;
+  
    usuario_id:string="";
 
    // 
@@ -40,10 +40,9 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
     //archivo
   archivo:File=new File([""],"");
   constructor(private ingresar:FormBuilder,private _general:GeneralService,private _login:GeneralLoginService,public snackBar:MatSnackBar) { 
-    this.cedula="";
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.usuario_id=id;
     this.myform=ingresar.group({
       id_usuario:0,
       id_objetivo:0,
@@ -65,18 +64,8 @@ export class NosotrospaginaprincipalmodificarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getusuario()
     this.getPaginas()
     this.getPaginasInicio()
-  }
-  getusuario(){
-    this._login.getusuariosearch(this.cedula)
-    .subscribe((res:any) => {
-      this.usuario_id=res.usuario.id;
-      this.myform.patchValue({
-       id_usuario:res.usuario.id
-      });   
-    });
   }
   getPaginas(){
     this._general.getTipoPagina("Nosotros")

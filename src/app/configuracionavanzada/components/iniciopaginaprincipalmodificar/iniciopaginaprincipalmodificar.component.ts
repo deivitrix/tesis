@@ -33,7 +33,6 @@ export class IniciopaginaprincipalmodificarComponent implements OnInit {
   id=0;
 
   //usuario
-  cedula:string;
   usuario_id:string="";
   
 
@@ -60,25 +59,16 @@ data:any={id:0,url_escoger:this.url_escoger};
       escoger:false
     });
     this.pathimagendefecto=_pathimagenes.pathimagendefecto;
-    this.cedula="";
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.usuario_id=id;
   }
 
   ngOnInit(): void {
-    this.getusuario();
     this.getPaginas()
   }
 
-  getusuario(){
-    this._login.getusuariosearch(this.cedula)
-    .subscribe((res:any) => {
-      //this.loading=false;
-      // console.log(res);
-      this.usuario_id=res.usuario.id;   
-    });
-  }
+ 
   getPaginas(){
     this._general.getTipoPagina("Inicio")
     .subscribe((res:any) => {

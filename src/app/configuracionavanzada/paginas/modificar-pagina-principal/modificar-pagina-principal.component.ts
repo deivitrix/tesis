@@ -10,15 +10,15 @@ import { GeneralFuncionalidadService } from 'src/app/services/funcionalidad/gene
 })
 export class ModificarPaginaPrincipalComponent implements OnInit {
 
-  cedula:string;
+  id_personal:string;
   loading=true;
   listafuncionalidadaux:FuncionalidadUsuario[]=[];
   listafuncionalidad:FuncionalidadUsuario[]=[];
 
   constructor(private _funcionalidad:GeneralFuncionalidadService,private route:Router) { 
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id;
   }
 
 
@@ -27,7 +27,7 @@ export class ModificarPaginaPrincipalComponent implements OnInit {
   }
 
   getfuncionalidad(){
-    this._funcionalidad.getfuncionalidad(this.cedula)
+    this._funcionalidad.getfuncionalidad(this.id_personal)
    .subscribe((res:any) => {
      //console.log(res.data);
      this.loading=false;

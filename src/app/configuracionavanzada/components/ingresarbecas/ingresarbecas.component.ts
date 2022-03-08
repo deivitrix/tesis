@@ -29,7 +29,7 @@ export class IngresarbecasComponent implements OnInit {
   titulo="";
 
   // usuario
-  cedula:string;
+  usuario_id:string;
 
   //ingresar categoria
   data:any={nombre:'',tipo:''}
@@ -64,10 +64,9 @@ export class IngresarbecasComponent implements OnInit {
   constructor(private rutaActiva: ActivatedRoute,private router:Router,private _becasnivel:BecasnivelService,private usuario:UsuarioServicesService
     ,private ingresar:FormBuilder,public dialog: MatDialog) { 
     this.tipo=rutaActiva.snapshot.params.tipo;
-    this.cedula="";
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.usuario_id=id;
 
     this.myform=ingresar.group({
       id_usuario:['']
@@ -100,11 +99,8 @@ export class IngresarbecasComponent implements OnInit {
 
   }
   getusuario(){
-    this.usuario.getusuariosearch(this.cedula)
-    .subscribe((res:any)=>{ 
-      this.myform.patchValue({
-        id_usuario:res.usuario.id
-      });
+    this.myform.patchValue({
+      id_usuario:this.usuario_id
     });
   }
 

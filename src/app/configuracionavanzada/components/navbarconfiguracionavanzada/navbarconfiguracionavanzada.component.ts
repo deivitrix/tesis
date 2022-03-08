@@ -8,21 +8,21 @@ import { GeneralFuncionalidadService } from 'src/app/services/funcionalidad/gene
   styleUrls: ['./navbarconfiguracionavanzada.component.css']
 })
 export class NavbarconfiguracionavanzadaComponent implements OnInit {
-  cedula="";
+  id_personal="";
   loading=true;
   listafuncionalidadaux:FuncionalidadUsuario[]=[];
   listafuncionalidad:FuncionalidadUsuario[]=[];
   constructor(private _funcionalidad:GeneralFuncionalidadService) { 
-    var cedula1;
-    cedula1=localStorage.getItem("cedula") as string;  
-    this.cedula=cedula1;
+    var id;
+    id=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id;
   }
 
   ngOnInit(): void {
     this.getfuncionalidad()
   }
   getfuncionalidad(){
-    this._funcionalidad.getfuncionalidad(this.cedula)
+    this._funcionalidad.getfuncionalidad(this.id_personal)
    .subscribe((res:any) => {
      //console.log(res.data);
      this.loading=false;
