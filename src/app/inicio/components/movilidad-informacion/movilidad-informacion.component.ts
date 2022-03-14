@@ -69,6 +69,7 @@ export class MovilidadInformacionComponent implements OnInit {
     }
     if(item.nombre=="Reglamento")
     {
+      
       if(item.estado=="A"){
         this.listareglamento.push(item)
       
