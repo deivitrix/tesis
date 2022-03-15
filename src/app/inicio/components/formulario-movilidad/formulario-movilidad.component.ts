@@ -25,6 +25,18 @@ export class FormularioMovilidadComponent implements OnInit {
   // formGroup
   myform:FormGroup;
 
+
+  //menu
+  menu_opcion:number=0;
+
+  // validaciones
+  menu1=false;
+  menu2=false;
+  menu3=false;
+  menu4=false;
+  menu5=false;
+
+
   constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder) {
     this.cedula=rutaActiva.snapshot.params.cedula;
     this.myform=ingresar.group({
@@ -63,6 +75,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovilidadEstudiante()
+    this.menu(6)
   }
 
   getMovilidadEstudiante()
@@ -103,7 +116,7 @@ export class FormularioMovilidadComponent implements OnInit {
         residencia_calle_3:res.usuario.residencia_calle_3,
         telefono_personal_domicilio:res.usuario.telefono_personal_domicilio,
         telefono_personal_celular:res.usuario.telefono_personal_celular,
-        
+
   
         contacto_emergencia_apellidos:res.usuario.contacto_emergencia_apellidos,
         contacto_emergencia_nombres:res.usuario.contacto_emergencia_nombres,
@@ -119,6 +132,62 @@ export class FormularioMovilidadComponent implements OnInit {
 
       }
     })
+
+  }
+
+  menu(id:number)
+  {
+    
+    if(this.menu_opcion==0)
+    {
+      this.menu_opcion=1;
+    }
+    else{
+      this.menu_opcion=id;
+    }
+
+    if(this.menu_opcion==1)
+    {
+      this.menu1=true;
+      this.menu2=false;
+      this.menu3=false;
+      this.menu4=false;
+      this.menu5=false;
+      console.log(this.menu1);
+      
+    }
+    else if(this.menu_opcion==2)
+    {
+      this.menu1=false;
+      this.menu2=true;
+      this.menu3=false;
+      this.menu4=false;
+      this.menu5=false;
+    }
+    else if(this.menu_opcion==3)
+    {
+      this.menu1=false;
+      this.menu2=false;
+      this.menu3=true;
+      this.menu4=false;
+      this.menu5=false;
+    }
+    else if(this.menu_opcion==4)
+    {
+      this.menu1=false;
+      this.menu2=false;
+      this.menu3=false;
+      this.menu4=true;
+      this.menu5=false;
+    }
+    else if(this.menu_opcion==5)
+    {
+      this.menu1=false;
+      this.menu2=false;
+      this.menu3=false;
+      this.menu4=false;
+      this.menu5=true;
+    }
 
   }
 
