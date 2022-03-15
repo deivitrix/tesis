@@ -1,3 +1,4 @@
+import { FormularioMovilidadComponent } from './components/formulario-movilidad/formulario-movilidad.component';
 import { ConveniosAprobadosPaginaComponent } from './paginas/convenios-aprobados-pagina/convenios-aprobados-pagina.component';
 import { MaestriaPaginaComponent } from './paginas/maestria-pagina/maestria-pagina.component';
 import { DoctoradoPaginaComponent } from './paginas/doctorado-pagina/doctorado-pagina.component';
@@ -58,6 +59,9 @@ const routes: Routes = [
       },
       {
         path:'conveniosaprobados',component:ConveniosAprobadosPaginaComponent
+      },
+      {
+        path:'formulario/:cedula',component:FormularioMovilidadComponent
       }
       
 

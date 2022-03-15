@@ -1,0 +1,100 @@
+<div class="separador"></div>
+<ng-container *ngIf="loading">
+<app-loading></app-loading>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <form [formGroup]="myform" autocomplete="off">
+        <div class="container-fluid wrapper">
+            <div class="formContent rounded">
+                <h4 class="active"> <span><h3>Formulario Movilidad</h3></span></h4>
+                <div class="fadeIn first">
+                    <!-- datos personales -->
+                       <div class="border ">
+                        <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z"/>
+                          </svg>Datos personales</h4>
+                       </div>
+                    
+                    
+                    <div class="row" style="margin-bottom: 2%;">
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Cedula</mat-label>
+                                <input formControlName="cedula" matInput>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>nombres</mat-label>
+                                <input formControlName="nombres" matInput>
+                              </mat-form-field>
+                        </div>
+        
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Apellido 1</mat-label>
+                                <input formControlName="apellido1" matInput>
+                              </mat-form-field>
+                        </div>
+
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Apellido 2</mat-label>
+                                <input formControlName="apellido2" matInput>
+                              </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 2%;">
+                        
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Tipo de Sangre</mat-label>
+                                <input formControlName="Tipo_Sangre" matInput>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Fecha de nacimiento</mat-label>
+                                <input formControlName="fecha_nacimiento" matInput>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Nacionalidad</mat-label>
+                                <input formControlName="nacionalidad" matInput>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Genero</mat-label>
+                                <input formControlName="genero" matInput>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <mat-form-field class="container-fill" appearance="fill">
+                                <mat-label>Correo institucional</mat-label>
+                                <input formControlName="correo_personal_institucional" matInput>
+                              </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+
+        
+                </div>
+            </div>
+        </div>
+
+    </form>
+   
+
+</ng-container>
+
+
+

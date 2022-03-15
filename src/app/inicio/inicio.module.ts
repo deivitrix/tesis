@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -30,6 +31,34 @@ import { ConveniosAprobadosPaginaComponent } from './paginas/convenios-aprobados
 import { MostrarConvenioAprobadosComponent } from './components/mostrar-convenio-aprobados/mostrar-convenio-aprobados.component';
 import { MostrarConvenioAprobadosBodyComponent } from './components/mostrar-convenio-aprobados-body/mostrar-convenio-aprobados-body.component';
 import { MovilidadInformacionComponent } from './components/movilidad-informacion/movilidad-informacion.component';
+import { FormularioMovilidadComponent } from './components/formulario-movilidad/formulario-movilidad.component';
+import { DialogcedulaComponent } from './components/dialogcedula/dialogcedula.component';
+
+//material
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import{ReactiveFormsModule} from '@angular/forms'
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import { PipesModule } from '../pipes/pipes.module';
+
+//editor de texto
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 
@@ -63,10 +92,38 @@ import { MovilidadInformacionComponent } from './components/movilidad-informacio
     MostrarConvenioAprobadosComponent,
     MostrarConvenioAprobadosBodyComponent,
     MovilidadInformacionComponent,
+    FormularioMovilidadComponent,
+    DialogcedulaComponent,
   ],
   imports: [
     CommonModule,
-    InicioRoutingModule
+    InicioRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatTreeModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    FormsModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    PipesModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCardModule,
+    CKEditorModule
+
   ],
   exports: [
     Navb1InicioComponent,
