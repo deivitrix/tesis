@@ -1,6 +1,10 @@
 import { GeneralMovilidadService } from './../../../services/generalMovilidad/general-movilidad.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 //editor de texto 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -51,10 +55,13 @@ export class FormularioMovilidadComponent implements OnInit {
   beneficio1=false;
   beneficio2=false;
 
-  //tipo de sangre
+  //botones
+  botonguardar=false;
+  botoncancelar=false;
 
 
-  constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder) {
+  constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder,
+    private router:Router) {
     this.cedula=rutaActiva.snapshot.params.cedula;
     this.myform=this.ingresar.group({
       idpersonal:[''],
@@ -224,7 +231,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
-  // checkbox
+  // checkbox beneficios
   presionar(value:boolean,numero:number)
   {
     if(numero==1)
@@ -238,9 +245,12 @@ export class FormularioMovilidadComponent implements OnInit {
     }
   }
 
+  //modelo de FormArray de materias
+
   get materias() {
     return this.mysolicitud.get('materias') as FormArray;
 }
+
 
 agregarMaterias(){
 
@@ -257,6 +267,39 @@ agregarMaterias(){
 removerMateria(index:number)
 {
   this.materias.removeAt(index);
+}
+
+
+//botones 
+cancelar(){
+
+  Swal.fire({
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    },
+    title: 'Esta seguro que desea cancelar la operacion?',
+    icon: 'warning',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Salir',
+    denyButtonText: `No Salir`,
+   
+  }).then((result)=>{
+    if(result.isConfirmed)
+    {
+      Swal.fire({
+        title:'Redireccionamiento',
+        text:'Se redirecciona a la pagina principal de Movilidad',
+        icon:'success',
+      });
+      this.router.navigate(['/principal/movilidad']);
+
+
+    }
+  })
 
 }
 
