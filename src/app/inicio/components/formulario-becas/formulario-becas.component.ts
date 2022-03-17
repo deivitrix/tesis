@@ -38,7 +38,14 @@ export class FormularioBecasComponent implements OnInit {
   menu2=false;
   menu3=false;
   menu4=false;
-  menu5=false;
+
+  //variable
+  beneficio1=false;
+  beneficio2=false;
+
+  //botones
+  botonguardar=false;
+  botoncancelar=false;
 
   constructor(private rutaActiva: ActivatedRoute, private becas:BecasnivelService,private ingresar:FormBuilder,
     private router:Router) {
@@ -178,7 +185,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=false;
         this.menu4=false;
-        this.menu5=false;
+        
         
       }
       else if(this.menu_opcion==2)
@@ -187,7 +194,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=true;
         this.menu3=false;
         this.menu4=false;
-        this.menu5=false;
+      
       }
       else if(this.menu_opcion==3)
       {
@@ -195,7 +202,6 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=true;
         this.menu4=false;
-        this.menu5=false;
       }
       else if(this.menu_opcion==4)
       {
@@ -203,18 +209,23 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=false;
         this.menu4=true;
-        this.menu5=false;
-      }
-      else if(this.menu_opcion==5)
-      {
-        this.menu1=false;
-        this.menu2=false;
-        this.menu3=false;
-        this.menu4=false;
-        this.menu5=true;
       }
   
     }
+
+    // checkbox beneficios
+  presionar(value:boolean,numero:number)
+  {
+    if(numero==1)
+    {
+      this.beneficio1=value;
+    }
+    if(numero==2)
+    {
+      this.beneficio2=value;
+
+    }
+  }
 
     //botones 
 cancelar(){
@@ -238,10 +249,10 @@ cancelar(){
     {
       Swal.fire({
         title:'Redireccionamiento',
-        text:'Se redirecciona a la pagina principal de Movilidad',
+        text:'Se redirecciona a la pagina principal de Becas',
         icon:'success',
       });
-      this.router.navigate(['/principal/movilidad']);
+      this.router.navigate(['/principal/becas']);
 
 
     }

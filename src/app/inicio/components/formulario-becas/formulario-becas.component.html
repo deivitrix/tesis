@@ -11,6 +11,619 @@
                     <h4 class="active"> <span>
                             <h3>Formulario Becas</h3>
                         </span></h4>
+                <div class="fadeIn first">
+                    <!-- menu -->
+                    <div class="container-fluid header_nav4">
+                        <input class="menu-btn3" type="checkbox" id="menu-btn3">
+                        <label class="menu-icon3" for="menu-btn3"><span class="nav-icon3"></span></label>
+                        <ul class="menu3">
+                            <li>
+                                <ng-container *ngIf="menu1">
+                                    <a (click)="menu(1)" style="border-bottom: 2px solid rgb(62, 178, 207)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z" />
+                                        </svg>&nbsp;Datos Personales</a>
+                                </ng-container>
+                                <ng-container *ngIf="menu1==false">
+                                    <a (click)="menu(1)" style="border-bottom: none"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z" />
+                                        </svg>&nbsp;Datos Personales</a>
+
+                                </ng-container>
+
+                            </li>
+                            <li>
+                                <ng-container *ngIf="menu2">
+                                    <a (click)="menu(2)" style="border-bottom: 2px solid rgb(62, 178, 207)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                                        </svg>&nbsp;Residencia</a>
+
+                                </ng-container>
+                                <ng-container *ngIf="menu2==false">
+                                    <a (click)="menu(2)" style="border-bottom: none"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                            <path fill-rule="evenodd"
+                                                d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                                        </svg>&nbsp;Residencia</a>
+                                </ng-container>
+
+                            </li>
+
+                            <li>
+                                <ng-container *ngIf="menu3">
+                                    <a (click)="menu(3)" style="border-bottom: 2px solid rgb(62, 178, 207)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-exclamation-square-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>&nbsp;Contacto Emergencia</a>
+
+                                </ng-container>
+                                <ng-container *ngIf="menu3==false">
+                                    <a (click)="menu(3)" style="border-bottom:none"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-exclamation-square-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                        </svg>&nbsp;Contacto Emergencia</a>
+
+                                </ng-container>
+
+                            </li>
+
+                            
+                            <li>
+                                <ng-container *ngIf="menu4">
+                                    <a (click)="menu(4)" style="border-bottom: 2px solid rgb(62, 178, 207)"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>&nbsp;Solicitud</a>
+
+                                </ng-container>
+                                <ng-container *ngIf="menu4==false">
+                                    <a (click)="menu(4)" style="border-bottom: none"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                            <path fill-rule="evenodd"
+                                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                        </svg>&nbsp;Solicitud</a>
+                                </ng-container>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <!-- body -->
+                    <ng-container *ngIf="menu1">
+                         <!-- datos personales -->
+                         <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z" />
+                                </svg> DATOS PERSONALES</h4>
+                        </div>
+
+
+                        <div class="row" style="margin-bottom: 2%;">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Cedula</mat-label>
+                                    <input formControlName="cedula" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Nombres</mat-label>
+                                    <input formControlName="nombres" matInput>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Apellido 1</mat-label>
+                                    <input formControlName="apellido1" matInput>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Apellido 2</mat-label>
+                                    <input formControlName="apellido2" matInput>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 2%;">
+
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Tipo de Sangre</mat-label>
+                                    <input formControlName="Tipo_Sangre" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Fecha de nacimiento</mat-label>
+                                    <input formControlName="fecha_nacimiento" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Nacionalidad</mat-label>
+                                    <input formControlName="nacionalidad" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Genero</mat-label>
+                                    <input formControlName="genero" matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 2%;">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Correo institucional</mat-label>
+                                    <input formControlName="correo_personal_institucional" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Correo Alternativo</mat-label>
+                                    <input formControlName="correo_personal_alternativo" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Estado civil</mat-label>
+                                    <input formControlName="Estado_civil" matInput>
+                                </mat-form-field>
+                            </div>
+
+
+                        </div>
+
+                    </ng-container>
+                    <ng-container *ngIf="menu2">
+                         <!-- residencia -->
+                         <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+                                </svg> RESIDENCIA</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Pais</mat-label>
+                                    <input formControlName="Pais" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Provincia</mat-label>
+                                    <input formControlName="Provincia" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Canton</mat-label>
+                                    <input formControlName="Canton" matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 2%;">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Calle 1</mat-label>
+                                    <input formControlName="residencia_calle_1" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Calle 2</mat-label>
+                                    <input formControlName="residencia_calle_2" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Calle 3</mat-label>
+                                    <input formControlName="residencia_calle_3" matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 2%;">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono Personal Domicilio</mat-label>
+                                    <input formControlName="telefono_personal_domicilio" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono Personal Celular</mat-label>
+                                    <input formControlName="telefono_personal_celular" matInput>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="menu3">
+                         <!-- contacto Emergencia -->
+                         <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg> CONTACTO EMERGENCIA</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Nombres</mat-label>
+                                    <input formControlName="contacto_emergencia_nombres" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input formControlName="contacto_emergencia_apellidos" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono 1</mat-label>
+                                    <input formControlName="contacto_emergencia_telefono_1" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono 2</mat-label>
+                                    <input formControlName="contacto_emergencia_telefono_2" matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </ng-container>
+                    <ng-container *ngIf="menu4">
+                        <form [formGroup]="mysolicitud" autocomplete="off">
+                            <div class="border ">
+                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>DATOS MOVILIDAD</h4>
+                            </div>
+                            <div class="col-sm" style="text-align: center;">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="row">
+                                            <h5>Modalidad</h5>
+                                            <div class="col-sm" style="margin-top: 3%;">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Modalidad 2</mat-label>
+                                                    <mat-select >
+                                                        <mat-option>None</mat-option>
+                                                        <mat-option value="option1">Presencial</mat-option>
+                                                        <mat-option value="option2">Virtual</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+
+                                            </div>
+                                            <div class="col-sm" style="margin-top: 3%; text-align: center;">
+                                                <mat-form-field appearance="fill">
+                                                    <mat-label>Modalidad 1</mat-label>
+                                                    <mat-select >
+                                                        <mat-option>None</mat-option>
+                                                        <mat-option value="option3">Nacional</mat-option>
+                                                        <mat-option value="option4">Internacional</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm" style="margin-top: 4%;">
+                                        <mat-form-field class="container-solicitud-universidad" appearance="fill">
+                                            <mat-label>Universidad de Destino</mat-label>
+                                            <input matInput>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row" style="margin-top: 2%; text-align: center;">
+
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Campus Destino</mat-label>
+                                        <input matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Numero de Semestres</mat-label>
+                                        <input type="number" matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Ingresar Rango de Fecha Estudios</mat-label>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                            <input matStartDate placeholder="Fecha de Inicio">
+                                            <input matEndDate placeholder="Fecha fin">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 2%; text-align: center;">
+
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Seleccionar Naturaleza del intercambio</mat-label>
+                                        <mat-select>
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="option3">Nacional</mat-option>
+                                            <mat-option value="option4">Internacional</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Becas o Apoyo</mat-label>
+                                        <input matInput>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Monto Referencial</mat-label>
+                                        <input matInput>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm" style="margin-top: 2%;">
+                                <div class="col-sm " style="margin-bottom: 3%;">
+                                    <div class="beneficio">
+                                        <mat-label>
+                                            <h5>Tipo de Beneficios</h5>
+                                        </mat-label>
+                                    </div>
+                                    <div style="margin-left: 25%; text-align: start;">
+                                        <div class="form-check">
+                                            <input #beneficio1 (change)="presionar(beneficio1.checked,1)"
+                                                class="form-check-input" type="checkbox" value="1" id="beneficio1">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Asignación de 4 horas de investigación
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Asignación de 8 horas de investigación
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Asignación de 10 horas de investigación
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Ayuda económica para publicación de artículo científico
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Ayuda para la adquisición de bienes e insumos
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Ayuda para la adquisición de libros
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Ayuda para publicación de libro
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Estipendio mensual
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Licencia con sueldo con todos los beneficios de ley
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Pago de la inscripción o colegiatura
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Pasaje aéreo de ida y vuelta para el becario por cada año de estudio
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
+                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
+                                            <label style="margin-left: 2%;" class="form-check-label"
+                                                for="flexCheckDefault">
+                                                Pasaje terrestre de ida y vuelta para el becario por cada año de estudio
+                                            </label>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="border ">
+                                <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path
+                                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd"
+                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                    </svg>ESPECIFICACIONES ESPECIALES</h4>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div style="margin-top: 5%;">
+                                        <mat-form-field class="container-fill" appearance="fill">
+                                            <mat-label>Tipo de Sangre</mat-label>
+                                            <input formControlName="tipo_sangre" matInput>
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="beneficio">
+                                        <mat-label>
+                                            <h6>Alergias</h6>
+                                        </mat-label>
+                                    </div>
+                                    <div class="container-fill-enfermedades">
+                                        <ckeditor [editor]="Editor"></ckeditor>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="beneficio">
+                                        <mat-label>
+                                            <h6>Enfermades Crononicas y tratamiento</h6>
+                                        </mat-label>
+                                    </div>
+                                    <div class="container-fill-enfermedades">
+                                        <ckeditor [editor]="Editor"></ckeditor>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="col-sm" style="margin-top: 8%; text-align: center;">
+                                        <mat-form-field class="container-solicitud-poliza" appearance="fill">
+                                            <mat-label>Polizada de seguro</mat-label>
+                                            <mat-select>
+                                                <mat-option>None</mat-option>
+                                                <mat-option value="S">Si</mat-option>
+                                                <mat-option value="N">No</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            
+                            <div class="row" style="text-align: center; margin-top: 5%;">
+                                <div class="col-sm">
+                                    <button [disabled]="botonguardar" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg><span>&nbsp;Guardar</span></button>
+                                    <button (click)="cancelar()" [disabled]="botoncancelar" title="Cancelar" class="btn btn-danger" style="margin: 2%;"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                        </svg><span>&nbsp;Cancelar</span></button>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </ng-container>
+                </div>
 
                 </div>
             </div>
