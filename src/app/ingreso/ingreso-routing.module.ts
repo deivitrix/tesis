@@ -30,7 +30,16 @@ const routes: Routes = [
       {
         path:'configuracionavanzada',
         loadChildren: () => import('src/app/configuracionavanzada/configuracionavanzada.module').then(m => m.ConfiguracionavanzadaModule),
-      }
+      },
+      {
+        path:'movilidad',
+        loadChildren: () => import('src/app/movilidad/movilidad.module').then(m => m.MovilidadModule),
+      },
+      {
+        path:'becas',
+        loadChildren: () => import('src/app/becas/becas.module').then(m => m.BecasModule),
+      },
+
 
 
     ]
