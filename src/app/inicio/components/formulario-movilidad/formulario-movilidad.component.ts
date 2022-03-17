@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 //editor de texto 
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-formulario-movilidad',
@@ -24,6 +24,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   // formGroup
   myform:FormGroup;
+  mysolicitud:FormGroup;
 
 
   //menu
@@ -36,10 +37,26 @@ export class FormularioMovilidadComponent implements OnInit {
   menu4=false;
   menu5=false;
 
+  // checkbox
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
+
+  //selector
+  selected="";
+  selected2="";
+
+  //variable
+  beneficio1=false;
+  beneficio2=false;
+
+  //tipo de sangre
+
 
   constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder) {
     this.cedula=rutaActiva.snapshot.params.cedula;
-    this.myform=ingresar.group({
+    this.myform=this.ingresar.group({
       idpersonal:[''],
       cedula:[{value:'',disabled: true}],
       Tipo_Sangre:[{value:'',disabled: true}],
@@ -71,6 +88,22 @@ export class FormularioMovilidadComponent implements OnInit {
       carrera:[{value:'',disabled: true}],
       promedio:[{value:'',disabled: true}],
     });
+    this.mysolicitud=this.ingresar.group({
+      modalidad1:['',Validators.required],
+      modalidad2:['',Validators.required],
+      universidad_destino:['',Validators.required],
+      campus_destino:['',Validators.required],
+      semestre_cursar:['',Validators.required],
+      fecha_inicio:['',Validators.required],
+      fecha_fin:['',Validators.required],
+      naturaleza:['',Validators.required],
+      becas:['',Validators.required],
+      monto:['',Validators.required],
+
+      tipo_sangre:[{value:'',disabled: true}],
+      materias:this.ingresar.array([])
+    });
+
    }
 
   ngOnInit(): void {
@@ -127,14 +160,15 @@ export class FormularioMovilidadComponent implements OnInit {
         carrera:res.usuario.carrera,
         promedio:res.usuario.promedio,
        });
-        
-        
 
+       this.mysolicitud.patchValue({
+         tipo_sangre:res.usuario.Tipo_Sangre
+       })
       }
     })
 
   }
-
+  // menu
   menu(id:number)
   {
     
@@ -153,7 +187,6 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=false;
       this.menu5=false;
-      console.log(this.menu1);
       
     }
     else if(this.menu_opcion==2)
@@ -190,5 +223,41 @@ export class FormularioMovilidadComponent implements OnInit {
     }
 
   }
+
+  // checkbox
+  presionar(value:boolean,numero:number)
+  {
+    if(numero==1)
+    {
+      this.beneficio1=value;
+    }
+    if(numero==2)
+    {
+      this.beneficio2=value;
+
+    }
+  }
+
+  get materias() {
+    return this.mysolicitud.get('materias') as FormArray;
+}
+
+agregarMaterias(){
+
+  const materiasFormGroup=this.ingresar.group({
+    id:0,
+    materia_origen:['',Validators.required],
+    clave_origen:[''],
+    materia_destino:['',Validators.required],
+    clave_destino:[''],
+  });
+  this.materias.push(materiasFormGroup);
+}
+
+removerMateria(index:number)
+{
+  this.materias.removeAt(index);
+
+}
 
 }

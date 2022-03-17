@@ -56,6 +56,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import { PipesModule } from '../pipes/pipes.module';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 //editor de texto
@@ -123,7 +125,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    CKEditorModule
+    CKEditorModule,
+    MatCheckboxModule,
+    MatRadioModule
 
   ],
   exports: [
