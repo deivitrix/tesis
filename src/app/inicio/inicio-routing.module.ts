@@ -1,3 +1,4 @@
+import { FormularioBecasComponent } from './components/formulario-becas/formulario-becas.component';
 import { FormularioMovilidadComponent } from './components/formulario-movilidad/formulario-movilidad.component';
 import { ConveniosAprobadosPaginaComponent } from './paginas/convenios-aprobados-pagina/convenios-aprobados-pagina.component';
 import { MaestriaPaginaComponent } from './paginas/maestria-pagina/maestria-pagina.component';
@@ -62,6 +63,9 @@ const routes: Routes = [
       },
       {
         path:'formulario/:cedula',component:FormularioMovilidadComponent
+      },
+      {
+        path:'formulario-becas/:cedula',component:FormularioBecasComponent
       }
       
 

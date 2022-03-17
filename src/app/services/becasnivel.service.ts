@@ -102,4 +102,13 @@ export class BecasnivelService {
     let url:string = this._base.getUrlLocalApi() + 'pagina-becas-body/update/estado'; 
     return this.http.put(url,data);
   }
+
+
+  //verificar la beca para el personal de UTM
+
+  getBecasDocente(cedula:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'consulta-becas/'+cedula; 
+    return this.http.get(url);
+  }
 }

@@ -41,11 +41,7 @@ export class FormularioMovilidadComponent implements OnInit {
   menu4=false;
   menu5=false;
 
-  // checkbox
-  checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
+  
 
   //selector
   selected="";
@@ -171,6 +167,21 @@ export class FormularioMovilidadComponent implements OnInit {
        this.mysolicitud.patchValue({
          tipo_sangre:res.usuario.Tipo_Sangre
        })
+      }
+      else
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:res.mensaje,
+          icon:'warning'
+        });
+        this.router.navigate(['/principal/movilidad'])
+        return;
       }
     })
 

@@ -1,0 +1,33 @@
+.separador{
+    margin-top: 150px;
+}
+.wrapper{
+    /* position: fixed; */
+    justify-content: center;
+    display: flex;
+}
+.formContent{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 80%;
+    max-width: 80%;
+    position: relative;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+h4.inactive {
+    color: #cccccc;
+    
+  }
+  
+h4.active {
+    color: gray;
+    border-bottom: 2px solid rgb(187, 216, 190);
+}
+.container-fill{
+    width: 70%;
+    text-align: center;
+    font-weight:bold;
+}

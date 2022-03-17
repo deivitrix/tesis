@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { BecasNivel } from 'src/app/models/becasnivel';
 import { BecasnivelService } from 'src/app/services/becasnivel.service';
 import { PathImagenesService } from 'src/app/services/path-imagenes.service';
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogcedulaComponent } from '../dialogcedula/dialogcedula.component';
 
 @Component({
   selector: 'app-becasnivel',
@@ -42,7 +47,12 @@ export class BecasnivelComponent implements OnInit {
 
    //contar
    auxdatos=0;
-  constructor(private _pathimagenes:PathImagenesService,private _becasnivel:BecasnivelService, private router:Router) { 
+
+
+   //cedula
+   cedula="";
+  constructor(private _pathimagenes:PathImagenesService,private _becasnivel:BecasnivelService, private router:Router
+    ,public dialog: MatDialog) { 
     this.pathBiblioteca=this._pathimagenes.pathbiblioteca;
     this.pathCapacitaciones=this._pathimagenes.pathcapacitaciones;
     this.pathPregrado=this._pathimagenes.pathpregrado;
@@ -169,4 +179,83 @@ export class BecasnivelComponent implements OnInit {
       this.router.navigate(['/principal/doctorado']);
     }
   }
+
+  //buscar la cedula
+  openDialog(){
+    const dialogRef=this.dialog.open(DialogcedulaComponent,{
+      width:'400px',
+      data:{titulo:'Ingresar Cedula',objeto:""}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+      if(result!=null)
+      {
+        if(result.length==0)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Se debe ingresar un N° cedula ',
+            icon:'warning'
+          });
+          return;
+
+        }
+        else if(result.length<10 || result.length>10)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Ingresar los numeros correctos del N° cedula ',
+            icon:'warning'
+          });
+          return;
+        }
+        this.cedula=result;
+
+        this._becasnivel.getBecasDocente(this.cedula)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+             this.router.navigate(['/principal/formulario-becas/'+this.cedula]);
+          }
+          else{
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:res.mensaje,
+              icon:'warning'
+            });
+
+          }
+        })
+
+
+
+        
+
+
+      }
+     
+      
+    });
+  
+
+  }
+
+
 }

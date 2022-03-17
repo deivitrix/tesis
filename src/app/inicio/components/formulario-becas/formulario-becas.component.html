@@ -1,0 +1,19 @@
+<div class="separador"></div>
+<ng-container *ngIf="loading">
+    <app-loading></app-loading>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <form [formGroup]="myform" autocomplete="off">
+        <div class="container-fluid wrapper">
+            <div class="formContent rounded">
+                <div style="text-align: center;">
+                    <h4 class="active"> <span>
+                            <h3>Formulario Becas</h3>
+                        </span></h4>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

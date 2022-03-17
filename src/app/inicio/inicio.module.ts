@@ -62,6 +62,7 @@ import {MatRadioModule} from '@angular/material/radio';
 
 //editor de texto
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { FormularioBecasComponent } from './components/formulario-becas/formulario-becas.component';
 
 
 
@@ -97,6 +98,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MovilidadInformacionComponent,
     FormularioMovilidadComponent,
     DialogcedulaComponent,
+    FormularioBecasComponent,
   ],
   imports: [
     CommonModule,
