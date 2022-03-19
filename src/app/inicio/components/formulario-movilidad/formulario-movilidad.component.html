@@ -40,7 +40,7 @@
                                 </ng-container>
 
                             </li>
-                            <li>
+                            <!-- <li>
                                 <ng-container *ngIf="menu2">
                                     <a (click)="menu(2)" style="border-bottom: 2px solid rgb(62, 178, 207)"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -87,7 +87,7 @@
 
                                 </ng-container>
 
-                            </li>
+                            </li> -->
 
                             <li>
                                 <ng-container *ngIf="menu4">
@@ -210,7 +210,22 @@
                                 </mat-form-field>
                             </div>
                         </div>
-                        <div class="row" style="margin-bottom: 2%;">
+
+                        <div class="row" style="margin-bottom: 2%; text-align: center;">
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Estado civil</mat-label>
+                                    <input formControlName="Estado_civil" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Discapacidad</mat-label>
+                                    <input formControlName="discapacidad" matInput>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 2%; text-align: center;">
                             <div class="col-sm">
                                 <mat-form-field class="container-fill" appearance="fill">
                                     <mat-label>Correo institucional</mat-label>
@@ -223,20 +238,47 @@
                                     <input formControlName="correo_personal_alternativo" matInput>
                                 </mat-form-field>
                             </div>
+
+                        </div>
+                        <!-- contacto Emergencia -->
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                </svg> CONTACTO EMERGENCIA</h4>
+                        </div>
+                        <div class="row">
                             <div class="col-sm">
                                 <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Estado civil</mat-label>
-                                    <input formControlName="Estado_civil" matInput>
+                                    <mat-label>Nombres</mat-label>
+                                    <input formControlName="contacto_emergencia_nombres" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input formControlName="contacto_emergencia_apellidos" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono 1</mat-label>
+                                    <input formControlName="contacto_emergencia_telefono_1" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                                <mat-form-field class="container-fill" appearance="fill">
+                                    <mat-label>Telefono 2</mat-label>
+                                    <input formControlName="contacto_emergencia_telefono_2" matInput>
                                 </mat-form-field>
                             </div>
 
 
                         </div>
 
-                    </ng-container>
-                    <ng-container *ngIf="menu2">
-                        <!-- residencia -->
-                        <div class="border ">
+                         <!-- residencia -->
+                         <div class="border ">
                             <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-house-door-fill" viewBox="0 0 16 16">
                                     <path
@@ -301,78 +343,61 @@
                         </div>
 
 
+
+                    </ng-container>
+                    <!-- <ng-container *ngIf="menu2">
+                       
                     </ng-container>
                     <ng-container *ngIf="menu3">
-                        <!-- contacto Emergencia -->
-                        <div class="border ">
-                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                </svg> CONTACTO EMERGENCIA</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Nombres</mat-label>
-                                    <input formControlName="contacto_emergencia_nombres" matInput>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Apellidos</mat-label>
-                                    <input formControlName="contacto_emergencia_apellidos" matInput>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Telefono 1</mat-label>
-                                    <input formControlName="contacto_emergencia_telefono_1" matInput>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Telefono 2</mat-label>
-                                    <input formControlName="contacto_emergencia_telefono_2" matInput>
-                                </mat-form-field>
-                            </div>
+                        
 
 
-                        </div>
-
-
-                    </ng-container>
+                    </ng-container> -->
                     <ng-container *ngIf="menu4">
-                        <div class="border ">
-                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
-                                </svg> PERIODO</h4>
-                        </div>
-                        <div class="row" style="text-align: center;">
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Carrera</mat-label>
-                                    <input formControlName="carrera" matInput>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Promedio</mat-label>
-                                    <input formControlName="promedio" matInput>
-                                </mat-form-field>
-                            </div>
+                        <!-- Periodo -->
+                        <div formArrayName="carreras" *ngFor="let carreras of carreras.controls; let i = index">
+                            <div [formGroupName]="i">
+                                <div class="border ">
+                                    <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                                        </svg> Carrera {{i+1}}</h4>
+                                </div>
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-sm">
+                                        <mat-form-field class="container-fill" appearance="fill">
+                                            <mat-label>Carrera</mat-label>
+                                            <input formControlName="escuela_nombre" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm">
+                                        <mat-form-field class="container-fill" appearance="fill">
+                                            <mat-label>Promedio</mat-label>
+                                            <input formControlName="promedio" matInput>
+                                        </mat-form-field>
+                                    </div>
+        
+                                </div>
+                                <div class="row" style="text-align: center;">
+                                    <div class="col-sm">
+                                        <mat-form-field class="container-fill" appearance="fill">
+                                            <mat-label>Semestre actual</mat-label>
+                                            <input formControlName="semestre" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-sm">
+                                        <mat-form-field class="container-fill" appearance="fill">
+                                            <mat-label>Periodo</mat-label>
+                                            <input formControlName="periodo" matInput>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
 
-                        </div>
-                        <div class="row" style="text-align: center;">
-                            <div class="col-sm">
-                                <mat-form-field class="container-fill" appearance="fill">
-                                    <mat-label>Ultimo Periodo</mat-label>
-                                    <input formControlName="periodo" matInput>
-                                </mat-form-field>
                             </div>
                         </div>
+                           
+                        
 
                     </ng-container>
                     <ng-container *ngIf="menu5">
@@ -387,29 +412,41 @@
                                     </svg>DATOS MOVILIDAD</h4>
                             </div>
                             <div class="col-sm" style="text-align: center;">
+                                <mat-form-field style="width: 30%;" appearance="fill">
+                                    <mat-label>Carrera</mat-label>
+                                    <mat-select >
+                                        <ng-container *ngFor="let carrera of listaCarrera">
+                                            <mat-option value="{{carrera.id_escuela}}">{{carrera.escuela_nombre}}</mat-option>
+                                        </ng-container>
+                                        
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm" style="text-align: center; margin-top: 2%;">
                                 <div class="row">
                                     <div class="col-sm">
                                         <div class="row">
                                             <h5>Modalidad</h5>
                                             <div class="col-sm" style="margin-top: 3%;">
                                                 <mat-form-field appearance="fill">
-                                                    <mat-label>Modalidad 2</mat-label>
-                                                    <mat-select [(value)]="selected">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option value="option1">Presencial</mat-option>
-                                                        <mat-option value="option2">Virtual</mat-option>
+                                                    <mat-label>Modalidad</mat-label>
+                                                    <mat-select >
+                                                        <ng-container *ngFor="let modalidad1 of modalidad1">
+                                                            <mat-option value="{{modalidad1.id}}">{{modalidad1.tipo_modalidad}}</mat-option>
+                                                        </ng-container>
+                                                        
                                                     </mat-select>
                                                 </mat-form-field>
 
 
                                             </div>
-                                            <div class="col-sm" style="margin-top: 3%; text-align: center;">
+                                            <div class="col-sm" style="margin-top: 3%; ">
                                                 <mat-form-field appearance="fill">
-                                                    <mat-label>Modalidad 1</mat-label>
-                                                    <mat-select [(value)]="selected2">
-                                                        <mat-option>None</mat-option>
-                                                        <mat-option value="option3">Nacional</mat-option>
-                                                        <mat-option value="option4">Internacional</mat-option>
+                                                    <mat-label>Tipo de Destino</mat-label>
+                                                    <mat-select >
+                                                        <ng-container *ngFor="let modalidad2 of modalidad2">
+                                                            <mat-option value="{{modalidad2.id}}">{{modalidad2.tipo_modalidad}}</mat-option>
+                                                        </ng-container>
                                                     </mat-select>
                                                 </mat-form-field>
 
@@ -458,30 +495,45 @@
 
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
-                                        <mat-label>Seleccionar Naturaleza del intercambio</mat-label>
+                                        <mat-label>Seleccionar Naturaleza del movilidad</mat-label>
                                         <mat-select>
                                             <mat-option>None</mat-option>
-                                            <mat-option value="option3">Nacional</mat-option>
-                                            <mat-option value="option4">Internacional</mat-option>
+                                            <mat-option value="option1">Curso de pregrado</mat-option>
+                                            <mat-option value="option2">Capacitación</mat-option>
+                                            <mat-option value="option3">Investigación</mat-option>
+                                            <mat-option value="option4">Tesis</mat-option>
+                                            <mat-option value="option5">Practica</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Becas o Apoyo</mat-label>
-                                        <input matInput>
+                                        <mat-select>
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="option1">Becas Internas (UTM)</mat-option>
+                                            <mat-option value="option2">Becas Externas</mat-option>
+                                            <mat-option value="option3">Autofinanciamiento</mat-option>
+                                        </mat-select>
+                                        <!-- <input matInput> -->
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Monto Referencial</mat-label>
-                                        <input matInput>
+                                        <!-- <input matInput> -->
+                                        <mat-select>
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="option1">América Larina y el Caribe (Hasta $2000)</mat-option>
+                                            <mat-option value="option2">Estados Unidos y Canadá (Hasta $3000)</mat-option>
+                                            <mat-option value="option3">Europa, Asia y Oceania Hasta ($4000)</mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
 
 
                             </div>
-                            <div class="col-sm" style="margin-top: 2%;">
+                            <!-- <div class="col-sm" style="margin-top: 2%;">
                                 <div class="col-sm " style="margin-bottom: 3%;">
                                     <div class="beneficio">
                                         <mat-label>
@@ -504,13 +556,13 @@
                                                 for="flexCheckDefault">
                                                 Pasaje aéreo de ida y vuelta para el estudiante
                                             </label>
-                                        </div>
+                                        </div> -->
 
 
-                                    </div>
+                                    <!-- </div> -->
 
-                                </div>
-                            </div>
+                                <!-- </div> -->
+                            <!-- </div> -->
 
                             <div class="border ">
                                 <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -523,19 +575,32 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm" style="margin-top: 4%;">
+                                    <mat-form-field class="container-solicitud" appearance="fill">
+                                        <mat-label>Tipo de Alergia</mat-label>
+                                        <!-- <input matInput> -->
+                                        <mat-select>
+                                            <mat-option>None</mat-option>
+                                            <mat-option value="option1">Alimentos</mat-option>
+                                            <mat-option value="option2">Medicina</mat-option>
+                                            <mat-option value="option3">Otros</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                               
+                                <!-- <div class="col-sm">
                                     <div style="margin-top: 5%;">
                                         <mat-form-field class="container-fill" appearance="fill">
                                             <mat-label>Tipo de Sangre</mat-label>
                                             <input formControlName="tipo_sangre" matInput>
                                         </mat-form-field>
 
-                                    </div>
-                                </div>
+                                    </div> 
+                                </div> -->
                                 <div class="col-sm">
                                     <div class="beneficio">
                                         <mat-label>
-                                            <h6>Alergias</h6>
+                                            <h6>Especificar Alergias</h6>
                                         </mat-label>
                                     </div>
                                     <div class="container-fill-enfermedades">
@@ -543,11 +608,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top:3% ;">
                                 <div class="col-sm">
                                     <div class="beneficio">
                                         <mat-label>
-                                            <h6>Enfermades Crononicas y tratamiento</h6>
+                                            <h6>Enfermades Persistentes y tratamiento</h6>
                                         </mat-label>
                                     </div>
                                     <div class="container-fill-enfermedades">
@@ -557,7 +622,7 @@
                                 <div class="col-sm">
                                     <div class="col-sm" style="margin-top: 8%; text-align: center;">
                                         <mat-form-field class="container-solicitud-poliza" appearance="fill">
-                                            <mat-label>Polizada de seguro</mat-label>
+                                            <mat-label>Poliza de seguro</mat-label>
                                             <mat-select>
                                                 <mat-option>None</mat-option>
                                                 <mat-option value="S">Si</mat-option>

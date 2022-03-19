@@ -18,4 +18,11 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'consulta-movilidad/'+cedula;
     return this.http.get(url);
   }
+
+  getserviciomodalidad(tipo:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'modalidad/'+tipo;
+    return this.http.get(url);
+    
+  }
 }

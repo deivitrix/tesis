@@ -41,19 +41,22 @@ export class FormularioMovilidadComponent implements OnInit {
   menu4=false;
   menu5=false;
 
-  
-
-  //selector
-  selected="";
-  selected2="";
-
-  //variable
-  beneficio1=false;
-  beneficio2=false;
 
   //botones
   botonguardar=false;
   botoncancelar=false;
+
+  //selector carrera
+  listaCarrera:any[]=[];
+
+  //select modalidad
+  modalidad1:any[]=[];
+  modalidad2:any[]=[];
+
+  modalidad1aux:any[]=[];
+  modalidad2aux:any[]=[];
+
+
 
 
   constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder,
@@ -63,6 +66,7 @@ export class FormularioMovilidadComponent implements OnInit {
       idpersonal:[''],
       cedula:[{value:'',disabled: true}],
       Tipo_Sangre:[{value:'',disabled: true}],
+      discapacidad:[{value:'',disabled: true}],
       nombres:[{value:'',disabled: true}],
       apellido1:[{value:'',disabled: true}],
       apellido2:[{value:'',disabled: true}],
@@ -90,8 +94,11 @@ export class FormularioMovilidadComponent implements OnInit {
       periodo:[{value:'',disabled: true}],
       carrera:[{value:'',disabled: true}],
       promedio:[{value:'',disabled: true}],
+
+      carreras:ingresar.array([])
     });
     this.mysolicitud=this.ingresar.group({
+      idescuela:['',Validators.required],
       modalidad1:['',Validators.required],
       modalidad2:['',Validators.required],
       universidad_destino:['',Validators.required],
@@ -134,6 +141,7 @@ export class FormularioMovilidadComponent implements OnInit {
         idpersonal:res.usuario.idpersonal,
         cedula:res.usuario.cedula,
         Tipo_Sangre:res.usuario.Tipo_Sangre,
+        discapacidad:res.usuario.Nombre_Discapacidad,
         nombres:res.usuario.nombres,
         apellido1:res.usuario.apellido1,
         apellido2:res.usuario.apellido2,
@@ -159,14 +167,15 @@ export class FormularioMovilidadComponent implements OnInit {
         contacto_emergencia_telefono_1:res.usuario.contacto_emergencia_telefono_1,
         contacto_emergencia_telefono_2:res.usuario.contacto_emergencia_telefono_2,
   
-        periodo:res.usuario.periodo,
-        carrera:res.usuario.carrera,
-        promedio:res.usuario.promedio,
        });
+       this.agregarcarrera(res.usuario);
+       this.selectCarrera(res.usuario);
+       this.getmodalidad();
 
        this.mysolicitud.patchValue({
          tipo_sangre:res.usuario.Tipo_Sangre
-       })
+       });
+
       }
       else
       {
@@ -242,18 +251,84 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
-  // checkbox beneficios
-  presionar(value:boolean,numero:number)
-  {
-    if(numero==1)
-    {
-      this.beneficio1=value;
-    }
-    if(numero==2)
-    {
-      this.beneficio2=value;
+  //modelo de carrera
+  get carreras(){
+    return this.myform.get('carreras') as FormArray;
+  }
 
+  agregarcarrera(usuario:any){
+
+    for(var i=0;i<usuario.carrera.length;i++){
+      var promedio1="";
+      if(usuario.carrera[i].promedio==null)
+      {
+        promedio1="Periodo Vigente";
+
+      }
+      else{
+        promedio1=usuario.carrera[i].periodo;
+
+      }
+      const carreraFormGroup=this.ingresar.group({
+        
+        id_escuela:usuario.carrera[i].idescuela,
+        escuela_nombre:[{value:usuario.carrera[i].escuela_nombre,disabled: true}] ,
+        promedio:[{value:promedio1,disabled: true}],
+        periodo:[{value:usuario.carrera[i].periodo,disabled: true}],
+        semestre:[{value:usuario.carrera[i].semestre,disabled: true}]
+      });
+      this.carreras.push(carreraFormGroup);
     }
+
+  }
+
+  selectCarrera(usuario:any)
+  {
+      for(var i=0;i<usuario.carrera.length;i++){
+        let carrera={id_escuela:0,escuela_nombre:"",}
+        carrera.id_escuela=usuario.carrera[i].idescuela;
+        carrera.escuela_nombre=usuario.carrera[i].escuela_nombre;
+        this.listaCarrera.push(carrera)
+      }
+
+
+  }
+
+  //modalidad
+  getmodalidad()
+  {
+    this.movilidad.getserviciomodalidad("0")
+    .subscribe((res:any)=>{
+      if(res.estado==true)
+      {
+        this.modalidad1aux=res.modalidad;
+
+        this.modalidad1aux.forEach((item:any)=>{
+          if(item.estado=="A"){
+            this.modalidad1.push(item);
+          }
+
+        })
+
+
+      }
+    });
+
+    this.movilidad.getserviciomodalidad("1")
+    .subscribe((res:any)=>{
+      if(res.estado==true)
+      {
+        this.modalidad2aux=res.modalidad;
+        this.modalidad2aux.forEach((item:any)=>{
+          if(item.estado=="A"){
+            this.modalidad2.push(item);
+          }
+        })
+
+      }
+    })
+
+
   }
 
   //modelo de FormArray de materias
