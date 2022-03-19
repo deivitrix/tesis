@@ -40,6 +40,7 @@ export class FormularioMovilidadComponent implements OnInit {
   menu3=false;
   menu4=false;
   menu5=false;
+  menu6=false;
 
 
   //botones
@@ -247,6 +248,15 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=false;
       this.menu5=true;
+    }
+    else if(this.menu_opcion==6)
+    {
+      this.menu1=false;
+      this.menu2=false;
+      this.menu3=false;
+      this.menu4=false;
+      this.menu5=false;
+      this.menu6=true;
     }
 
   }
