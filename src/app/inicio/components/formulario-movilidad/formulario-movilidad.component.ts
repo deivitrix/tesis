@@ -120,6 +120,7 @@ export class FormularioMovilidadComponent implements OnInit {
   ngOnInit(): void {
     this.getMovilidadEstudiante()
     this.menu(6)
+    this.getmodalidad();
   }
 
   getMovilidadEstudiante()
@@ -171,7 +172,6 @@ export class FormularioMovilidadComponent implements OnInit {
        });
        this.agregarcarrera(res.usuario);
        this.selectCarrera(res.usuario);
-       this.getmodalidad();
 
        this.mysolicitud.patchValue({
          tipo_sangre:res.usuario.Tipo_Sangre
@@ -215,6 +215,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=false;
       this.menu5=false;
+      this.menu6=false;
       
     }
     else if(this.menu_opcion==2)
@@ -224,6 +225,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=false;
       this.menu5=false;
+      this.menu6=false;
     }
     else if(this.menu_opcion==3)
     {
@@ -232,6 +234,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=true;
       this.menu4=false;
       this.menu5=false;
+      this.menu6=false;
     }
     else if(this.menu_opcion==4)
     {
@@ -240,6 +243,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=true;
       this.menu5=false;
+      this.menu6=false;
     }
     else if(this.menu_opcion==5)
     {
@@ -248,6 +252,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.menu3=false;
       this.menu4=false;
       this.menu5=true;
+      this.menu6=false;
     }
     else if(this.menu_opcion==6)
     {
