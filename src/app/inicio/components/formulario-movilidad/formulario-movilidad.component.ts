@@ -58,6 +58,22 @@ export class FormularioMovilidadComponent implements OnInit {
   modalidad2aux:any[]=[];
 
 
+  //selector universidades
+  listuniver:any[]=[];
+
+  //selector naturaleza
+  listnatu:any[]=[];
+  listnatu_aux:any[]=[];
+
+  //selector apoyo
+  listapoyo:any[]=[];
+  listapoyo_aux:any[]=[];
+
+  //selector monto
+  listmonto:any[]=[];
+  listmonto_aux:any[]=[];
+
+
 
 
   constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder,
@@ -102,6 +118,7 @@ export class FormularioMovilidadComponent implements OnInit {
       idescuela:['',Validators.required],
       modalidad1:['',Validators.required],
       modalidad2:['',Validators.required],
+      id_universidad:['',Validators.required],
       universidad_destino:['',Validators.required],
       campus_destino:['',Validators.required],
       semestre_cursar:['',Validators.required],
@@ -121,6 +138,10 @@ export class FormularioMovilidadComponent implements OnInit {
     this.getMovilidadEstudiante()
     this.menu(6)
     this.getmodalidad();
+    this.getuniversidad();
+    this.getnaturaleza();
+    this.getapoyo();
+    this.getmonto();
   }
 
   getMovilidadEstudiante()
@@ -266,6 +287,8 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
+ 
+
   //modelo de carrera
   get carreras(){
     return this.myform.get('carreras') as FormArray;
@@ -309,7 +332,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
-  //modalidad
+  //selector modalidad
   getmodalidad()
   {
     this.movilidad.getserviciomodalidad("0")
@@ -346,8 +369,72 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
-  //modelo de FormArray de materias
+   //selector universidad
+   getuniversidad(){
+     this.movilidad.getserviciouniversidades()
+     .subscribe((res:any)=>{
+       this.listuniver=res;
+       
+     })
+   }
 
+   //selector naturaleza
+   getnaturaleza(){
+     this.movilidad.getservicionaturaleza("M")
+     .subscribe((res:any)=>{
+       if(res.estado==true)
+       {
+         this.listnatu_aux=res.naturaleza
+         this.listnatu_aux.forEach((item:any)=>{
+           if(item.estado=="A")
+           {
+             this.listnatu.push(item);
+           }
+         })
+
+       }
+     })
+   }
+
+   //selector apoyo
+   getapoyo(){
+     this.movilidad.getservicioapoyo("M")
+     .subscribe((res:any)=>{
+       if(res.estado){
+         this.listapoyo_aux=res.apoyo
+         this.listapoyo_aux.forEach((item:any)=>{
+           if(item.estado=="A")
+           {
+             this.listapoyo.push(item);
+
+           }
+         })
+
+       }
+     })
+   
+   }
+
+   // select monto
+   getmonto(){
+    this.movilidad.getserviciomonto("M")
+    .subscribe((res:any)=>{
+      if(res.estado){
+        this.listmonto_aux=res.monto
+        this.listmonto_aux.forEach((item:any)=>{
+          if(item.estado=="A")
+          {
+            this.listmonto.push(item);
+
+          }
+        })
+
+      }
+    })
+   }
+  
+
+  //modelo de FormArray de materias
   get materias() {
     return this.mysolicitud.get('materias') as FormArray;
 }

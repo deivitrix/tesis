@@ -468,9 +468,14 @@
                                         </div>
                                     </div>
                                     <div class="col-sm" style="margin-top: 4%;">
-                                        <mat-form-field class="container-solicitud-universidad" appearance="fill">
-                                            <mat-label>Universidad de Destino</mat-label>
-                                            <input matInput>
+                                        <mat-form-field style="width: 90%;" appearance="fill">
+                                            <mat-label>Universidad Destino</mat-label>
+                                            <mat-select >
+                                                <ng-container *ngFor="let uni of listuniver">
+                                                    <mat-option value="{{uni.iduniversidad}}">{{uni.nombre}}</mat-option>
+                                                </ng-container>
+                                                
+                                            </mat-select>
                                         </mat-form-field>
                                     </div>
 
@@ -511,12 +516,10 @@
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Seleccionar Naturaleza del movilidad</mat-label>
                                         <mat-select>
-                                            <mat-option>None</mat-option>
-                                            <mat-option value="option1">Curso de pregrado</mat-option>
-                                            <mat-option value="option2">Capacitación</mat-option>
-                                            <mat-option value="option3">Investigación</mat-option>
-                                            <mat-option value="option4">Tesis</mat-option>
-                                            <mat-option value="option5">Practica</mat-option>
+
+                                             <ng-container *ngFor="let list of listnatu">
+                                                <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                            </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -524,10 +527,9 @@
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Becas o Apoyo</mat-label>
                                         <mat-select>
-                                            <mat-option>None</mat-option>
-                                            <mat-option value="option1">Becas Internas (UTM)</mat-option>
-                                            <mat-option value="option2">Becas Externas</mat-option>
-                                            <mat-option value="option3">Autofinanciamiento</mat-option>
+                                            <ng-container *ngFor="let list of listapoyo">
+                                                <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                            </ng-container>
                                         </mat-select>
                                         <!-- <input matInput> -->
                                     </mat-form-field>
@@ -537,10 +539,9 @@
                                         <mat-label>Monto Referencial</mat-label>
                                         <!-- <input matInput> -->
                                         <mat-select>
-                                            <mat-option>None</mat-option>
-                                            <mat-option value="option1">América Larina y el Caribe (Hasta $2000)</mat-option>
-                                            <mat-option value="option2">Estados Unidos y Canadá (Hasta $3000)</mat-option>
-                                            <mat-option value="option3">Europa, Asia y Oceania Hasta ($4000)</mat-option>
+                                            <ng-container *ngFor="let list of listmonto">
+                                                <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                            </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>

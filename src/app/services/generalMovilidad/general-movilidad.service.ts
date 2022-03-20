@@ -18,11 +18,36 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'consulta-movilidad/'+cedula;
     return this.http.get(url);
   }
-
+  //modalidad 
   getserviciomodalidad(tipo:string)
   {
     let url:string = this._base.getUrlLocalApi() + 'modalidad/'+tipo;
     return this.http.get(url);
     
   }
+
+  // universidades
+  getserviciouniversidades(){
+    let url:string = this._base.getUrlLocalApi() + 'universidades';
+    return this.http.get(url);
+  }
+
+  //naturaleza
+  getservicionaturaleza(tipo:string){
+    let url:string = this._base.getUrlLocalApi() + 'naturaleza/'+tipo;
+    return this.http.get(url);
+  }
+
+  //apoyo
+  getservicioapoyo(tipo:string){
+    let url:string = this._base.getUrlLocalApi() + 'apoyo/'+tipo;
+    return this.http.get(url);
+  }
+
+  //monto
+  getserviciomonto(tipo:string){
+    let url:string = this._base.getUrlLocalApi() + 'monto/'+tipo;
+    return this.http.get(url);
+  }
+
 }
