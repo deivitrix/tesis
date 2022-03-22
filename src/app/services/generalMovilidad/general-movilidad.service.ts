@@ -50,4 +50,10 @@ export class GeneralMovilidadService {
     return this.http.get(url);
   }
 
+  //alergias
+  getservicioalergias(){
+    let url:string = this._base.getUrlLocalApi() + 'alergias';
+    return this.http.get(url);
+  }
+
 }

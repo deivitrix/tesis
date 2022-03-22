@@ -414,8 +414,10 @@
                         
 
                     </ng-container>
+                    <form [formGroup]="mysolicitud" autocomplete="off">
                     <ng-container *ngIf="menu5">
-                        <form [formGroup]="mysolicitud" autocomplete="off">
+                        
+                            <pre>{{mysolicitud.value | json}}</pre>
                             <div class="border ">
                                 <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -426,9 +428,9 @@
                                     </svg>DATOS MOVILIDAD</h4>
                             </div>
                             <div class="col-sm" style="text-align: center;">
-                                <mat-form-field style="width: 30%;" appearance="fill">
+                                <mat-form-field style="width: 40%;" appearance="fill">
                                     <mat-label>Carrera</mat-label>
-                                    <mat-select >
+                                    <mat-select formControlName="idescuela" >
                                         <ng-container *ngFor="let carrera of listaCarrera">
                                             <mat-option value="{{carrera.id_escuela}}">{{carrera.escuela_nombre}}</mat-option>
                                         </ng-container>
@@ -444,7 +446,7 @@
                                             <div class="col-sm" style="margin-top: 3%;">
                                                 <mat-form-field appearance="fill">
                                                     <mat-label>Modalidad</mat-label>
-                                                    <mat-select >
+                                                    <mat-select formControlName="modalidad1" >
                                                         <ng-container *ngFor="let modalidad1 of modalidad1">
                                                             <mat-option value="{{modalidad1.id}}">{{modalidad1.tipo_modalidad}}</mat-option>
                                                         </ng-container>
@@ -457,7 +459,7 @@
                                             <div class="col-sm" style="margin-top: 3%; ">
                                                 <mat-form-field appearance="fill">
                                                     <mat-label>Tipo de Destino</mat-label>
-                                                    <mat-select >
+                                                    <mat-select formControlName="modalidad2">
                                                         <ng-container *ngFor="let modalidad2 of modalidad2">
                                                             <mat-option value="{{modalidad2.id}}">{{modalidad2.tipo_modalidad}}</mat-option>
                                                         </ng-container>
@@ -470,7 +472,7 @@
                                     <div class="col-sm" style="margin-top: 4%;">
                                         <mat-form-field style="width: 90%;" appearance="fill">
                                             <mat-label>Universidad Destino</mat-label>
-                                            <mat-select >
+                                            <mat-select formControlName="id_universidad">
                                                 <ng-container *ngFor="let uni of listuniver">
                                                     <mat-option value="{{uni.iduniversidad}}">{{uni.nombre}}</mat-option>
                                                 </ng-container>
@@ -489,21 +491,21 @@
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Carrera Destino</mat-label>
-                                        <input matInput>
+                                        <input formControlName="carrera_destino" matInput>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Semestre a cursar</mat-label>
-                                        <input matInput>
+                                        <input formControlName="semestre_cursar" matInput>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Ingresar Rango de Fecha Estudios</mat-label>
                                         <mat-date-range-input [rangePicker]="picker">
-                                            <input matStartDate placeholder="Fecha de Inicio">
-                                            <input matEndDate placeholder="Fecha fin">
+                                            <input formControlName="fecha_inicio" matStartDate placeholder="Fecha de Inicio">
+                                            <input formControlName="fecha_fin" matEndDate placeholder="Fecha fin">
                                         </mat-date-range-input>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -515,8 +517,7 @@
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Seleccionar Naturaleza del movilidad</mat-label>
-                                        <mat-select>
-
+                                        <mat-select formControlName="id_naturaleza">
                                              <ng-container *ngFor="let list of listnatu">
                                                 <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
                                             </ng-container>
@@ -526,7 +527,7 @@
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Becas o Apoyo</mat-label>
-                                        <mat-select>
+                                        <mat-select formControlName="id_becas">
                                             <ng-container *ngFor="let list of listapoyo">
                                                 <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
                                             </ng-container>
@@ -538,7 +539,7 @@
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Monto Referencial</mat-label>
                                         <!-- <input matInput> -->
-                                        <mat-select>
+                                        <mat-select formControlName="id_monto">
                                             <ng-container *ngFor="let list of listmonto">
                                                 <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
                                             </ng-container>
@@ -594,11 +595,10 @@
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Tipo de Alergia</mat-label>
                                         <!-- <input matInput> -->
-                                        <mat-select>
-                                            <mat-option>None</mat-option>
-                                            <mat-option value="option1">Alimentos</mat-option>
-                                            <mat-option value="option2">Medicina</mat-option>
-                                            <mat-option value="option3">Otros</mat-option>
+                                        <mat-select formControlName="id_alergias">
+                                            <ng-container *ngFor="let list of listalergias">
+                                                <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                            </ng-container>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -619,7 +619,7 @@
                                         </mat-label>
                                     </div>
                                     <div class="container-fill-enfermedades">
-                                        <ckeditor [editor]="Editor"></ckeditor>
+                                        <ckeditor formControlName="especificar_alergias" [editor]="Editor"></ckeditor>
                                     </div>
                                 </div>
                             </div>
@@ -631,15 +631,14 @@
                                         </mat-label>
                                     </div>
                                     <div class="container-fill-enfermedades">
-                                        <ckeditor [editor]="Editor"></ckeditor>
+                                        <ckeditor formControlName="enfermedades_tratamiento" [editor]="Editor"></ckeditor>
                                     </div>
                                 </div>
                                 <div class="col-sm">
                                     <div class="col-sm" style="margin-top: 8%; text-align: center;">
                                         <mat-form-field class="container-solicitud-poliza" appearance="fill">
                                             <mat-label>Poliza de seguro</mat-label>
-                                            <mat-select>
-                                                <mat-option>None</mat-option>
+                                            <mat-select formControlName="poliza_seguro">
                                                 <mat-option value="S">Si</mat-option>
                                                 <mat-option value="N">No</mat-option>
                                             </mat-select>
@@ -732,15 +731,209 @@
 
                                 </div>
                             </div>
-                        </form>
+                        
 
 
 
                     </ng-container>
 
                     <ng-container *ngIf="menu6==true">
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>DOCUMENTOS</h4>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm" >
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Certificado Matricula</mat-label>
+                                            <input  formControlName="nombre_certificado"  matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Copia Record</mat-label>
+                                            <input  formControlName="nombre_copia" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Solicitud Carta</mat-label>
+                                            <input  formControlName="nombre_solicitud" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Cartas Recomendacion</mat-label>
+                                            <input  formControlName="nombre_cartas" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>No Sancion</mat-label>
+                                            <input formControlName="nombre_no_sancion" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Fotos</mat-label>
+                                            <input formControlName="nombre_fotos" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Seguro</mat-label>
+                                            <input formControlName="nombre_seguro" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Examen psicometrico</mat-label>
+                                            <input formControlName="nombre_examen" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Dominio de Idioma</mat-label>
+                                            <input formControlName="nombre_dominio" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Documentos U_Destino</mat-label>
+                                            <input formControlName="nombre_documento" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Comprobante Solvente</mat-label>
+                                            <input formControlName="nombre_comprobante" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input  type="Agregar Imagen" class="btn_enviar"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm" style="text-align: center;">
+                            <button (click)="borrar_archivos()" title="Cancelar" class="btn btn-danger" style="margin: 2%;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                            </svg><span>&nbsp;Borrar archivos subidos</span></button>
+                        </div>
+
+                   
 
                     </ng-container>
+                </form>
                 </div>
             </div>
         </div>
