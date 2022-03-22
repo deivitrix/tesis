@@ -74,6 +74,11 @@ export class FormularioMovilidadComponent implements OnInit {
   listmonto_aux:any[]=[];
 
 
+  //selector alergias
+  listalergias:any[]=[];
+  listalergias_aux:any[]=[];
+
+
 
 
   constructor(private rutaActiva: ActivatedRoute, private movilidad:GeneralMovilidadService,private ingresar:FormBuilder,
@@ -119,17 +124,67 @@ export class FormularioMovilidadComponent implements OnInit {
       modalidad1:['',Validators.required],
       modalidad2:['',Validators.required],
       id_universidad:['',Validators.required],
-      universidad_destino:['',Validators.required],
-      campus_destino:['',Validators.required],
+      carrera_destino:['',Validators.required],
       semestre_cursar:['',Validators.required],
       fecha_inicio:['',Validators.required],
       fecha_fin:['',Validators.required],
-      naturaleza:['',Validators.required],
-      becas:['',Validators.required],
-      monto:['',Validators.required],
+      id_naturaleza:['',Validators.required],
+      id_becas:['',Validators.required],
+      id_monto:['',Validators.required],
+      id_alergias:['',Validators.required],
+      especificar_alergias:['',Validators.required],
+      enfermedades_tratamiento:['',Validators.required],
+      poliza_seguro:['',Validators.required],
 
       tipo_sangre:[{value:'',disabled: true}],
-      materias:this.ingresar.array([])
+      materias:this.ingresar.array([]),
+
+      //documentos
+      certificado_matricula:[new File([""],""),Validators.required],
+      pdfcertificado_matricula:["",Validators.required],
+      nombre_certificado:[{value:'',disabled: true}],
+      verificar1:[false],
+      copia_record:[new File([""],""),Validators.required],
+      pdfcopia_record:["",Validators.required],
+      nombre_copia:[{value:'',disabled: true}],
+      verificar2:[false],
+      solicitud_carta:[new File([""],""),Validators.required],
+      pdfsolicitud_carta:["",Validators.required],
+      nombre_solicitud:[{value:'',disabled: true}],
+      verificar3:[false],
+      cartas_recomendacion:[new File([""],""),Validators.required],
+      pdfcartas_recomendacion:["",Validators.required],
+      nombre_cartas:[{value:'',disabled: true}],
+      verificar4:[false],
+      no_sancion:[new File([""],""),Validators.required],
+      pdfno_sancion:["",Validators.required],
+      nombre_no_sancion:[{value:'',disabled: true}],
+      verificar5:[false],
+      fotos:[new File([""],""),Validators.required],
+      pdffotos:["",Validators.required],
+      nombre_fotos:[{value:'',disabled: true}],
+      verificar6:[false],
+      seguro:[new File([""],""),Validators.required],
+      pdfseguro:["",Validators.required],
+      nombre_seguro:[{value:'',disabled: true}],
+      verificar7:[false],
+      examen_psicometria:[new File([""],""),Validators.required],
+      pdfexamen_psicometrico:["",Validators.required],
+      nombre_examen:[{value:'',disabled: true}],
+      verificar8:[false],
+      dominio_idioma:[new File([""],""),Validators.required],
+      pdfdominio_idioma:["",Validators.required],
+      nombre_dominio:[{value:'',disabled: true}],
+      verificar9:[false],
+      documento_udestino:[new File([""],""),Validators.required],
+      pdfdocumento_udestino:["",Validators.required],
+      nombre_documento:[{value:'',disabled: true}],
+      verificar10:[false],
+      comprobante_solvencia:[new File([""],""),Validators.required],
+      pdfcomprobante_solvencia:["",Validators.required],
+      nombre_comprobante:[{value:'',disabled: true}],
+      verificar11:[false],
+
     });
 
    }
@@ -142,6 +197,7 @@ export class FormularioMovilidadComponent implements OnInit {
     this.getnaturaleza();
     this.getapoyo();
     this.getmonto();
+    this.getalergias();
   }
 
   getMovilidadEstudiante()
@@ -432,6 +488,25 @@ export class FormularioMovilidadComponent implements OnInit {
       }
     })
    }
+
+   //selector alergias
+   getalergias(){
+     this.movilidad.getservicioalergias()
+     .subscribe((res:any)=>{
+       if(res.estado==true)
+       {
+        this.listalergias_aux=res.alergias;
+        this.listalergias_aux.forEach((item:any)=>{
+          if(item.estado=="A")
+          {
+            this.listalergias.push(item);
+          }
+        })
+
+       }
+
+     })
+   }
   
 
   //modelo de FormArray de materias
@@ -457,6 +532,126 @@ removerMateria(index:number)
   this.materias.removeAt(index);
 }
 
+
+// agregar files al mysolicitud
+
+fileEvent(event:any,numero:number)
+{
+  const archivoCapturado=event.target.files[0];
+  if(archivoCapturado.type=="application/pdf"){
+    if(numero==1)
+    {
+      this.mysolicitud.patchValue({
+        certificado_matricula:archivoCapturado,
+        nombre_certificado:archivoCapturado.name,
+        verificar1:true
+      });
+    }
+    else if(numero==2){
+      this.mysolicitud.patchValue({
+        copia_record:archivoCapturado,
+        nombre_copia:archivoCapturado.name,
+        verificar2:true
+      });
+  
+    }
+    else if(numero==3){
+      this.mysolicitud.patchValue({
+        solicitud_carta:archivoCapturado,
+        nombre_solicitud:archivoCapturado.name,
+        verificar3:true
+      });
+  
+    }
+    else if(numero==4){
+      this.mysolicitud.patchValue({
+        cartas_recomendacion:archivoCapturado,
+        nombre_cartas:archivoCapturado.name,
+        verificar4:true
+      });
+  
+    }
+    else if(numero==5){
+      this.mysolicitud.patchValue({
+        no_sancion:archivoCapturado,
+        nombre_no_sancion:archivoCapturado.name,
+        verificar5:true
+      });
+  
+    }
+    else if(numero==6){
+      this.mysolicitud.patchValue({
+        fotos:archivoCapturado,
+        nombre_fotos:archivoCapturado.name,
+        verificar6:true
+      });
+  
+    }
+    else if(numero==7){
+      this.mysolicitud.patchValue({
+        seguro:archivoCapturado,
+        nombre_seguro:archivoCapturado.name,
+        verificar7:true
+      });
+  
+    }
+    else if(numero==8){
+      this.mysolicitud.patchValue({
+        examen_psicometria:archivoCapturado,
+        nombre_examen:archivoCapturado.name,
+        verificar8:true
+      });
+  
+    }
+    else if(numero==9){
+      this.mysolicitud.patchValue({
+        dominio_idioma:archivoCapturado,
+        nombre_dominio:archivoCapturado.name,
+        verificar9:true
+      });
+  
+    }
+    else if(numero==10){
+      this.mysolicitud.patchValue({
+        documento_udestino:archivoCapturado,
+        nombre_documento:archivoCapturado.name,
+        verificar10:true
+      });
+  
+    }
+    else if(numero==11){
+      this.mysolicitud.patchValue({
+        comprobante_solvencia:archivoCapturado,
+        nombre_comprobante:archivoCapturado.name,
+        verificar11:true
+      });
+  
+    }
+
+  }
+  else{
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title:"Solo se puede escoger archivos PDF ",
+      icon:'warning'
+    });
+  }
+
+ 
+  
+
+}
+
+// eliminar file
+borrar_archivos(){
+ 
+
+}
 
 //botones 
 cancelar(){
