@@ -34,4 +34,9 @@ export class UsuarioServicesService {
     let url:string = this._base.getUrlLocalApi() + 'usuario/search/'+id;
     return this.http.get<any>(url);
   }
+
+  getUsuariosDRICB(){
+    let url:string = this._base.getUrlLocalApi() + 'acceso-usuario'
+    return this.http.get<any>(url);
+  }
 }

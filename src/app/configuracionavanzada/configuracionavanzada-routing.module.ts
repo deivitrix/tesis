@@ -5,6 +5,7 @@ import { RegistroactividadesPaginaComponent } from './paginas/registroactividade
 import { BaseconfiguracionavanzadaComponent } from './baseconfiguracionavanzada/baseconfiguracionavanzada.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UsuariosDricbComponent } from './paginas/usuarios-dricb/usuarios-dricb.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,10 @@ const routes: Routes = [
       },
       {
         path:'becasnivelbody/:id/:tipo/:nombre',component:TablabecasnivelbodyComponent
-      }
+      },
+      {
+        path:'usuariosDricb',component:UsuariosDricbComponent
+      },
     ]
   }
 ];

@@ -5,6 +5,7 @@ import { BuscarConvenioPipe } from './buscarConvenio/buscar-convenio.pipe';
 import { BuscarBecasPipe } from './buscarBecas/buscar-becas.pipe';
 import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
 import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenionombre.pipe';
+import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
 
 
 
@@ -14,17 +15,21 @@ import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenion
     BuscarConvenioPipe,
     BuscarBecasPipe,
     BuscarBecasBodyPipe,
-    BuscarconvenionombrePipe
+    BuscarconvenionombrePipe,
+    BuscarusuariosPipe,
+    
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
   ],
   exports: [
     PaginationPipe,
     BuscarConvenioPipe,
     BuscarBecasPipe,
     BuscarBecasBodyPipe,
-    BuscarconvenionombrePipe
+    BuscarconvenionombrePipe,
+    BuscarusuariosPipe,
   ]
 })
 export class PipesModule { }

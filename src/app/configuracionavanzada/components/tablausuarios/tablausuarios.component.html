@@ -1,0 +1,55 @@
+<ng-container *ngIf="loading">
+    <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>    
+    </ng-container>
+    <ng-container *ngIf="loading==false">
+    <div class="container-fluid" style="margin-top: 5%;">
+        <div class="row">
+        <div class="col-sm titulo">
+          <h2>Usuarios</h2>
+        </div>
+        <div class="col-sm boton"> 
+            <button  mat-flat-button color="primary" ><mat-icon>add</mat-icon> </button>
+        </div>
+    </div>
+        <div class="col-sm">
+            <mat-form-field class="mat-form-field-filtro">
+                <mat-label>Filtro</mat-label>
+                <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+                <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            <table class="table table-responsive table-primary" style="margin: 1px; ">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th style="width: 15%;"scope="col">Cedula</th>
+                    <th style="width: 25%;"scope="col">Apellidos</th>
+                    <th style="width: 25%;"scope="col">Nombres</th>
+                    <th style="width: 15%;"scope="col">Cargo</th>
+                    <th style="width: 10%;"scope="col">Acción</th>
+                  </tr>
+                </thead>
+                 <tbody>
+                  <tr *ngFor="let c of listaUsuarios | pagination :pageSize :pageNumber | buscarusuarios :filtro;">
+                        <th scope="row">{{c.position}}</th>
+                        <td style="text-align: justify;">{{c.cedula}}</td>
+                        <td style="text-align: justify;">{{c.apellidos}}</td>
+                        <td style="text-align: justify;">{{c.nombres}}</td>
+                        <td style="text-align: justify;">{{c.cargo}}</td> 
+                        <td>
+                            <a href="">1</a>
+                        </td>
+                  </tr>
+                </tbody> 
+              </table>
+          
+              <div>
+                <mat-paginator class="table-primary" [length]="listaUsuarios.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                  aria-label="Select page" (page)="handlePagePending($event)">
+                </mat-paginator>
+              </div>
+        </div>   
+    </div>
+    
+    </ng-container>

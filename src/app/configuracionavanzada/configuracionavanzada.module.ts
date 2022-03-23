@@ -47,6 +47,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { DialogingresarbecasComponent } from './components/dialogingresarbecas/dialogingresarbecas.component';
 import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/tablabecasnivelbody.component';
 import { DialogingresarbecasbodyComponent } from './components/dialogingresarbecasbody/dialogingresarbecasbody.component';
+import { UsuariosDricbComponent } from './paginas/usuarios-dricb/usuarios-dricb.component';
+import { TablausuariosComponent } from './components/tablausuarios/tablausuarios.component';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { DialogingresarbecasbodyComponent } from './components/dialogingresarbec
     DialogingresarbecasComponent,
     TablabecasnivelbodyComponent,
     DialogingresarbecasbodyComponent,
+    UsuariosDricbComponent,
+    TablausuariosComponent,
     
   ],
   imports: [
