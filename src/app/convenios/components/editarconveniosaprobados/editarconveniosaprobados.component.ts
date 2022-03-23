@@ -441,12 +441,10 @@ export class EditarconveniosaprobadosComponent implements OnInit {
               PDF:this.myform.get('PDF')?.value,
               nombre_convenio:this.myform.get('nombre_convenio')?.value
             }}
-  
-            console.log(json);
+
             
              this.convenios.modificarconveniosaprobados(json)
              .subscribe((res:any)=>{
-               console.log(res);
                
                if(res.estado==true)
                {

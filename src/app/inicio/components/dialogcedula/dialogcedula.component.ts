@@ -8,8 +8,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./dialogcedula.component.css']
 })
 export class DialogcedulaComponent implements OnInit {
-
-  categoria="";
   constructor(
     public dialoRef:MatDialogRef<DialogcedulaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

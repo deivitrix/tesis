@@ -56,4 +56,11 @@ export class GeneralMovilidadService {
     return this.http.get(url);
   }
 
+  //Documentos movilidad
+  addftpmovilidad(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'documentos/movilidad';
+    return this.http.post(url,data);
+  }
+
 }
