@@ -38,6 +38,7 @@ export class FormularioBecasComponent implements OnInit {
   menu2=false;
   menu3=false;
   menu4=false;
+  menu5=false;
 
   //variable
   beneficio1=false;
@@ -185,6 +186,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=false;
         this.menu4=false;
+        this.menu5=false;
         
         
       }
@@ -194,6 +196,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=true;
         this.menu3=false;
         this.menu4=false;
+        this.menu5=false;
       
       }
       else if(this.menu_opcion==3)
@@ -202,6 +205,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=true;
         this.menu4=false;
+        this.menu5=false;
       }
       else if(this.menu_opcion==4)
       {
@@ -209,6 +213,15 @@ export class FormularioBecasComponent implements OnInit {
         this.menu2=false;
         this.menu3=false;
         this.menu4=true;
+        this.menu5=false;
+      }
+      else if(this.menu_opcion==4)
+      {
+        this.menu1=false;
+        this.menu2=false;
+        this.menu3=false;
+        this.menu4=false;
+        this.menu5=true;
       }
   
     }

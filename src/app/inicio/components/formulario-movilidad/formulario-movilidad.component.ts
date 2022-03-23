@@ -1194,7 +1194,6 @@ export class FormularioMovilidadComponent implements OnInit {
     }
 
     // documentos 
-   
     //certificado de matricula
     if(this.mysolicitud.get('verificar1')?.value==false)
     {
@@ -1356,40 +1355,95 @@ export class FormularioMovilidadComponent implements OnInit {
         });
         return;
       }
-      const formData = new FormData();
-      formData.append('certificado_matricula', this.mysolicitud.get('certificado_matricula')?.value);
-      formData.append('copia_record', this.mysolicitud.get('copia_record')?.value);
-      formData.append('solicitud_carta', this.mysolicitud.get('solicitud_carta')?.value);
-      formData.append('cartas_recomendacion', this.mysolicitud.get('cartas_recomendacion')?.value);
-      formData.append('no_sancion', this.mysolicitud.get('no_sancion')?.value);
-      formData.append('fotos', this.mysolicitud.get('fotos')?.value);
-      formData.append('seguro', this.mysolicitud.get('seguro')?.value);
-      
-      if(this.mysolicitud.get('verificar8')?.value==true){
-        formData.append('examen_psicometria', this.mysolicitud.get('examen_psicometria')?.value);
-      }
-      if(this.mysolicitud.get('verificar9')?.value==true){
-        formData.append('dominio_idioma', this.mysolicitud.get('dominio_idioma')?.value);
-      }
-      formData.append('documento_udestino', this.mysolicitud.get('documento_udestino')?.value);
-      formData.append('comprobante_solvencia', this.mysolicitud.get('comprobante_solvencia')?.value);
 
-      this.loadingspinner=true;
-      this.movilidad.addftpmovilidad(formData)
-      .subscribe((res:any)=>{
-        if(res.estado==true)
+      Swal.fire({
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        title: 'Esta seguro que desea guarda la solicitud?',
+        icon: 'warning',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        denyButtonText: `No guardar`,
+       
+      }).then((result2)=>{
+
+        if(result2.isConfirmed)
         {
+          const formData = new FormData();
+          formData.append('certificado_matricula', this.mysolicitud.get('certificado_matricula')?.value);
+          formData.append('copia_record', this.mysolicitud.get('copia_record')?.value);
+          formData.append('solicitud_carta', this.mysolicitud.get('solicitud_carta')?.value);
+          formData.append('cartas_recomendacion', this.mysolicitud.get('cartas_recomendacion')?.value);
+          formData.append('no_sancion', this.mysolicitud.get('no_sancion')?.value);
+          formData.append('fotos', this.mysolicitud.get('fotos')?.value);
+          formData.append('seguro', this.mysolicitud.get('seguro')?.value);
           
+          if(this.mysolicitud.get('verificar8')?.value==true){
+            formData.append('examen_psicometria', this.mysolicitud.get('examen_psicometria')?.value);
+          }
+          if(this.mysolicitud.get('verificar9')?.value==true){
+            formData.append('dominio_idioma', this.mysolicitud.get('dominio_idioma')?.value);
+          }
+          formData.append('documento_udestino', this.mysolicitud.get('documento_udestino')?.value);
+          formData.append('comprobante_solvencia', this.mysolicitud.get('comprobante_solvencia')?.value);
+
+          this.loadingspinner=true;
+          this.movilidad.addftpmovilidad(formData)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              this.mysolicitud.patchValue({
+                pdfcertificado_matricula:res.pdf.certificado_matricula,
+                pdfcopia_record:res.pdf.copia_record,
+                pdfsolicitud_carta:res.pdf.solicitud_carta,
+                pdfcartas_recomendacion:res.pdf.cartas_recomendacion,
+                pdfno_sancion:res.pdf.no_sancion,
+                pdffotos:res.pdf.fotos,
+                pdfseguro:res.pdf.seguro,
+                pdfexamen_psicometrico:res.pdf.examen_psicometria,
+                pdfdominio_idioma:res.pdf.dominio_idioma,
+                pdfdocumento_udestino:res.pdf.documento_udestino,
+                pdfcomprobante_solvencia:res.pdf.comprobante_solvencia
+              });
+
+              let json={data:this.mysolicitud.value}
+              this.movilidad.addsolicitud(json)
+              .subscribe((res:any)=>{
+                this.loadingspinner=false;
+                if(res.estado==true)
+                {
+                  Swal.fire({
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    },
+                    title:'Solicitud Guardada con exito',
+                    icon:'success'
+                  });
+                  this.router.navigate(['/principal/movilidad'])
+
+                }
+
+              })
+
+
+              
+            }
+
+          })
+
+
+
+
         }
-
       })
-
-
-
-
-
-
-
   }
 
 }

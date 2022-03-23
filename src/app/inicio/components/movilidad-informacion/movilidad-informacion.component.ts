@@ -29,6 +29,9 @@ export class MovilidadInformacionComponent implements OnInit {
   //cedula
   cedula:string="";
 
+  //cedula consultar
+  cedula_consultar:string="";
+
   constructor(private path:PathImagenesService, private _general:GeneralService,public dialog: MatDialog
     ,private movilidad:GeneralMovilidadService,private router:Router) { 
     this.pathmovilidad=path.pathimagenmovilidad;
@@ -93,7 +96,7 @@ export class MovilidadInformacionComponent implements OnInit {
     });
   }
 
-  //buscar la cedula
+  //buscar la cedula solicitud 
   openDialog(){
     const dialogRef=this.dialog.open(DialogcedulaComponent,{
       width:'400px',
@@ -114,7 +117,7 @@ export class MovilidadInformacionComponent implements OnInit {
             hideClass: {
               popup: 'animate__animated animate__fadeOutUp'
             },
-            title:'Se debe ingresar un N° cedula ',
+            title:'Se debe ingresar un N° cedula correcto!!!',
             icon:'warning'
           });
           return;
@@ -162,6 +165,56 @@ export class MovilidadInformacionComponent implements OnInit {
         
 
 
+      }
+     
+      
+    });
+  
+
+  }
+
+  dialogconsultar(){
+
+    const dialogRef1=this.dialog.open(DialogcedulaComponent,{
+      width:'400px',
+      data:{titulo:'Ingresar Cedula a Consultar Solicitud',objeto:""}
+    });
+
+    dialogRef1.afterClosed().subscribe(result1=> {
+      console.log('The dialog was closed');
+      
+      if(result1!=null)
+      {
+        if(result1.length==0)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Se debe ingresar un N° cedula correcto!!!!',
+            icon:'warning'
+          });
+          return;
+
+        }
+        else if(result1.length<10 || result1.length>10)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Ingresar los numeros correctos del N° cedula ',
+            icon:'warning'
+          });
+          return;
+        }
+        this.cedula_consultar=result1;
       }
      
       

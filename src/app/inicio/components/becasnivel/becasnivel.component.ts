@@ -51,6 +51,10 @@ export class BecasnivelComponent implements OnInit {
 
    //cedula
    cedula="";
+
+   // consultar cedula para solicitud
+   cedula_consultar:string="";
+   
   constructor(private _pathimagenes:PathImagenesService,private _becasnivel:BecasnivelService, private router:Router
     ,public dialog: MatDialog) { 
     this.pathBiblioteca=this._pathimagenes.pathbiblioteca;
@@ -249,6 +253,57 @@ export class BecasnivelComponent implements OnInit {
         
 
 
+      }
+     
+      
+    });
+  
+
+  }
+
+  //buscar cedula para consultar solicitud
+  dialogconsultar(){
+
+    const dialogRef1=this.dialog.open(DialogcedulaComponent,{
+      width:'400px',
+      data:{titulo:'Ingresar Cedula a Consultar Solicitud',objeto:""}
+    });
+
+    dialogRef1.afterClosed().subscribe(result1=> {
+      console.log('The dialog was closed');
+      
+      if(result1!=null)
+      {
+        if(result1.length==0)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Se debe ingresar un N° cedula correcto!!!!',
+            icon:'warning'
+          });
+          return;
+
+        }
+        else if(result1.length<10 || result1.length>10)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Ingresar los numeros correctos del N° cedula ',
+            icon:'warning'
+          });
+          return;
+        }
+        this.cedula_consultar=result1;
       }
      
       

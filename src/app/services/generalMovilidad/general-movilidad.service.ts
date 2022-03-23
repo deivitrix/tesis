@@ -63,4 +63,11 @@ export class GeneralMovilidadService {
     return this.http.post(url,data);
   }
 
+  //agregar solicitud
+  addsolicitud(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'movilidad-new';
+    return this.http.post(url,data);
+
+  }
+
 }
