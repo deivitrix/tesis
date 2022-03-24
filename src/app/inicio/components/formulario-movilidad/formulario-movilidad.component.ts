@@ -89,8 +89,7 @@ export class FormularioMovilidadComponent implements OnInit {
   botonguardardocumentos=false;
 
 
-  //verificar pdf subidos 
-  verificar_pdf=0;
+
 
 
 
