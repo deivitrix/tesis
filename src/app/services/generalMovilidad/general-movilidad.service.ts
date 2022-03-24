@@ -70,4 +70,10 @@ export class GeneralMovilidadService {
 
   }
 
+  //Documento movilidad (uno a uno )
+  addftpmovilidad_v2(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'documento/movilidad';
+    return this.http.post(url,data);
+  }
 }

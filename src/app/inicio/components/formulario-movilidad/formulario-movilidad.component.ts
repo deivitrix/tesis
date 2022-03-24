@@ -51,6 +51,8 @@ export class FormularioMovilidadComponent implements OnInit {
   //botones
   botonguardar = false;
   botoncancelar = false;
+  botonguardarDocumento=false;
+  botonborrarDocumento=false;
 
   //selector carrera
   listaCarrera: any[] = [];
@@ -82,6 +84,13 @@ export class FormularioMovilidadComponent implements OnInit {
   //selector alergias
   listalergias: any[] = [];
   listalergias_aux: any[] = [];
+
+  //verificar presion de guardar
+  botonguardardocumentos=false;
+
+
+  //verificar pdf subidos 
+  verificar_pdf=0;
 
 
 
@@ -1022,13 +1031,14 @@ export class FormularioMovilidadComponent implements OnInit {
 
     }
 
+
     //naturaleza
     if(this.mysolicitud.get('id_naturaleza')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
           titulo:'Error.....',
-          mensaje:"Ingresar una fecha de fin ",
+          mensaje:"Escoger una Naturaleza de Movilidad ",
          buttonText:'',
          icon:'warning'
         },
@@ -1047,7 +1057,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
           titulo:'Error.....',
-          mensaje:"Ingresar una fecha de fin ",
+          mensaje:"Escoger una opcion de Becas ",
          buttonText:'',
          icon:'warning'
         },
@@ -1066,7 +1076,7 @@ export class FormularioMovilidadComponent implements OnInit {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
           titulo:'Error.....',
-          mensaje:"Ingresar una fecha de fin ",
+          mensaje:"Escoger una opcion de monto ",
          buttonText:'',
          icon:'warning'
         },
@@ -1128,7 +1138,7 @@ export class FormularioMovilidadComponent implements OnInit {
          buttonText:'',
          icon:'warning'
         },
-        duration:1000,
+        duration:1500,
         horizontalPosition:'end',
         verticalPosition:'bottom',
         panelClass:'error'     
@@ -1193,7 +1203,132 @@ export class FormularioMovilidadComponent implements OnInit {
       }
     }
 
-    // documentos 
+    
+    if(this.botonguardardocumentos==false)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Presionar el boton de Guardar de la pestaña Documentos",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+    {
+      if(this.mysolicitud.get('pdfcertificado_matricula')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Cargando datos documentos....",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+
+      }
+      if(this.mysolicitud.get('pdfcertificado_matricula')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Cargando datos documentos....",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+
+    }
+
+    if(this.mysolicitud.get('pdfcertificado_matricula')?.value.length==0 || this.mysolicitud.get('pdfcopia_record')?.value.length==0 
+      || this.mysolicitud.get('pdfsolicitud_carta')?.value.length==0 || this.mysolicitud.get('pdfcartas_recomendacion')?.value.length==0
+      || this.mysolicitud.get('pdfno_sancion')?.value.length==0 || this.mysolicitud.get('pdffotos')?.value.length==0
+      || this.mysolicitud.get('pdfseguro')?.value.length==0 || this.mysolicitud.get('pdfdocumento_udestino')?.value.length==0
+      || this.mysolicitud.get('pdfcomprobante_solvencia')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Cargando datos documentos....!!",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+
+     
+
+      Swal.fire({
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        title: 'Esta seguro que desea guarda la solicitud?',
+        icon: 'warning',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Guardar',
+        denyButtonText: `No guardar`,
+       
+      }).then((result2)=>{
+
+        if(result2.isConfirmed)
+        {
+
+          let json={data:this.mysolicitud.value}
+              this.movilidad.addsolicitud(json)
+              .subscribe((res:any)=>{
+                this.loadingspinner=false;
+                if(res.estado==true)
+                {
+                  Swal.fire({
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    },
+                    title:'Solicitud Guardada con exito',
+                    icon:'success'
+                  });
+                  this.router.navigate(['/principal/movilidad'])
+
+                }
+              });
+        }
+      })
+  }
+
+  //boton de guardar Documentos
+  guardar_documentos(){
+    //documentos 
     //certificado de matricula
     if(this.mysolicitud.get('verificar1')?.value==false)
     {
@@ -1363,87 +1498,565 @@ export class FormularioMovilidadComponent implements OnInit {
         hideClass: {
           popup: 'animate__animated animate__fadeOutUp'
         },
-        title: 'Esta seguro que desea guarda la solicitud?',
+        title: 'Esta seguro que desea guardar los Documentos?',
         icon: 'warning',
         showDenyButton: true,
         showCancelButton: true,
         confirmButtonText: 'Guardar',
         denyButtonText: `No guardar`,
        
-      }).then((result2)=>{
-
-        if(result2.isConfirmed)
+      }).then((result)=>{
+        if(result.isConfirmed)
         {
-          const formData = new FormData();
-          formData.append('certificado_matricula', this.mysolicitud.get('certificado_matricula')?.value);
-          formData.append('copia_record', this.mysolicitud.get('copia_record')?.value);
-          formData.append('solicitud_carta', this.mysolicitud.get('solicitud_carta')?.value);
-          formData.append('cartas_recomendacion', this.mysolicitud.get('cartas_recomendacion')?.value);
-          formData.append('no_sancion', this.mysolicitud.get('no_sancion')?.value);
-          formData.append('fotos', this.mysolicitud.get('fotos')?.value);
-          formData.append('seguro', this.mysolicitud.get('seguro')?.value);
-          
-          if(this.mysolicitud.get('verificar8')?.value==true){
-            formData.append('examen_psicometria', this.mysolicitud.get('examen_psicometria')?.value);
-          }
-          if(this.mysolicitud.get('verificar9')?.value==true){
-            formData.append('dominio_idioma', this.mysolicitud.get('dominio_idioma')?.value);
-          }
-          formData.append('documento_udestino', this.mysolicitud.get('documento_udestino')?.value);
-          formData.append('comprobante_solvencia', this.mysolicitud.get('comprobante_solvencia')?.value);
+
+          // declarar variables
+           var verificar_pdf1=false;
+           var verificar_pdf2=false;
+           var verificar_pdf3=false;
+           var verificar_pdf4=false;
+           var verificar_pdf5=false;
+           var verificar_pdf6=false;
+           var verificar_pdf7=false;
+           var verificar_pdf8=false;
+           var verificar_pdf9=false;
+           var verificar_pdf10=false;
+           var verificar_pdf11=false;
+
 
           this.loadingspinner=true;
-          this.movilidad.addftpmovilidad(formData)
+          this.botonguardardocumentos=true;
+          this.botonguardarDocumento=true;
+          this.botonborrarDocumento=true;
+     
+      //     //certificado_matricula
+          const formData = new FormData();
+          formData.append('document', this.mysolicitud.get('certificado_matricula')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
           .subscribe((res:any)=>{
             if(res.estado==true)
             {
-              this.mysolicitud.patchValue({
-                pdfcertificado_matricula:res.pdf.certificado_matricula,
-                pdfcopia_record:res.pdf.copia_record,
-                pdfsolicitud_carta:res.pdf.solicitud_carta,
-                pdfcartas_recomendacion:res.pdf.cartas_recomendacion,
-                pdfno_sancion:res.pdf.no_sancion,
-                pdffotos:res.pdf.fotos,
-                pdfseguro:res.pdf.seguro,
-                pdfexamen_psicometrico:res.pdf.examen_psicometria,
-                pdfdominio_idioma:res.pdf.dominio_idioma,
-                pdfdocumento_udestino:res.pdf.documento_udestino,
-                pdfcomprobante_solvencia:res.pdf.comprobante_solvencia
-              });
-
-              let json={data:this.mysolicitud.value}
-              this.movilidad.addsolicitud(json)
-              .subscribe((res:any)=>{
-                this.loadingspinner=false;
-                if(res.estado==true)
+              verificar_pdf1=true;
+             this.mysolicitud.patchValue({
+               pdfcertificado_matricula:res.documento 
+             })
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
                 {
-                  Swal.fire({
-                    showClass: {
-                      popup: 'animate__animated animate__fadeInDown'
-                    },
-                    hideClass: {
-                      popup: 'animate__animated animate__fadeOutUp'
-                    },
-                    title:'Solicitud Guardada con exito',
-                    icon:'success'
-                  });
-                  this.router.navigate(['/principal/movilidad'])
-
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
                 }
 
-              })
 
-
-              
+              }
+              else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
             }
+          });
+          //copia_record
+          const formData1 = new FormData();
+          formData1.append('document', this.mysolicitud.get('copia_record')?.value);
+          this.movilidad.addftpmovilidad_v2(formData1)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf2=true;
+             this.mysolicitud.patchValue({
+               pdfcopia_record:res.documento 
+             })
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
 
-          })
+
+              }
+              else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+
+     
+            }
+          });
+     
+          //solicitud Carta
+          const formData2 = new FormData();
+          formData2.append('document', this.mysolicitud.get('solicitud_carta')?.value);
+          this.movilidad.addftpmovilidad_v2(formData2)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf3=true;
+             this.mysolicitud.patchValue({
+               pdfsolicitud_carta:res.documento 
+             })
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
 
 
+              }
+              else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
 
+     
+            }
+          });
+
+          //carta Recomendacion
+          const formData3 = new FormData();
+          formData3.append('document', this.mysolicitud.get('cartas_recomendacion')?.value);
+          this.movilidad.addftpmovilidad_v2(formData3)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf4=true;
+             this.mysolicitud.patchValue({
+              pdfcartas_recomendacion:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
+            }
+          });
+
+          //No sancion
+          const formData4 = new FormData();
+          formData4.append('document', this.mysolicitud.get('no_sancion')?.value);
+          this.movilidad.addftpmovilidad_v2(formData4)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf5=true;
+             this.mysolicitud.patchValue({
+              pdfno_sancion:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
+            }
+          });
+
+          //Fotos
+          const formData5 = new FormData();
+          formData5.append('document', this.mysolicitud.get('fotos')?.value);
+          this.movilidad.addftpmovilidad_v2(formData5)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf6=true;
+             this.mysolicitud.patchValue({
+              pdffotos:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
+            }
+          });
+
+          //seguro
+          const formData6 = new FormData();
+          formData6.append('document', this.mysolicitud.get('seguro')?.value);
+          this.movilidad.addftpmovilidad_v2(formData6)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf7=true;
+             this.mysolicitud.patchValue({
+              pdfseguro:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
+            }
+          });
+
+          //Documentos U_Destino
+          const formData7 = new FormData();
+          formData7.append('document',this.mysolicitud.get('documento_udestino')?.value);
+          this.movilidad.addftpmovilidad_v2(formData7)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf8=true;
+             this.mysolicitud.patchValue({
+              pdfdocumento_udestino:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+     
+            }
+          });
+
+          //Comprobante Solvente
+          const formData8 = new FormData();
+          formData8.append('document',this.mysolicitud.get('comprobante_solvencia')?.value);
+          this.movilidad.addftpmovilidad_v2(formData8)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf9=true;
+             this.mysolicitud.patchValue({
+              pdfcomprobante_solvencia:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+
+            }
+          });
+
+           //
+     
+      
+        //examen Psicometria
+        if(this.mysolicitud.get('verificar8')?.value==true)
+        {
+          const formData9 = new FormData();
+          formData9.append('document',this.mysolicitud.get('examen_psicometria')?.value);
+          this.movilidad.addftpmovilidad_v2(formData9)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf10=true;
+             this.mysolicitud.patchValue({
+              pdfexamen_psicometrico:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+              }
+              else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+            }
+          });
 
         }
-      })
+        if(this.mysolicitud.get('verificar9')?.value==true)
+        {
+          //
+          const formData10 = new FormData();
+          formData10.append('document',this.mysolicitud.get('dominio_idioma')?.value);
+          this.movilidad.addftpmovilidad_v2(formData10)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf11=true;
+              this.mysolicitud.patchValue({
+                pdfdominio_idioma:res.documento 
+             });
+             if(verificar_pdf1==true && verificar_pdf2==true && verificar_pdf3==true &&
+              verificar_pdf4==true && verificar_pdf5==true && verificar_pdf6==true &&
+              verificar_pdf7==true && verificar_pdf8==true && verificar_pdf9==true)
+              {
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+                else{
+                  this.loadingspinner=false;
+                }
+
+
+              }else{
+                if(this.mysolicitud.get('verificar8')?.value==true || this.mysolicitud.get('verificar9')?.value==true)
+                {
+                  if(verificar_pdf10==true)
+                  {
+                    this.loadingspinner=false;
+                  }
+                  if(verificar_pdf11==true){
+                    this.loadingspinner=false;
+                  }
+                }
+              }
+            }
+          });
+
+        }
+      
+    
+      
+
+      }
+      });
+
+     
+
+   
+
+
+
   }
 
 }

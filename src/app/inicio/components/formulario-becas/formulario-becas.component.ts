@@ -215,7 +215,7 @@ export class FormularioBecasComponent implements OnInit {
         this.menu4=true;
         this.menu5=false;
       }
-      else if(this.menu_opcion==4)
+      else if(this.menu_opcion==5)
       {
         this.menu1=false;
         this.menu2=false;
@@ -274,3 +274,5 @@ cancelar(){
 }
 
 }
+
+
