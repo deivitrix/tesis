@@ -148,4 +148,20 @@ export class BecasnivelService {
     return this.http.get(url);
   }
 
+  // beneficios
+  getserviciobeneficio(id:number)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'beneficios/'+id;
+    return this.http.get(url);
+  }
+
+  //subir solicitudes de Becas
+  addftpsolicitudbecas(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'documento/becas';
+    return this.http.post(url,data);
+  }
+
+  
+
 }

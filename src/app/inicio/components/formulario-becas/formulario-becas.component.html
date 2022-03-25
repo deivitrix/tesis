@@ -1,3 +1,6 @@
+<ng-container *ngIf="loadingspinner==true">
+    <app-spinnerinicio></app-spinnerinicio>
+</ng-container>
 <div class="separador"></div>
 <ng-container *ngIf="loading">
     <app-loading></app-loading>
@@ -331,6 +334,7 @@
                     </ng-container>
                     <form [formGroup]="mysolicitud" autocomplete="off">
                     <ng-container *ngIf="menu4">
+                        <pre>{{mysolicitud.value | json}}</pre>
                             <div class="border ">
                                 <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -418,8 +422,8 @@
 
                                 <div class="col-sm">
                                     <mat-form-field class="container-solicitud" appearance="fill">
-                                        <mat-label>Seleccionar Naturaleza del movilidad</mat-label>
-                                        <mat-select formControlName="id_naturaleza">
+                                        <mat-label>Seleccionar Naturaleza de la Beca</mat-label>
+                                        <mat-select formControlName="id_naturaleza" (selectionChange)="beneficios_naturaleza()">
                                              <ng-container *ngFor="let list of listnatu">
                                                 <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
                                             </ng-container>
@@ -458,123 +462,27 @@
                                             <h5>Tipo de Beneficios</h5>
                                         </mat-label>
                                     </div>
-                                    <div style="margin-left: 25%; text-align: start;">
-                                        <div class="form-check">
-                                            <input #beneficio1 (change)="presionar(beneficio1.checked,1)"
-                                                class="form-check-input" type="checkbox" value="1" id="beneficio1">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Asignación de 4 horas de investigación
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Asignación de 8 horas de investigación
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Asignación de 10 horas de investigación
-                                            </label>
-                                        </div>
+                                    <ng-container *ngIf="mysolicitud.get('id_naturaleza')?.value.length!=0">
+                                        <ng-container *ngIf="naturaleza_verificar">
+                                            <app-loading></app-loading>
+                                        </ng-container>
+                                        <ng-container *ngIf="naturaleza_verificar==false">
+                                            <div style="margin-left: 25%; text-align: start;">
+                                                <div *ngFor="let list of listbeneficio">
+                                                    <div class="form-check">
+                                                        <input 
+                                                            class="form-check-input" type="checkbox" disabled checked>
+                                                        <label style="margin-left: 2%; font-weight:bold;" class="form-check-label"
+                                                            for="flexCheckDefault">
+                                                           {{list.descripcion}}
+                                                        </label>
+                                                    </div>
+                                                </div> 
+                                            </div>
 
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Ayuda económica para publicación de artículo científico
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Ayuda para la adquisición de bienes e insumos
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Ayuda para la adquisición de libros
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Ayuda para publicación de libro
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Estipendio mensual
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Licencia con sueldo con todos los beneficios de ley
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Pago de la inscripción o colegiatura
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Pasaje aéreo de ida y vuelta para el becario por cada año de estudio
-                                            </label>
-                                        </div>
-
-                                        <div class="form-check">
-                                            <input #beneficio2 (change)="presionar(beneficio2.checked,2)"
-                                                class="form-check-input" type="checkbox" value="2" id="beneficio2">
-                                            <label style="margin-left: 2%;" class="form-check-label"
-                                                for="flexCheckDefault">
-                                                Pasaje terrestre de ida y vuelta para el becario por cada año de estudio
-                                            </label>
-                                        </div>
-
-
-
-
-
-
-
-
-
-
-
-                                    </div>
+                                        </ng-container>
+                                    </ng-container>
+                                   
 
                                 </div>
                             </div>
@@ -593,7 +501,6 @@
                                 <div class="col-sm" style="margin-top: 4%;">
                                     <mat-form-field class="container-solicitud" appearance="fill">
                                         <mat-label>Tipo de Alergia</mat-label>
-                                        <!-- <input matInput> -->
                                         <mat-select formControlName="id_alergias">
                                             <ng-container *ngFor="let list of listalergias">
                                                 <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
@@ -640,7 +547,7 @@
                             
                             <div class="row" style="text-align: center; margin-top: 5%;">
                                 <div class="col-sm">
-                                    <button [disabled]="botonguardar" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                    <button (click)="guardar()" [disabled]="botonguardar" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                             <path
@@ -704,13 +611,13 @@
                         </div>
 
                         <div class="col-sm" style="text-align: center; margin-top: 1%;">
-                            <button [disabled]="botonguardarDocumento"  title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                            <button [disabled]="botonguardarDocumento" (click)="guardar_documentos()"  title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                 <path
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                             </svg><span>&nbsp;Guardar</span></button>
-                            <button [disabled]="botonborrarDocumento" title="Cancelar" class="btn btn-danger" style="margin: 2%;"><svg
+                            <button [disabled]="botonborrarDocumento" (click)="borrar_archivos()" title="Cancelar" class="btn btn-danger" style="margin: 2%;"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                 fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                                 <path

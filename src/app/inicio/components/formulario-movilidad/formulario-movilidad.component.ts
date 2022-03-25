@@ -636,7 +636,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   }
 
-  // eliminar file
+  // eliminar archivos seleccionados
   borrar_archivos() {
     const dialogRef = this.dialog.open(DialogborrarfilesComponent, {
       width: '900px',
@@ -672,36 +672,6 @@ export class FormularioMovilidadComponent implements OnInit {
       console.log('The dialog was closed');
 
       if (result != null) {
-        // if(result.length==0)
-        // {
-        //   Swal.fire({
-        //     showClass: {
-        //       popup: 'animate__animated animate__fadeInDown'
-        //     },
-        //     hideClass: {
-        //       popup: 'animate__animated animate__fadeOutUp'
-        //     },
-        //     title:'Se debe ingresar un N° cedula ',
-        //     icon:'warning'
-        //   });
-        //   return;
-
-        // }
-        // else if(result.length<10 || result.length>10)
-        // {
-        //   Swal.fire({
-        //     showClass: {
-        //       popup: 'animate__animated animate__fadeInDown'
-        //     },
-        //     hideClass: {
-        //       popup: 'animate__animated animate__fadeOutUp'
-        //     },
-        //     title:'Ingresar los numeros correctos del N° cedula ',
-        //     icon:'warning'
-        //   });
-        //   return;
-        // }
-
        if(result.borrar1==false && result.borrar2==false && result.borrar3==false && result.borrar4==false
         && result.borrar5==false && result.borrar6==false && result.borrar7==false && result.borrar8==false
         && result.borrar9==false && result.borrar10==false && result.borrar11==false )
@@ -734,7 +704,7 @@ export class FormularioMovilidadComponent implements OnInit {
                 verificar1: false
               });
             }
-            else if (result.borrar2 == true) {
+             if (result.borrar2 == true) {
               this.mysolicitud.patchValue({
                 copia_record: [new File([""], ""), Validators.required],
                 nombre_copia: [''],
@@ -742,7 +712,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar3 == true) {
+             if (result.borrar3 == true) {
               this.mysolicitud.patchValue({
                 solicitud_carta: [new File([""], ""), Validators.required],
                 nombre_solicitud: [''],
@@ -750,7 +720,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar4 == true) {
+             if (result.borrar4 == true) {
               this.mysolicitud.patchValue({
                 cartas_recomendacion: [new File([""], ""), Validators.required],
                 nombre_cartas: [''],
@@ -758,7 +728,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar5 == true) {
+             if (result.borrar5 == true) {
               this.mysolicitud.patchValue({
                 no_sancion: [new File([""], ""), Validators.required],
                 nombre_no_sancion: [''],
@@ -766,7 +736,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar6 == true) {
+             if (result.borrar6 == true) {
               this.mysolicitud.patchValue({
                 fotos: [new File([""], ""), Validators.required],
                 nombre_fotos: [''],
@@ -774,7 +744,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar7 == true) {
+             if (result.borrar7 == true) {
               this.mysolicitud.patchValue({
                 seguro: [new File([""], ""), Validators.required],
                 nombre_seguro: [''],
@@ -782,7 +752,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar8 == true) {
+             if (result.borrar8 == true) {
               this.mysolicitud.patchValue({
                 examen_psicometria: [new File([""], ""), Validators.required],
                 nombre_examen: [''],
@@ -790,7 +760,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar9 == true) {
+             if (result.borrar9 == true) {
               this.mysolicitud.patchValue({
                 dominio_idioma: [new File([""], ""), Validators.required],
                 nombre_dominio: [''],
@@ -798,7 +768,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar10 == true) {
+             if (result.borrar10 == true) {
               this.mysolicitud.patchValue({
                 documento_udestino: [new File([""], ""), Validators.required],
                 nombre_documento: [''],
@@ -806,7 +776,7 @@ export class FormularioMovilidadComponent implements OnInit {
               });
 
             }
-            else if (result.borrar11 == true) {
+             if (result.borrar11 == true) {
               this.mysolicitud.patchValue({
                 comprobante_solvencia: [new File([""], ""), Validators.required],
                 nombre_comprobante: [''],
@@ -973,7 +943,6 @@ export class FormularioMovilidadComponent implements OnInit {
     }
 
     // semestre cursar
-
  if(this.mysolicitud.get('semestre_cursar')?.value.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{

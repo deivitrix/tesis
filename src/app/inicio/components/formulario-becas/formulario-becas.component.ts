@@ -9,6 +9,10 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BecasnivelService } from 'src/app/services/becasnivel.service';
+import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogborrarfilesbecasComponent } from '../dialogborrarfilesbecas/dialogborrarfilesbecas.component';
 
 
 @Component({
@@ -25,6 +29,7 @@ export class FormularioBecasComponent implements OnInit {
 
   //loading
   loading=true;
+  loadingspinner=false;
 
   // formGroup
   myform:FormGroup;
@@ -66,6 +71,9 @@ export class FormularioBecasComponent implements OnInit {
   listnatu: any[] = [];
   listnatu_aux: any[] = [];
 
+  //beneficios
+  listbeneficio:any[]=[];
+
   //selector apoyo
   listapoyo: any[] = [];
   listapoyo_aux: any[] = [];
@@ -82,8 +90,12 @@ export class FormularioBecasComponent implements OnInit {
   //verificar presion de guardar
   botonguardardocumentos=false;
 
+  //selector naturaleza booleano
+  naturaleza_verificar=false;
+
+
   constructor(private rutaActiva: ActivatedRoute, private becas:BecasnivelService,private ingresar:FormBuilder,
-    private router:Router) {
+    private router:Router, public snackBar:MatSnackBar, public dialog: MatDialog) {
       this.cedula=rutaActiva.snapshot.params.cedula;
       this.myform=this.ingresar.group({
         idpersonal:[''],
@@ -135,6 +147,7 @@ export class FormularioBecasComponent implements OnInit {
         pdfcarta_aceptacion: ["", Validators.required],
         nombre_carta: [{ value: '', disabled: true }],
         verificar1: [false],
+
         titulo: [new File([""], ""), Validators.required],
         pdftitulo: ["", Validators.required],
         nombre_titulo: [{ value: '', disabled: true }],
@@ -200,6 +213,7 @@ export class FormularioBecasComponent implements OnInit {
        });
 
        this.mysolicitud.patchValue({
+        idpersonal:res.usuario.idpersonal,
          tipo_sangre:res.usuario.Tipo_Sangre
        })
 
@@ -291,7 +305,6 @@ export class FormularioBecasComponent implements OnInit {
           this.listapoyo_aux.forEach((item: any) => {
             if (item.estado == "A") {
               this.listapoyo.push(item);
-
             }
           })
 
@@ -396,8 +409,25 @@ export class FormularioBecasComponent implements OnInit {
   
     }
 
-    // agregar files al mysolicitud
+    //beneficios
+  beneficios_naturaleza()
+  {
+    this.naturaleza_verificar=true;
+    this.becas.getserviciobeneficio(this.mysolicitud.get('id_naturaleza')?.value)
+    .subscribe((res:any)=>{
+      if(res.estado==true){
 
+        this.naturaleza_verificar=false;
+        this.listbeneficio=[];
+        this.listbeneficio=res.beneficios;
+      }
+
+    });
+
+   
+  }
+
+  // agregar files al mysolicitud
   fileEvent(event: any, numero: number) {
     const archivoCapturado = event.target.files[0];
     if (archivoCapturado.type == "application/pdf") {
@@ -433,7 +463,7 @@ export class FormularioBecasComponent implements OnInit {
 
   }
 
-    // checkbox beneficios
+  // checkbox beneficios
   presionar(value:boolean,numero:number)
   {
     if(numero==1)
@@ -447,8 +477,311 @@ export class FormularioBecasComponent implements OnInit {
     }
   }
 
-    //botones 
-cancelar(){
+  //botones 
+
+  guardar(){
+    
+    //modalidad
+    if(this.mysolicitud.get('modalidad1')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de modalidad",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    if(this.mysolicitud.get('modalidad2')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de tipo destino",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //universidad
+    if(this.mysolicitud.get('id_universidad')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una Universidad",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //campus destino
+    if(this.mysolicitud.get('campus_destino')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar carrera destino",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    // numero semestre
+ if(this.mysolicitud.get('numero_semestre')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar un semestre a cursar ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    if(this.mysolicitud.get('numero_semestre')?.value <0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar numero de semestres en numeros positivos",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:2000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //fecha inicio 
+    if(this.mysolicitud.get('fecha_inicio')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar una fecha de inicio ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //fecha fin 
+    if(this.mysolicitud.get('fecha_fin')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar una fecha de fin ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+    //naturaleza
+    if(this.mysolicitud.get('id_naturaleza')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una Naturaleza de Movilidad ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //becas
+    if(this.mysolicitud.get('id_becas')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de Becas ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //monto
+    // if(this.mysolicitud.get('id_monto')?.value.length==0)
+    // {
+    //   this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+    //     data:{
+    //       titulo:'Error.....',
+    //       mensaje:"Escoger una opcion de monto ",
+    //      buttonText:'',
+    //      icon:'warning'
+    //     },
+    //     duration:1000,
+    //     horizontalPosition:'end',
+    //     verticalPosition:'bottom',
+    //     panelClass:'error'     
+    //   });
+    //   return;
+
+    // }
+
+
+    //alergias
+    if(this.mysolicitud.get('id_alergias')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de Alergias ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+
+    }
+
+    //especificar Alergias 
+    if(this.mysolicitud.get('especificar_alergias')?.value.length==0)
+    {
+      
+     this.mysolicitud.patchValue({
+         especificar_alergias:'<p>&nbsp;No definido</p>'
+     });
+     
+    }
+    //Enfermedades Persistentes y tratamiento 
+    if(this.mysolicitud.get('enfermedades_tratamiento')?.value.length==0)
+    {
+      
+     this.mysolicitud.patchValue({
+      enfermedades_tratamiento:'<p>&nbsp;No definido</p>'
+     });
+     
+    }
+
+    //Poliza de seguro
+    if(this.mysolicitud.get('poliza_seguro')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Escoger una opcion de Poliza de Seguro ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1500,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.botonguardardocumentos==false)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Presionar el boton de Guardar de la pestaña Documentos",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    if(this.mysolicitud.get('pdfcarta_aceptacion')?.value.length==0 || this.mysolicitud.get('pdftitulo')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Cargando datos documentos....!!",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+  }
+
+
+  cancelar(){
 
   Swal.fire({
     showClass: {
@@ -478,7 +811,199 @@ cancelar(){
     }
   })
 
-}
+  }
+
+  //borrar archivos selecionados
+
+  borrar_archivos(){
+    const dialogRef = this.dialog.open(DialogborrarfilesbecasComponent, {
+      width: '900px',
+      data: {
+        titulo: 'Borrar Archivos', objeto: {
+          carta_aceptacion: this.mysolicitud.get('nombre_carta')?.value,
+          borrar1: false,
+          titulo: this.mysolicitud.get('nombre_titulo')?.value,
+          borrar2: false,
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+
+      if (result != null) {
+
+       if(result.borrar1==false && result.borrar2==false)
+        {
+          return;
+        }
+
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title: "Esta seguro que desea Borrar los archivos seleccionados!!",
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Borrar',
+          denyButtonText: `No Borrar`,
+
+        }).then((result1) => {
+
+          if (result1.isConfirmed) {
+            if (result.borrar1 == true) {
+              this.mysolicitud.patchValue({
+                carta_aceptacion: [new File([""], ""), Validators.required],
+                nombre_carta: [''],
+                verificar1: false
+              });
+            }
+            if (result.borrar2 == true) {
+              this.mysolicitud.patchValue({
+                titulo: [new File([""], ""), Validators.required],
+                nombre_titulo: [''],
+                verificar2: false
+              });
+
+            }
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:"Elimino los archivos seleccionados",
+              icon:'success'
+            });
+
+          }
+
+        })
+      }
+    });
+
+
+
+  }
+
+  //guardar documentos
+  guardar_documentos(){
+
+    // carta de aceptacion
+    if(this.mysolicitud.get('verificar1')?.value==false)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Subir documento Carta de Aceptacion ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+    //Copia Record
+    if(this.mysolicitud.get('verificar2')?.value==false)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Subir documento Titulo ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
+
+
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea guardar los Documentos?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+     
+    }).then((result)=>{
+
+      if(result.isConfirmed)
+      {
+         // declarar variables
+         var verificar_pdf1=false;
+         var verificar_pdf2=false;
+         this.loadingspinner=true;
+         this.botonguardardocumentos=true;
+         this.botonguardarDocumento=true;
+         this.botonborrarDocumento=true;
+
+
+         const formData = new FormData();
+          formData.append('document', this.mysolicitud.get('carta_aceptacion')?.value);
+          this.becas.addftpsolicitudbecas(formData)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf1=true;
+              this.mysolicitud.patchValue({
+                pdfcarta_aceptacion:res.documento 
+              })
+              if(verificar_pdf1==true && verificar_pdf2==true)
+                { 
+                  this.loadingspinner=false;
+                }
+
+            }
+          });
+
+
+
+          const formData2 = new FormData();
+          formData2.append('document', this.mysolicitud.get('titulo')?.value);
+          this.becas.addftpsolicitudbecas(formData2)
+          .subscribe((res:any)=>{
+            if(res.estado==true)
+            {
+              verificar_pdf2=true;
+              this.mysolicitud.patchValue({
+                pdftitulo:res.documento 
+              });
+              if(verificar_pdf1==true && verificar_pdf2==true)
+                { 
+                  this.loadingspinner=false;
+                }
+
+            }
+          });
+
+      }
+
+
+    });
+
+
+
+  }
 
 }
 

@@ -65,6 +65,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FormularioBecasComponent } from './components/formulario-becas/formulario-becas.component';
 import { DialogborrarfilesComponent } from './components/dialogborrarfiles/dialogborrarfiles.component';
 import { SpinnerinicioComponent } from './components/spinnerinicio/spinnerinicio.component';
+import { DialogborrarfilesbecasComponent } from './components/dialogborrarfilesbecas/dialogborrarfilesbecas.component';
 
 
 
@@ -103,6 +104,7 @@ import { SpinnerinicioComponent } from './components/spinnerinicio/spinnerinicio
     FormularioBecasComponent,
     DialogborrarfilesComponent,
     SpinnerinicioComponent,
+    DialogborrarfilesbecasComponent,
   ],
   imports: [
     CommonModule,
