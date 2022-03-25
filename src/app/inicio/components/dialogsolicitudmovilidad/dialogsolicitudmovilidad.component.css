@@ -1,9 +1,11 @@
 .titulo{
     text-align: center;
-    font-size: 18px;
-    color: rgb(118, 158, 190);
+    font-size: 23px;
+    /* color: rgb(118, 158, 190); */
     /* font-family: 'Raleway', sans-serif; */
      font-family: 'Raleway', sans-serif; 
+     -webkit-text-stroke: 1.5px rgb(118, 158, 190); /*poner bordes a las letras*/
+     color: rgb(107, 103, 104);
 }
 .container-fill{
     text-align: center;

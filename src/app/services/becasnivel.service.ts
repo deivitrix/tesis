@@ -169,6 +169,13 @@ export class BecasnivelService {
     return this.http.post(url,data); 
   }
 
+  //obtener las solicitudes consultados por cedula
+  getsolicitudbecas(cedula:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'solicitud-beca/'+cedula;
+    return this.http.get(url);
+  }
+
   
 
 }

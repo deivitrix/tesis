@@ -1,0 +1,40 @@
+.titulo{
+    text-align: center;
+    font-size: 23px;
+    /* color: rgb(118, 158, 190); */
+    /* font-family: 'Raleway', sans-serif; */
+     font-family: 'Raleway', sans-serif; 
+     -webkit-text-stroke: 1.5px rgb(118, 158, 190); /*poner bordes a las letras*/
+     color: rgb(107, 103, 104);
+
+}
+.container-fill{
+    text-align: center;
+    width: 70%;
+    color: rgb(82, 107, 187);
+}
+/* .label-des{
+    color: rgb(0, 0, 0);
+    font-family: 'Raleway', sans-serif;
+} */
+
+.contenido{
+    text-align: center;
+}
+
+.button-action{
+    justify-content: center;
+}
+
+.texto-borde-a {
+    -webkit-text-stroke: 1.5px rgb(43, 180, 25);
+    color: transparent;
+  }
+  .texto-borde-p {
+    -webkit-text-stroke: 1.5px rgb(126, 136, 125);
+    color: transparent;
+  }
+  .texto-borde-r {
+    -webkit-text-stroke: 1.5px rgb(206, 68, 68);
+    color: transparent;
+  }

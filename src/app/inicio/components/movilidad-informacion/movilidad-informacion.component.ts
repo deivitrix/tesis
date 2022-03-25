@@ -220,9 +220,7 @@ export class MovilidadInformacionComponent implements OnInit {
         .subscribe((res:any)=>{
 
           if(res.estado==true)
-          {
-            console.log(res.datos);
-            
+          { 
             const dialogRef1=this.dialog.open(DialogsolicitudmovilidadComponent,{
               width:'1700px',
               data:{titulo:'Consultar Solicitudes Movilidad',objeto:res.datos}

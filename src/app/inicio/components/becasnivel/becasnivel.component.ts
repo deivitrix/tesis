@@ -1,3 +1,4 @@
+import { DialogsolicitudbecasComponent } from './../dialogsolicitudbecas/dialogsolicitudbecas.component';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BecasNivel } from 'src/app/models/becasnivel';
@@ -304,6 +305,30 @@ export class BecasnivelComponent implements OnInit {
           return;
         }
         this.cedula_consultar=result1;
+
+        this._becasnivel.getsolicitudbecas(this.cedula_consultar)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {  
+            const dialogRef1=this.dialog.open(DialogsolicitudbecasComponent,{
+              width:'1700px',
+              data:{titulo:'Consultar Solicitudes Becas',objeto:res.datos}
+            });
+
+          }else{
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:res.mensaje,
+              icon:'warning'
+            });
+          }
+        })
+
       }
      
       
