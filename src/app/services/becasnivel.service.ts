@@ -162,6 +162,13 @@ export class BecasnivelService {
     return this.http.post(url,data);
   }
 
+  // agregar solicitud becas
+  addsolicitudbecas(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'becas-new';
+    return this.http.post(url,data); 
+  }
+
   
 
 }

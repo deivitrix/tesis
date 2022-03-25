@@ -778,6 +778,50 @@ export class FormularioBecasComponent implements OnInit {
       return;
     }
 
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea guarda la solicitud?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+     
+    }).then((result)=>{
+
+      if(result.isConfirmed)
+      {
+        this.loadingspinner=true;
+        let json={data:this.mysolicitud.value};
+        this.becas.addsolicitudbecas(json)
+        .subscribe((res:any)=>{
+
+          this.loadingspinner=false;
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Guardada con exito',
+              icon:'success'
+            });
+            this.router.navigate(['/principal/becas'])
+          }
+        });
+
+
+      }
+    })
+
   }
 
 
