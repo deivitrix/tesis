@@ -66,6 +66,8 @@ import { FormularioBecasComponent } from './components/formulario-becas/formular
 import { DialogborrarfilesComponent } from './components/dialogborrarfiles/dialogborrarfiles.component';
 import { SpinnerinicioComponent } from './components/spinnerinicio/spinnerinicio.component';
 import { DialogborrarfilesbecasComponent } from './components/dialogborrarfilesbecas/dialogborrarfilesbecas.component';
+import { DialogsolicitudmovilidadComponent } from './components/dialogsolicitudmovilidad/dialogsolicitudmovilidad.component';
+import { DialogsolicitudbecasComponent } from './components/dialogsolicitudbecas/dialogsolicitudbecas.component';
 
 
 
@@ -105,6 +107,8 @@ import { DialogborrarfilesbecasComponent } from './components/dialogborrarfilesb
     DialogborrarfilesComponent,
     SpinnerinicioComponent,
     DialogborrarfilesbecasComponent,
+    DialogsolicitudmovilidadComponent,
+    DialogsolicitudbecasComponent,
   ],
   imports: [
     CommonModule,

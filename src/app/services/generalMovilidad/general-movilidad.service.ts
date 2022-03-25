@@ -76,4 +76,11 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'documento/movilidad';
     return this.http.post(url,data);
   }
+
+  //obtener las solicitudes consultados por cedula
+  getsolicitudmovilidad(cedula:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'solicitud-movilidad/'+cedula;
+    return this.http.get(url);
+  }
 }

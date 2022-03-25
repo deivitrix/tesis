@@ -1,3 +1,4 @@
+import { DialogsolicitudmovilidadComponent } from './../dialogsolicitudmovilidad/dialogsolicitudmovilidad.component';
 import { Router } from '@angular/router';
 import { GeneralMovilidadService } from './../../../services/generalMovilidad/general-movilidad.service';
 import { DialogcedulaComponent } from './../dialogcedula/dialogcedula.component';
@@ -215,6 +216,39 @@ export class MovilidadInformacionComponent implements OnInit {
           return;
         }
         this.cedula_consultar=result1;
+        this.movilidad.getsolicitudmovilidad(this.cedula_consultar)
+        .subscribe((res:any)=>{
+
+          if(res.estado==true)
+          {
+            console.log(res.datos);
+            
+            const dialogRef1=this.dialog.open(DialogsolicitudmovilidadComponent,{
+              width:'1700px',
+              data:{titulo:'Consultar Solicitudes Movilidad',objeto:res.datos}
+            });
+
+          }
+          else
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:res.mensaje,
+              icon:'warning'
+            });
+
+
+          }
+
+
+
+        });
+
       }
      
       
