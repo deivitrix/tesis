@@ -6,6 +6,8 @@ import { BuscarBecasPipe } from './buscarBecas/buscar-becas.pipe';
 import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
 import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenionombre.pipe';
 import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
+import { BuscarsolicitudmovilidadPipe } from './buscarsolicitudmovilidad/buscarsolicitudmovilidad.pipe';
+
 
 
 
@@ -17,6 +19,8 @@ import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
     BuscarBecasBodyPipe,
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
+    BuscarsolicitudmovilidadPipe,
+   
     
   ],
   imports: [
@@ -30,6 +34,7 @@ import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
     BuscarBecasBodyPipe,
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
+    BuscarsolicitudmovilidadPipe,
   ]
 })
 export class PipesModule { }

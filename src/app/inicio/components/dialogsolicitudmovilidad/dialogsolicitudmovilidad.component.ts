@@ -19,7 +19,7 @@ export class DialogsolicitudmovilidadComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  public pageSize: number = 10;
+  public pageSize: number = 5;
   public pageNumber: number = 1;
 
   constructor(
