@@ -136,6 +136,7 @@ export class DialoginformacionComponent implements OnInit {
       this.loading=false;
       if(res.estado==true)
       {
+        
         var genero1 = "";
         var poliza="";
         if (res.datos.genero == "M") {
@@ -154,40 +155,61 @@ export class DialoginformacionComponent implements OnInit {
           poliza="No";
 
         }
-        // pdfcertificado_matricula:[{ value: '', disabled: true }],
-        // pdfcopia_record:[{ value: '', disabled: true }],
-        // pdfsolicitud_carta:[{ value: '', disabled: true }],
-        // pdfcartas_recomendacion:[{ value: '', disabled: true }],
-        // pdfno_sancion:[{ value: '', disabled: true }],
-        // pdffotos:[{ value: '', disabled: true }],
-        // pdfseguro:[{ value: '', disabled: true }],
-        // pdfexamen_psicometrico:[{ value: '', disabled: true }],
-        // pdfdominio_idioma:[{ value: '', disabled: true }],
-        // pdfdocumentos_udestino:[{ value: '', disabled: true }],
-        // pdfcomprobante_solvencia:[{ value: '', disabled: true }],
+      
+       
+        this.myform.patchValue({
+          nombre_certificado:"Si",
+          nombre_copia:"Si",
+          nombre_solicitud:"Si",
+          nombre_cartas:"Si",
+          nombre_no_sancion:"Si",
+          nombre_fotos:"Si",
+          nombre_seguro:"Si",
+          nombre_documento:"Si",
+          nombre_comprobante:"Si"
 
-      //   nombre_certificado: [{ value: '', disabled: true }],
-      // nombre_copia: [{ value: '', disabled: true }],
-      // nombre_solicitud: [{ value: '', disabled: true }],
-      // nombre_cartas: [{ value: '', disabled: true }],
-      // nombre_no_sancion: [{ value: '', disabled: true }],
-      // nombre_fotos: [{ value: '', disabled: true }],
-      // nombre_seguro: [{ value: '', disabled: true }],
-      // nombre_examen: [{ value: '', disabled: true }],
-      // nombre_dominio: [{ value: '', disabled: true }],
-      // nombre_documento: [{ value: '', disabled: true }],
-      // nombre_comprobante: [{ value: '', disabled: true }],
 
-        if(res.datos.pdfcertificado_matricula.length!=0)
+        })
+        
+
+
+        if(res.datos.pdfexamen_psicometrico==null)
         {
           this.myform.patchValue({
-            nombre_certificado:"Si"
+            nombre_examen:"NO"
+          })
+
+        }
+        else if(res.datos.pdfexamen_psicometrico.length!=0)
+        {
+          this.myform.patchValue({
+            nombre_examen:"Si"
           })
 
         }
         else{
           this.myform.patchValue({
-            nombre_certificado:"No"
+            nombre_examen:"No"
+          })
+        }
+
+         if(res.datos.pdfdominio_idioma==null)
+        {
+          this.myform.patchValue({
+            nombre_dominio:"No"
+          })
+
+        }
+        else if(res.datos.pdfdominio_idioma.length!=0)
+        {
+          this.myform.patchValue({
+            nombre_dominio:"Si"
+          })
+
+        }
+        else{
+          this.myform.patchValue({
+            nombre_dominio:"No"
           })
         }
 
@@ -240,13 +262,24 @@ export class DialoginformacionComponent implements OnInit {
           enfermedades_tratamiento:res.datos.enfermedades_tratamiento,
           poliza_seguro:poliza,
 
+          //pdf
+          pdfcertificado_matricula:res.datos.pdfcertificado_matricula,
+          pdfcopia_record:res.datos.pdfcopia_record,
+          pdfsolicitud_carta:res.datos.pdfsolicitud_carta,
+          pdfcartas_recomendacion:res.datos.pdfcartas_recomendacion,
+          pdfno_sancion:res.datos.pdfno_sancion,
+          pdffotos:res.datos.pdffotos,
+          pdfseguro:res.datos.pdfseguro,
+          pdfexamen_psicometrico:res.datos.pdfexamen_psicometrico,
+          pdfdominio_idioma:res.datos.pdfdominio_idioma,
+          pdfdocumentos_udestino:res.datos.pdfdocumentos_udestino,
+          pdfcomprobante_solvencia:res.datos.pdfcomprobante_solvencia,
+
 
         });
 
         this.agregarcarrera(res.datos);
         this.agregarmaterias(res.datos);
-
-
       }
 
     })
@@ -345,6 +378,137 @@ export class DialoginformacionComponent implements OnInit {
 
   }
 
+documentoURL(numero:number)
+{
+  if(numero==1)
+  {
+    let urlToOpen:string= this.myform.get('pdfcertificado_matricula')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
 
+    url += urlToOpen;
+    window.open(url, '_blank');
+   
+
+  }
+  else if(numero==2){
+    let urlToOpen:string=this.myform.get('pdfcopia_record')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+
+  }
+  else if(numero==3){
+    let urlToOpen:string=this.myform.get('pdfsolicitud_carta')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+
+  }
+  else if(numero==4){
+    let urlToOpen:string=this.myform.get('pdfcartas_recomendacion')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+
+  }
+  else if(numero==5){
+    let urlToOpen:string=this.myform.get('pdfno_sancion')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+  }
+  else if(numero==6){
+    let urlToOpen:string=this.myform.get('pdffotos')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+
+  }
+  else if(numero==7){
+    let urlToOpen:string=this.myform.get('pdfseguro')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+
+  }
+  else if(numero==8){
+    let urlToOpen:string=this.myform.get('pdfexamen_psicometrico')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+  }
+  else if(numero==9){
+    let urlToOpen:string=this.myform.get('pdfdominio_idioma')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+  }
+  else if(numero==10){
+    let urlToOpen:string=this.myform.get('pdfdocumentos_udestino')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+  }
+  else if(numero==11){
+    let urlToOpen:string=this.myform.get('pdfcomprobante_solvencia')?.value;
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(urlToOpen)) {
+      url += 'http://';
+    }
+
+    url += urlToOpen;
+    window.open(url, '_blank');
+    
+  }
+
+}
 
 }

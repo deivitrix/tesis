@@ -368,13 +368,13 @@
               <div class="row">
                 <h5 style=" color: gray;">Modalidad</h5>
                 <div class="col-sm" style="margin-top: 3%;">
-                  <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                  <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
                     <mat-label>Modalidad</mat-label>
                     <input formControlName="modalidad" matInput>
                   </mat-form-field>
                 </div>
                 <div class="col-sm" style="margin-top: 3%;">
-                  <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                  <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
                     <mat-label>Tipo Destino</mat-label>
                     <input formControlName="tipo_destino" matInput>
                   </mat-form-field>
@@ -395,7 +395,7 @@
         </div>
         <div class="row" style="margin-top: 2%; text-align: center;">
           <div class="col-sm">
-            <mat-form-field class="container-font" appearance="fill">
+            <mat-form-field style="width: 100%;" class="container-font" appearance="fill">
               <mat-label>Carrera Destino</mat-label>
               <input formControlName="carrera_destino" matInput>
             </mat-form-field>
@@ -535,117 +535,119 @@
               </svg>DOCUMENTOS</h4>
       </div>
 
-      <div class="row">
+      <div class="row" >
         <div class="col-sm">
             <div class="col-sm">
-              <mat-form-field  appearance="fill">
+              <mat-form-field class="container-font"  appearance="fill">
                 <mat-label>Certificado Matricula</mat-label>
                 <input  formControlName="nombre_certificado"  matInput>
               </mat-form-field>
-              <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+                <a (click)="documentoURL(1)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
+             
             </div>
         </div>
 
         <div class="col-sm">
           <div class="col-sm">
-            <mat-form-field  appearance="fill">
-              <mat-label>Certificado Matricula</mat-label>
-              <input  formControlName="nombre_certificado"  matInput>
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Copia Record</mat-label>
+              <input  formControlName="nombre_copia"  matInput>
             </mat-form-field>
-            <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+            <a (click)="documentoURL(2)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
           </div>
       </div>
       <div class="col-sm">
         <div class="col-sm">
-          <mat-form-field  appearance="fill">
-            <mat-label>Certificado Matricula</mat-label>
-            <input  formControlName="nombre_certificado"  matInput>
+          <mat-form-field class="container-font" appearance="fill">
+            <mat-label>Solicitud Carta</mat-label>
+            <input  formControlName="nombre_solicitud"  matInput>
           </mat-form-field>
-          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+          <a (click)="documentoURL(3)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
         </div>
     </div>
     </div>
 
     <div class="row">
       <div class="col-sm">
+        <div class="col-sm">
+          <mat-form-field class="container-font" appearance="fill">
+            <mat-label>Carta Recomendacion</mat-label>
+            <input  formControlName="nombre_cartas"  matInput>
+          </mat-form-field>
+          <a  (click)="documentoURL(4)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
+        </div>
+    </div>
+      <div class="col-sm">
           <div class="col-sm">
-            <mat-form-field  appearance="fill">
-              <mat-label>Certificado Matricula</mat-label>
-              <input  formControlName="nombre_certificado"  matInput>
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>No Sancion</mat-label>
+              <input  formControlName="nombre_no_sancion"  matInput>
             </mat-form-field>
-            <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+            <a  (click)="documentoURL(5)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
           </div>
       </div>
 
       <div class="col-sm">
         <div class="col-sm">
-          <mat-form-field  appearance="fill">
-            <mat-label>Certificado Matricula</mat-label>
-            <input  formControlName="nombre_certificado"  matInput>
+          <mat-form-field  class="container-font" appearance="fill">
+            <mat-label>Fotos</mat-label>
+            <input  formControlName="nombre_fotos"  matInput>
           </mat-form-field>
-          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+          <a  (click)="documentoURL(6)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
         </div>
     </div>
-    <div class="col-sm">
-      <div class="col-sm">
-        <mat-form-field  appearance="fill">
-          <mat-label>Certificado Matricula</mat-label>
-          <input  formControlName="nombre_certificado"  matInput>
-        </mat-form-field>
-        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-      </div>
-  </div>
+    
   </div>
   <div class="row">
     <div class="col-sm">
+      <div class="col-sm">
+        <mat-form-field class="container-font" appearance="fill">
+          <mat-label>Seguro</mat-label>
+          <input  formControlName="nombre_seguro"  matInput>
+        </mat-form-field>
+        <a (click)="documentoURL(7)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
+      </div>
+  </div>
+    <div class="col-sm">
         <div class="col-sm">
-          <mat-form-field  appearance="fill">
-            <mat-label>Certificado Matricula</mat-label>
-            <input  formControlName="nombre_certificado"  matInput>
+          <mat-form-field class="container-font" appearance="fill">
+            <mat-label>Examen Psicometrico</mat-label>
+            <input  formControlName="nombre_examen"  matInput>
           </mat-form-field>
-          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+          <a (click)="documentoURL(8)" [ngClass]="this.myform.get('pdfexamen_psicometrico')?.value === null?'disabled':'enable'"class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
         </div>
     </div>
 
     <div class="col-sm">
       <div class="col-sm">
-        <mat-form-field  appearance="fill">
-          <mat-label>Certificado Matricula</mat-label>
-          <input  formControlName="nombre_certificado"  matInput>
+        <mat-form-field class="container-font" appearance="fill">
+          <mat-label>Dominio Idioma</mat-label>
+          <input  formControlName="nombre_dominio"  matInput>
         </mat-form-field>
-        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+        <a  (click)="documentoURL(9)" [ngClass]="this.myform.get('pdfdominio_idioma')?.value === null?'disabled':'enable'" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
       </div>
   </div>
-  <div class="col-sm">
-    <div class="col-sm">
-      <mat-form-field  appearance="fill">
-        <mat-label>Certificado Matricula</mat-label>
-        <input  formControlName="nombre_certificado"  matInput>
-      </mat-form-field>
-      <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-    </div>
-</div>
+  
 </div>
 <div class="row">
-  <div class="col-sm">
+
+    <div class="col-sm">
       <div class="col-sm">
-        <mat-form-field  appearance="fill">
-          <mat-label>Certificado Matricula</mat-label>
-          <input  formControlName="nombre_certificado"  matInput>
+        <mat-form-field class="container-font" appearance="fill">
+          <mat-label>Documentos U_destino</mat-label>
+          <input  formControlName="nombre_documento"  matInput>
         </mat-form-field>
-        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+        <a (click)="documentoURL(10)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
       </div>
   </div>
-
   <div class="col-sm">
-    <div class="col-sm">
-      <mat-form-field  appearance="fill">
-        <mat-label>Certificado Matricula</mat-label>
-        <input  formControlName="nombre_certificado"  matInput>
-      </mat-form-field>
-      <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-    </div>
-</div>
+    <mat-form-field class="container-font" appearance="fill">
+      <mat-label>Comprobante Solvencia</mat-label>
+      <input  formControlName="nombre_comprobante"  matInput>
+    </mat-form-field>
+    <a (click)="documentoURL(11)" class="btn btn-light" style="cursor: pointer; margin: 4%;"><mat-icon style="color: rgb(66, 53, 53);">remove_red_eye</mat-icon></a>
+  </div>
+     
 </div>
     
 
