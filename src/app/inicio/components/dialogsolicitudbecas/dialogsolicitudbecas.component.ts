@@ -41,11 +41,12 @@ export class DialogsolicitudbecasComponent implements OnInit {
 
   getsolicitud(){
     this.listsolicitud=this.data.objeto;
+    //console.log(this.listsolicitud);
     this.listsolicitud.map((element, index) => (element.position = index + 1));
     this.listsolicitud.forEach((item:any)=>{
       this.nombres=item.nombres;
       this.apellidos=item.apellidos;
-      this.facultad=item.nombre_facultad;
+      this.facultad=item.nombre_facultad.trim();
 
       if(item.estado_solicitud=="A")
       {
