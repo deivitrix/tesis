@@ -288,7 +288,6 @@ export class DialoginformacionComponent implements OnInit {
   }
 
   menu(id:number){
-    console.log(id);
     
     if (this.menu_opcion == 0) {
       this.menu_opcion = 1;

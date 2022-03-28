@@ -1,20 +1,19 @@
 <ng-container *ngIf=" loadingspinner">
-  <app-spinnermovilidad></app-spinnermovilidad>
-</ng-container>
-<div class="container-fluid titulo">
-    <h3>Movilidad Becas UTM</h3>
-</div>
-
-<div class="container-fluid selector">
+    <app-spinnerbecas></app-spinnerbecas>
+  </ng-container>
+  <div class="container-fluid titulo">
+      <h3> Becas UTM</h3>
+  </div>
+  <div class="container-fluid selector">
     <form [formGroup]="selector" autocomplete="off">
     <div class="row">
         <div class="col-sm">
           <mat-form-field class="container-fill" appearance="fill">
-            <mat-label>Estado Solicitud Movilidad</mat-label>
+            <mat-label>Estado Solicitud Becas</mat-label>
             <mat-select formControlName="tipo" (selectionChange)="cambioEstadoMovilidad($event)">
-              <mat-option value="A">Becas Movilidad Aprobadas</mat-option>
-              <mat-option value="P">Becas Movilidad Pendiente</mat-option>
-              <mat-option value="R">Becas Movilidad Reprobadas</mat-option>
+              <mat-option value="A">Becas Aprobadas</mat-option>
+              <mat-option value="P">Becas Pendiente</mat-option>
+              <mat-option value="R">Becas Reprobadas</mat-option>
             </mat-select>
           </mat-form-field>
           <div *ngIf="
@@ -32,12 +31,9 @@
     </form>
 </div>
 
-
-
-
 <ng-container *ngIf="tabla==true"> 
     <ng-container *ngIf="loading">
-        <app-loadingmovilidad></app-loadingmovilidad>
+        <app-loadingbecas></app-loadingbecas>
    </ng-container>
 <ng-container *ngIf="loading==false">
     <div style="margin: 15px">
@@ -58,7 +54,7 @@
               <th scope="col">#</th>
               <th scope="col">Cedula</th>
               <th scope="col">Nombres</th>
-              <th scope="col">Nombre Carrera</th>
+              <th scope="col">Facultad</th>
               <th scope="col">Naturaleza Movilidad</th>
               <th scope="col">Universidad Destino</th>
               <th style="width: 7%;" scope="col">Fecha Inicio</th>
@@ -72,7 +68,7 @@
                 <th scope="row">{{c.position}}</th>
                 <td style="font-size: 13px;">{{c.cedula}}</td>
                 <td style="font-size: 13px;">{{c.nombres}} {{c.apellidos}}</td>
-                <td style="font-size: 13px;">{{c.nombre_carrera}}</td>
+                <td style="font-size: 13px;">{{c.nombre_facultad}}</td>
                 <td style="font-size: 13px;">{{c.naturaleza}}</td>
                 <td style="font-size: 13px;">{{c.universidad_destino}}</td>
                 <td style="font-size: 13px;">{{c.fecha_inicio}}</td>
@@ -95,3 +91,4 @@
 
 </ng-container>
 </ng-container>
+

@@ -176,6 +176,21 @@ export class BecasnivelService {
     return this.http.get(url);
   }
 
+   // obtener los datos de movilidad por el estado de la solicitud
+   getEstadoSolicitudMovilidad(tipo:string)
+   {
+     //consultar/solicitudes/{tipo}/{estado}
+     let url:string = this._base.getUrlLocalApi() + 'becas/solicitudes/B/'+tipo;
+     return this.http.get(url);
+   }
+
+   //obtener la informacion de la solicitud
+  getsolicitudid(id:number)
+  { 
+    let url:string = this._base.getUrlLocalApi() + 'solicitud/becas/'+id;
+    return this.http.get(url);
+  }
+
   
 
 }
