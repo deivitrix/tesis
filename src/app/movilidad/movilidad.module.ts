@@ -33,6 +33,8 @@ import {MatDividerModule} from '@angular/material/divider';
 //editor de texto
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PipesModule } from '../pipes/pipes.module';
+import { DialoginformacionComponent } from './components/dialoginformacion/dialoginformacion.component';
+import { SpinnerPDFComponent } from './components/spinner-pdf/spinner-pdf.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { PipesModule } from '../pipes/pipes.module';
     NabvarmovilidadComponent,
     SpinnermovilidadComponent,
     TablamostrarmovilidadComponent,
-    LoadingmovilidadComponent
+    LoadingmovilidadComponent,
+    DialoginformacionComponent,
+    SpinnerPDFComponent
   ],
   imports: [
     CommonModule,

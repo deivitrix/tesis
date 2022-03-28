@@ -1,0 +1,664 @@
+<div mat-dialog-content class="contenido">
+  <p class="titulo">{{data.titulo}}</p>
+  <ng-container *ngIf="loading">
+    <app-loadingmovilidad></app-loadingmovilidad>
+  </ng-container>
+  <ng-container *ngIf="loading==false">
+    <form [formGroup]="myform" autocomplete="off">
+      <!-- menu -->
+      <div class="container-fluid header_nav3">
+        <input class="menu-btn2" type="checkbox" id="menu-btn2">
+        <label class="menu-icon2" for="menu-btn2"><span class="nav-icon2"></span></label>
+        <ul class="menu2">
+          <li>
+            <ng-container *ngIf="menu1">
+              <a (click)="menu(1)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z" />
+                </svg>&nbsp;Datos Personales</a>
+            </ng-container>
+            <ng-container *ngIf="menu1==false">
+              <a (click)="menu(1)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-file-person-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-1 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm-3 4c2.623 0 4.146.826 5 1.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-1.245C3.854 11.825 5.377 11 8 11z" />
+                </svg>&nbsp;Datos Personales</a>
+
+            </ng-container>
+
+          </li>
+
+          <li>
+            <ng-container *ngIf="menu2">
+              <a (click)="menu(2)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                </svg>&nbsp;Periodo </a>
+            </ng-container>
+            <ng-container *ngIf="menu2==false">
+              <a (click)="menu(2)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                </svg>&nbsp;Periodo </a>
+            </ng-container>
+
+
+          </li>
+
+
+
+          <li>
+            <ng-container *ngIf="menu3">
+              <a (click)="menu(3)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                </svg>&nbsp;Solicitud</a>
+
+            </ng-container>
+            <ng-container *ngIf="menu3==false">
+              <a (click)="menu(3)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                </svg>&nbsp;Solicitud</a>
+            </ng-container>
+
+          </li>
+          <li>
+            <ng-container *ngIf="menu4">
+              <a (click)="menu(4)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z" />
+                </svg>&nbsp;Documentos</a>
+
+            </ng-container>
+            <ng-container *ngIf="menu4==false">
+              <a (click)="menu(4)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                  height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z" />
+                </svg>&nbsp;Documentos</a>
+            </ng-container>
+
+          </li>
+
+        </ul>
+      </div>
+      <ng-container *ngIf="menu1">
+        <!-- datos personales -->
+        <div style="margin-top: 2%;"></div>
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+              <path
+                d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z" />
+            </svg> DATOS PERSONALES</h4>
+        </div>
+
+
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Cedula</mat-label>
+              <input formControlName="cedula" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Nombres</mat-label>
+              <input formControlName="nombres" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Apellido 1</mat-label>
+              <input formControlName="apellido1" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Apellido 2</mat-label>
+              <input formControlName="apellido2" matInput>
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 2%;">
+
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Tipo de Sangre</mat-label>
+              <input formControlName="tipo_sangre" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input formControlName="fecha_nacimiento" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Nacionalidad</mat-label>
+              <input formControlName="nacionalidad" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Genero</mat-label>
+              <input formControlName="genero" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 2%; text-align: center;">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Estado civil</mat-label>
+              <input formControlName="Estado_civil" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Discapacidad</mat-label>
+              <input formControlName="discapacidad" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 2%; text-align: center;">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Correo institucional</mat-label>
+              <input formControlName="correo_personal_institucional" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Correo Alternativo</mat-label>
+              <input formControlName="correo_personal_alternativo" matInput>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <!-- contacto Emergencia -->
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-exclamation-square-fill" viewBox="0 0 16 16">
+              <path
+                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg> CONTACTO EMERGENCIA</h4>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Nombres</mat-label>
+              <input formControlName="contacto_emergencia_nombres" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Apellidos</mat-label>
+              <input formControlName="contacto_emergencia_apellidos" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Telefono 1</mat-label>
+              <input formControlName="contacto_emergencia_telefono_1" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Telefono 2</mat-label>
+              <input formControlName="contacto_emergencia_telefono_2" matInput>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+
+        <!-- residencia -->
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-house-door-fill" viewBox="0 0 16 16">
+              <path
+                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+            </svg> RESIDENCIA</h4>
+        </div>
+        <div class="row">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Pais</mat-label>
+              <input formControlName="Pais" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Provincia</mat-label>
+              <input formControlName="Provincia" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Canton</mat-label>
+              <input formControlName="Canton" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Calle 1</mat-label>
+              <input formControlName="residencia_calle_1" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Calle 2</mat-label>
+              <input formControlName="residencia_calle_2" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Calle 3</mat-label>
+              <input formControlName="residencia_calle_3" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 2%;">
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Telefono Personal Domicilio</mat-label>
+              <input formControlName="telefono_personal_domicilio" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-fill" appearance="fill">
+              <mat-label>Telefono Personal Celular</mat-label>
+              <input formControlName="telefono_personal_celular" matInput>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+
+
+      </ng-container>
+      <ng-container *ngIf="menu2">
+        <!-- Periodo -->
+        <div formArrayName="carreras" *ngFor="let carreras of carreras.controls; let i = index">
+          <div [formGroupName]="i">
+            <div class="border ">
+              <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-calendar-check-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                </svg> Carrera {{i+1}}</h4>
+            </div>
+            <div class="row" style="text-align: center;">
+              <div class="col-sm">
+                <mat-form-field class="container-fill" appearance="fill">
+                  <mat-label>Carrera</mat-label>
+                  <input formControlName="escuela_nombre" matInput>
+                </mat-form-field>
+              </div>
+              <div class="col-sm">
+                <mat-form-field class="container-fill" appearance="fill">
+                  <mat-label>Promedio</mat-label>
+                  <input formControlName="promedio" matInput>
+                </mat-form-field>
+              </div>
+
+            </div>
+            <div class="row" style="text-align: center;">
+              <div class="col-sm">
+                <mat-form-field class="container-fill" appearance="fill">
+                  <mat-label>Semestre actual</mat-label>
+                  <input formControlName="semestre" matInput>
+                </mat-form-field>
+              </div>
+              <div class="col-sm">
+                <mat-form-field class="container-fill" appearance="fill">
+                  <mat-label>Periodo</mat-label>
+                  <input formControlName="periodo" matInput>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="menu3">
+        <!-- <pre>{{mysolicitud.value | json}}</pre> -->
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-pencil-square" viewBox="0 0 16 16">
+              <path
+                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+              <path fill-rule="evenodd"
+                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            </svg>DATOS MOVILIDAD</h4>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+            <mat-label>Carrera</mat-label>
+            <input formControlName="nombre_carrera" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-sm" style="text-align: center; margin-top: 2%;">
+          <div class="row">
+            <div class="col-sm">
+              <div class="row">
+                <h5 style=" color: gray;">Modalidad</h5>
+                <div class="col-sm" style="margin-top: 3%;">
+                  <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                    <mat-label>Modalidad</mat-label>
+                    <input formControlName="modalidad" matInput>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm" style="margin-top: 3%;">
+                  <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                    <mat-label>Tipo Destino</mat-label>
+                    <input formControlName="tipo_destino" matInput>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm" style="margin-top: 3%;">
+              <mat-form-field class="container-font" style="width: 90%;" appearance="fill">
+                <mat-label>Universidad Destino</mat-label>
+                <input formControlName="universidad_destino" matInput>
+              </mat-form-field>
+            </div>
+
+
+          </div>
+
+        </div>
+        <div class="row" style="margin-top: 2%; text-align: center;">
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Carrera Destino</mat-label>
+              <input formControlName="carrera_destino" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Semestre a cursar</mat-label>
+              <input formControlName="semestre_cursar" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Fecha Inicio</mat-label>
+              <input formControlName="fecha_inicio" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Fecha Fin</mat-label>
+              <input formControlName="fecha_fin" matInput>
+            </mat-form-field>
+          </div>
+
+        </div>
+        <div class="row" style="margin-top: 2%; text-align: center;">
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Naturaleza</mat-label>
+              <input formControlName="naturaleza" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field class="container-font" appearance="fill">
+              <mat-label>Becas o Apoyo</mat-label>
+              <input formControlName="beca_apoyo" matInput>
+            </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field style="width: 100%; font-weight:bold; text-align: center;" appearance="fill">
+              <mat-label>Monto</mat-label>
+              <input formControlName="monto_referencial" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+              </svg>ESPECIFICACIONES ESPECIALES</h4>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field class="container-font" appearance="fill">
+            <mat-label>Tipo de Alergias</mat-label>
+            <input formControlName="alergias" matInput>
+          </mat-form-field>
+        </div>
+        <div class="col-sm">
+            <h6 style="color: gray;">Especificar Alergias</h6>
+          <div style="color: gray;" [innerHTML]="this.myform.get('especificar_alergia')?.value"></div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 2%;">
+        <div class="col-sm">
+          <h6 style="color: gray;">Enfermedades Cronicas y Tratamiento</h6>
+          <div style="color: gray;" [innerHTML]="this.myform.get('enfermedades_tratamiento')?.value"></div>
+        </div>
+        <div class="col-sm">
+          <mat-form-field class="container-font" appearance="fill">
+            <mat-label style="font-size: 18px;">Poliza de Seguro</mat-label>
+            <input formControlName="poliza_seguro" matInput>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="border ">
+        <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path
+                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                <path fill-rule="evenodd"
+                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+            </svg>HOMOLOGACIÓN DE ESTUDIOS</h4>
+       </div>
+       <div class="col-sm">
+         <mat-label style="color: gray;"><h5>Materias</h5></mat-label>
+       </div>
+       <div class="col-sm">
+        <table class="table table-responsive table-secondary table-bordered">
+          <thead>
+              <tr style="text-align: center;">
+                  <th style="width: 22%;" scope="col">Materia Origen</th>
+                  <th style="width: 22%;" scope="col">Clave</th>
+                  <th style="width: 22%;" scope="col">Materia Destino</th>
+                  <th style="width: 22%;" scope="col">Clave</th>
+              </tr>
+          </thead>
+      <tbody style="font-weight:bold;" formArrayName="materias" *ngFor="let materias of materias.controls; let i = index">
+                  <tr [formGroupName]="i">
+                          <td>
+                              <input  formControlName="materia_origen" matInput>
+                          </td>
+                          <td>
+                             
+                              <input formControlName="clave_origen" matInput>
+                          </td>
+                          <td>
+                              <input formControlName="materia_destino" matInput>
+                          </td>
+                          <td>
+                              <input formControlName="clave_destino" matInput>
+                          </td>
+                      
+                  </tr>                                    
+      </tbody>
+
+      </table>
+       </div>
+
+
+
+
+      </ng-container>
+      <ng-container *ngIf="menu4==true">
+        <div class="border ">
+          <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-pencil-square" viewBox="0 0 16 16">
+                  <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                  <path fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+              </svg>DOCUMENTOS</h4>
+      </div>
+
+      <div class="row">
+        <div class="col-sm">
+            <div class="col-sm">
+              <mat-form-field  appearance="fill">
+                <mat-label>Certificado Matricula</mat-label>
+                <input  formControlName="nombre_certificado"  matInput>
+              </mat-form-field>
+              <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+            </div>
+        </div>
+
+        <div class="col-sm">
+          <div class="col-sm">
+            <mat-form-field  appearance="fill">
+              <mat-label>Certificado Matricula</mat-label>
+              <input  formControlName="nombre_certificado"  matInput>
+            </mat-form-field>
+            <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+          </div>
+      </div>
+      <div class="col-sm">
+        <div class="col-sm">
+          <mat-form-field  appearance="fill">
+            <mat-label>Certificado Matricula</mat-label>
+            <input  formControlName="nombre_certificado"  matInput>
+          </mat-form-field>
+          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm">
+          <div class="col-sm">
+            <mat-form-field  appearance="fill">
+              <mat-label>Certificado Matricula</mat-label>
+              <input  formControlName="nombre_certificado"  matInput>
+            </mat-form-field>
+            <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+          </div>
+      </div>
+
+      <div class="col-sm">
+        <div class="col-sm">
+          <mat-form-field  appearance="fill">
+            <mat-label>Certificado Matricula</mat-label>
+            <input  formControlName="nombre_certificado"  matInput>
+          </mat-form-field>
+          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+        </div>
+    </div>
+    <div class="col-sm">
+      <div class="col-sm">
+        <mat-form-field  appearance="fill">
+          <mat-label>Certificado Matricula</mat-label>
+          <input  formControlName="nombre_certificado"  matInput>
+        </mat-form-field>
+        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+      </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+        <div class="col-sm">
+          <mat-form-field  appearance="fill">
+            <mat-label>Certificado Matricula</mat-label>
+            <input  formControlName="nombre_certificado"  matInput>
+          </mat-form-field>
+          <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+        </div>
+    </div>
+
+    <div class="col-sm">
+      <div class="col-sm">
+        <mat-form-field  appearance="fill">
+          <mat-label>Certificado Matricula</mat-label>
+          <input  formControlName="nombre_certificado"  matInput>
+        </mat-form-field>
+        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+      </div>
+  </div>
+  <div class="col-sm">
+    <div class="col-sm">
+      <mat-form-field  appearance="fill">
+        <mat-label>Certificado Matricula</mat-label>
+        <input  formControlName="nombre_certificado"  matInput>
+      </mat-form-field>
+      <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+    </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-sm">
+      <div class="col-sm">
+        <mat-form-field  appearance="fill">
+          <mat-label>Certificado Matricula</mat-label>
+          <input  formControlName="nombre_certificado"  matInput>
+        </mat-form-field>
+        <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+      </div>
+  </div>
+
+  <div class="col-sm">
+    <div class="col-sm">
+      <mat-form-field  appearance="fill">
+        <mat-label>Certificado Matricula</mat-label>
+        <input  formControlName="nombre_certificado"  matInput>
+      </mat-form-field>
+      <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+    </div>
+</div>
+</div>
+    
+
+      </ng-container>
+
+
+
+    </form>
+  </ng-container>
+
+
+</div>
+
+<div mat-dialog-actions class="button-action">
+  <button mat-flat-button color="primary" [mat-dialog-close]="data.objeto" cdkFocusInitial>Aceptar</button>
+</div>

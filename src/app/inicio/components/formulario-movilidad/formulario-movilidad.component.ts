@@ -205,7 +205,7 @@ export class FormularioMovilidadComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovilidadEstudiante()
-    this.menu(6)
+    this.menu(0)
     this.getmodalidad();
     this.getuniversidad();
     this.getnaturaleza();
@@ -1248,6 +1248,9 @@ export class FormularioMovilidadComponent implements OnInit {
         });
         return;
       }
+
+    
+
 
      
 

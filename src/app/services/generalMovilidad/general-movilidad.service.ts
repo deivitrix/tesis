@@ -91,4 +91,10 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'consultar/solicitudes/M/'+tipo;
     return this.http.get(url);
   }
+  //obtener la informacion de la solicitud
+  getsolicitudid(id:number)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'solicitud/movilidad/'+id;
+    return this.http.get(url);
+  }
 }

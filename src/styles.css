@@ -5,15 +5,15 @@
 }
 
 .activa-link{
-    border-bottom: 2px solid green;
+    border-bottom: 3px solid green;
     /* color: chartreuse !important; */
 }
 
 .activa-link2{
-  border-bottom: 2px solid rgb(62, 178, 207);
+  border-bottom: 3px solid rgb(62, 178, 207);
 }
 .activa-link3{
-  border-bottom: 2px solid rgb(62, 178, 207);
+  border-bottom: 3px solid rgb(62, 178, 207);
 }
 
 body{

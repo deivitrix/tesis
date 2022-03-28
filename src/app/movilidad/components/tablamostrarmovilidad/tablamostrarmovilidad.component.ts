@@ -1,7 +1,9 @@
+import { DialoginformacionComponent } from './../dialoginformacion/dialoginformacion.component';
 import { GeneralMovilidadService } from './../../../services/generalMovilidad/general-movilidad.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tablamostrarmovilidad',
@@ -12,6 +14,7 @@ export class TablamostrarmovilidadComponent implements OnInit {
 
   //loading 
   loading=true;
+  loadingspinner=false;
   
  //FormGroup
    selector: FormGroup;
@@ -32,9 +35,12 @@ export class TablamostrarmovilidadComponent implements OnInit {
     this.filtro = event.target.value;
   }
 
+  //boton
+  botongenerar=true;
 
 
-  constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService) {
+
+  constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog) {
     
  this.selector=mostrar.group({
    tipo:['',Validators.required]
@@ -45,12 +51,14 @@ export class TablamostrarmovilidadComponent implements OnInit {
   }
 
   cambioEstadoMovilidad(event: any){
+    this.botongenerar=false;
+    this.loadingspinner=true;
     this.movilidad.getEstadoSolicitudMovilidad(event.value)
     .subscribe((res:any)=>{
       this.tabla=true;
       this.loading=false;
+      this.loadingspinner=false;
       this.listsolicitud=[];
-      console.log(res);
       if(res.estado==true)
       {
         this.listsolicitud=res.datos;
@@ -66,6 +74,16 @@ export class TablamostrarmovilidadComponent implements OnInit {
   handlePagePending(e: PageEvent) {
     this.pageSize = e.pageSize;
     this.pageNumber = e.pageIndex + 1;
+  }
+
+  opendialogInformacio(id:number)
+  {
+    const dialogRef1=this.dialog.open(DialoginformacionComponent,{
+      width:'1300px',
+      data:{titulo:'Informacion Solicitud',objeto:id}
+    });
+    
+
   }
 
 

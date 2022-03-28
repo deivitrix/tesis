@@ -1,3 +1,6 @@
+<ng-container *ngIf=" loadingspinner">
+  <app-spinnermovilidad></app-spinnermovilidad>
+</ng-container>
 <div class="container-fluid titulo">
     <h3>Movilidad Becas UTM</h3>
 </div>
@@ -16,7 +19,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm">
-          <button  mat-flat-button color="primary"> <mat-icon>print</mat-icon> Generar Reporte</button>
+          <button [disabled]="botongenerar" mat-flat-button color="primary"> <mat-icon>print</mat-icon> Generar Reporte</button>
         </div>
   
       </div>
@@ -52,8 +55,8 @@
               <th scope="col">Nombre Carrera</th>
               <th scope="col">Naturaleza Movilidad</th>
               <th scope="col">Universidad Destino</th>
-              <th scope="col">Fecha Inicio</th>
-              <th scope="col">Fecha Fin</th>
+              <th style="width: 7%;" scope="col">Fecha Inicio</th>
+              <th style="width: 7%;" scope="col">Fecha Fin</th>
               <th scope="col">Acciones</th>
 
             </tr>
@@ -69,7 +72,7 @@
                 <td style="font-size: 13px;">{{c.fecha_inicio}}</td>
                 <td style="font-size: 13px;">{{c.fecha_fin}}</td>
                 <td>
-                    <a style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+                    <a (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
                     <a style="cursor: pointer;margin: 4%; color:brown;"><mat-icon>picture_as_pdf</mat-icon></a>
                 </td>
 
