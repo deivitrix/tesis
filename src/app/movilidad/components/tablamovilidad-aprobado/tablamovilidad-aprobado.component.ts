@@ -4,6 +4,10 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { GeneralMovilidadService } from 'src/app/services/generalMovilidad/general-movilidad.service';
 import { DialoginformacionComponent } from '../dialoginformacion/dialoginformacion.component';
 
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+
 @Component({
   selector: 'app-tablamovilidad-aprobado',
   templateUrl: './tablamovilidad-aprobado.component.html',
@@ -66,13 +70,125 @@ export class TablamovilidadAprobadoComponent implements OnInit {
       width:'1300px',
       data:{titulo:'Informacion Solicitud',objeto:id}
     });
-
   }
 
   //paginacion
   handlePagePending(e: PageEvent) {
     this.pageSize = e.pageSize;
     this.pageNumber = e.pageIndex + 1;
+  }
+
+  // aceptar solicitud
+  aceptarSolicitud(id:number)
+  { 
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Que desea realizar con esta solicitud....?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Aprobar',
+      denyButtonText: `Rechazar`,
+      
+    }).then((result)=>{
+
+      if(result.isConfirmed){
+        ///Aprobar
+       this.loadingspinner=true;
+        let json={
+          data:{
+            id:id,
+            tipo:"M",
+            estado_solicitud:"A"
+          }
+        }
+        this.movilidad.updateSolicitudEstadoMovilidad(json)
+        .subscribe((res:any)=>{
+          this.loadingspinner=false;
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Aprobada....!!!!',
+              icon:'success'
+            });
+            this.getMovilidadBecas();
+          }
+          else
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:res.mensaje,
+              icon:'warning'
+            });
+
+          }
+        })
+       
+
+      }
+
+      if(result.isDenied)
+      {
+        //Rechazar
+        this.loadingspinner=true;
+        let json={
+          data:{
+            id:id,
+            tipo:"M",
+            estado_solicitud:"R"
+          }
+        }
+        this.movilidad.updateSolicitudEstadoMovilidad(json)
+        .subscribe((res:any)=>{
+          this.loadingspinner=false;
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Rechazada.....!!!',
+              icon:'warning'
+            });
+          }
+          else
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:res.mensaje,
+              icon:'warning'
+            });
+
+          }
+        });
+      }
+
+    })
+
   }
 
 }

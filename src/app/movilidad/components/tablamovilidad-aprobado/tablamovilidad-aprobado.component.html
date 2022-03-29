@@ -22,13 +22,13 @@
             <tr style="text-align: center; font-size: 14px;">
               <th scope="col">#</th>
               <th scope="col">Cedula</th>
-              <th style="width: 15%;" scope="col">Nombres</th>
+              <th style="width: 20%;" scope="col">Nombres</th>
               <th style="width: 15%;" scope="col">Nombre Carrera</th>
               <th style="width: 7%;" scope="col">Naturaleza Movilidad</th>
               <th scope="col">Universidad Destino</th>
               <th style="width: 7%;" scope="col">Fecha Inicio</th>
               <th style="width: 7%;" scope="col">Fecha Fin</th>
-              <th style="width: 10%;"scope="col">Acciones</th>
+              <th style="width: 7%;"scope="col">Acciones</th>
 
             </tr>
           </thead>
@@ -44,8 +44,7 @@
                 <td style="font-size: 13px;">{{c.fecha_fin}}</td>
                 <td>
                     <a (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-                    <a style="cursor: pointer; margin: 4%; color:rgb(46, 165, 42);"><mat-icon>check_circle_outline</mat-icon></a>
-                    <a style="cursor: pointer; margin: 2%; color:rgb(165, 42, 42);"><mat-icon>highlight_off</mat-icon></a>
+                    <a (click)="aceptarSolicitud(c.id)" style="cursor: pointer; margin: 4%; color:rgb(46, 165, 42);"><mat-icon>check_circle</mat-icon></a>
                 </td>
 
             </tr>

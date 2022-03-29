@@ -14,7 +14,7 @@
             <mat-select formControlName="tipo" (selectionChange)="cambioEstadoMovilidad($event)">
               <mat-option value="A">Becas Movilidad Aprobadas</mat-option>
               <mat-option value="P">Becas Movilidad Pendiente</mat-option>
-              <mat-option value="R">Becas Movilidad Reprobadas</mat-option>
+              <mat-option value="R">Becas Movilidad Rechazadas</mat-option>
             </mat-select>
           </mat-form-field>
           <div *ngIf="
@@ -57,9 +57,9 @@
             <tr style="text-align: center; font-size: 14px;">
               <th scope="col">#</th>
               <th scope="col">Cedula</th>
-              <th scope="col">Nombres</th>
+              <th style="width: 20%;" scope="col">Nombres</th>
               <th scope="col">Nombre Carrera</th>
-              <th scope="col">Naturaleza Movilidad</th>
+              <th style="width: 7%;" scope="col">Naturaleza Movilidad</th>
               <th scope="col">Universidad Destino</th>
               <th style="width: 7%;" scope="col">Fecha Inicio</th>
               <th style="width: 7%;" scope="col">Fecha Fin</th>

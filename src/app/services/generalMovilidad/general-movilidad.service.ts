@@ -97,4 +97,11 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'solicitud/movilidad/'+id;
     return this.http.get(url);
   }
+
+  //update solicitud estado_solicitud
+  updateSolicitudEstadoMovilidad(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'updatemovilidad/solicitud';
+    return this.http.put(url,data);
+  }
 }
