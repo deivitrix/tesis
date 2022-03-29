@@ -1,3 +1,4 @@
+import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.component';
 import { MostrarBecasComponent } from './paginas/mostrar-becas/mostrar-becas.component';
 import { BasebecasComponent } from './basebecas/basebecas.component';
 import { NgModule } from '@angular/core';
@@ -14,6 +15,9 @@ const routes: Routes = [
       {
         path: 'mostrarbecas',component:MostrarBecasComponent
       },
+      {
+        path:'aprobarbecas',component:AprobarBecasComponent
+      }
     ]
   }
 ];

@@ -34,6 +34,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PipesModule } from '../pipes/pipes.module';
 import { LoadingbecasComponent } from './components/loadingbecas/loadingbecas.component';
 import { DialoginformacionbecasComponent } from './components/dialoginformacionbecas/dialoginformacionbecas.component';
+import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.component';
+import { TablabecasAprobadoComponent } from './components/tablabecas-aprobado/tablabecas-aprobado.component';
 
 
 
@@ -46,6 +48,8 @@ import { DialoginformacionbecasComponent } from './components/dialoginformacionb
     TablamostrarbecasComponent,
     LoadingbecasComponent,
     DialoginformacionbecasComponent,
+    AprobarBecasComponent,
+    TablabecasAprobadoComponent,
 
   ],
   imports: [

@@ -1,3 +1,4 @@
+import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-movilidad.component';
 
 import { BasemovilidadComponent } from './basemovilidad/basemovilidad.component';
 import { NgModule } from '@angular/core';
@@ -15,6 +16,9 @@ const routes: Routes = [
       {
         path: 'mostrarmovilidad',component:MostrarMovilidadComponent
       },
+      {
+        path:'aprobarmovilidad',component:AprobarMovilidadComponent
+      }
     ]
   }
 ];

@@ -1,0 +1,19 @@
+.titulo{
+    margin-top: 2.5%;
+    text-align: center;
+    margin-bottom: 3%;
+    -webkit-text-stroke: 1.5px rgb(85, 139, 153);
+    color: rgb(90, 160, 50);
+}
+
+.container-fill{
+    width: 60%;
+}
+
+.mat-form-field-filtro{
+    font-size: 14px;
+    width: 100%;
+}
+.mda-form-msg{
+    color: #f57c74;
+}

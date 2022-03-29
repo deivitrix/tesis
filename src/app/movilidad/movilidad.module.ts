@@ -35,6 +35,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { PipesModule } from '../pipes/pipes.module';
 import { DialoginformacionComponent } from './components/dialoginformacion/dialoginformacion.component';
 import { SpinnerPDFComponent } from './components/spinner-pdf/spinner-pdf.component';
+import { TablamovilidadAprobadoComponent } from './components/tablamovilidad-aprobado/tablamovilidad-aprobado.component';
+import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-movilidad.component';
 
 
 @NgModule({
@@ -46,7 +48,9 @@ import { SpinnerPDFComponent } from './components/spinner-pdf/spinner-pdf.compon
     TablamostrarmovilidadComponent,
     LoadingmovilidadComponent,
     DialoginformacionComponent,
-    SpinnerPDFComponent
+    SpinnerPDFComponent,
+    TablamovilidadAprobadoComponent,
+    AprobarMovilidadComponent
   ],
   imports: [
     CommonModule,

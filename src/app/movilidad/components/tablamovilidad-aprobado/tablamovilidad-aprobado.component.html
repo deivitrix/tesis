@@ -1,0 +1,68 @@
+<ng-container *ngIf=" loadingspinner">
+    <app-spinnermovilidad></app-spinnermovilidad>
+  </ng-container>
+<div class="container-fluid titulo">
+    <h3>Aprobar Movilidad Becas UTM</h3>
+</div>
+
+<ng-container *ngIf="tabla==true"> 
+    <ng-container *ngIf="loadingspinner==false">
+        <div class="container-fluid">
+            <div style="margin: 15px">
+                <mat-form-field class="mat-form-field-filtro">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+                    <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                <!-- tabla -->
+    <table class="table table-bordered table-responsive table-primary" style="margin: 1px; ">
+        <thead>
+            <tr style="text-align: center; font-size: 14px;">
+              <th scope="col">#</th>
+              <th scope="col">Cedula</th>
+              <th style="width: 15%;" scope="col">Nombres</th>
+              <th style="width: 15%;" scope="col">Nombre Carrera</th>
+              <th style="width: 7%;" scope="col">Naturaleza Movilidad</th>
+              <th scope="col">Universidad Destino</th>
+              <th style="width: 7%;" scope="col">Fecha Inicio</th>
+              <th style="width: 7%;" scope="col">Fecha Fin</th>
+              <th style="width: 10%;"scope="col">Acciones</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align: justify;" *ngFor="let c of listsolicitud | pagination :pageSize :pageNumber | buscarsolicitudmovilidad: filtro">
+                <th scope="row">{{c.position}}</th>
+                <td style="font-size: 13px;">{{c.cedula}}</td>
+                <td style="font-size: 13px;">{{c.nombres}} {{c.apellidos}}</td>
+                <td style="font-size: 13px;">{{c.nombre_carrera}}</td>
+                <td style="font-size: 13px;">{{c.naturaleza}}</td>
+                <td style="font-size: 13px;">{{c.universidad_destino}}</td>
+                <td style="font-size: 13px;">{{c.fecha_inicio}}</td>
+                <td style="font-size: 13px;">{{c.fecha_fin}}</td>
+                <td>
+                    <a (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+                    <a style="cursor: pointer; margin: 4%; color:rgb(46, 165, 42);"><mat-icon>check_circle_outline</mat-icon></a>
+                    <a style="cursor: pointer; margin: 2%; color:rgb(165, 42, 42);"><mat-icon>highlight_off</mat-icon></a>
+                </td>
+
+            </tr>
+          </tbody>
+    </table>
+    <!-- paginador -->
+    <div>
+        <mat-paginator [length]="listsolicitud.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page" (page)="handlePagePending($event)">
+        </mat-paginator>
+    </div>
+            
+</div>
+
+        </div>
+    </ng-container>
+   
+
+</ng-container>
+
