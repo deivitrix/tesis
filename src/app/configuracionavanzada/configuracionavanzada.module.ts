@@ -49,6 +49,7 @@ import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/t
 import { DialogingresarbecasbodyComponent } from './components/dialogingresarbecasbody/dialogingresarbecasbody.component';
 import { UsuariosDricbComponent } from './paginas/usuarios-dricb/usuarios-dricb.component';
 import { TablausuariosComponent } from './components/tablausuarios/tablausuarios.component';
+import { DialogusuariosComponent } from './components/dialogusuarios/dialogusuarios.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { TablausuariosComponent } from './components/tablausuarios/tablausuarios
     DialogingresarbecasbodyComponent,
     UsuariosDricbComponent,
     TablausuariosComponent,
+    DialogusuariosComponent,
     
   ],
   imports: [

@@ -39,4 +39,26 @@ export class UsuarioServicesService {
     let url:string = this._base.getUrlLocalApi() + 'acceso-usuario'
     return this.http.get<any>(url);
   }
+
+  //para saber si esta dentro del sistema del SGA y del DRICB 
+  getusuarioconsulta(cedula:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'consultar/usuario/'+cedula
+    return this.http.get<any>(url);
+  }
+
+  // cargos de un usuario del sistema
+  getcargos(){
+    let url:string = this._base.getUrlLocalApi() + 'obtener/cargos'
+    return this.http.get<any>(url);
+  }
+
+  //agregar un usuario al sistema
+  addusuariosistema(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'ingresar/usuario';
+    return this.http.post(url,data);
+  }
+
+
 }

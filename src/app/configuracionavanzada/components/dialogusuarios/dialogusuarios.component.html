@@ -1,0 +1,53 @@
+<div mat-dialog-content class="contenido">
+    <p class="titulo">{{data.titulo}} <mat-icon>person</mat-icon> </p>
+    
+    <ng-container *ngIf="data.objeto.tipo=='B'">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Cedula</mat-label>
+        <input matInput [(ngModel)]="data.objeto.cedula">
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container *ngIf="data.objeto.tipo =='G'">
+      <div class="col-sm">
+        <div class="col-sm">
+            <mat-form-field style="font-weight:bold;" class="container-fill"  appearance="fill">
+                <mat-label class="label-des">Nombres y Apellidos</mat-label>
+                <input disabled matInput [(ngModel)]="data.objeto.nombres">
+            </mat-form-field>
+        </div>
+      </div>
+      <div class="col-sm" style="margin-top: 1%;">
+        <mat-form-field class="container-fill" appearance="fill">
+            <mat-label>Cargos Administrativos</mat-label>
+            <mat-select [(ngModel)]="data.objeto.cargo_id" >
+              <ng-container *ngFor="let cargo of listcargos">
+                <mat-option value="{{cargo.cargos_id}}">{{cargo.cargo}}</mat-option>
+              </ng-container>
+              
+            </mat-select>
+          </mat-form-field>
+
+      </div>
+           
+      
+    </ng-container>
+    
+  </div>
+
+ 
+  <ng-container *ngIf="data.objeto.tipo =='B'">
+    <div mat-dialog-actions class="button-action">
+        <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+        <button mat-button  color="primary" [mat-dialog-close]="data" cdkFocusInitial>Buscar</button>
+      </div>
+  </ng-container>
+
+  <ng-container *ngIf="data.objeto.tipo =='G'">
+    <div mat-dialog-actions class="button-action">
+        <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+        <button mat-button  color="primary" [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
+      </div>
+  </ng-container>
+
+  
