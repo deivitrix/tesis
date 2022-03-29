@@ -45,7 +45,7 @@
                         <td>
                           <mat-form-field class="container-fill" appearance="fill">
                             <mat-label>Estado</mat-label>
-                            <mat-select [(ngModel)]="c.estado">
+                            <mat-select [(ngModel)]="c.estado" (selectionChange)="cambioEstado($event,c.id)">
                                 <mat-option value="A">Activado</mat-option>
                                 <mat-option value="D">Desactivado</mat-option>
                             </mat-select>

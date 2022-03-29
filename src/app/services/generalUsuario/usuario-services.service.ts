@@ -60,5 +60,12 @@ export class UsuarioServicesService {
     return this.http.post(url,data);
   }
 
+  // actualizar el estado de un Usuario
+  updateEstadoUsuario(data:any){
+   
+    let url:string = this._base.getUrlLocalApi() + 'update/usuario/dricb';
+    return this.http.put(url,data);
+  }
+
 
 }

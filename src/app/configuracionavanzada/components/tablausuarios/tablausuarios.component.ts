@@ -199,4 +199,52 @@ getUsuarios(){
     });
   }
 
+  // cambiar estado
+  cambioEstado(event:any,id:number){ 
+    this.loadingspinner=true;
+
+    let json={
+      data:{
+        id:id,
+        estado:event.value
+      }
+    }    
+    this.usuario.updateEstadoUsuario(json)
+    .subscribe((res:any)=>{
+      this.loadingspinner=false;
+      if(res.estado==true)
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:'Se actualizo correctamente el Estado del Usuario',
+          icon:'success'
+        });
+        this.getUsuarios();
+        
+
+
+      }
+      else{
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:res.mensaje,
+          icon:'warning'
+        });
+        return;
+      }
+
+    })
+
+  }
+
 }
