@@ -67,5 +67,12 @@ export class UsuarioServicesService {
     return this.http.put(url,data);
   }
 
+  //Update cargo usuario 
+  updateCargoUsuario(data:any){
+
+    let url:string = this._base.getUrlLocalApi() + 'update/cargo/usuario';
+    return this.http.put(url,data);
+  }
+
 
 }

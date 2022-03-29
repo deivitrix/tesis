@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { UsuarioServicesService } from 'src/app/services/generalUsuario/usuario-services.service';
@@ -19,6 +20,7 @@ export class TablausuariosComponent implements OnInit {
   loadingspinner=false;
 
   listaUsuarios: any[] = [];
+  listcargos:any[]=[];
   //cedula
   cedula="";
 
@@ -34,25 +36,45 @@ export class TablausuariosComponent implements OnInit {
     this.filtro = event.target.value;
   }
 
-  constructor(private usuario:UsuarioServicesService,public dialog: MatDialog) { }
+  constructor(private usuario:UsuarioServicesService,public dialog: MatDialog) { 
+   
+  }
 
   ngOnInit():void {
     this.getUsuarios();
+
   }
 
 getUsuarios(){
   this.usuario.getUsuariosDRICB()
   .subscribe((res:any)=>{
     if(res.estado==true){
+      
+      this.getcargos();
       this.loading=false;
       this.listaUsuarios=[];
       this.listaUsuarios=res.datos;
 
       this.listaUsuarios.map((element, index) => (element.position = index + 1));
+      this.listaUsuarios.map((element) => (element.cargos_id = ""+element.cargos_id));
     }
   } )
 
 }
+
+getcargos()
+  {
+    this.usuario.getcargos()
+    .subscribe((res:any)=>{
+      this.listcargos=[];
+      if(res.estado==true)
+      { 
+        this.listcargos=res.datos;
+        this.listcargos.map((element) => (element.cargos_id = ""+element.cargos_id));
+      }
+    })
+
+  }
 
   handlePagePending(e: PageEvent) {
     this.pageSize = e.pageSize;
@@ -221,7 +243,7 @@ getUsuarios(){
           hideClass: {
             popup: 'animate__animated animate__fadeOutUp'
           },
-          title:'Se actualizo correctamente el Estado del Usuario',
+          title:'Se actualizo correctamente el estado del usuario',
           icon:'success'
         });
         this.getUsuarios();
@@ -243,6 +265,63 @@ getUsuarios(){
         return;
       }
 
+    })
+
+  }
+
+  //editar cargo
+  editarCargo(cargo_id:number,nombres:string,apellidos:string)
+  {
+    var nombre_completo=nombres+" "+apellidos;
+    const dialogRef1=this.dialog.open(DialogusuariosComponent,{
+      width:'500px',
+      data:{titulo:'Modificar Cargo Departamento',objeto:{tipo:"E",nombres:nombre_completo,cargo_id:cargo_id}}
+    });
+
+
+  }
+
+  cargo(event:any,id:number)
+  {
+    this.loadingspinner=true;
+    let json={
+      data:{
+        id:id,
+        cargos_id:event.value
+      }
+    }
+    this.usuario.updateCargoUsuario(json)
+    .subscribe((res:any)=>{
+      if(res.estado==true)
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:'Se actualizo correctamente el cargo del usuario',
+          icon:'success'
+        });
+        this.getUsuarios();
+
+      }
+      else
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:res.mensaje,
+          icon:'warning'
+        });
+        return;
+
+      }
     })
 
   }

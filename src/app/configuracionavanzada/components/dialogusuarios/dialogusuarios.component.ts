@@ -17,7 +17,7 @@ export class DialogusuariosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.data.objeto.tipo=="G")
+    if(this.data.objeto.tipo=="G" || this.data.objeto.tipo=="E")
     {
       this.getcargos()
     }
