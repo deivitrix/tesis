@@ -162,6 +162,7 @@ export class TablabecasAprobadoComponent implements OnInit {
             title:'Solicitud Rechazada.....!!!',
             icon:'warning'
           });
+          this.getBecasSolicitud();
 
          }
          else

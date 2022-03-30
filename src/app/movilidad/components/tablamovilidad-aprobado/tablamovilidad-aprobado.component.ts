@@ -169,6 +169,7 @@ export class TablamovilidadAprobadoComponent implements OnInit {
               title:'Solicitud Rechazada.....!!!',
               icon:'warning'
             });
+            this.getMovilidadBecas();
           }
           else
           {

@@ -292,6 +292,7 @@ getcargos()
     }
     this.usuario.updateCargoUsuario(json)
     .subscribe((res:any)=>{
+      this.loadingspinner=false;
       if(res.estado==true)
       {
         Swal.fire({
