@@ -36,6 +36,8 @@ import { LoadingbecasComponent } from './components/loadingbecas/loadingbecas.co
 import { DialoginformacionbecasComponent } from './components/dialoginformacionbecas/dialoginformacionbecas.component';
 import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.component';
 import { TablabecasAprobadoComponent } from './components/tablabecas-aprobado/tablabecas-aprobado.component';
+import { SubirDocumentoFinalBecasComponent } from './paginas/subir-documento-final-becas/subir-documento-final-becas.component';
+import { TablasubirdocumentobecasComponent } from './components/tablasubirdocumentobecas/tablasubirdocumentobecas.component';
 
 
 
@@ -50,6 +52,8 @@ import { TablabecasAprobadoComponent } from './components/tablabecas-aprobado/ta
     DialoginformacionbecasComponent,
     AprobarBecasComponent,
     TablabecasAprobadoComponent,
+    SubirDocumentoFinalBecasComponent,
+    TablasubirdocumentobecasComponent,
 
   ],
   imports: [

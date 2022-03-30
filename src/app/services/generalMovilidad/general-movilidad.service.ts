@@ -104,4 +104,13 @@ export class GeneralMovilidadService {
     let url:string = this._base.getUrlLocalApi() + 'updatemovilidad/solicitud';
     return this.http.put(url,data);
   }
+
+  ///tabla aprobado movilidad
+  getablaaprobadosSolicitud(){
+    let url:string = this._base.getUrlLocalApi() + 'movilidad/s-aprobada/A';
+    return this.http.get(url);
+  }
+
+
+
 }

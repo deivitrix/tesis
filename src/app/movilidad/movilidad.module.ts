@@ -37,6 +37,8 @@ import { DialoginformacionComponent } from './components/dialoginformacion/dialo
 import { SpinnerPDFComponent } from './components/spinner-pdf/spinner-pdf.component';
 import { TablamovilidadAprobadoComponent } from './components/tablamovilidad-aprobado/tablamovilidad-aprobado.component';
 import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-movilidad.component';
+import { SubirDocumentoFinalMovilidadComponent } from './paginas/subir-documento-final-movilidad/subir-documento-final-movilidad.component';
+import { TablasubirdocumentomovilidadComponent } from './components/tablasubirdocumentomovilidad/tablasubirdocumentomovilidad.component';
 
 
 @NgModule({
@@ -50,7 +52,9 @@ import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-m
     DialoginformacionComponent,
     SpinnerPDFComponent,
     TablamovilidadAprobadoComponent,
-    AprobarMovilidadComponent
+    AprobarMovilidadComponent,
+    SubirDocumentoFinalMovilidadComponent,
+    TablasubirdocumentomovilidadComponent
   ],
   imports: [
     CommonModule,

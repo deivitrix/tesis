@@ -1,3 +1,4 @@
+import { SubirDocumentoFinalBecasComponent } from './paginas/subir-documento-final-becas/subir-documento-final-becas.component';
 import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.component';
 import { MostrarBecasComponent } from './paginas/mostrar-becas/mostrar-becas.component';
 import { BasebecasComponent } from './basebecas/basebecas.component';
@@ -17,6 +18,9 @@ const routes: Routes = [
       },
       {
         path:'aprobarbecas',component:AprobarBecasComponent
+      },
+      {
+        path:'subirdocumentofinalbecas',component:SubirDocumentoFinalBecasComponent
       }
     ]
   }

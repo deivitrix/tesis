@@ -198,6 +198,13 @@ export class BecasnivelService {
     return this.http.put(url,data);
   }
 
+  ///tabla aprobado movilidad
+  getablaaprobadosSolicitud(){
+    let url:string = this._base.getUrlLocalApi() + 'becas/s-aprobada/A';
+    return this.http.get(url);
+  }
+
+
 
   
 

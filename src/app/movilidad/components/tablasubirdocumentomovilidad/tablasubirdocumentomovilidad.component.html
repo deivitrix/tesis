@@ -1,0 +1,69 @@
+<ng-container *ngIf=" loadingspinner">
+    <app-spinnermovilidad></app-spinnermovilidad>
+  </ng-container>
+<div class="container-fluid titulo">
+    <h3>Subir Documento Movilidad Becas UTM</h3>
+</div>
+
+<ng-container *ngIf="tabla==true"> 
+    <ng-container *ngIf="loadingspinner==false">
+        <div class="container-fluid">
+            <div style="margin: 15px">
+                <mat-form-field class="mat-form-field-filtro">
+                    <mat-label>Filtro</mat-label>
+                    <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+                    <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+    <!-- tabla -->
+    <table class="table table-bordered table-responsive table-primary" style="margin: 1px; ">
+        <thead>
+            <tr style="text-align: center; font-size: 14px;">
+              <th scope="col">#</th>
+              <th scope="col">Cedula</th>
+              <th style="width: 20%;" scope="col">Nombres</th>
+              <th style="width: 15%;" scope="col">Nombre Carrera</th>
+              <th style="width: 7%;" scope="col">Naturaleza Movilidad</th>
+              <th scope="col">Universidad Destino</th>
+              <th style="width: 7%;" scope="col">Fecha Inicio</th>
+              <th style="width: 7%;" scope="col">Fecha Fin</th>
+              <th style="width: 7%;"scope="col">Acciones</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align: justify;" *ngFor="let c of listsolicitud | pagination :pageSize :pageNumber | buscarsolicitudmovilidad: filtro">
+                <th scope="row">{{c.position}}</th>
+                <td style="font-size: 13px;">{{c.cedula}}</td>
+                <td style="font-size: 13px;">{{c.nombres}} {{c.apellidos}}</td>
+                <td style="font-size: 13px;">{{c.nombre_carrera}}</td>
+                <td style="font-size: 13px;">{{c.naturaleza}}</td>
+                <td style="font-size: 13px;">{{c.universidad_destino}}</td>
+                <td style="font-size: 13px;">{{c.fecha_inicio}}</td>
+                <td style="font-size: 13px;">{{c.fecha_fin}}</td>
+                <td>
+                    <div class="example-button-container">
+                        <button (click)="subir(c.id)" mat-mini-fab color="primary">
+                          <mat-icon>file_upload</mat-icon>
+                        </button>
+                      </div>
+                </td>
+
+            </tr>
+          </tbody>
+    </table>
+    <!-- paginador -->
+    <div>
+        <mat-paginator [length]="listsolicitud.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+          aria-label="Select page" (page)="handlePagePending($event)">
+        </mat-paginator>
+    </div>
+            
+</div>
+
+        </div>
+    </ng-container>
+   
+
+</ng-container>
