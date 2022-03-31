@@ -77,14 +77,14 @@ export class MovilidadInformacionComponent implements OnInit {
   separarBeneficios(original:Interfaz_contenido[])
   {
     original.forEach((item:Interfaz_contenido)=>{
-      if(item.interfaz.nombre=="Beneficios-Reglamento"){
+      if(item.interfaz.nombre=="Beneficios-Informacion"){
     if(item.nombre=="Beneficios")
     {
       if(item.estado=="A"){
         this.listabeneficios.push(item)
       }
     }
-    if(item.nombre=="Reglamento")
+    if(item.nombre=="Mas Informacion")
     {
       
       if(item.estado=="A"){

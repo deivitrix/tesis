@@ -31,8 +31,11 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
    // 
    myform:FormGroup;
 
-   //guardar
+   //botones
    botonguardar=false;
+   botoncancelar=false;
+   botonvista=false;
+   botonpdf=false;
 
     //archivo
   archivo:File=new File([""],"");
@@ -71,6 +74,9 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
    }
 
    separar(original:Interfaz_contenido[]){
+     this.myform.patchValue({
+       id_usuario:this.usuario_id
+     })
     original.forEach((item:Interfaz_contenido)=>{
 
       if(item.nombre=="Objetivo General")
@@ -143,7 +149,10 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
     }).then((result)=>{
       if(result.isConfirmed)
       {
-        this.loadingspinner=true;
+        this.botonguardar=true;
+        this.botoncancelar=true;
+        this.botonvista=true;
+        this.botonpdf=true;
         this.myform.patchValue({
           boton_subir:true
         })
@@ -154,10 +163,12 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
           formData.append('document', this.archivo);
           this._general.reglamentodocumento(formData)
           .subscribe((res:any)=>{
-            this.loadingspinner=false;
+            this.botonguardar=false;
+            this.botoncancelar=false;
+            this.botonvista=false;
+            this.botonpdf=false;
             if(res.estado==true)
-            {
-              
+            { 
               this.myform.patchValue({
                 boton_subir:false,
                 pdfreglamento:res.documento
@@ -261,19 +272,17 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
     if(result.isConfirmed)
     {
       this.botonguardar=true;
-      var utm="El Departamento de Relaciones Internacionales, Convenios y Becas ";
-      var descripcion1=this.myform.get('objetivo')?.value
-      var separar1=utm+descripcion1.charAt(0).toLowerCase()+descripcion1.slice(1);
-      
-
-      this.myform.patchValue({
-        objetivo:separar1,
-      
-      });
-      let json={data:this.myform.value};
+        this.botoncancelar=true;
+        this.botonvista=true;
+        this.botonpdf=true;
+       let json={data:this.myform.value};
 
       this._general.updatePaginaMovilidad(json)
       .subscribe((res:any)=>{
+        this.botonguardar=false;
+        this.botoncancelar=false;
+        this.botonvista=false;
+        this.botonpdf=false;
         if(res.estado==true)
         {
           Swal.fire({
@@ -286,9 +295,7 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
             title:res.mensaje,
             icon:'success'
           });
-          this.botonguardar=false;
           this.getPaginas()
-         
           return;
 
 
@@ -305,7 +312,6 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
             title:res.mensaje,
             icon:'warning'
           });
-          this.botonguardar=false;
           return;
 
         }

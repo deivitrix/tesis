@@ -15,8 +15,8 @@ width: 50%;
 
 .titulo1{
 font-size: 25px;
-text-align: center;
-color: black;
+text-align: start;
+color: rgb(78, 73, 73);
 }
 
 .body{
