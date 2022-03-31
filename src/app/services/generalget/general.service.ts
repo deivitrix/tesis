@@ -66,6 +66,18 @@ export class GeneralService {
     return this.http.put(url,data);
   }
 
+  //subir archivo reglamento movilidad
+  reglamentodocumento(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'documento/reglamento';
+    return this.http.post(url,data);
+  }
+
+  //modificar la pagina Movilidad
+  updatePaginaMovilidad(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'pagina-movilidad/update';
+    return this.http.put(url,data);
+  }
+
   
 
 

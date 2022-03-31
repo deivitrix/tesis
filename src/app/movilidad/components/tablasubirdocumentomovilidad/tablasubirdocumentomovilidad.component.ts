@@ -40,6 +40,8 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
     this.loadingspinner=true;
     this.movilidad.getablaaprobadosSolicitud()
     .subscribe((res:any)=>{
+      console.log(res);
+      
       this.tabla=true;
       this.loading=false;
       this.loadingspinner=false;
@@ -62,6 +64,7 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
 
   //subir documento
   subir(id:number){
-
+   
+    
   }
 }

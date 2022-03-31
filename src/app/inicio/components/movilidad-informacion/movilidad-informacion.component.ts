@@ -24,7 +24,7 @@ export class MovilidadInformacionComponent implements OnInit {
   listaobjetivo:Interfaz_contenido[]=[];
   listaprograma:Interfaz_contenido[]=[];
   listabeneficios:Interfaz_contenido[]=[];
-  listareglamento:Interfaz_contenido[]=[];
+  listainformacion:Interfaz_contenido[]=[];
 
 
   //cedula
@@ -88,7 +88,7 @@ export class MovilidadInformacionComponent implements OnInit {
     {
       
       if(item.estado=="A"){
-        this.listareglamento.push(item)
+        this.listainformacion.push(item)
       
       }
     }

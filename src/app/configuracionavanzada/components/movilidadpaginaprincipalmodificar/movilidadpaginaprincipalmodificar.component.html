@@ -1,1 +1,112 @@
-<p>movilidadpaginaprincipalmodificar works!</p>
+<div class="border"></div>
+<ng-container *ngIf="loadingspinner">
+    <app-spinnerconfiguracionavanzada></app-spinnerconfiguracionavanzada>
+</ng-container>
+<ng-container *ngIf="loading">
+    <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>
+  </ng-container>
+
+  <ng-container *ngIf="loading==false">
+    <div class="container-fluid ">
+        <div class="col-sm titulo">
+            <mat-card-title>Pagina Movilidad</mat-card-title>
+        </div>
+    </div>
+    
+    <!-- <pre>{{myform.value | json}}</pre> -->
+    <form [formGroup]="myform" autocomplete="off" >
+      <div class="container-fluid wrapper">
+        <div class="formContent rounded">
+          <div class="fadeIn first">
+            <h4 class="active"> <span class="titulo"><h3>Modificacion</h3></span></h4>
+            <div class="col-sm" style="margin-top: 5%;">
+              <div class="row">
+                 <div class="col-sm-6" style="margin-top: 12%;">
+                   <h6><label>El Departamento de Relaciones Internacionales, Convenios y Becas: </label></h6>
+                 </div>
+                 <div class="col-sm"style="margin-top: 2%;">
+                  <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                      <mat-label>Objetivo General </mat-label>
+                      <textarea  formControlName="objetivo" matInput></textarea>
+                    </mat-form-field>
+                    <div *ngIf="myform.get('objetivo')?.hasError('required') && myform.get('objetivo')?.touched" style="margin-top: -20px;">
+                      <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                  </div>
+                  </div>
+                  <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                      <mat-label>Programa de movilidad académica</mat-label>
+                      <textarea  formControlName="programa" matInput></textarea>
+                    </mat-form-field>
+                    <div *ngIf="myform.get('programa')?.hasError('required') && myform.get('programa')?.touched" style="margin-top: -20px;">
+                      <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                  </div>
+                  </div>
+                  <div class="col-sm">
+                    <mat-form-field class="container-fill" appearance="fill">
+                      <mat-label>Beneficios </mat-label>
+                      <textarea  formControlName="beneficios" matInput></textarea>
+                    </mat-form-field>
+                    <div *ngIf="myform.get('beneficios')?.hasError('required') && myform.get('beneficios')?.touched" style="margin-top: -20px;">
+                      <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                  </div>
+                  </div>
+        
+                </div>
+              </div>
+  
+            </div>
+            <div class="col-sm" style="margin-top: 2%;">
+              <div class="row">
+                <div class="col-sm" style="margin-top: 3%;">
+                  <h6><label>Más Información</label></h6>
+                </div>
+                <div class="col-sm">
+                  <mat-form-field class="container-fill" appearance="fill">
+                    <mat-label>Más Información</mat-label>
+                    <textarea  formControlName="informacion" matInput></textarea>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3 boton_c">
+                      <div>
+                        <div  class="card_1 boton-container">
+                          <div class="boton-container">
+                            <button style="margin-left: 0% ;" (click)="PDF()" mat-flat-button color="primary"><mat-icon>visibility</mat-icon></button>
+                            <div class="container-button">
+                              <input [disabled]="myform.get('boton_subir')?.value" title="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                            </div>
+                          </div>
+                        </div>
+                       
+                      </div>
+                      
+                </div>
+              </div>
+            </div>
+            <div class="col-sm container-fluid" style="margin-top: 2%;">
+                <div class="row">
+                  <div class="col-sm" style="text-align: center;">
+                     <button (click)="guardar()"title="Guardar"[disabled]="botonguardar"  class="btn btn-success" style="margin: 2%; "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                       </svg><span>&nbsp;Guardar</span></button>
+                     <button (click)="cancelar()" title="Cancelar"  class="btn btn-danger" style="margin: 2%;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                       </svg><span>&nbsp;Cancelar</span></button>
+                     
+                  </div>
+                </div>
+              
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+    </form>
+    
+  </ng-container>
+
