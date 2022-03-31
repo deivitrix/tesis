@@ -33,26 +33,32 @@
             <div class="col-sm" >
                 <h1 class="titulo1">Objetivo General</h1>
                 <div style="margin-top: 3%; text-align: justify;">
-                <p>
+                
                     <ng-container *ngFor="let lista of listaobjetivo">
-                        {{lista.descripcion}}
+                        <div [innerHTML]="lista.descripcion"></div>
                      </ng-container>
                      <ng-container *ngIf="listaobjetivo.length==0">
-                        No existe Datos en el Objetivo General
+                         <p>
+                            No existe Datos en el Objetivo General
+                         </p>
+                       
                      </ng-container>
-                </p>
+                
                 </div>
             </div>
 
             <div class="col-sm" >
                 <h1 class="titulo1">Programa de movilidad académica estudiantil</h1>
                 <div style="margin-top: 3%; text-align: justify;">
-                <p> <ng-container *ngFor="let lista of listaprograma">
-                    {{lista.descripcion}}
+                 <ng-container *ngFor="let lista of listaprograma">
+                    <div [innerHTML]="lista.descripcion"></div>
                  </ng-container>
                  <ng-container *ngIf="listaprograma.length==0">
-                    No existe Datos en el Programa de Movilidad
-                 </ng-container></p>
+                     <p>
+                        No existe Datos en el Programa de Movilidad
+                     </p>
+                    
+                 </ng-container>
                 </div>
                  
             </div>
@@ -62,14 +68,16 @@
             <div class="col-sm" >
                 <h1 class="titulo1">Beneficios</h1>
                 <div style="margin-top: 3%; text-align: justify;">
-                    <p>
                         <ng-container *ngFor="let lista of listabeneficios">
-                            {{lista.descripcion}}
+                            <div [innerHTML]="lista.descripcion"></div>
+                            
                          </ng-container>
                          <ng-container *ngIf="listabeneficios.length==0">
-                            No existe Datos en los Beneficios
+                             <p>
+                                No existe Datos en los Beneficios
+                             </p>
+                          
                          </ng-container>
-                    </p>
 
                 </div>
                 
@@ -77,11 +85,11 @@
             <div class="col-sm">
                 <h1 class="titulo1">Mas Informacion</h1>
                 <div style="margin-top: 3%;">
-                    <p>
+                    
                         <ng-container *ngFor="let lista of listainformacion">
-                            {{lista.descripcion}}
+                            <div [innerHTML]="lista.descripcion"></div>
                          </ng-container>
-                       </p>
+                       
 
                 </div>
                

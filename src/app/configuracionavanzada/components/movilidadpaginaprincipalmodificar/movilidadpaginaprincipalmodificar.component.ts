@@ -5,6 +5,10 @@ import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/
 import { Interfaz_contenido } from 'src/app/models/Interfaz_contenido.model';
 import { GeneralService } from 'src/app/services/generalget/general.service';
 import { GeneralLoginService } from 'src/app/services/generalLogin/generallogin.service';
+//editor de texto 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+ 
 import Swal from 'sweetalert2';
 
 @Component({
@@ -17,6 +21,9 @@ export class MovilidadpaginaprincipalmodificarComponent implements OnInit {
   //loading
   loading=true;
   loadingspinner=false;
+
+  //editor 
+  public Editor = ClassicEditor;
   //listaInterfaz
   listainterfaz:Interfaz_contenido[]=[];
   listainterfazaux:Interfaz_contenido[]=[];

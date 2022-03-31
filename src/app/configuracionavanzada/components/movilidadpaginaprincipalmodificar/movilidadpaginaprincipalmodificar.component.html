@@ -21,32 +21,55 @@
             <div class="col-sm" style="margin-top: 5%;">
               <div class="row">
                  <div class="col-sm"style="margin-top: 2%;">
-                  <div class="col-sm">
-                    <mat-form-field class="container-fill" appearance="fill">
+                  <div class="col-sm" style="margin-bottom: 2%;">
+
+                    <div style="margin-bottom: 1.5%;">
+                      <mat-label><strong>Objetivo General</strong> </mat-label>
+                    </div>
+                    <div style="width: 80%; margin-left: 10%;">
+                      <ckeditor  formControlName="objetivo" [editor]="Editor" ></ckeditor>
+                  </div>
+
+                    <!-- <mat-form-field class="container-fill" appearance="fill">
                       <mat-label>Objetivo General </mat-label>
                       <textarea  formControlName="objetivo" matInput></textarea>
                     </mat-form-field>
                     <div *ngIf="myform.get('objetivo')?.hasError('required') && myform.get('objetivo')?.touched" style="margin-top: -20px;">
                       <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                  </div> -->
                   </div>
+                  <div class="col-sm" style="margin-bottom: 2%;">
+
+                    <div style="margin-bottom: 1.5%;">
+                      <mat-label><strong>Programa de movilidad académica</strong> </mat-label>
+                    </div>
+                    <div style="width: 80%; margin-left: 10%;">
+                      <ckeditor  formControlName="programa" [editor]="Editor" ></ckeditor>
                   </div>
-                  <div class="col-sm">
-                    <mat-form-field class="container-fill" appearance="fill">
+
+                    <!-- <mat-form-field class="container-fill" appearance="fill">
                       <mat-label>Programa de movilidad académica</mat-label>
                       <textarea  formControlName="programa" matInput></textarea>
                     </mat-form-field>
                     <div *ngIf="myform.get('programa')?.hasError('required') && myform.get('programa')?.touched" style="margin-top: -20px;">
                       <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
+                  </div> -->
                   </div>
+                  <div class="col-sm" style="margin-bottom: 2%;">
+
+                    <div style="margin-bottom: 1.5%;">
+                      <mat-label><strong>Beneficios</strong> </mat-label>
+                    </div>
+                    <div style="width: 80%; margin-left: 10%;">
+                      <ckeditor  formControlName="beneficios" [editor]="Editor" ></ckeditor>
                   </div>
-                  <div class="col-sm">
-                    <mat-form-field class="container-fill" appearance="fill">
+                    <!-- <mat-form-field class="container-fill" appearance="fill">
                       <mat-label>Beneficios </mat-label>
                       <textarea  formControlName="beneficios" matInput></textarea>
                     </mat-form-field>
                     <div *ngIf="myform.get('beneficios')?.hasError('required') && myform.get('beneficios')?.touched" style="margin-top: -20px;">
                       <span class="mda-form-msg">Este campo <strong>requerido</strong></span>
-                  </div>
+                  </div> -->
                   </div>
         
                 </div>
@@ -56,13 +79,16 @@
             <div class="col-sm" style="margin-top: 2%;">
               <div class="row">
                 <div class="col-sm" style="margin-top: 3%;">
-                  <h6><label>Más Información</label></h6>
+                  <h6><label><strong>Más Información</strong> </label></h6>
                 </div>
                 <div class="col-sm">
-                  <mat-form-field class="container-fill" appearance="fill">
+                  <div style="width: 80%;">
+                    <ckeditor  formControlName="informacion" [editor]="Editor" ></ckeditor>
+                </div>
+                  <!-- <mat-form-field class="container-fill" appearance="fill">
                     <mat-label>Más Información</mat-label>
                     <textarea  formControlName="informacion" matInput></textarea>
-                  </mat-form-field>
+                  </mat-form-field> -->
                 </div>
                 <div class="col-md-3 boton_c">
                       <div>
