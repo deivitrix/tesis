@@ -40,6 +40,8 @@ import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-m
 import { SubirDocumentoFinalMovilidadComponent } from './paginas/subir-documento-final-movilidad/subir-documento-final-movilidad.component';
 import { TablasubirdocumentomovilidadComponent } from './components/tablasubirdocumentomovilidad/tablasubirdocumentomovilidad.component';
 import { DialogsubirdocumentomovilidadComponent } from './components/dialogsubirdocumentomovilidad/dialogsubirdocumentomovilidad.component';
+import { TablaeditarsolicitudesComponent } from './components/tablaeditarsolicitudes/tablaeditarsolicitudes.component';
+import { EditarsolicitudesMovilidadComponent } from './paginas/editarsolicitudes-movilidad/editarsolicitudes-movilidad.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { DialogsubirdocumentomovilidadComponent } from './components/dialogsubir
     AprobarMovilidadComponent,
     SubirDocumentoFinalMovilidadComponent,
     TablasubirdocumentomovilidadComponent,
-    DialogsubirdocumentomovilidadComponent
+    DialogsubirdocumentomovilidadComponent,
+    TablaeditarsolicitudesComponent,
+    EditarsolicitudesMovilidadComponent
   ],
   imports: [
     CommonModule,

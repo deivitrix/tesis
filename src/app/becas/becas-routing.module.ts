@@ -1,3 +1,4 @@
+import { EditarsolicitudesBecasComponent } from './paginas/editarsolicitudes-becas/editarsolicitudes-becas.component';
 import { SubirDocumentoFinalBecasComponent } from './paginas/subir-documento-final-becas/subir-documento-final-becas.component';
 import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.component';
 import { MostrarBecasComponent } from './paginas/mostrar-becas/mostrar-becas.component';
@@ -21,6 +22,11 @@ const routes: Routes = [
       },
       {
         path:'subirdocumentofinalbecas',component:SubirDocumentoFinalBecasComponent
+      },
+      {
+        path:'editarsolicitudes-becas',component:EditarsolicitudesBecasComponent
+
+
       }
     ]
   }

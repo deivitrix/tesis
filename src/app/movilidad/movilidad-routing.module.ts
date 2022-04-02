@@ -1,3 +1,4 @@
+import { EditarsolicitudesMovilidadComponent } from './paginas/editarsolicitudes-movilidad/editarsolicitudes-movilidad.component';
 import { SubirDocumentoFinalMovilidadComponent } from './paginas/subir-documento-final-movilidad/subir-documento-final-movilidad.component';
 import { AprobarMovilidadComponent } from './paginas/aprobar-movilidad/aprobar-movilidad.component';
 
@@ -22,6 +23,10 @@ const routes: Routes = [
       },
       {
         path:'subirdocumentofinalmovilidad',component:SubirDocumentoFinalMovilidadComponent
+      },
+      {
+        path:'editarsolicitudes-movilidad',component:EditarsolicitudesMovilidadComponent
+
       }
     ]
   }

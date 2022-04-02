@@ -39,6 +39,8 @@ import { TablabecasAprobadoComponent } from './components/tablabecas-aprobado/ta
 import { SubirDocumentoFinalBecasComponent } from './paginas/subir-documento-final-becas/subir-documento-final-becas.component';
 import { TablasubirdocumentobecasComponent } from './components/tablasubirdocumentobecas/tablasubirdocumentobecas.component';
 import { DialogsubirdocumentobecasComponent } from './components/dialogsubirdocumentobecas/dialogsubirdocumentobecas.component';
+import { EditarsolicitudesBecasComponent } from './paginas/editarsolicitudes-becas/editarsolicitudes-becas.component';
+import { TablaeditarsolicitudesbecasComponent } from './components/tablaeditarsolicitudesbecas/tablaeditarsolicitudesbecas.component';
 
 
 
@@ -57,6 +59,8 @@ import { DialogsubirdocumentobecasComponent } from './components/dialogsubirdocu
     SubirDocumentoFinalBecasComponent,
     TablasubirdocumentobecasComponent,
     DialogsubirdocumentobecasComponent,
+    EditarsolicitudesBecasComponent,
+    TablaeditarsolicitudesbecasComponent,
    
 
   ],
