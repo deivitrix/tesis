@@ -23,6 +23,8 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
  
    //lista 
    listsolicitud:any[]=[];
+
+  
  
    @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
  

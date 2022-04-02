@@ -38,6 +38,9 @@ export class TablaeditarsolicitudesComponent implements OnInit {
  
    //boton
    botongenerar=true;
+
+    //selector
+    selector_a="";
  
  
  
@@ -54,6 +57,7 @@ export class TablaeditarsolicitudesComponent implements OnInit {
    cambioEstadoMovilidad(event: any){
      this.botongenerar=false;
      this.loadingspinner=true;
+     this.selector_a=event.value;
      this.movilidad.getEstadoSolicitudMovilidad(event.value)
      .subscribe((res:any)=>{
        this.tabla=true;
@@ -85,6 +89,21 @@ export class TablaeditarsolicitudesComponent implements OnInit {
      });
      
  
+   }
+
+   editar(id:number)
+   {
+    if(this.selector_a=="A")
+    {
+      
+
+    }
+    if(this.selector_a=="P")
+    {
+
+
+    }
+
    }
 
 }
