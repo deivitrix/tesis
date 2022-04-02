@@ -38,6 +38,8 @@ import { AprobarBecasComponent } from './paginas/aprobar-becas/aprobar-becas.com
 import { TablabecasAprobadoComponent } from './components/tablabecas-aprobado/tablabecas-aprobado.component';
 import { SubirDocumentoFinalBecasComponent } from './paginas/subir-documento-final-becas/subir-documento-final-becas.component';
 import { TablasubirdocumentobecasComponent } from './components/tablasubirdocumentobecas/tablasubirdocumentobecas.component';
+import { DialogsubirdocumentobecasComponent } from './components/dialogsubirdocumentobecas/dialogsubirdocumentobecas.component';
+
 
 
 
@@ -54,6 +56,8 @@ import { TablasubirdocumentobecasComponent } from './components/tablasubirdocume
     TablabecasAprobadoComponent,
     SubirDocumentoFinalBecasComponent,
     TablasubirdocumentobecasComponent,
+    DialogsubirdocumentobecasComponent,
+   
 
   ],
   imports: [

@@ -6,15 +6,15 @@ import Swal from 'sweetalert2';
 import 'animate.css';
 
 @Component({
-  selector: 'app-dialogsubirdocumentomovilidad',
-  templateUrl: './dialogsubirdocumentomovilidad.component.html',
-  styleUrls: ['./dialogsubirdocumentomovilidad.component.css']
+  selector: 'app-dialogsubirdocumentobecas',
+  templateUrl: './dialogsubirdocumentobecas.component.html',
+  styleUrls: ['./dialogsubirdocumentobecas.component.css']
 })
-export class DialogsubirdocumentomovilidadComponent implements OnInit {
+export class DialogsubirdocumentobecasComponent implements OnInit {
 
   nombre_archivo="";
 
-  constructor(public dialoRef:MatDialogRef<DialogsubirdocumentomovilidadComponent>,
+  constructor(public dialoRef:MatDialogRef<DialogsubirdocumentobecasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,) { }
 
   ngOnInit(): void {
@@ -50,5 +50,6 @@ export class DialogsubirdocumentomovilidadComponent implements OnInit {
 
 
   }
+
 
 }

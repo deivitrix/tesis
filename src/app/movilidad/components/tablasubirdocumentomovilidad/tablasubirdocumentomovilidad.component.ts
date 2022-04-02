@@ -1,7 +1,13 @@
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { GeneralMovilidadService } from 'src/app/services/generalMovilidad/general-movilidad.service';
+import { DialogsubirdocumentomovilidadComponent } from '../dialogsubirdocumentomovilidad/dialogsubirdocumentomovilidad.component';
+
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
 
 @Component({
   selector: 'app-tablasubirdocumentomovilidad',
@@ -31,7 +37,9 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
    }
  
 
-  constructor(private movilidad:GeneralMovilidadService, public dialog: MatDialog) { }
+  constructor(private movilidad:GeneralMovilidadService, public dialog: MatDialog) { 
+
+  }
 
   ngOnInit(): void {
     this.getMovilidadBecas();
@@ -40,8 +48,6 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
     this.loadingspinner=true;
     this.movilidad.getablaaprobadosSolicitud()
     .subscribe((res:any)=>{
-      console.log(res);
-      
       this.tabla=true;
       this.loading=false;
       this.loadingspinner=false;
@@ -63,7 +69,74 @@ export class TablasubirdocumentomovilidadComponent implements OnInit {
   }
 
   //subir documento
-  subir(id:number){
+  subir(id:number,nombres:string,apellidos:string){
+    const  archivo:File=new File([""],"");
+
+    var nombres_a=nombres+" "+apellidos;
+    const dialogRef1=this.dialog.open(DialogsubirdocumentomovilidadComponent,{
+      width:'700px',
+      data:{titulo:'Subir Documento Final Movilidad',nombres:nombres_a,objeto:archivo,subir:false}
+    });
+
+    dialogRef1.afterClosed().subscribe(result => {
+      console.log('The dialog was closed'); 
+    if(result!=null)
+    { 
+      if(result.subir==true)
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title: 'Desea subir el documento?....',
+          icon: 'warning',
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: 'Guardar',
+          denyButtonText: `No Guardar`,
+          
+        }).then((result1)=>{
+          if(result1.isConfirmed)
+          {
+            this.loadingspinner=true;
+            const archivo=result.objeto;
+            const formData = new FormData();
+            formData.append('document', archivo);
+            this.movilidad.addsolicitudfinalftp(formData)
+            .subscribe((res:any)=>{
+              if(res.estado==true)
+              {
+                console.log(res.documento);
+                this.loadingspinner=false;
+
+              }
+            })
+          }
+        })
+
+
+      }
+      else
+      {
+        Swal.fire({
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          title:'Se debe seleccionar un archivo PDF',
+          icon:'warning'
+        });
+        return;
+      }
+
+    }
+    
+    });
    
     
   }

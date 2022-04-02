@@ -70,7 +70,7 @@ export class GeneralMovilidadService {
 
   }
 
-  //Documento movilidad (uno a uno )
+  //Documento movilidad (uno a uno ) para la solicitud 
   addftpmovilidad_v2(data:any)
   {
     let url:string = this._base.getUrlLocalApi() + 'documento/movilidad';
@@ -109,6 +109,15 @@ export class GeneralMovilidadService {
   getablaaprobadosSolicitud(){
     let url:string = this._base.getUrlLocalApi() + 'movilidad/s-aprobada/A';
     return this.http.get(url);
+  }
+
+
+  //subir documento final
+  addsolicitudfinalftp(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'subir/pdfsolicitudes';
+    return this.http.post(url,data);
+
   }
 
 

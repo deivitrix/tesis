@@ -204,6 +204,14 @@ export class BecasnivelService {
     return this.http.get(url);
   }
 
+   //subir documento final
+   addsolicitudfinalftp(data:any)
+   {
+     let url:string = this._base.getUrlLocalApi() + 'subir/pdfsolicitudes';
+     return this.http.post(url,data);
+ 
+   }
+
 
 
   
