@@ -71,7 +71,7 @@
                 <td style="font-size: 13px;">{{c.fecha_fin}}</td>
                 <td>
                     <a (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-                    <a style="cursor: pointer;margin: 4%; color:brown;"><mat-icon>edit</mat-icon></a>
+                    <a  (click)="editar(c.id)" style="cursor: pointer;margin: 4%; color:brown;"><mat-icon>edit</mat-icon></a>
                 </td>
 
             </tr>

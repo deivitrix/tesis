@@ -38,6 +38,9 @@ export class TablaeditarsolicitudesbecasComponent implements OnInit {
   //boton
   botongenerar=true;
 
+  //selector
+  selector_a="";
+
  constructor(private mostrar: FormBuilder, private becas:BecasnivelService, public dialog: MatDialog) { 
    this.selector=mostrar.group({
      tipo:['',Validators.required]
@@ -49,6 +52,7 @@ export class TablaeditarsolicitudesbecasComponent implements OnInit {
  cambioEstadoMovilidad(event: any){
    this.botongenerar=false;
    this.loadingspinner=true;
+   this.selector_a=event.value;
    this.becas.getEstadoSolicitudMovilidad(event.value)
    .subscribe((res:any)=>{
      this.tabla=true;
@@ -81,4 +85,19 @@ export class TablaeditarsolicitudesbecasComponent implements OnInit {
    
 
  }
+ 
+ editar(id:number)
+   {
+    if(this.selector_a=="A")
+    {
+      
+
+    }
+    if(this.selector_a=="P")
+    {
+
+
+    }
+
+   }
 }
