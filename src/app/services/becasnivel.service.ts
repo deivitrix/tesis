@@ -212,6 +212,13 @@ export class BecasnivelService {
  
    }
 
+   // actualizar estado documento final 
+  updateEstadoSubirDocumento(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'actualizar/informe/s_aprobadas';
+    return this.http.put(url,data);
+  }
+
 
 
   

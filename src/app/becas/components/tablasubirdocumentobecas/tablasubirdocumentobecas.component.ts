@@ -108,8 +108,45 @@ export class TablasubirdocumentobecasComponent implements OnInit {
             .subscribe((res:any)=>{
               if(res.estado==true)
               {
-                console.log(res.documento);
-                this.loadingspinner=false;
+                let json={
+                  data:{
+                    id:id,
+                    PDF:res.documento,
+                    tipo:"M"
+                  }
+                }
+                this.becas.updateEstadoSubirDocumento(json)
+                .subscribe((res1:any)=>{
+                  this.loadingspinner=false;
+                  if(res1.estado==true)
+                  {
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:'Se actualizado el registro de Movilidad...!!',
+                      icon:'success'
+                    });
+                    this.getBecas();
+                  }
+                  else{
+                    Swal.fire({
+                      showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                      },
+                      hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                      },
+                      title:res1.mensaje,
+                      icon:'warning'
+                    });
+                    return;
+                  }
+
+                });
 
               }
             })
