@@ -22,4 +22,12 @@
     color: #f57c74;
 }
 
+.disabled{
+    pointer-events: none;
+}
+.enable{
+    pointer-events: auto;
+
+}
+
 

@@ -18,6 +18,9 @@ export class TablamostrarbecasComponent implements OnInit {
   //FormGroup
     selector: FormGroup;
    tabla = false;
+
+   //estado movilidad
+  estado_movilidad="";
  
    //lista 
    listsolicitud:any[]=[];
@@ -48,6 +51,7 @@ export class TablamostrarbecasComponent implements OnInit {
   cambioEstadoMovilidad(event: any){
     this.botongenerar=false;
     this.loadingspinner=true;
+    this.estado_movilidad=event.value;
     this.becas.getEstadoSolicitudMovilidad(event.value)
     .subscribe((res:any)=>{
       this.tabla=true;

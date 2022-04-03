@@ -38,6 +38,9 @@ export class TablamostrarmovilidadComponent implements OnInit {
   //boton
   botongenerar=true;
 
+  //estado movilidad
+  estado_movilidad="";
+
 
 
   constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog) {
@@ -53,6 +56,7 @@ export class TablamostrarmovilidadComponent implements OnInit {
   cambioEstadoMovilidad(event: any){
     this.botongenerar=false;
     this.loadingspinner=true;
+    this.estado_movilidad=event.value;
     this.movilidad.getEstadoSolicitudMovilidad(event.value)
     .subscribe((res:any)=>{
       this.tabla=true;

@@ -59,7 +59,12 @@
               <th scope="col">Universidad Destino</th>
               <th style="width: 7%;" scope="col">Fecha Inicio</th>
               <th style="width: 7%;" scope="col">Fecha Fin</th>
-              <th scope="col">Acciones</th>
+              <ng-container *ngIf="estado_movilidad=='A'"> 
+                <th style="width: 8%;" scope="col">Acciones</th>
+              </ng-container>
+              <ng-container *ngIf="estado_movilidad!='A'"> 
+                <th scope="col">Acciones</th>
+              </ng-container>
 
             </tr>
           </thead>
@@ -74,8 +79,11 @@
                 <td style="font-size: 13px;">{{c.fecha_inicio}}</td>
                 <td style="font-size: 13px;">{{c.fecha_fin}}</td>
                 <td>
-                    <a (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
-                    <a style="cursor: pointer;margin: 4%; color:brown;"><mat-icon>picture_as_pdf</mat-icon></a>
+                    <a title="Informacion de la Solicitud" (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+                    <a title="PDF de la Solicitud" style="cursor: pointer;margin: 4%; color:brown;"><mat-icon>picture_as_pdf</mat-icon></a>
+                    <ng-container *ngIf="estado_movilidad=='A'"> 
+                      <a title="PDF documento Final" style="cursor: pointer; color:rgb(42, 165, 52);"><mat-icon>picture_as_pdf</mat-icon></a>
+                      </ng-container>
                 </td>
 
             </tr>
