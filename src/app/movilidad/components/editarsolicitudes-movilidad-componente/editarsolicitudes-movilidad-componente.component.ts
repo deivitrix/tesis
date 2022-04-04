@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralMovilidadService } from 'src/app/services/generalMovilidad/general-movilidad.service';
+//editor de texto 
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+//Alertas
+import Swal from 'sweetalert2';
+import 'animate.css';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
+
 
 @Component({
   selector: 'app-editarsolicitudes-movilidad-componente',
@@ -20,6 +29,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
   //loading
   loading=true;
+  loadingspinner=false;
 
    // formGroup
    myform: FormGroup;
@@ -63,15 +73,41 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
   //comprobar enabled o disabled
   comprobador=false;
 
-  constructor(private rutaActiva: ActivatedRoute,private movilidad:GeneralMovilidadService, private mostrar: FormBuilder) { 
+  //verificar pdf final en Aprobados
+  verificar_pdf=false;
+
+   //controlador del editor de texto
+   public Editor = ClassicEditor;
+
+   //boton añadir materias , borrar materias
+   boton_add_materias=false;
+   boton_delete_materias=false;
+
+   //boton guardar documentos
+   boton_documentos=false;
+   boton_documento_final=false;
+  
+   //boton documento final verificar
+   vcerificar_boton_final=false;
+
+
+
+
+  constructor(private rutaActiva: ActivatedRoute,private movilidad:GeneralMovilidadService, private mostrar: FormBuilder,
+    private router:Router,public snackBar:MatSnackBar) { 
     this.id=rutaActiva.snapshot.params.id;
     this.tipo_estado=rutaActiva.snapshot.params.tipo;
     
     if(this.tipo_estado=="A")
     {
       this.comprobador=true;
+      this.boton_add_materias=true;
+      this.boton_delete_materias=true;
+      this.boton_documentos=true;
       this.myform = this.mostrar.group({
         //solicitud
+        id:this.id,
+        tipo_documento:this.tipo_estado,
         nombre_carrera:[{ value: '', disabled: true }],
         modalidad:[{ value: '', disabled: true }],
         tipo_destino:[{ value: '', disabled: true }],
@@ -129,14 +165,20 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
          pdfdominio_idioma: ["", Validators.required],
          nombre_dominio: [{ value: '', disabled: true }],
          verificar9: [false],
-         documento_udestino: [new File([""], ""), Validators.required],
-         pdfdocumento_udestino: ["", Validators.required],
+         documentos_udestino: [new File([""], ""), Validators.required],
+         pdfdocumentos_udestino: ["", Validators.required],
          nombre_documento: [{ value: '', disabled: true }],
          verificar10: [false],
          comprobante_solvencia: [new File([""], ""), Validators.required],
          pdfcomprobante_solvencia: ["", Validators.required],
          nombre_comprobante: [{ value: '', disabled: true }],
          verificar11: [false],
+
+          //documento final 
+          final: [new File([""], ""), Validators.required],
+          pdf_final: ["", Validators.required],
+          nombre_final: [{ value: '', disabled: true }],
+          verificar12: [false],
        });
 
 
@@ -145,8 +187,13 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
     else
     {
       this.comprobador=false;
+      this.boton_add_materias=false;
+      this.boton_delete_materias=false;
+      this.boton_documentos=false;
       this.myform = this.mostrar.group({
         //solicitud
+        id:this.id,
+        tipo_documento:this.tipo_estado,
         nombre_carrera:[{ value: '', disabled: true }],
         modalidad:[{ value: '', disabled: false }],
         tipo_destino:[{ value: '', disabled: false }],
@@ -159,13 +206,16 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
         beca_apoyo:[{ value: '', disabled: false }],
         monto_referencial:[{ value: '', disabled: false }],
         
-        alergias:[{ value: '', disabled: true }],
-        especificar_alergia:[{ value: '', disabled: true }],
-        enfermedades_tratamiento:[{ value: '', disabled: true }],
-        poliza_seguro:[{ value: '', disabled: true }],
+        alergias:[{ value: '', disabled: false }],
+        id_especificar_alergias:[''],
+        especificar_alergia:[{ value: '', disabled: false }],
+        id_enfermedades_cronicas:[''],
+        enfermedades_tratamiento:[{ value: '', disabled: false }],
+        poliza_seguro:[{ value: '', disabled: false }],
   
         //materias
         materias: this.mostrar.array([]),
+        eliminar_materia:this.mostrar.array([]),
   
          //documentos
          certificado_matricula: [new File([""], ""), Validators.required],
@@ -205,13 +255,20 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
          nombre_dominio: [{ value: '', disabled: true }],
          verificar9: [false],
          documento_udestino: [new File([""], ""), Validators.required],
-         pdfdocumento_udestino: ["", Validators.required],
+         pdfdocumentos_udestino: ["", Validators.required],
          nombre_documento: [{ value: '', disabled: true }],
          verificar10: [false],
          comprobante_solvencia: [new File([""], ""), Validators.required],
          pdfcomprobante_solvencia: ["", Validators.required],
          nombre_comprobante: [{ value: '', disabled: true }],
          verificar11: [false],
+
+
+         //documento final 
+         final: [new File([""], ""), Validators.required],
+         pdf_final: ["", Validators.required],
+         nombre_final: [{ value: '', disabled: true }],
+         verificar12: [false],
        });
 
     }
@@ -241,6 +298,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
      
       if(res.estado==true)
       {
+        this.verificar_pdf=false;
         res.datos.id_modalidad1=res.datos.id_modalidad1+"";
         res.datos.id_modalidad2=res.datos.id_modalidad2+"";
         res.datos.iduniversidad=res.datos.iduniversidad+"";
@@ -249,6 +307,26 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
         res.datos.naturaleza_id=res.datos.naturaleza_id+"";
         res.datos.id_becas=res.datos.id_becas+"";
         res.datos.id_monto= res.datos.id_monto+"";
+
+        //alergias
+        res.datos.id_alergias=res.datos.id_alergias+"";
+
+
+        if(res.datos.s_aprobado)
+        {
+          if(res.datos.s_aprobado.pdf==null)
+          {
+            this.verificar_pdf=true;
+          }
+          else{
+            this.myform.patchValue({
+            pdf_final: res.datos.s_aprobado.pdf,
+            nombre_final: this.extraer_nombre(res.datos.s_aprobado.pdf),
+            })
+          }
+        }
+
+        
 
 
         this.myform.patchValue({
@@ -265,23 +343,36 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
           beca_apoyo:res.datos.id_becas,
           monto_referencial:res.datos.id_monto,
           
-          alergias:res.datos.alergias,
+          alergias:res.datos.id_alergias,
+          id_especificar_alergias:res.datos.id_alergias,
           especificar_alergia:res.datos.especificar_alergia,
+          id_enfermedades_cronicas:res.datos.id_enfermedades_cronicas,
           enfermedades_tratamiento:res.datos.enfermedades_tratamiento,
           poliza_seguro:res.datos.poliza_seguro,
 
           //pdf
           pdfcertificado_matricula:res.datos.pdfcertificado_matricula,
+          nombre_certificado:this.extraer_nombre(res.datos.pdfcertificado_matricula),
           pdfcopia_record:res.datos.pdfcopia_record,
+          nombre_copia:this.extraer_nombre(res.datos.pdfcopia_record),
           pdfsolicitud_carta:res.datos.pdfsolicitud_carta,
+          nombre_solicitud:this.extraer_nombre(res.datos.pdfsolicitud_carta),
           pdfcartas_recomendacion:res.datos.pdfcartas_recomendacion,
+          nombre_cartas:this.extraer_nombre(res.datos.pdfcartas_recomendacion),
           pdfno_sancion:res.datos.pdfno_sancion,
+          nombre_no_sancion:this.extraer_nombre(res.datos.pdfno_sancion),
           pdffotos:res.datos.pdffotos,
+          nombre_fotos:this.extraer_nombre(res.datos.pdffotos),
           pdfseguro:res.datos.pdfseguro,
+          nombre_seguro:this.extraer_nombre(res.datos.pdfseguro),
           pdfexamen_psicometrico:res.datos.pdfexamen_psicometrico,
+          nombre_examen:this.extraer_nombre(res.datos.pdfexamen_psicometrico),
           pdfdominio_idioma:res.datos.pdfdominio_idioma,
+          nombre_dominio:this.extraer_nombre(res.datos.pdfdominio_idioma),
           pdfdocumentos_udestino:res.datos.pdfdocumentos_udestino,
+          nombre_documento:this.extraer_nombre(res.datos.pdfdocumentos_udestino),
           pdfcomprobante_solvencia:res.datos.pdfcomprobante_solvencia,
+          nombre_comprobante:this.extraer_nombre(res.datos.pdfcomprobante_solvencia),
         });
         this.agregarmaterias(res.datos);
         this.loading=false;
@@ -324,6 +415,19 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
   }
 
+  // funcion para poner el nombre del archivo
+  extraer_nombre(nombre:string)
+  {
+    if(nombre!=null)
+    {
+      var separar=nombre.split('/');
+      var nombre_archivo=separar[separar.length-1];
+      return nombre_archivo;
+
+    }
+   return "";
+  }
+
    //modelo de FormArray de materias
  get materias() {
   return this.myform.get('materias') as FormArray;
@@ -333,20 +437,51 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
   {
     for (var i = 0; i < usuario.materias.length; i++) 
     {
-      const materiasFormGroup = this.mostrar.group({
+      
+      if(this.tipo_estado=='A')
+      {
+        const materiasFormGroup = this.mostrar.group({
 
-        id: usuario.materias[i].id,
-        materia_origen: [{ value: usuario.materias[i].materia_origen, disabled: true }],
-        clave_origen: [{ value: usuario.materias[i].codigo_origen, disabled: true }],
-        materia_destino: [{ value: usuario.materias[i].materia_destino, disabled: true }],
-        clave_destino: [{ value: usuario.materias[i].codigo_destino, disabled: true }]
-      });
-      this.materias.push(materiasFormGroup);
+          id: usuario.materias[i].id,
+          materia_origen: [{ value: usuario.materias[i].materia_origen, disabled: true }],
+          clave_origen: [{ value: usuario.materias[i].codigo_origen, disabled: true }],
+          materia_destino: [{ value: usuario.materias[i].materia_destino, disabled: true }],
+          clave_destino: [{ value: usuario.materias[i].codigo_destino, disabled: true }]
+        });
+        this.materias.push(materiasFormGroup);
+      }
+      else
+      {
+        const materiasFormGroup = this.mostrar.group({
+
+          id: usuario.materias[i].id,
+          materia_origen: [{ value: usuario.materias[i].materia_origen, disabled: false }],
+          clave_origen: [{ value: usuario.materias[i].codigo_origen, disabled: false }],
+          materia_destino: [{ value: usuario.materias[i].materia_destino, disabled: false }],
+          clave_destino: [{ value: usuario.materias[i].codigo_destino, disabled: false }]
+        });
+        this.materias.push(materiasFormGroup);
+      }
+     
+     
 
 
     }
 
   }
+
+  removerMateria(index: number) {
+    const eliminar=this.mostrar.group({ 
+      id:this.materias.controls[index].value.id
+    });
+    this.eliminar_materias.push(eliminar);
+    this.materias.removeAt(index);
+  }
+
+  get eliminar_materias(){
+    return this.myform.get('eliminar_materia') as FormArray;
+  }
+
 
 
   //selector modalidad
@@ -460,6 +595,790 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
       })
   }
 
+  //documento
+  fileEvent(event:any,numero:number){
+   
+
+    const archivoCapturado = event.target.files[0];
+    if (archivoCapturado.type == "application/pdf") {
+        if(numero==1)
+        {
+          if(this.myform.get('pdfcertificado_matricula')?.value.length==0 || this.myform.get('pdfcertificado_matricula')?.value.length==1)
+          {
+            this.myform.patchValue({
+              certificado_matricula: archivoCapturado,
+              pdfcertificado_matricula:'',
+              nombre_certificado: archivoCapturado.name,
+              verificar1: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfcertificado_matricula')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  certificado_matricula: archivoCapturado,
+                  pdfcertificado_matricula:'',
+                  nombre_certificado: archivoCapturado.name,
+                  verificar1: [true],
+                });
+
+              }
+            })
+            
+
+          }
+
+
+
+        }
+        if(numero==2)
+        {
+          if(this.myform.get('pdfcopia_record')?.value.length==0 || this.myform.get('pdfcopia_record')?.value.length==1)
+          {
+            this.myform.patchValue({
+              copia_record: archivoCapturado,
+              pdfcopia_record:'',
+              nombre_copia: archivoCapturado.name,
+              verificar2: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfcopia_record')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  copia_record: archivoCapturado,
+                  pdfcopia_record:'',
+                  nombre_copia: archivoCapturado.name,
+                  verificar2: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==3)
+        {
+          if(this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfsolicitud_carta')?.value.length==1)
+          {
+            this.myform.patchValue({
+              solicitud_carta: archivoCapturado,
+              pdfsolicitud_carta:'',
+              nombre_solicitud: archivoCapturado.name,
+              verificar3: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfsolicitud_carta')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  solicitud_carta: archivoCapturado,
+                  pdfsolicitud_carta:'',
+                  nombre_solicitud: archivoCapturado.name,
+                  verificar3: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==4)
+        {
+          if(this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfsolicitud_carta')?.value.length==1)
+          {
+            this.myform.patchValue({
+              cartas_recomendacion: archivoCapturado,
+              pdfcartas_recomendacion:'',
+              nombre_cartas: archivoCapturado.name,
+              verificar4: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfsolicitud_carta')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  cartas_recomendacion: archivoCapturado,
+                  pdfcartas_recomendacion:'',
+                  nombre_cartas: archivoCapturado.name,
+                  verificar4: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==5)
+        {
+          if(this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfsolicitud_carta')?.value.length==1)
+          {
+            this.myform.patchValue({
+              no_sancion: archivoCapturado,
+              pdfno_sancion:'',
+              nombre_no_sancion: archivoCapturado.name,
+              verificar5: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfsolicitud_carta')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  no_sancion: archivoCapturado,
+                  pdfno_sancion:'',
+                  nombre_no_sancion: archivoCapturado.name,
+                  verificar5: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==6)
+        {
+          if(this.myform.get('pdffotos')?.value.length==0 || this.myform.get('pdffotos')?.value.length==1)
+          {
+            this.myform.patchValue({
+              fotos: archivoCapturado,
+              pdffotos:'',
+              nombre_fotos: archivoCapturado.name,
+              verificar6: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdffotos')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  fotos: archivoCapturado,
+                  pdffotos:'',
+                  nombre_fotos: archivoCapturado.name,
+                  verificar6: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==7)
+        {
+          if(this.myform.get('pdfseguro')?.value.length==0 || this.myform.get('pdfseguro')?.value.length==1)
+          {
+            this.myform.patchValue({
+              seguro: archivoCapturado,
+              pdfseguro:'',
+              nombre_seguro: archivoCapturado.name,
+              verificar7: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfseguro')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  seguro: archivoCapturado,
+                  pdfseguro:'',
+                  nombre_seguro: archivoCapturado.name,
+                  verificar7: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==7)
+        {
+          if(this.myform.get('pdfexamen_psicometrico')?.value.length==0 || this.myform.get('pdfexamen_psicometrico')?.value.length==1)
+          {
+            this.myform.patchValue({
+              examen_psicometria: archivoCapturado,
+              pdfexamen_psicometrico:'',
+              nombre_examen: archivoCapturado.name,
+              verificar8: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfexamen_psicometrico')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  examen_psicometria: archivoCapturado,
+                  pdfexamen_psicometrico:'',
+                  nombre_examen: archivoCapturado.name,
+                  verificar8: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==9)
+        {
+          if(this.myform.get('pdfdominio_idioma')?.value.length==0 || this.myform.get('pdfdominio_idioma')?.value.length==1)
+          {
+            this.myform.patchValue({
+              dominio_idioma: archivoCapturado,
+              pdfdominio_idioma:'',
+              nombre_dominio: archivoCapturado.name,
+              verificar9: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfdominio_idioma')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  dominio_idioma: archivoCapturado,
+                  pdfdominio_idioma:'',
+                  nombre_dominio: archivoCapturado.name,
+                  verificar9: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==10)
+        {
+          if(this.myform.get('pdfdocumentos_udestino')?.value.length==0 || this.myform.get('pdfdocumentos_udestino')?.value.length==1)
+          {
+            this.myform.patchValue({
+              documento_udestino: archivoCapturado,
+              pdfdocumentos_udestino:'',
+              nombre_documento: archivoCapturado.name,
+              verificar10: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfdocumentos_udestino')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  documento_udestino: archivoCapturado,
+                  pdfdocumentos_udestino:'',
+                  nombre_documento: archivoCapturado.name,
+                  verificar10: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==11)
+        {
+          if(this.myform.get('pdfcomprobante_solvencia')?.value.length==0 || this.myform.get('pdfcomprobante_solvencia')?.value.length==1)
+          {
+            this.myform.patchValue({
+              comprobante_solvencia: archivoCapturado,
+              pdfcomprobante_solvencia:'',
+              nombre_documento: archivoCapturado.name,
+              verificar11: true,
+            });
+            return;
+            
+
+          }
+          if(this.myform.get('pdfcomprobante_solvencia')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  comprobante_solvencia: archivoCapturado,
+                  pdfcomprobante_solvencia:'',
+                  nombre_documento: archivoCapturado.name,
+                  verificar11: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+
+        if(numero==12)
+        {
+          if(this.myform.get('pdf_final')?.value.length==0 || this.myform.get('pdf_final')?.value.length==1)
+          {
+            this.myform.patchValue({
+              final: archivoCapturado,
+              pdf_final:'',
+              nombre_final: archivoCapturado.name,
+              verificar12: true,
+            });
+            return;
+            
+          }
+          if(this.myform.get('pdf_final')?.value.length>1)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title: 'Esta seguro que desea cambiar el archivo....?',
+              icon: 'warning',
+              showDenyButton: true,
+              showCancelButton: true,
+              confirmButtonText: 'Guardar',
+              denyButtonText: `No Guardar`,
+        
+            }).then((result)=>{
+              if(result.isConfirmed){
+                this.myform.patchValue({
+                  final: archivoCapturado,
+                  pdf_final:'',
+                  nombre_final:archivoCapturado.name,
+                  verificar12: true,
+                });
+
+              }
+            })
+            
+
+          }
+
+        }
+    }
+    else{
+      Swal.fire({
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        title: "Solo se puede escoger archivos PDF ",
+        icon: 'warning'
+      });
+    }
+
+  }
+
+  //eliminar archivos
+  eliminar_archivo(numero:number){
+    if (numero == 1) {
+      this.myform.patchValue({
+        certificado_matricula: [new File([""], ""), Validators.required],
+        pdfcertificado_matricula:'',
+        nombre_certificado: '',
+        verificar1: false
+      });
+    }
+     if (numero == 2) {
+      this.myform.patchValue({
+        copia_record: [new File([""], ""), Validators.required],
+        pdfcopia_record:'',
+        nombre_copia: '',
+        verificar2: false
+      });
+
+    }
+     if (numero == 3) {
+      this.myform.patchValue({
+        solicitud_carta: [new File([""], ""), Validators.required],
+        pdfsolicitud_carta:'',
+        nombre_solicitud: '',
+        verificar3: false
+      });
+
+    }
+     if (numero == 4) {
+      this.myform.patchValue({
+        cartas_recomendacion: [new File([""], ""), Validators.required],
+        pdfcartas_recomendacion:'',
+        nombre_cartas: '',
+        verificar4: false
+      });
+
+    }
+     if (numero == 5) {
+      this.myform.patchValue({
+        no_sancion: [new File([""], ""), Validators.required],
+        pdfno_sancion:'',
+        nombre_no_sancion: '',
+        verificar5: false
+      });
+
+    }
+     if (numero == 6) {
+      this.myform.patchValue({
+        fotos: [new File([""], ""), Validators.required],
+        pdffotos:'',
+        nombre_fotos: '',
+        verificar6: false
+      });
+
+    }
+     if (numero == 7) {
+      this.myform.patchValue({
+        seguro: [new File([""], ""), Validators.required],
+        pdfseguro: '',
+        nombre_seguro: '',
+        verificar7: false
+      });
+
+    }
+     if (numero == 8) {
+      this.myform.patchValue({
+        examen_psicometria: [new File([""], ""), Validators.required],
+        pdfexamen_psicometrico:'',
+        nombre_examen: '',
+        verificar8: false
+      });
+
+    }
+     if (numero == 9) {
+      this.myform.patchValue({
+        dominio_idioma: [new File([""], ""), Validators.required],
+        pdfdominio_idioma:'',
+        nombre_dominio: '',
+        verificar9: false
+      });
+
+    }
+     if (numero == 10) {
+      this.myform.patchValue({
+        documento_udestino: [new File([""], ""), Validators.required],
+        pdfdocumentos_udestino:'',
+        nombre_documento: '',
+        verificar10: false
+      });
+
+    }
+     if (numero == 11) {
+      this.myform.patchValue({
+        comprobante_solvencia: [new File([""], ""), Validators.required],
+        pdfcomprobante_solvencia:'',
+        nombre_comprobante: '',
+        verificar11: false
+      });
+
+    }
+
+    if (numero == 12) {
+      this.myform.patchValue({
+        final: [new File([""], ""), Validators.required],
+          pdf_final: '',
+          nombre_final: '',
+          verificar12: [false],
+      });
+
+    }
+
+  }
+
+
+
+  //guardar_documentos
+  guardar_documentos()
+  {
+    if(this.myform.get('nombre_certificado')?.value.length==0 || this.myform.get('nombre_copia')?.value.length==0 
+    || this.myform.get('nombre_solicitud')?.value.length==0 || this.myform.get('nombre_cartas')?.value.length==0
+    || this.myform.get('nombre_no_sancion')?.value.length==0 || this.myform.get('nombre_fotos')?.value.length==0
+    || this.myform.get('nombre_seguro')?.value.length==0 || this.myform.get('nombre_documento')?.value.length==0
+    || this.myform.get('nombre_comprobante')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Error documentos faltantes....!!",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error' 
+      });
+      return;
+    }
+
+
+
+    
+
+  }
+
+  //guardar documento final
+  guardar_documento_final(){
+    if(this.myform.get('nombre_final')?.value.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Error Agregar un documento Final....!!",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error' 
+      });
+      return;
+    }
+
+    
+
+
+  }
+
+  cancelar(){
+    
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea cancelar la operacion?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Salir',
+      denyButtonText: `No Salir`,
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Redireccionamiento',
+          text: 'Se redirecciona a la pagina principal de Editar Movilidad',
+          icon: 'success',
+        });
+        this.router.navigate(['/utmricb/movilidad/editarsolicitudes-movilidad']);
+
+
+      }
+    })
+
+  }
 
 
 
