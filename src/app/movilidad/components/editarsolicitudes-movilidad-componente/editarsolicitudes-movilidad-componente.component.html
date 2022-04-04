@@ -101,80 +101,109 @@
                           </div>
                           <div class="col-sm" style="text-align: center; margin-top: 2%;">
                             <div class="row">
-                              <div class="col-sm">
-                                <div class="row">
-                                  <h5 style=" color: gray;">Modalidad</h5>
-                                  <div class="col-sm" style="margin-top: 3%;">
-                                    <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
-                                      <mat-label>Modalidad</mat-label>
-                                      <input formControlName="modalidad" matInput>
-                                    </mat-form-field>
-                                  </div>
-                                  <div class="col-sm" style="margin-top: 3%;">
-                                    <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
-                                      <mat-label>Tipo Destino</mat-label>
-                                      <input formControlName="tipo_destino" matInput>
-                                    </mat-form-field>
-                                  </div>
+                                <div class="col-sm">
+                                    <div class="row">
+                                        <h5 style=" color: gray;">Modalidad</h5>
+                                        <div class="col-sm" style="margin-top: 3%;text-align: center;">
+                                            <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" appearance="fill">
+                                                <mat-label>Modalidad</mat-label>
+                                                <mat-select formControlName="modalidad" >
+                                                    <ng-container *ngFor="let modalidad1 of modalidad1">
+                                                        <mat-option value="{{modalidad1.id}}">{{modalidad1.tipo_modalidad}}</mat-option>
+                                                    </ng-container>
+                                                    
+                                                </mat-select>
+                                            </mat-form-field>
+
+
+                                        </div>
+                                        <div class="col-sm" style="margin-top: 3%; ">
+                                            <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" appearance="fill">
+                                                <mat-label>Tipo de Destino</mat-label>
+                                                <mat-select formControlName="tipo_destino">
+                                                    <ng-container *ngFor="let modalidad2 of modalidad2">
+                                                        <mat-option value="{{modalidad2.id}}">{{modalidad2.tipo_modalidad}}</mat-option>
+                                                    </ng-container>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                  
-                              <div class="col-sm" style="margin-top: 3%;">
-                                <mat-form-field class="container-font" style="width: 90%;" appearance="fill">
-                                  <mat-label>Universidad Destino</mat-label>
-                                  <input formControlName="universidad_destino" matInput>
-                                </mat-form-field>
-                              </div>
-                  
-                  
+                                <div class="col-sm" style="margin-top: 4%;text-align: center;">
+                                    <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;" appearance="fill">
+                                        <mat-label>Universidad Destino</mat-label>
+                                        <mat-select formControlName="universidad_destino">
+                                            <ng-container *ngFor="let uni of listuniver">
+                                                <mat-option value="{{uni.iduniversidad}}">{{uni.nombre}}</mat-option>
+                                            </ng-container>
+                                            
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
                             </div>
-                  
-                          </div>
+
+                        </div>
                           <div class="row" style="margin-top: 2%; text-align: center;">
                             <div class="col-sm">
-                              <mat-form-field style="width: 100%;" class="container-font" appearance="fill">
+                              <mat-form-field style="width: 100%;" [ngClass]="comprobador ===true?'container-font':'container-font-1'"  appearance="fill">
                                 <mat-label>Carrera Destino</mat-label>
                                 <input formControlName="carrera_destino" matInput>
                               </mat-form-field>
                             </div>
                             <div class="col-sm">
-                              <mat-form-field class="container-font" appearance="fill">
+                              <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" appearance="fill">
                                 <mat-label>Semestre a cursar</mat-label>
                                 <input formControlName="semestre_cursar" matInput>
                               </mat-form-field>
                             </div>
+                            
                             <div class="col-sm">
-                              <mat-form-field class="container-font" appearance="fill">
-                                <mat-label>Fecha Inicio</mat-label>
-                                <input formControlName="fecha_inicio" matInput>
-                              </mat-form-field>
-                            </div>
-                            <div class="col-sm">
-                              <mat-form-field class="container-font" appearance="fill">
-                                <mat-label>Fecha Fin</mat-label>
-                                <input formControlName="fecha_fin" matInput>
-                              </mat-form-field>
+                                <mat-form-field class="container-solicitud" appearance="fill">
+                                    <mat-label>Rango de Fecha Estudios</mat-label>
+                                    <mat-date-range-input [rangePicker]="picker">
+                                        <input formControlName="fecha_inicio" matStartDate placeholder="Fecha de Inicio">
+                                        <input formControlName="fecha_fin" matEndDate placeholder="Fecha fin">
+                                    </mat-date-range-input>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-date-range-picker #picker></mat-date-range-picker>
+                                </mat-form-field>
                             </div>
                   
                           </div>
                           <div class="row" style="margin-top: 2%; text-align: center;">
                             <div class="col-sm">
-                              <mat-form-field class="container-font" appearance="fill">
-                                <mat-label>Naturaleza</mat-label>
-                                <input formControlName="naturaleza" matInput>
-                              </mat-form-field>
+                                <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;" appearance="fill">
+                                    <mat-label>Seleccionar Naturaleza del movilidad</mat-label>
+                                    <mat-select formControlName="naturaleza">
+                                         <ng-container *ngFor="let list of listnatu">
+                                            <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                             <div class="col-sm">
-                              <mat-form-field class="container-font" appearance="fill">
-                                <mat-label>Becas o Apoyo</mat-label>
-                                <input formControlName="beca_apoyo" matInput>
-                              </mat-form-field>
+                                <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;" appearance="fill">
+                                    <mat-label>Becas o Apoyo</mat-label>
+                                    <mat-select formControlName="beca_apoyo">
+                                        <ng-container *ngFor="let list of listapoyo">
+                                            <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                    <!-- <input matInput> -->
+                                </mat-form-field>
                             </div>
                             <div class="col-sm">
-                              <mat-form-field style="width: 100%; font-weight:bold; text-align: center;" appearance="fill">
-                                <mat-label>Monto</mat-label>
-                                <input formControlName="monto_referencial" matInput>
-                              </mat-form-field>
+                                <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;" appearance="fill">
+                                    <mat-label>Monto Referencial</mat-label>
+                                    <!-- <input matInput> -->
+                                    <mat-select formControlName="monto_referencial">
+                                        <ng-container *ngFor="let list of listmonto">
+                                            <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                           </div>
                   

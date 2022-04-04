@@ -16,7 +16,7 @@ import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/
   styleUrls: ['./conveniospaginaprincipalmodificar.component.css']
 })
 export class ConveniospaginaprincipalmodificarComponent implements OnInit {
- loading=false;
+ loading=true;
  //id
  id=0;
 
@@ -65,7 +65,6 @@ listainterfazaux:Interfaz_contenido[]=[];
     this.listainterfaz=res;
     //console.log(this.listainterfaz);
      this.id=this.listainterfaz[0].interfaz.id;
-     this.loading=false;
      this.separarcarosel(this.listainterfaz);
     });
   }
@@ -119,6 +118,7 @@ listainterfazaux:Interfaz_contenido[]=[];
         } 
       }
     });
+    this.loading=false;
     
     
 
