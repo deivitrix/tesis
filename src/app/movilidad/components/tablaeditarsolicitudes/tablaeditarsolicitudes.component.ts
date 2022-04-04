@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DialoginformacionComponent } from './../dialoginformacion/dialoginformacion.component';
 import { GeneralMovilidadService } from './../../../services/generalMovilidad/general-movilidad.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -44,7 +45,8 @@ export class TablaeditarsolicitudesComponent implements OnInit {
  
  
  
-   constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog) {
+   constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog,
+    private router:Router) {
      
   this.selector=mostrar.group({
     tipo:['',Validators.required]
@@ -93,16 +95,7 @@ export class TablaeditarsolicitudesComponent implements OnInit {
 
    editar(id:number)
    {
-    if(this.selector_a=="A")
-    {
-      
-
-    }
-    if(this.selector_a=="P")
-    {
-
-
-    }
+    this.router.navigate(['/utmricb/movilidad/editarSolicitud-movilidad/'+id+'/'+this.selector_a])
 
    }
 

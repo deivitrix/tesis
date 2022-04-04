@@ -1,0 +1,197 @@
+<div class="separador"></div>
+<ng-container *ngIf="loading">
+    <app-loadingmovilidad></app-loadingmovilidad>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+    <form [formGroup]="myform" autocomplete="off">
+        <div class="container-fluid wrapper">
+            <div class="formContent rounded">
+                <div style="text-align: center;">
+                    <h4 class="active"> <span>
+                            <h3>Formulario Editar Movilidad</h3>
+                        </span></h4>
+
+                </div>
+                <div class="fadeIn first">
+                    <!-- menu -->
+                    <div class="container-fluid header_nav3">
+                        <input class="menu-btn2" type="checkbox" id="menu-btn2">
+                        <label class="menu-icon2" for="menu-btn2"><span class="nav-icon2"></span></label>
+                        <ul class="menu2">
+
+                        
+                        <li>
+                            <ng-container *ngIf="menu1">
+                            <a (click)="menu(1)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>&nbsp;Solicitud</a>
+
+                            </ng-container>
+                            <ng-container *ngIf="menu1==false">
+                            <a (click)="menu(1)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>&nbsp;Solicitud</a>
+                            </ng-container>
+
+                        </li>
+                        <li>
+                            <ng-container *ngIf="menu2">
+                            <a (click)="menu(2)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z" />
+                                </svg>&nbsp;Documentos</a>
+
+                            </ng-container>
+                            <ng-container *ngIf="menu2==false">
+                            <a (click)="menu(2)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" class="bi bi-cloud-arrow-down-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 6.854-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 9.293V5.5a.5.5 0 0 1 1 0v3.793l1.146-1.147a.5.5 0 0 1 .708.708z" />
+                                </svg>&nbsp;Documentos</a>
+                            </ng-container>
+
+                        </li>
+                        <ng-container *ngIf="tipo_estado=='A'">
+                            <li>
+                                <ng-container *ngIf="menu3">
+                                    <a (click)="menu(3)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                                    </svg>&nbsp;Documento final</a>
+                                </ng-container>
+                                <ng-container *ngIf="menu3==false">
+                                    <a (click)="menu(3)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                                    </svg>&nbsp;Documento final</a>
+                                </ng-container>
+
+                            </li>
+                        </ng-container>
+
+                        </ul>
+                    </div>
+
+                    <!-- body -->
+                    <ng-container *ngIf="menu1==true">
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                              </svg>DATOS MOVILIDAD</h4>
+                        </div>
+                        <div class="col-sm" style="text-align: center;">
+                            <mat-form-field class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                              <mat-label>Carrera</mat-label>
+                              <input formControlName="nombre_carrera" matInput>
+                            </mat-form-field>
+                          </div>
+                          <div class="col-sm" style="text-align: center; margin-top: 2%;">
+                            <div class="row">
+                              <div class="col-sm">
+                                <div class="row">
+                                  <h5 style=" color: gray;">Modalidad</h5>
+                                  <div class="col-sm" style="margin-top: 3%;">
+                                    <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                                      <mat-label>Modalidad</mat-label>
+                                      <input formControlName="modalidad" matInput>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-sm" style="margin-top: 3%;">
+                                    <mat-form-field style="width: 100%;" class="container-font" style="width: 40%; text-align: center;" appearance="fill">
+                                      <mat-label>Tipo Destino</mat-label>
+                                      <input formControlName="tipo_destino" matInput>
+                                    </mat-form-field>
+                                  </div>
+                                </div>
+                              </div>
+                  
+                              <div class="col-sm" style="margin-top: 3%;">
+                                <mat-form-field class="container-font" style="width: 90%;" appearance="fill">
+                                  <mat-label>Universidad Destino</mat-label>
+                                  <input formControlName="universidad_destino" matInput>
+                                </mat-form-field>
+                              </div>
+                  
+                  
+                            </div>
+                  
+                          </div>
+                          <div class="row" style="margin-top: 2%; text-align: center;">
+                            <div class="col-sm">
+                              <mat-form-field style="width: 100%;" class="container-font" appearance="fill">
+                                <mat-label>Carrera Destino</mat-label>
+                                <input formControlName="carrera_destino" matInput>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                              <mat-form-field class="container-font" appearance="fill">
+                                <mat-label>Semestre a cursar</mat-label>
+                                <input formControlName="semestre_cursar" matInput>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                              <mat-form-field class="container-font" appearance="fill">
+                                <mat-label>Fecha Inicio</mat-label>
+                                <input formControlName="fecha_inicio" matInput>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                              <mat-form-field class="container-font" appearance="fill">
+                                <mat-label>Fecha Fin</mat-label>
+                                <input formControlName="fecha_fin" matInput>
+                              </mat-form-field>
+                            </div>
+                  
+                          </div>
+                          <div class="row" style="margin-top: 2%; text-align: center;">
+                            <div class="col-sm">
+                              <mat-form-field class="container-font" appearance="fill">
+                                <mat-label>Naturaleza</mat-label>
+                                <input formControlName="naturaleza" matInput>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                              <mat-form-field class="container-font" appearance="fill">
+                                <mat-label>Becas o Apoyo</mat-label>
+                                <input formControlName="beca_apoyo" matInput>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-sm">
+                              <mat-form-field style="width: 100%; font-weight:bold; text-align: center;" appearance="fill">
+                                <mat-label>Monto</mat-label>
+                                <input formControlName="monto_referencial" matInput>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                  
+                          <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>ESPECIFICACIONES ESPECIALES</h4>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>

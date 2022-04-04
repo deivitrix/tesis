@@ -126,4 +126,12 @@ export class GeneralMovilidadService {
     return this.http.put(url,data);
   }
 
+  //consultar solicitud movilidad
+  getconsultarMovilidadeditar(id:string,solicitud_estado:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'consultar/solicitud-editar/M/'+id+'/'+solicitud_estado;
+    return this.http.get(url);
+
+  }
+
 }

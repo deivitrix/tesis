@@ -42,6 +42,7 @@ import { TablasubirdocumentomovilidadComponent } from './components/tablasubirdo
 import { DialogsubirdocumentomovilidadComponent } from './components/dialogsubirdocumentomovilidad/dialogsubirdocumentomovilidad.component';
 import { TablaeditarsolicitudesComponent } from './components/tablaeditarsolicitudes/tablaeditarsolicitudes.component';
 import { EditarsolicitudesMovilidadComponent } from './paginas/editarsolicitudes-movilidad/editarsolicitudes-movilidad.component';
+import { EditarsolicitudesMovilidadComponenteComponent } from './components/editarsolicitudes-movilidad-componente/editarsolicitudes-movilidad-componente.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { EditarsolicitudesMovilidadComponent } from './paginas/editarsolicitudes
     TablasubirdocumentomovilidadComponent,
     DialogsubirdocumentomovilidadComponent,
     TablaeditarsolicitudesComponent,
-    EditarsolicitudesMovilidadComponent
+    EditarsolicitudesMovilidadComponent,
+    EditarsolicitudesMovilidadComponenteComponent
   ],
   imports: [
     CommonModule,
