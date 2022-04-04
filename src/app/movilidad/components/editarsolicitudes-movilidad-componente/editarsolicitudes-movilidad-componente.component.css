@@ -12,8 +12,8 @@
     border-radius: 10px 10px 10px 10px;
     background: #fff;
     padding: 30px;
-    width: 80%;
-    max-width: 80%;
+    width: 100%;
+    max-width: 90%;
     position: relative;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
@@ -54,6 +54,83 @@ h4.active {
     text-align: center;
 }
 
+.beneficio{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.titulo2{
+    text-align: center;
+    padding: 40px;
+    text-align: end;
+}
+
+.btn-solicitud{
+    /* margin-top: 7%; */
+    text-align: end;
+    padding: 40px;
+
+}
+
+.disabled{
+    pointer-events: none;
+    color: white;
+}
+.enable{
+    pointer-events: auto;
+    color: white;
+}
+/* file boton */
+.boton-container{
+    display: inline-block;
+    position: relative;
+    margin-top: 5%;
+   
+}
+.container-button{
+position: absolute;
+margin-left: 105%;
+margin-top: -32%;
+background-color: rgb(143, 138, 138);
+width: 35px;
+height: 35px;
+border-radius:0%;
+}
+
+.container-button-eliminar{
+position: absolute;
+margin-left: 128%;
+margin-top: -32%;
+background-color: rgb(163, 46, 46);
+width: 35px;
+height: 35px;
+border-radius:0%;
+text-align: center;
+}
+.btn_enviar{
+position: absolute;
+width: 30px;
+left: 0.1%;
+opacity: 0;
+}
+p#texto{
+   margin-top: 8px;
+   text-align: center;
+   color:white;
+}
+@media (max-width:35.938em)
+{
+    .titulo2{
+        text-align: center;
+        padding: 20px;
+    }
+    .btn-solicitud{
+     /* margin-top: 1%; */
+     text-align: center;
+     padding: 20px;
+    }
+
+}
 
 
 /* menu */

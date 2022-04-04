@@ -1,9 +1,14 @@
 <div class="separador"></div>
+<ng-container *ngIf="loadingspinner">
+    <app-spinnermovilidad></app-spinnermovilidad>
+</ng-container>
+
 <ng-container *ngIf="loading">
     <app-loadingmovilidad></app-loadingmovilidad>
 </ng-container>
 
 <ng-container *ngIf="loading==false">
+    <!-- <pre>{{myform.value | json}}</pre> -->
     <form [formGroup]="myform" autocomplete="off">
         <div class="container-fluid wrapper">
             <div class="formContent rounded">
@@ -64,19 +69,22 @@
 
                         </li>
                         <ng-container *ngIf="tipo_estado=='A'">
-                            <li>
-                                <ng-container *ngIf="menu3">
-                                    <a (click)="menu(3)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
-                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
-                                    </svg>&nbsp;Documento final</a>
-                                </ng-container>
-                                <ng-container *ngIf="menu3==false">
-                                    <a (click)="menu(3)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
-                                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
-                                    </svg>&nbsp;Documento final</a>
-                                </ng-container>
-
-                            </li>
+                            <ng-container *ngIf="verificar_pdf==false">
+                                <li>
+                                    <ng-container *ngIf="menu3">
+                                        <a (click)="menu(3)" style="border-bottom: 3px solid rgb(62, 178, 207)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                                        </svg>&nbsp;Documento final</a>
+                                    </ng-container>
+                                    <ng-container *ngIf="menu3==false">
+                                        <a (click)="menu(3)" style="border-bottom: none"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text-fill" viewBox="0 0 16 16">
+                                            <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM4.5 9a.5.5 0 0 1 0-1h7a.5.5 0 0 1 0 1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 1 0-1h4a.5.5 0 0 1 0 1h-4z"/>
+                                        </svg>&nbsp;Documento final</a>
+                                    </ng-container>
+    
+                                </li>
+                            </ng-container>
+                           
                         </ng-container>
 
                         </ul>
@@ -216,6 +224,421 @@
                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>ESPECIFICACIONES ESPECIALES</h4>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm" style="margin-top: 4%;">
+                                <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;" appearance="fill">
+                                    <mat-label>Tipo de Alergia</mat-label>
+                                    <!-- <input matInput> -->
+                                    <mat-select formControlName="alergias">
+                                        <ng-container *ngFor="let list of listalergias">
+                                            <mat-option value="{{list.id}}">{{list.descripcion}}</mat-option>
+                                        </ng-container>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                           
+                            <div class="col-sm">
+                                <div class="beneficio">
+                                    <mat-label>
+                                        <h6>Especificar Alergias</h6>
+                                    </mat-label>
+                                </div>
+                                <div [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;">
+                                    <ckeditor formControlName="especificar_alergia" [editor]="Editor"></ckeditor>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:3%; margin-bottom: 4%;">
+                            <div class="col-sm">
+                                <div class="beneficio">
+                                    <mat-label>
+                                        <h6>Enfermades Persistentes y Tratamiento</h6>
+                                    </mat-label>
+                                </div>
+                                <div [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%;">
+                                    <ckeditor formControlName="enfermedades_tratamiento" [editor]="Editor"></ckeditor>
+                                </div>
+                            </div>
+                            <div class="col-sm">
+                                <div class="col-sm" style="margin-top: 8%; text-align: center;">
+                                    <mat-form-field [ngClass]="comprobador ===true?'container-font':'container-font-1'" style="width: 100%; margin-top: 7%;" appearance="fill">
+                                        <mat-label>Poliza de seguro</mat-label>
+                                        <mat-select formControlName="poliza_seguro">
+                                            <mat-option value="S">Si</mat-option>
+                                            <mat-option value="N">No</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>HOMOLOGACIÓN DE ESTUDIOS</h4>
+                        </div>
+                        <div class="col-sm">
+                            <div class="row">
+
+                                <div class="col-sm-7 titulo2">
+                                    <mat-label>
+                                        <h5>Materias</h5>
+                                    </mat-label>
+                                </div>
+                                <div class="col-sm btn-solicitud">
+                                    <button [disabled]="boton_add_materias" title="Agregar Materias" mat-flat-button color="primary">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm">
+                            <table class="table table-responsive table-secondary table-bordered">
+                                <thead>
+                                    <tr style="text-align: center;">
+                                        <th style="width: 22%;" scope="col">Materia Origen</th>
+                                        <th style="width: 22%;" scope="col">Clave</th>
+                                        <th style="width: 22%;" scope="col">Materia Destino</th>
+                                        <th style="width: 22%;" scope="col">Clave</th>
+                                        <th style="width: 10%;" scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                            <tbody formArrayName="materias" *ngFor="let materias of materias.controls; let i = index">
+                                        <tr [formGroupName]="i">
+                                                <td>
+                                                    <input formControlName="materia_origen" matInput>
+                                                </td>
+                                                <td>
+                                                   
+                                                    <input formControlName="clave_origen" matInput>
+                                                </td>
+                                                <td>
+                                                    <input formControlName="materia_destino" matInput>
+                                                </td>
+                                                <td>
+                                                    <input formControlName="clave_destino" matInput>
+                                                </td>
+                                                <td style="text-align: center;">
+                                                    <a [ngClass]="boton_delete_materias ===true?'disabled':'enable'" (click)="removerMateria(i)" style="color: brown; cursor: pointer;">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </td>
+
+                                    
+                                            
+                                        </tr>                                    
+                            </tbody>
+
+                            </table>
+                            
+                            
+                        </div>
+
+                        <div class="row" style="text-align: center;">
+                            <div class="col-sm">
+                                <button  title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg><span>&nbsp;Guardar</span></button>
+                                <button (click)="cancelar()"  title="Cancelar" class="btn btn-danger" style="margin: 2%;"><svg
+                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                    </svg><span>&nbsp;Cancelar</span></button>
+
+                            </div>
+                        </div>
+
+
+
+                    </ng-container>
+
+                    <ng-container *ngIf="menu2">
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>DOCUMENTOS</h4>
+                        </div>
+
+                        <!-- body -->
+                        <div class="col-sm">
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm" >
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Certificado Matricula</mat-label>
+                                            <input  formControlName="nombre_certificado"  matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(1)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Copia Record</mat-label>
+                                            <input  formControlName="nombre_copia" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'"  type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(2)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                            <div class="row" style="text-align: center; ">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Solicitud Carta</mat-label>
+                                            <input  formControlName="nombre_solicitud" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(3)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Cartas Recomendacion</mat-label>
+                                            <input  formControlName="nombre_cartas" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(4)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>No Sancion</mat-label>
+                                            <input formControlName="nombre_no_sancion" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(5)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Fotos</mat-label>
+                                            <input formControlName="nombre_fotos" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(6)" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Seguro</mat-label>
+                                            <input formControlName="nombre_seguro" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(7)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Examen psicometrico</mat-label>
+                                            <input formControlName="nombre_examen" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(8)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Dominio de Idioma</mat-label>
+                                            <input formControlName="nombre_dominio" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(9)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Documentos U_Destino</mat-label>
+                                            <input formControlName="nombre_documento" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(10)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+
+                            <div class="row" style="text-align: center;">
+                                <div class="col-sm">
+                                    <div class="boton-container">
+                                        <mat-form-field  appearance="fill">
+                                            <mat-label>Comprobante Solvente</mat-label>
+                                            <input formControlName="nombre_comprobante" matInput>
+                                        </mat-form-field>
+                                        <div class="container-button">
+                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
+                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                              </svg></p>
+                                        </div>
+                                        <div class="container-button-eliminar">
+                                            <p id="texto"><a (click)="eliminar_archivo(11)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm" style="text-align: center; margin-top: 1%;">
+                            <button (click)="guardar_documentos()" [disabled]="boton_documentos" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg><span>&nbsp;Guardar Documentos</span></button>
+                        </div>
+
+                    </ng-container>
+
+                    <ng-container *ngIf="menu3">
+                        <div class="border ">
+                            <h4><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path
+                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                    <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                </svg>DOCUMENTO FINAL</h4>
+                        </div>
+                        <div class="row" style="text-align: center;">
+                            <div class="col-sm">
+                                <div class="boton-container">
+                                    <mat-form-field style="text-align: center;" appearance="fill">
+                                        <mat-label>Documento final</mat-label>
+                                        <input formControlName="nombre_final" matInput>
+                                    </mat-form-field>
+                                    <div class="container-button">
+                                        <input  type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,12)"  accept="application/pdf">
+                          <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                          </svg></p>
+                                    </div>
+                                    <div class="container-button-eliminar">
+                                        <p id="texto"><a (click)="eliminar_archivo(12)" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                        <div class="col-sm" style="text-align: center; margin-top: 1%;">
+                            <button (click)="guardar_documento_final()" [disabled]="boton_documento_final" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg><span>&nbsp;Guardar Documento</span></button>
+                        </div>
+                        
 
                     </ng-container>
 
