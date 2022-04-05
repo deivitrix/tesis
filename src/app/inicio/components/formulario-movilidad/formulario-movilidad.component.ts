@@ -1196,7 +1196,7 @@ export class FormularioMovilidadComponent implements OnInit {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
             titulo:'Error.....',
-            mensaje:"Cargando datos documentos....",
+            mensaje:"Cargando datos documentos....!!  Espere unos segundos",
            buttonText:'',
            icon:'warning'
           },
@@ -1214,7 +1214,7 @@ export class FormularioMovilidadComponent implements OnInit {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
             titulo:'Error.....',
-            mensaje:"Cargando datos documentos....",
+            mensaje:"Cargando datos documentos....!!  Espere unos segundos",
            buttonText:'',
            icon:'warning'
           },
@@ -1237,7 +1237,7 @@ export class FormularioMovilidadComponent implements OnInit {
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{
             titulo:'Error.....',
-            mensaje:"Cargando datos documentos....!!",
+            mensaje:"Cargando datos documentos....!! Espere unos segundos",
            buttonText:'',
            icon:'warning'
           },

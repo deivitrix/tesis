@@ -8,7 +8,7 @@
 </ng-container>
 
 <ng-container *ngIf="loading==false">
-    <!-- <pre>{{myform.value | json}}</pre> -->
+    <pre>{{myform.value | json}}</pre>
     <form [formGroup]="myform" autocomplete="off">
         <div class="container-fluid wrapper">
             <div class="formContent rounded">
@@ -291,7 +291,7 @@
                                     </mat-label>
                                 </div>
                                 <div class="col-sm btn-solicitud">
-                                    <button [disabled]="boton_add_materias" title="Agregar Materias" mat-flat-button color="primary">
+                                    <button (click)="agregarmaterias_add()" [disabled]="boton_add_materias" title="Agregar Materias" mat-flat-button color="primary">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                 </div>
@@ -343,7 +343,7 @@
 
                         <div class="row" style="text-align: center;">
                             <div class="col-sm">
-                                <button  title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
+                                <button (click)="guardar()" title="Guardar" class="btn btn-success" style="margin: 2%;"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                                         <path
@@ -383,15 +383,46 @@
                                             <mat-label>Certificado Matricula</mat-label>
                                             <input  formControlName="nombre_certificado"  matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(1)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
+                                  <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                  </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(1)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="comprobador==false">
+                                            <ng-container *ngIf="comprobador2">
+                                                <div class="container-button">
+                                                    <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
+                                      <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                      </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(1)" class="disabled"  style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+
+                                            </ng-container>
+                                            <ng-container *ngIf="comprobador2==false">
+                                                <div class="container-button">
+                                                    <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,1)"  accept="application/pdf">
+                                      <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                      </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(1)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+                                            </ng-container>
+
+                                        </ng-container>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-sm">
@@ -400,15 +431,45 @@
                                             <mat-label>Copia Record</mat-label>
                                             <input  formControlName="nombre_copia" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'"  type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(2)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input   type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(2)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="comprobador==false">
+                                            <ng-container *ngIf="comprobador2">
+                                                <div class="container-button">
+                                                    <input   type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
+                                                    <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                    </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(2)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+                                            
+                                            </ng-container>
+                                            <ng-container *ngIf="comprobador2==false">
+                                                <div class="container-button">
+                                                    <input  type="Agregar Documento" class=" enable btn_enviar"type="file" (change)="fileEvent($event,2)"  accept="application/pdf">
+                                                    <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                    </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(2)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+                                             </ng-container>
+                                            </ng-container>
+                                       
                                     </div>
                                 </div>
                                 
@@ -421,15 +482,46 @@
                                             <mat-label>Solicitud Carta</mat-label>
                                             <input  formControlName="nombre_solicitud" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(3)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(3)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+
+                                        <ng-container *ngIf="comprobador==false">
+                                            <ng-container *ngIf="comprobador2">
+                                                <div class="container-button">
+                                                    <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
+                                                    <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                    </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(3)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+                                            
+                                            </ng-container>
+                                            <ng-container *ngIf="comprobador2==false">
+                                                <div class="container-button">
+                                                    <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,3)"  accept="application/pdf">
+                                                    <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                    </svg></p>
+                                                </div>
+                                                <div class="container-button-eliminar">
+                                                    <p id="texto"><a (click)="eliminar_archivo(3)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                                </div>
+                                             </ng-container>
+                                            </ng-container>
+
+                                        
                                     </div>
                                     
                                 </div>
@@ -439,15 +531,47 @@
                                             <mat-label>Cartas Recomendacion</mat-label>
                                             <input  formControlName="nombre_cartas" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(4)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(4)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(4)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,4)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(4)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>                                      
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -459,15 +583,49 @@
                                             <mat-label>No Sancion</mat-label>
                                             <input formControlName="nombre_no_sancion" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(5)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(5)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(5)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,5)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(5)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+                                        
+                                        
                                     </div>
                                 </div>
 
@@ -477,15 +635,48 @@
                                             <mat-label>Fotos</mat-label>
                                             <input formControlName="nombre_fotos" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(6)" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(6)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(6)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,6)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(6)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+
+                                        
                                     </div>
                                 </div>
                                 
@@ -498,15 +689,49 @@
                                             <mat-label>Seguro</mat-label>
                                             <input formControlName="nombre_seguro" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(7)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(7)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(7)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,7)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(7)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+
+                                        
                                     </div>
                                 </div>
                                 <div class="col-sm">
@@ -515,15 +740,47 @@
                                             <mat-label>Examen psicometrico</mat-label>
                                             <input formControlName="nombre_examen" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(8)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(8)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(8)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,8)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(8)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -535,15 +792,47 @@
                                             <mat-label>Dominio de Idioma</mat-label>
                                             <input formControlName="nombre_dominio" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(9)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(9)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(9)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,9)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(9)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+
+                                        
                                     </div>
                                 </div>
 
@@ -553,15 +842,48 @@
                                             <mat-label>Documentos U_Destino</mat-label>
                                             <input formControlName="nombre_documento" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(10)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(10)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(10)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,10)"  accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(10)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                         </ng-container>
+                                        </ng-container>
+                                        
                                     </div>
                                 </div>
                             
@@ -574,15 +896,47 @@
                                             <mat-label>Comprobante Solvente</mat-label>
                                             <input formControlName="nombre_comprobante" matInput>
                                         </mat-form-field>
-                                        <div class="container-button">
-                                            <input [ngClass]="comprobador ===true?'disabled':'enable'" type="Agregar Documento" class="btn_enviar"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
-                              <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
-                              </svg></p>
-                                        </div>
-                                        <div class="container-button-eliminar">
-                                            <p id="texto"><a (click)="eliminar_archivo(11)" [ngClass]="comprobador ===true?'disabled':'enable'" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
-                                        </div>
+
+                                        <ng-container *ngIf="comprobador">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(11)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+
+                                        </ng-container>
+                                        
+                                        <ng-container *ngIf="comprobador==false">
+                                        <ng-container *ngIf="comprobador2">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar disabled"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(11)" class="disabled" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                        
+                                        </ng-container>
+                                        <ng-container *ngIf="comprobador2==false">
+                                            <div class="container-button">
+                                                <input  type="Agregar Documento" class="btn_enviar enable"type="file" (change)="fileEvent($event,11)" accept="application/pdf">
+                                                <p id="texto"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cloud-upload-fill" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M8 0a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 4.095 0 5.555 0 7.318 0 9.366 1.708 11 3.781 11H7.5V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11h4.188C14.502 11 16 9.57 16 7.773c0-1.636-1.242-2.969-2.834-3.194C12.923 1.999 10.69 0 8 0zm-.5 14.5V11h1v3.5a.5.5 0 0 1-1 0z"/>
+                                                </svg></p>
+                                            </div>
+                                            <div class="container-button-eliminar">
+                                                <p id="texto"><a (click)="eliminar_archivo(11)" class="enable" style="cursor: pointer;" ><mat-icon>delete</mat-icon></a></p>
+                                            </div>
+                                         </ng-container>
+                                        </ng-container>
+
+                                        
                                     </div>
                                 </div>
                             </div>

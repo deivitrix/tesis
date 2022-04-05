@@ -73,6 +73,9 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
   //comprobar enabled o disabled
   comprobador=false;
 
+  //comprobador 2 enable o disabled de los botones
+  comprobador2=false;
+
   //verificar pdf final en Aprobados
   verificar_pdf=false;
 
@@ -88,7 +91,10 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
    boton_documento_final=false;
   
    //boton documento final verificar
-   vcerificar_boton_final=false;
+   verificar_boton_final=false;
+
+   //verficar boton guardar
+   verificar_boton_documentos=false;
 
 
 
@@ -194,14 +200,14 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
         //solicitud
         id:this.id,
         tipo_documento:this.tipo_estado,
-        nombre_carrera:[{ value: '', disabled: true }],
+        nombre_carrera:[{ value: '', disabled: true },Validators.required],
         modalidad:[{ value: '', disabled: false }],
         tipo_destino:[{ value: '', disabled: false }],
         universidad_destino:[{ value: '', disabled: false }],
-        carrera_destino:[{ value: '', disabled: false }],
-        semestre_cursar:[{ value: '', disabled: false }],
-        fecha_inicio:[{ value: '', disabled: false }],
-        fecha_fin:[{ value: '', disabled: false }],
+        carrera_destino:[{ value: '', disabled: false },Validators.required],
+        semestre_cursar:[{ value: '', disabled: false },Validators.required],
+        fecha_inicio:[{ value: '', disabled: false },Validators.required],
+        fecha_fin:[{ value: '', disabled: false },Validators.required],
         naturaleza:[{ value: '', disabled: false }],
         beca_apoyo:[{ value: '', disabled: false }],
         monto_referencial:[{ value: '', disabled: false }],
@@ -325,8 +331,11 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
             })
           }
         }
-
-        
+       
+        var fecha=res.datos.fecha_inicio as string;
+        var fecha_fi=res.datos.fecha_fin as string;
+        var fecha_i= new Date(fecha);
+        var fecha_f=new Date(fecha_fi);
 
 
         this.myform.patchValue({
@@ -337,8 +346,8 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
           universidad_destino:res.datos.iduniversidad,
           carrera_destino:res.datos.carrera_destino,
           semestre_cursar:res.datos.semestre_cursar,
-          fecha_inicio:res.datos.fecha_inicio,
-          fecha_fin:res.datos.fecha_fin,
+          fecha_inicio:fecha_i ,
+          fecha_fin:fecha_f,
           naturaleza:res.datos.naturaleza_id,
           beca_apoyo:res.datos.id_becas,
           monto_referencial:res.datos.id_monto,
@@ -470,12 +479,34 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
   }
 
-  removerMateria(index: number) {
-    const eliminar=this.mostrar.group({ 
-      id:this.materias.controls[index].value.id
+  agregarmaterias_add()
+  {
+    const materiasFormGroup = this.mostrar.group({
+      id: 0,
+      materia_origen: ['', Validators.required],
+      clave_origen: [''],
+      materia_destino: ['', Validators.required],
+      clave_destino: [''],
     });
-    this.eliminar_materias.push(eliminar);
-    this.materias.removeAt(index);
+    this.materias.push(materiasFormGroup);
+
+  }
+
+  removerMateria(index: number) {
+    if(this.materias.controls[index].value.id==0)
+    {
+      this.materias.removeAt(index);
+    }
+    else
+    {
+      const eliminar=this.mostrar.group({ 
+        id:this.materias.controls[index].value.id
+      });
+      this.eliminar_materias.push(eliminar);
+      this.materias.removeAt(index);
+    }
+    
+    
   }
 
   get eliminar_materias(){
@@ -597,8 +628,6 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
   //documento
   fileEvent(event:any,numero:number){
-   
-
     const archivoCapturado = event.target.files[0];
     if (archivoCapturado.type == "application/pdf") {
         if(numero==1)
@@ -637,7 +666,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
                   certificado_matricula: archivoCapturado,
                   pdfcertificado_matricula:'',
                   nombre_certificado: archivoCapturado.name,
-                  verificar1: [true],
+                  verificar1: true,
                 });
 
               }
@@ -745,7 +774,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         if(numero==4)
         {
-          if(this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfsolicitud_carta')?.value.length==1)
+          if(this.myform.get(' pdfcartas_recomendacion')?.value.length==0 || this.myform.get(' pdfcartas_recomendacion')?.value.length==1)
           {
             this.myform.patchValue({
               cartas_recomendacion: archivoCapturado,
@@ -757,7 +786,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
             
 
           }
-          if(this.myform.get('pdfsolicitud_carta')?.value.length>1)
+          if(this.myform.get(' pdfcartas_recomendacion')?.value.length>1)
           {
             Swal.fire({
               showClass: {
@@ -792,7 +821,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         if(numero==5)
         {
-          if(this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfsolicitud_carta')?.value.length==1)
+          if(this.myform.get('pdfno_sancion')?.value.length==0 || this.myform.get('pdfno_sancion')?.value.length==1)
           {
             this.myform.patchValue({
               no_sancion: archivoCapturado,
@@ -804,7 +833,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
             
 
           }
-          if(this.myform.get('pdfsolicitud_carta')?.value.length>1)
+          if(this.myform.get('pdfno_sancion')?.value.length>1)
           {
             Swal.fire({
               showClass: {
@@ -931,8 +960,19 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         }
 
-        if(numero==7)
+        if(numero==8)
         {
+          if(this.myform.get('pdfexamen_psicometrico')?.value==null)
+          {
+            this.myform.patchValue({
+              examen_psicometria: archivoCapturado,
+              pdfexamen_psicometrico:'',
+              nombre_examen: archivoCapturado.name,
+              verificar8: true,
+            });
+            return;
+
+          }
           if(this.myform.get('pdfexamen_psicometrico')?.value.length==0 || this.myform.get('pdfexamen_psicometrico')?.value.length==1)
           {
             this.myform.patchValue({
@@ -980,6 +1020,17 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         if(numero==9)
         {
+          if(this.myform.get('pdfdominio_idioma')?.value==null)
+          {
+            this.myform.patchValue({
+              dominio_idioma: archivoCapturado,
+              pdfdominio_idioma:'',
+              nombre_dominio: archivoCapturado.name,
+              verificar9: true,
+            });
+            return;
+
+          }
           if(this.myform.get('pdfdominio_idioma')?.value.length==0 || this.myform.get('pdfdominio_idioma')?.value.length==1)
           {
             this.myform.patchValue({
@@ -1319,6 +1370,236 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
       return;
     }
 
+    if(this.myform.get('verificar1')?.value==false && this.myform.get('verificar2')?.value==false
+    && this.myform.get('verificar3')?.value==false && this.myform.get('verificar4')?.value==false
+    && this.myform.get('verificar5')?.value==false && this.myform.get('verificar6')?.value==false
+    && this.myform.get('verificar7')?.value==false && this.myform.get('verificar8')?.value==false
+    && this.myform.get('verificar9')?.value==false && this.myform.get('verificar10')?.value==false
+    && this.myform.get('verificar11')?.value==false)
+    {
+      this.boton_documentos=true;
+      this.verificar_boton_documentos=true;
+      this.comprobador2=true;
+      return;
+
+    }
+
+    Swal.fire({
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      title: 'Esta seguro que desea guardar los Documentos?',
+      icon: 'warning',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      denyButtonText: `No guardar`,
+     
+    }).then((result)=>{
+
+      if(result.isConfirmed)
+      {
+        this.boton_documentos=true;
+        this.comprobador2=true;
+        this.verificar_boton_documentos=true;
+        if(this.myform.get('verificar8')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('examen_psicometria')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfexamen_psicometrico:res.documento
+              });
+            }
+
+          });
+        }
+    
+        if(this.myform.get('verificar9')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('dominio_idioma')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfdominio_idioma:res.documento
+              })
+            }
+          });
+        }
+        if(this.myform.get('verificar1')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('certificado_matricula')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfcertificado_matricula:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar2')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('copia_record')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfcopia_record:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar3')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('solicitud_carta')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfsolicitud_carta:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar4')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('cartas_recomendacion')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfcartas_recomendacion:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar5')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('no_sancion')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfno_sancion:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar6')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('fotos')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdffotos:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar7')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('seguro')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfseguro:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar10')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('documentos_udestino')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfdocumentos_udestino:res.documento
+              })
+            }
+          });
+
+        }
+        if(this.myform.get('verificar11')?.value==true)
+        {
+          this.loading=true;
+          const formData = new FormData();
+          formData.append('document', this.myform.get('comprobante_solvencia')?.value);
+          this.movilidad.addftpmovilidad_v2(formData)
+          .subscribe((res:any)=>{
+            this.loading=false;
+            if(res.estado==true)
+            {
+              this.myform.patchValue({
+                pdfcomprobante_solvencia:res.documento
+              })
+            }
+          });
+
+        }
+      }
+    })
+
+   
+
+
+
+
 
 
     
@@ -1343,9 +1624,330 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
       });
       return;
     }
+    this.verificar_boton_final=true;
+    this.loading=true;
+    this.boton_documento_final=true;
+    const formData = new FormData();
+    formData.append('document', this.myform.get('final')?.value);
+    this.movilidad.addsolicitudfinalftp(formData)
+    .subscribe((res:any)=>{
+      this.loading=false;
+      if(res.estado==true)
+      {
+        this.myform.patchValue({
+          pdf_final:res.documento
+        });
+      }
 
+    });
+
+  }
+
+
+  guardar(){
+
+    if(this.tipo_estado=="A")
+    {
+      if(this.verificar_pdf==false)
+      {
+        if(this.myform.get('pdf_final')?.value.length==0)
+        {
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Error Documento final sin subir",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error' 
+          });
+          return;
+        }
+      }
+
+      if(this.myform.get('fecha_inicio')?.value==null)
+        {
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Error Fecha inicio no ingresada....!!!",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error' 
+          });
+          return;
+        }
+
+        if(this.myform.get('fecha_fin')?.value==null)
+        {
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Error Fecha fin no ingresada....!!!",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error' 
+          });
+          return;
+        }
+
+        //subir la informacion editar de la solicitud
+
+
+
+
+    }
+    if(this.tipo_estado=='P')
+    {
+        //carrera destino
+      if(this.myform.get('carrera_destino')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar carrera destino",
+          buttonText:'',
+          icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+          // semestre cursar
+      if(this.myform.get('semestre_cursar')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar un semestre a cursar ",
+            buttonText:'',
+            icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+      //fecha inicio 
+      if(this.myform.get('fecha_inicio')?.value==null)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar una fecha de inicio ",
+            buttonText:'',
+            icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+
+      //fecha fin 
+      if(this.myform.get('fecha_fin')?.value==null)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar una fecha de fin ",
+            buttonText:'',
+            icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+        }
+
+        //Materias
+    if(this.materias.length==0)
+    {
+      this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+        data:{
+          titulo:'Error.....',
+          mensaje:"Ingresar Materias  ",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'     
+      });
+      return;
+    }
     
+    for(var i=0;i<this.materias.length;i++)
+    {
+      if(this.materias.controls[i].value.materia_origen.length==0)
+      { 
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar el nombre de la materia origen  "+(i+1),
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
 
+      }
+
+      if(this.materias.controls[i].value.materia_destino.length==0)
+      { 
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar el nombre de la materia destino "+(i+1),
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+    }
+    //especificar Alergias   
+    if(this.myform.get('especificar_alergia')?.value.length==0)
+    {
+      
+     this.myform.patchValue({
+         especificar_alergia:'<p>&nbsp;No definido</p>'
+     });
+     
+    }
+    //Enfermedades Persistentes y tratamiento 
+    if(this.myform.get('enfermedades_tratamiento')?.value.length==0)
+    {
+      
+     this.myform.patchValue({
+      enfermedades_tratamiento:'<p>&nbsp;No definido</p>'
+     });
+    }
+        if(this.verificar_boton_documentos==false)
+        {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Presionar el boton de Guardar de la pestaña Documentos",
+            buttonText:'',
+            icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+      
+
+
+    if(this.myform.get('pdfcertificado_matricula')?.value.length==0 || this.myform.get('pdfcopia_record')?.value.length==0 
+      || this.myform.get('pdfsolicitud_carta')?.value.length==0 || this.myform.get('pdfcartas_recomendacion')?.value.length==0
+      || this.myform.get('pdfno_sancion')?.value.length==0 || this.myform.get('pdffotos')?.value.length==0
+      || this.myform.get('pdfseguro')?.value.length==0 || this.myform.get('pdfdocumento_udestino')?.value.length==0
+      || this.myform.get('pdfcomprobante_solvencia')?.value.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Cargando datos documentos....!! Espere unos segundos",
+          buttonText:'',
+          icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+      }
+
+
+      if(this.myform.get('verificar8')?.value==true)
+      {
+        if(this.myform.get('pdfexamen_psicometrico')?.value.length==0)
+        {
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Cargando datos documentos....!! Espere unos minutos",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error'     
+          });
+          return;
+
+
+        }
+
+
+      }
+      if(this.myform.get('verificar9')?.value==true)
+      {
+        if(this.myform.get('pdfdominio_idioma')?.value.length==0)
+        {
+          this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+            data:{
+              titulo:'Error.....',
+              mensaje:"Cargando datos documentos....!! Espere unos minutos",
+             buttonText:'',
+             icon:'warning'
+            },
+            duration:1000,
+            horizontalPosition:'end',
+            verticalPosition:'bottom',
+            panelClass:'error'     
+          });
+          return;
+          
+
+        }
+      }
+
+
+
+
+
+
+    }
 
   }
 
