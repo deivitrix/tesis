@@ -131,7 +131,13 @@ export class GeneralMovilidadService {
   {
     let url:string = this._base.getUrlLocalApi() + 'consultar/solicitud-editar/M/'+id+'/'+solicitud_estado;
     return this.http.get(url);
+  }
 
+  //actualizar datos solicitud 
+  updateSolicitudMovilidad(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'actualizar-solicitud-movilidad';
+    return this.http.put(url,data);
   }
 
 }

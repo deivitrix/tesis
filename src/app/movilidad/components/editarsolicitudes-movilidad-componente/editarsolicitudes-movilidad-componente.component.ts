@@ -1704,6 +1704,28 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         //subir la informacion editar de la solicitud
 
+        let json={
+          data:this.myform.value
+        }
+        this.movilidad.updateSolicitudMovilidad(json)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Actualizada con exito.....!!!',
+              icon:'success'
+            });
+            this.router.navigate(['/utmricb/movilidad/editarsolicitudes-movilidad']);
+
+          }
+        })
+
 
 
 
@@ -1941,6 +1963,28 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
         }
       }
+
+      let json={
+        data:this.myform.value
+      }
+      this.movilidad.updateSolicitudMovilidad(json)
+      .subscribe((res:any)=>{
+        if(res.estado==true)
+        {
+          Swal.fire({
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            title:'Solicitud Actualizada con exito.....!!!',
+            icon:'success'
+          });
+          this.router.navigate(['/utmricb/movilidad/editarsolicitudes-movilidad']);
+
+        }
+      })
 
 
 
