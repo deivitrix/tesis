@@ -41,6 +41,7 @@ import { TablasubirdocumentobecasComponent } from './components/tablasubirdocume
 import { DialogsubirdocumentobecasComponent } from './components/dialogsubirdocumentobecas/dialogsubirdocumentobecas.component';
 import { EditarsolicitudesBecasComponent } from './paginas/editarsolicitudes-becas/editarsolicitudes-becas.component';
 import { TablaeditarsolicitudesbecasComponent } from './components/tablaeditarsolicitudesbecas/tablaeditarsolicitudesbecas.component';
+import { EditarsolicitudesBecasComponenteComponent } from './components/editarsolicitudes-becas-componente/editarsolicitudes-becas-componente.component';
 
 
 
@@ -61,6 +62,7 @@ import { TablaeditarsolicitudesbecasComponent } from './components/tablaeditarso
     DialogsubirdocumentobecasComponent,
     EditarsolicitudesBecasComponent,
     TablaeditarsolicitudesbecasComponent,
+    EditarsolicitudesBecasComponenteComponent,
    
 
   ],

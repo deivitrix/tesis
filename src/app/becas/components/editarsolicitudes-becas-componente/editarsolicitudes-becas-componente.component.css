@@ -65,16 +65,16 @@ h4.active {
     text-align: end;
 }
 
+.container-solicitud{
+    width: 80%;
+    text-align: center;
+}
+
 .btn-solicitud{
     /* margin-top: 7%; */
     text-align: end;
     padding: 40px;
 
-}
-
-.container-solicitud{
-    width: 80%;
-    text-align: center;
 }
 
 .disabled{

@@ -219,6 +219,13 @@ export class BecasnivelService {
     return this.http.put(url,data);
   }
 
+  //consultar solicitud movilidad
+  getconsultarBecasEditar(id:string,solicitud_estado:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'consultar/solicitud-editar/B/'+id+'/'+solicitud_estado;
+    return this.http.get(url);
+  }
+
 
 
   

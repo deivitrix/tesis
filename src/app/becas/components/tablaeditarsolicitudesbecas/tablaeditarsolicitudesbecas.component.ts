@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { BecasnivelService } from 'src/app/services/becasnivel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tablaeditarsolicitudesbecas',
@@ -41,7 +42,7 @@ export class TablaeditarsolicitudesbecasComponent implements OnInit {
   //selector
   selector_a="";
 
- constructor(private mostrar: FormBuilder, private becas:BecasnivelService, public dialog: MatDialog) { 
+ constructor(private mostrar: FormBuilder, private becas:BecasnivelService, public dialog: MatDialog,private router:Router) { 
    this.selector=mostrar.group({
      tipo:['',Validators.required]
    })
@@ -88,16 +89,6 @@ export class TablaeditarsolicitudesbecasComponent implements OnInit {
  
  editar(id:number)
    {
-    if(this.selector_a=="A")
-    {
-      
-
-    }
-    if(this.selector_a=="P")
-    {
-
-
-    }
-
+    this.router.navigate(['/utmricb/becas/editarSolicitud-becas/'+id+'/'+this.selector_a])
    }
 }

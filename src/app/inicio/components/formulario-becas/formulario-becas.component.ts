@@ -463,19 +463,7 @@ export class FormularioBecasComponent implements OnInit {
 
   }
 
-  // checkbox beneficios
-  presionar(value:boolean,numero:number)
-  {
-    if(numero==1)
-    {
-      this.beneficio1=value;
-    }
-    if(numero==2)
-    {
-      this.beneficio2=value;
-
-    }
-  }
+  
 
   //botones 
 

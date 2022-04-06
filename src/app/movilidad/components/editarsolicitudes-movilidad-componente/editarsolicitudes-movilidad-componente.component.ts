@@ -76,6 +76,9 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
   //comprobador 2 enable o disabled de los botones
   comprobador2=false;
 
+  //enable o disable documento final
+comprobador3=true;
+
   //verificar pdf final en Aprobados
   verificar_pdf=false;
 
@@ -300,7 +303,7 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
   {
     this.movilidad.getconsultarMovilidadeditar(this.id,this.tipo_estado)
     .subscribe((res:any)=>{
-      console.log(res);
+      //console.log(res);
      
       if(res.estado==true)
       {
@@ -1624,6 +1627,15 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
       });
       return;
     }
+
+    if(this.myform.get('verificar12')?.value ==false)
+    {
+      this.boton_documento_final=true;
+      this.comprobador3=true;
+      return;
+
+    }
+
     this.verificar_boton_final=true;
     this.loading=true;
     this.boton_documento_final=true;

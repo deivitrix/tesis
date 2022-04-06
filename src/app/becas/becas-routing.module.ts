@@ -5,6 +5,7 @@ import { MostrarBecasComponent } from './paginas/mostrar-becas/mostrar-becas.com
 import { BasebecasComponent } from './basebecas/basebecas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditarsolicitudesBecasComponenteComponent } from './components/editarsolicitudes-becas-componente/editarsolicitudes-becas-componente.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,9 @@ const routes: Routes = [
       {
         path:'editarsolicitudes-becas',component:EditarsolicitudesBecasComponent
 
-
+      },
+      {
+        path:'editarSolicitud-becas/:id/:tipo',component:EditarsolicitudesBecasComponenteComponent
       }
     ]
   }
