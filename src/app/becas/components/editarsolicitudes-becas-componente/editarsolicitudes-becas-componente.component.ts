@@ -858,24 +858,24 @@ verificar_pdf=false;
         let json={
           data:this.myform.value
         }
-        // this.movilidad.updateSolicitudMovilidad(json)
-        // .subscribe((res:any)=>{
-        //   if(res.estado==true)
-        //   {
-        //     Swal.fire({
-        //       showClass: {
-        //         popup: 'animate__animated animate__fadeInDown'
-        //       },
-        //       hideClass: {
-        //         popup: 'animate__animated animate__fadeOutUp'
-        //       },
-        //       title:'Solicitud Actualizada con exito.....!!!',
-        //       icon:'success'
-        //     });
-        //     this.router.navigate(['/utmricb/movilidad/editarsolicitudes-movilidad']);
+        this.becas.updateSolicitudBecas(json)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Actualizada con exito.....!!!',
+              icon:'success'
+            });
+            this.router.navigate(['/utmricb/becas/editarsolicitudes-becas']);
 
-        //   }
-        // })
+          }
+        })
 
 
 
@@ -1029,6 +1029,25 @@ verificar_pdf=false;
   let json={
     data:this.myform.value
   }
+  this.becas.updateSolicitudBecas(json)
+        .subscribe((res:any)=>{
+          if(res.estado==true)
+          {
+            Swal.fire({
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              },
+              title:'Solicitud Actualizada con exito.....!!!',
+              icon:'success'
+            });
+            this.router.navigate(['/utmricb/becas/editarsolicitudes-becas']);
+
+          }
+        })
+
 
 
  }
