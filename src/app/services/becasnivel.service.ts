@@ -226,6 +226,13 @@ export class BecasnivelService {
     return this.http.get(url);
   }
 
+  //actualizar solicitud becas
+  updateSolicitudBecas(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'actualizar-solicitud-becas';
+    return this.http.put(url,data);
+  }
+
 
 
   
