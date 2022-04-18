@@ -18,6 +18,8 @@ export class SesionGuardGuard implements CanActivate {
 
       if(cedula){
         this.router.navigateByUrl('/utmricb');
+        this.router.navigateByUrl('/becas');
+        this.router.navigateByUrl('/movilidad');
        
         return false;
       }else{

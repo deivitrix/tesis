@@ -111,51 +111,93 @@ export class LoginComponent implements OnInit {
       if (res.error == false) {
         
         this._login.login(res.id_personal)
-        .subscribe((res:any)=>{
-
-          if(res.estado==true)
+        .subscribe((res1:any)=>{
+          if(res1.estado==true)
           {
-            if(res.usuario.estado=="A")
-            {
-              this.snackBar.openFromComponent(MensajeLoginComponent,{
-                        data:{
-                          titulo:'Bienvenido',
-                          mensaje:'Bienvenido al Sistema UTMRICB',
-                         buttonText:'',
-                         icon:'success'
-                        },
-                        duration:1500,
-                        horizontalPosition:'center',
-                        verticalPosition:'top',
-                        panelClass:'success'
-                      });
-                        this.loading=false;
-                        // guardar en cache
-                     sessionStorage.setItem('isRedirected','true');
-                     localStorage.setItem("id_personal",res.usuario.id);
-                    this.router.navigate(['/utmricb/principal']);
-            }
-            else{
-                     this.loading=false;
-          this.snackBar.openFromComponent(MensajeLoginComponent,{
-            data:{
-              titulo:'Error.....',
-              mensaje:"Este usuario no encuentra activo!!!",
-             buttonText:'',
-             icon:'warning'
-            },
-            duration:1000,
-            horizontalPosition:'end',
-            verticalPosition:'bottom',
-            panelClass:'error'
-          });
-          this.contrasena="";
-          return;
-
+            if(res1.tipo=="I"){
+              if(res1.usuario.estado=="A")
+              {
+                this.snackBar.openFromComponent(MensajeLoginComponent,{
+                          data:{
+                            titulo:'Bienvenido',
+                            mensaje:'Bienvenido al Sistema UTMRICB',
+                           buttonText:'',
+                           icon:'success'
+                          },
+                          duration:1500,
+                          horizontalPosition:'center',
+                          verticalPosition:'top',
+                          panelClass:'success'
+                        });
+                          this.loading=false;
+                          // guardar en cache
+                       sessionStorage.setItem('isRedirected','true');
+                       localStorage.setItem("id_personal",res1.usuario.id);
+                      this.router.navigate(['/utmricb/principal']);
+              }
+              else{
+                this.loading=false;
+        this.snackBar.openFromComponent(MensajeLoginComponent,{
+         data:{
+         titulo:'Error.....',
+         mensaje:"Este usuario no encuentra activo!!!",
+         buttonText:'',
+         icon:'warning'
+        },
+        duration:1000,
+        horizontalPosition:'end',
+        verticalPosition:'bottom',
+        panelClass:'error'
+        });
+        this.contrasena="";
+        return;
+        
+        }
+              
             }
             
+          //Modulo de Movilidad
+          else if (res1.tipo=="M"){
+            this.snackBar.openFromComponent(MensajeLoginComponent,{
+              data:{
+                titulo:'Bienvenido',
+                mensaje:'Bienvenido al Sistema UTMRICB',
+               buttonText:'',
+               icon:'success'
+              },
+              duration:1500,
+              horizontalPosition:'center',
+              verticalPosition:'top',
+              panelClass:'success'
+            });
+              this.loading=false;
+              // guardar en cache
+           sessionStorage.setItem('isRedirected','true');
+           localStorage.setItem("id_personal",res.id_personal);
+          this.router.navigate(['/movilidad/movilidad']);
           }
-          else{
+          
+          //Modulo de Becas
+          else if (res1.tipo=="B"){
+            this.snackBar.openFromComponent(MensajeLoginComponent,{
+              data:{
+                titulo:'Bienvenido',
+                mensaje:'Bienvenido al Sistema UTMRICB',
+               buttonText:'',
+               icon:'success'
+              },
+              duration:1500,
+              horizontalPosition:'center',
+              verticalPosition:'top',
+              panelClass:'success'
+            });
+              this.loading=false;
+              // guardar en cache
+           sessionStorage.setItem('isRedirected','true');
+           localStorage.setItem("id_personal",res.id_personal);
+          this.router.navigate(['/becas/becas']);
+
+          }else{
             Swal.fire({
               showClass: {
                 popup: 'animate__animated animate__fadeInDown',
@@ -166,9 +208,12 @@ export class LoginComponent implements OnInit {
               title: res.mensaje,
               icon: 'warning',
             });
-
+    
           }
-        })
+        }
+          
+        }
+        )
 
       }
     });

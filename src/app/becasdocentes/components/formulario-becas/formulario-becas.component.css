@@ -1,0 +1,279 @@
+.separador{
+    margin-top: 150px;
+}
+.wrapper{
+    /* position: fixed; */
+    justify-content: center;
+    display: flex;
+}
+.formContent{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 80%;
+    max-width: 80%;
+    position: relative;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+h4.inactive {
+    color: #cccccc;
+    
+  }
+  
+h4.active {
+    color: gray;
+    border-bottom: 2px solid rgb(187, 216, 190);
+}
+.container-fill{
+    width: 70%;
+    text-align: center;
+    font-weight:bold;
+}
+
+.container-solicitud{
+    text-align: center;
+    width: 80%;
+}
+
+.container-solicitud-universidad{
+    text-align: center;
+    width: 80%;
+}
+.container-solicitud-poliza{
+ width: 80%;
+}
+.beneficio{
+    text-align: center;
+    margin-bottom: 2%;
+}
+
+.container-fill-enfermedades{
+    width: 100%;
+    text-align: center;
+}
+
+
+.border{
+   
+    border-bottom: 2px solid rgb(187, 216, 190) !important;
+     margin-bottom: 2%;
+     background-color: rgb(187, 216, 190);
+     margin-top: 1.5%;
+     text-align: center;
+}
+
+.boton-container{
+    display: inline-block;
+    position: relative;
+    margin-top: 5%;
+   
+}
+
+.container-button{
+position: absolute;
+margin-left: 100%;
+margin-top: -32%;
+background-color: rgb(143, 138, 138);
+width: 35px;
+height: 35px;
+border-radius:0%;
+}
+.btn_enviar{
+position: absolute;
+width: 30px;
+left: 0.1%;
+opacity: 0;
+}
+p#texto{
+   margin-top: 8px;
+   text-align: center;
+   color:white;
+}
+
+/* menu */
+.header_nav4{
+    background-color: #fff;
+    box-shadow: 0.5px 0.5px 2px 0 rgba(0, 0, 0, 0.1);
+    /* position: fixed; */
+    width: 100%;
+    z-index: 3;
+    /* gradiente */
+    background: #abbaab;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    
+}
+a{
+    color: #000;
+    text-decoration: none;
+}
+
+.menu3{
+    /* margin:10px 0px 0px 60px; */
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+
+    background-color: #fff;
+    background: #abbaab;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    
+  }
+  .header_nav4 ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.header_nav4 ul a{
+    display: block;
+    padding: 20px;
+    text-decoration: none;
+}
+.header_nav4 .menu1{
+    clear: both;
+}
+
+.header_nav4 li{
+    float: left;
+}
+
+    /* separador de los a href */
+.header_nav4 li a{
+    padding: 10px 20px;
+}
+
+/* menu la posicion */
+.header_nav4 .menu3{
+    clear: none;
+    max-height: none;
+    display: flex;
+    justify-content: center;
+}
+
+.menu3 li a{
+    display: block;
+    line-height: 2rem;
+    color: rgb(36, 34, 34);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu3 li a:hover{
+    background-color: rgb(185, 216, 224);
+        text-decoration: none;
+        border: 0.1px solid whitesmoke;
+        box-shadow: 0px -1px;
+}
+
+.header_nav4 .menu-btn3{
+        display: none;
+}
+
+
+
+@media  (max-width:73.75em)
+{ 
+    .header_nav4{
+        background-color: #fff;
+        box-shadow: 0.5px 0.5px 2px 0 rgba(0, 0, 0, 0.1);
+        /* position: fixed; */
+        width: 100%;
+        z-index: 3;
+        display: block;
+    }
+    .header_nav4 ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    .header_nav4 ul a{
+        display: block;
+        padding: 20px;
+        text-decoration: none;
+    }
+
+    .header_nav4 ul a:hover{
+        background-color: rgb(185, 216, 224);
+    }
+    .header_nav4 .menu3{
+        
+        clear: both;
+        display: block;
+        display: block;
+        justify-content: start;
+        max-height: 0;
+        transition:max-height .2s ease-out ;
+     }
+     .header_nav4 .menu-icon3{
+        padding: 30px 25px;
+        position: relative;
+        float: right;
+        cursor: pointer;
+    }
+    .header_nav4 .menu-icon3 .nav-icon3{
+        background-color: #333;
+        display: block;
+        height: 2px;
+        width: 18px;
+        position: relative;
+        transition: background .2s ease-out;
+    }
+
+    .header_nav4 .menu-icon3 .nav-icon3:before{
+        background: #333;
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        transition: all .2s ease-out;
+        top: 5px;
+    }
+    
+    .header_nav4 .menu-icon3 .nav-icon3:after{
+      background: #333;
+      content: "";
+      display: block;
+      height: 100%;
+      position: absolute;
+      width: 100%;
+      transition: all .2s ease-out;
+      top: -5px;
+    }
+    .header_nav4 .menu-btn3{
+        display: none;
+    }
+
+    .header_nav4 .menu-btn3:checked ~ .menu3{
+        max-height: 300px;
+      }
+       /* Animacion de la x */
+       /* El menu la trasaccion de desaparecer el icono del menu y aparezca el icono de la x */
+     
+      
+      /* primera linea */
+    .header_nav4 .menu-btn3:checked ~.menu-icon3 .nav-icon3:after{
+        transform:rotate(45deg);
+        top: 0;
+    } 
+       /* linea del medio */
+       .header_nav4 .menu-btn3:checked ~.menu-icon3 .nav-icon3{
+        background: transparent;
+      }
+      /* ultima linea */
+      .header_nav4 .menu-btn3:checked ~.menu-icon3 .nav-icon3:before{
+          transform:rotate(-45deg);
+          top: 0;
+    
+    }
+}

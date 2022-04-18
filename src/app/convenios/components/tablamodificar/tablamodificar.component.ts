@@ -155,11 +155,11 @@ export class TablamodificarComponent implements OnInit {
           estado:"D"
         }};
 
-        console.log(json);
+        //console.log(json);
         
         this.convenios.eliminarconvenio(json)
         .subscribe((res:any)=>{
-          console.log(res);
+          //console.log(res);
           
 
           if(res.estado==true)

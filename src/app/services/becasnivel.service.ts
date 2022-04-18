@@ -105,9 +105,9 @@ export class BecasnivelService {
 
 
   //verificar la beca para el personal de UTM
-  getBecasDocente(cedula:string)
+  getBecasDocente(id:string)
   {
-    let url:string = this._base.getUrlLocalApi() + 'consulta-becas/'+cedula; 
+    let url:string = this._base.getUrlLocalApi() + 'consulta-becas/'+id; 
     return this.http.get(url);
   }
   //modalidad 
@@ -170,9 +170,9 @@ export class BecasnivelService {
   }
 
   //obtener las solicitudes consultados por cedula
-  getsolicitudbecas(cedula:string)
+  getsolicitudbecas(id:string)
   {
-    let url:string = this._base.getUrlLocalApi() + 'solicitud-beca/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'solicitud-beca/'+id;
     return this.http.get(url);
   }
 

@@ -6,6 +6,7 @@ import { BaseconfiguracionavanzadaComponent } from './baseconfiguracionavanzada/
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuariosDricbComponent } from './paginas/usuarios-dricb/usuarios-dricb.component';
+import { LogoSolicitudesComponent } from './paginas/logo-solicitudes/logo-solicitudes.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
       },
       {
         path:'usuariosDricb',component:UsuariosDricbComponent
+      },
+      {
+        path:'logosolicitudes',component:LogoSolicitudesComponent
       },
     ]
   }

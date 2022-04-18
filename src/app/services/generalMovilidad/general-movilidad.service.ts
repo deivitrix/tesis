@@ -13,9 +13,9 @@ export class GeneralMovilidadService {
   ) { }
 
   //buscar que sea un Estudiante
-  getMovilidadEstudiante(cedula:string)
+  getMovilidadEstudiante(id:string)
   {
-    let url:string = this._base.getUrlLocalApi() + 'consulta-movilidad/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'consulta-movilidad/'+id;
     return this.http.get(url);
   }
   //modalidad 
@@ -78,9 +78,9 @@ export class GeneralMovilidadService {
   }
 
   //obtener las solicitudes consultados por cedula
-  getsolicitudmovilidad(cedula:string)
+  getsolicitudmovilidad(id:string)
   {
-    let url:string = this._base.getUrlLocalApi() + 'solicitud-movilidad/'+cedula;
+    let url:string = this._base.getUrlLocalApi() + 'solicitud-movilidad/'+id;
     return this.http.get(url);
   }
 

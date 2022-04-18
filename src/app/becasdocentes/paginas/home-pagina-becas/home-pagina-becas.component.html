@@ -1,0 +1,21 @@
+<!-- <ng-container *ngIf="loading">
+ <app-spinneringresobecas></app-spinneringresobecas>
+  </ng-container> -->
+  
+  <ng-container *ngIf="loading==false">
+      <div class="container-fluid">
+          <div class=" container-fluid row">
+              <div class="col-sm-7 titulo">
+                  <h2><mat-icon>account_balance</mat-icon> Pagina Principal</h2>
+              </div>
+              <div class="col-sm" style="margin-top: 1%; text-align: end;">
+                  <img class="img" src="http://3.15.185.2/Contenido/Imagenes/escudo.png" alt="">
+           </div>
+          </div>
+      </div>
+      <div class="col-sm reloj-container">
+          <div class="reloj">
+              <span class="mishoras"><mat-icon style="color: rgb(159, 233, 233);">alarm</mat-icon> Hora: {{hora}}:{{minutos}} {{ampm}}</span>
+          </div>
+      </div>
+  

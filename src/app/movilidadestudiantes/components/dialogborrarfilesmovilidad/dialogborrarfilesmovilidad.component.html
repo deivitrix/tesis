@@ -1,0 +1,161 @@
+<div mat-dialog-content class="contenido">
+  <p class="titulo">{{data.titulo}}</p>
+  
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Certificado matricula</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.certificado">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.certificado.length==1">
+        <a (click)="ondelete(1)" [ngClass]="data.objeto.certificado.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.certificado.length>1 ||data.objeto.certificado.length==0">
+        <a (click)="ondelete(1)" [ngClass]="data.objeto.certificado ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Copia Record</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.copia">
+      </mat-form-field>
+
+      <ng-container *ngIf="data.objeto.copia.length==1">
+        <a (click)="ondelete(2)" [ngClass]="data.objeto.copia.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.copia.length>1 ||data.objeto.copia.length==0">
+        <a (click)="ondelete(2)" [ngClass]="data.objeto.copia ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Solicitud Carta</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.solicitud">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.solicitud.length==1">
+        <a (click)="ondelete(3)" [ngClass]="data.objeto.solicitud.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.solicitud.length>1 ||data.objeto.solicitud.length==0">
+        <a (click)="ondelete(3)" [ngClass]="data.objeto.solicitud ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Cartas Recomendacion</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.cartas">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.cartas.length==1">
+        <a (click)="ondelete(4)" [ngClass]="data.objeto.cartas.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.cartas.length>1 ||data.objeto.cartas.length==0">
+        <a (click)="ondelete(4)" [ngClass]="data.objeto.cartas ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">No Sancion</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.no_sancion">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.no_sancion.length==1">
+        <a (click)="ondelete(5)" [ngClass]="data.objeto.no_sancion.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.no_sancion.length>1 ||data.objeto.no_sancion.length==0">
+        <a (click)="ondelete(5)" [ngClass]="data.objeto.no_sancion ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Fotos</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.fotos">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.fotos.length==1">
+        <a (click)="ondelete(6)" [ngClass]="data.objeto.fotos.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.fotos.length>1 ||data.objeto.fotos.length==0">
+        <a (click)="ondelete(6)" [ngClass]="data.objeto.fotos ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Seguro</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.seguro">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.seguro.length==1">
+        <a (click)="ondelete(7)" [ngClass]="data.objeto.seguro.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.seguro.length>1 ||data.objeto.seguro.length==0">
+        <a (click)="ondelete(7)" [ngClass]="data.objeto.seguro ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Examen Psicometrico</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.examen">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.examen.length==1">
+        <a (click)="ondelete(8)" [ngClass]="data.objeto.examen.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.examen.length>1 ||data.objeto.examen.length==0">
+        <a (click)="ondelete(8)" [ngClass]="data.objeto.examen ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Dominio de Idioma</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.dominio">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.dominio.length==1">
+        <a (click)="ondelete(9)" [ngClass]="data.objeto.dominio.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.dominio.length>1 ||data.objeto.dominio.length==0">
+        <a (click)="ondelete(9)" [ngClass]="data.objeto.dominio ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Documentos U Destino</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.documento">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.documento.length==1">
+        <a (click)="ondelete(10)" [ngClass]="data.objeto.documento.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.documento.length>1 ||data.objeto.documento.length==0">
+        <a (click)="ondelete(10)" [ngClass]="data.objeto.documento ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+    <div class="col-sm">
+      <mat-form-field class="container-fill"  appearance="fill">
+        <mat-label class="label-des">Comprobante Solvente</mat-label>
+        <input disabled matInput [(ngModel)]="data.objeto.comprobante">
+      </mat-form-field>
+      <ng-container *ngIf="data.objeto.comprobante.length==1">
+        <a (click)="ondelete(11)" [ngClass]="data.objeto.comprobante.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+      <ng-container *ngIf="data.objeto.comprobante.length>1 ||data.objeto.comprobante.length==0">
+        <a (click)="ondelete(11)" [ngClass]="data.objeto.comprobante ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+      </ng-container>
+
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="button-action">
+  <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+  <button mat-button  color="primary" [mat-dialog-close]="data.objeto" cdkFocusInitial>Aceptar</button>
+</div>
