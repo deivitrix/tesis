@@ -52,6 +52,7 @@ import { TablausuariosComponent } from './components/tablausuarios/tablausuarios
 import { DialogusuariosComponent } from './components/dialogusuarios/dialogusuarios.component';
 import { LogoSolicitudesComponent } from './paginas/logo-solicitudes/logo-solicitudes.component';
 import { CambiarLogoSolicitudesComponent } from './components/cambiar-logo-solicitudes/cambiar-logo-solicitudes.component';
+import { GalleriaComponent } from './components/galleria/galleria.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { CambiarLogoSolicitudesComponent } from './components/cambiar-logo-solic
     TablausuariosComponent,
     DialogusuariosComponent,
     LogoSolicitudesComponent,
-    CambiarLogoSolicitudesComponent
+    CambiarLogoSolicitudesComponent,
+    GalleriaComponent
     
   ],
   imports: [

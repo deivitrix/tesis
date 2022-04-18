@@ -14,9 +14,9 @@ export class SolicitudesService {
     ) { }
 
 
-    //Obtener todas las imagenes de la tabla imagenes_solicitudes
+    //Obtener todas las imagenes de la tabla imagenes_convenios
     getimagenesconvenios():Observable<any>{
-      let url:string=this._base.getUrlLocalApi()+'imagen-convenios';
+      let url:string=this._base.getUrlLocalApi()+'imagen-convenio';
       return this.http.get<any>(url);
     }
     
@@ -26,14 +26,14 @@ export class SolicitudesService {
       return this.http.get<any>(url);
     }
 
-    //Actualizar la imagen 
+    //Actualizar la tabla imagen_solicitudes
     updatelogo(data:any)
     {
       let url:string = this._base.getUrlLocalApi() + 'update/imagen-solicitudes';
       return this.http.post(url,data);
     }
   
-    //Eliminar la imagen
+    //Eliminar la tabla imagen_solicitudes
     deletelogo(data:any){
       let url:string = this._base.getUrlLocalApi() + 'delete/imagen-solicitudes';
       return this.http.put(url,data);
@@ -45,5 +45,11 @@ export class SolicitudesService {
       let url:string = this._base.getUrlLocalApi() + 'imagen-solicitudes/subir';
       return this.http.post(url,data);
     }
+
+    //subir ftp imagen convenio
+    subirImagenSolicitudesftp(data:any){
+    let url:string = this._base.getUrlLocalApi() + 'imagen-carrusel';
+    return this.http.post(url,data);
+  }
 
 }
