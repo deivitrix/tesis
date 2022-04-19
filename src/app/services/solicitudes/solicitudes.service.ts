@@ -32,6 +32,13 @@ export class SolicitudesService {
       let url:string = this._base.getUrlLocalApi() + 'update/imagen-solicitudes';
       return this.http.post(url,data);
     }
+
+     //Actualizar la tabla imagen_solicitudes
+     updatelogo2(data:any)
+     {
+       let url:string = this._base.getUrlLocalApi() + 'update/imagen/solicitudes';
+       return this.http.put(url,data);
+     }
   
     //Eliminar la tabla imagen_solicitudes
     deletelogo(data:any){

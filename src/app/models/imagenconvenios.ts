@@ -1,4 +1,4 @@
-export interface Imagen{
+export interface imagenconvenios{
     id:number;
     nombre:string;
     url_imagen:string;

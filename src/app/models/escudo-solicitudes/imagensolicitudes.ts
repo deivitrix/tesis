@@ -1,7 +1,7 @@
-import { ImagenModel } from './imagen';
+import { Imagen } from './imagen';
 
 export interface ImagenSolicitudes{
     id:number;
-    imagenescon_id:ImagenModel;
+    imagenescon_id:Imagen[];
     estado:string;
 }
