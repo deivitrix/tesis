@@ -27,7 +27,7 @@ export class CambiarLogoSolicitudesComponent implements OnInit {
 // formGroup
 myform:FormGroup;
 
-//listaInterfaz
+//listaSolicitudes
 lista:ImagenSolicitudes[]=[];
 listaaux:ImagenSolicitudes[]=[];
 
@@ -35,7 +35,7 @@ listaaux:ImagenSolicitudes[]=[];
 loading=true;
 verificar=true;
 
-//id carrosel
+//id imagen_solicitudes
 id=0;
 
 //usuario
@@ -64,11 +64,12 @@ constructor(private ingresar:FormBuilder,private _general:GeneralService,
   private router:Router,
   ) { 
   this.myform=ingresar.group({
-    imagen:ingresar.array([]),
-    logo:[_pathimagenes.pathimagendefecto],
+    iimagenescon_id:0,
+    imagenes_solicitudes:[_pathimagenes.pathimagendefecto],
     botonsubir:false,
     botoneliminar:false,
-    escoger:false
+    escoger:false,
+    verificar:false
   });
   this.pathimagendefecto=_pathimagenes.pathimagendefecto;
   var id;
@@ -82,10 +83,13 @@ ngOnInit(): void {
 
 
 getimagenes(){
-  this._solicitudes.getimagenesconvenios()
+  this._solicitudes.getimagensolicitudes()
   .subscribe((res:any)=>{
+    this.listaaux=[];
     this.listaaux=res;
     this.loading=false;
+     console.log(this.listaaux);
+    //this.id=this.listaaux[0].imagenes_solicitudes.id;
     this.separarlista(this.listaaux);
   })
 }
@@ -95,22 +99,27 @@ separarlista(original:ImagenSolicitudes[])
   original.forEach((item:ImagenSolicitudes)=>{
     if(item.estado=="A")
     {
-      this.lista.push(item);
+      this.myform.patchValue({
+        imagenescon_id:item.imagenescon_id
+       })
+       
+      //this.lista.push(item);
 
     }
   })
 
 }
 
+
+
 //modelo
 get imagen(){
-  return this.myform.get('logo') as FormArray;
+  return this.myform.get('imagenes_solicitudes') as FormArray;
 }
-
 
 getImagen(index:number)
 {
-  var url=this.imagen.controls[index].value.urlimagen;
+  var url=this.imagen.controls[index].value.logo;
   return url;
 
 }
@@ -120,7 +129,7 @@ getImagen(index:number)
 fileEvent(event:any)
 {
   const boton=this.myform;
-  const i=this.myform.get('logo') as FormArray;
+  const i=this.myform.get('imagenes_solicitudes') as FormArray;
   const foto=new Image();
   const archivoCapturado=event.target.files[0]; 
   const general=this._general;
@@ -263,30 +272,28 @@ toBase64 = (file: File) => new Promise((resolve, reject) => {
 });
 
 // escoger la imagenes ya subidas
-escoger(id:number){
-this.data={id:0,url_escoger:this.url_escoger};
+// escoger(id:number){
+// this.data={id:0,url_escoger:this.url_escoger};
 
-const dialogRef=this.dialog.open(GalleriaComponent,{
-  width:'700px',
-  data:{titulo:'Galeria',url:this.data}
-});
+// const dialogRef=this.dialog.open(GalleriaComponent,{
+//   width:'700px',
+//   data:{titulo:'Galeria',url:this.data}
+// });
 
-dialogRef.afterClosed().subscribe(result => {
-  console.log('The dialog was closed');
-  if(result!=null)
-  {
-      if(result.url_escoger.length!=0){
+// dialogRef.afterClosed().subscribe(result => {
+//   console.log('The dialog was closed');
+//   if(result!=null)
+//   {
+//       if(result.url_escoger.length!=0){
 
-        this.imagen.controls[id].patchValue({
-          id_imagen:result.id,
-          urlimagen:result.url_escoger
-        });
-      }
-  }
- 
-  
-});
-}
+//         this.imagen.controls[id].patchValue({
+//           imagenescon_id:result.id,
+//           imagenes_solicitudes:result.url_escoger
+//         });
+//       }
+//   }
+// });
+// }
 
   // escoger la imagenes ya subidas
   escoger2(id:number){
@@ -305,8 +312,8 @@ dialogRef.afterClosed().subscribe(result => {
         
           if(result.url_escoger.length!=0){
             this.myform.patchValue({
-              id_imagen:result.id,
-              urlimagen:result.url_escoger
+              imagenescon_id:result.id,
+              imagenes_solicitudes:result.url_escoger
             });
           }
         }
@@ -315,128 +322,233 @@ dialogRef.afterClosed().subscribe(result => {
 
 //botones
 
-guardar(){
+// guardar(){
   
-    //console.log(this.imagen.length);
+//     //console.log(this.imagen.length);
     
-  for(var i=0;i<this.imagen.length;i++)
-  {
-    if(this.imagen.controls[i].value.id==0)
-    {
-      if(this.imagen.controls[i].value.urlimagen==this.pathimagendefecto)
-      {
-        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
-          data:{
-            titulo:'Error.....',
-            mensaje:"Ingresar una imagen",
-           buttonText:'',
-           icon:'warning'
-          },
-          duration:1000,
-          horizontalPosition:'end',
-          verticalPosition:'bottom',
-          panelClass:'error'
-        });
-        return;
+//   for(var i=0;i<this.imagen.length;i++)
+//   {
+//     if(this.imagen.controls[i].value.id==0)
+//     {
+//       if(this.imagen.controls[i].value.logo==this.pathimagendefecto)
+//       {
+//         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+//           data:{
+//             titulo:'Error.....',
+//             mensaje:"Ingresar una imagen",
+//            buttonText:'',
+//            icon:'warning'
+//           },
+//           duration:1000,
+//           horizontalPosition:'end',
+//           verticalPosition:'bottom',
+//           panelClass:'error'
+//         });
+//         return;
 
-      }
+//       }
 
       
 
-    }
+//     }
     
-  }
+//   }
 
-  Swal.fire({
-    showClass: {
-      popup: 'animate__animated animate__fadeInDown'
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutUp'
-    },
-    title: 'Esta seguro que desea Guardar...??',
-    icon: 'warning',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Guardar',
-    denyButtonText: `No guardar`,
+//   Swal.fire({
+//     showClass: {
+//       popup: 'animate__animated animate__fadeInDown'
+//     },
+//     hideClass: {
+//       popup: 'animate__animated animate__fadeOutUp'
+//     },
+//     title: 'Esta seguro que desea Guardar...??',
+//     icon: 'warning',
+//     showDenyButton: true,
+//     showCancelButton: true,
+//     confirmButtonText: 'Guardar',
+//     denyButtonText: `No guardar`,
    
-  }).then((result)=>{
-    if(result.isConfirmed)
-    {
-      this.botonguardar=true;
+//   }).then((result)=>{
+//     if(result.isConfirmed)
+//     {
+//       this.botonguardar=true;
+//       this.myform.patchValue({
+//         botonsubir:true,
+//         botoneliminar:true,
+//       });
+//       if(this.myform.get('imagenescon_id')?.value.length==0){
+//         Swal.fire({
+//           showClass: {
+//             popup: 'animate__animated animate__fadeInDown'
+//           },
+//           hideClass: {
+//             popup: 'animate__animated animate__fadeOutUp'
+//           },
+//           title:'Debe existir informacion para guardar',
+//           icon:'warning'
+//         });
+//         this.botonguardar=false;
+//         this.myform.patchValue({
+//           botonsubir:false,
+//           botoneliminar:false,
+//         });
+//         return;
+//       }
+//       let json={data:this.myform.value}
+//       this._solicitudes.updatelogo(json)
+//       .subscribe((res:any)=>{
+//         if(res.estado==true)
+//         {
+//           Swal.fire({
+//             showClass: {
+//               popup: 'animate__animated animate__fadeInDown'
+//             },
+//             hideClass: {
+//               popup: 'animate__animated animate__fadeOutUp'
+//             },
+//             title:'Se modifico el carrosel con exito!!....',
+//             icon:'success'
+//           });
+//           this.botonguardar=false;
+//           this.myform.patchValue({
+//             botonsubir:false,
+           
+//           });
+          
+//             //this.loading=true;
+//            this.getimagenes()
+//           return;
+//         }
+//       })
+   
+
+      
+
+//     }
+//     else if(result.isDenied)
+//     {
+//       Swal.fire({
+//         showClass: {
+//           popup: 'animate__animated animate__fadeInDown'
+//         },
+//         hideClass: {
+//           popup: 'animate__animated animate__fadeOutUp'
+//         },
+//         title:'Se cancelo la operacion',
+//         icon:'warning'
+//       })
+//       return;
+//     }
+//   })
+
+// }
+
+guardar2(){
+
+  if(this.myform.get('imagenes_solicitudes')?.value.length==0 )
+  {
+   this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+     data:{
+       titulo:'Error.....',
+       mensaje:'Datos Faltantes......!!!',
+      buttonText:'',
+      icon:'warning'
+     },
+     duration:1000,
+     horizontalPosition:'end',
+     verticalPosition:'bottom',
+     panelClass:'error'     
+   });
+   return;
+
+  }
+ 
+  Swal.fire({
+   showClass: {
+     popup: 'animate__animated animate__fadeInDown'
+   },
+   hideClass: {
+     popup: 'animate__animated animate__fadeOutUp'
+   },
+   title: 'Esta seguro que desea Guardar...??',
+   icon: 'warning',
+   showDenyButton: true,
+   showCancelButton: true,
+   confirmButtonText: 'Guardar',
+   denyButtonText: `No guardar`,
+  
+ }).then((result)=>{
+   if(result.isConfirmed)
+   {
+     this.botonguardar=true;
       this.myform.patchValue({
         botonsubir:true,
         botoneliminar:true,
       });
-      if(this.myform.get('logo')?.value.length==0){
-        Swal.fire({
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          },
-          title:'Debe existir informacion para guardar',
-          icon:'warning'
-        });
-        this.botonguardar=false;
-        this.myform.patchValue({
-          botonsubir:false,
-          botoneliminar:false,
-        });
-        return;
-      }
-      let json={data:this.myform.value}
-      this._solicitudes.updatelogo2(json)
-      .subscribe((res:any)=>{
-        if(res.estado==true)
-        {
-          Swal.fire({
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            },
-            title:'Se modifico el carrosel con exito!!....',
-            icon:'success'
-          });
-          this.botonguardar=false;
-          this.myform.patchValue({
-            botonsubir:false,
-           
-          });
-          
-            this.loading=true;
-          // this.getimagenes()
-          return;
-        }
-      })
-   
+      let json={data:this.myform.value};
 
-      
-
-    }
-    else if(result.isDenied)
-    {
-      Swal.fire({
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        },
-        title:'Se cancelo la operacion',
-        icon:'warning'
-      })
-      return;
-    }
-  })
-
+     this._solicitudes.updatelogo(json)
+     .subscribe((res:any)=>{
+       this.botonguardar=false;
   
+       if(res.estado==true)
+       {
+         Swal.fire({
+           showClass: {
+             popup: 'animate__animated animate__fadeInDown'
+           },
+           hideClass: {
+             popup: 'animate__animated animate__fadeOutUp'
+           },
+           title:res.mensaje,
+           icon:'success'
+         });
+         this.getimagenes()
+         return;
 
-}
+
+       }
+       else
+       {
+         Swal.fire({
+           showClass: {
+             popup: 'animate__animated animate__fadeInDown'
+           },
+           hideClass: {
+             popup: 'animate__animated animate__fadeOutUp'
+           },
+           title:res.mensaje,
+           icon:'warning'
+         });
+         return;
+
+       }
+       
+
+     })
+           
+
+   }
+   else if(result.isDenied)
+   {
+     Swal.fire({
+       showClass: {
+         popup: 'animate__animated animate__fadeInDown'
+       },
+       hideClass: {
+         popup: 'animate__animated animate__fadeOutUp'
+       },
+       title:'Se cancelo la operacion',
+       icon:'warning'
+     })
+     return;
+
+   }
+ })
+
+
+
+ }
 
 cancelar(){
   Swal.fire({
@@ -463,11 +575,5 @@ cancelar(){
 
 
 }
-
-
-
-
-
-
 
 }

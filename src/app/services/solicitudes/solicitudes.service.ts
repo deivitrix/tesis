@@ -30,7 +30,7 @@ export class SolicitudesService {
     updatelogo(data:any)
     {
       let url:string = this._base.getUrlLocalApi() + 'update/imagen-solicitudes';
-      return this.http.post(url,data);
+      return this.http.put(url,data);
     }
 
      //Actualizar la tabla imagen_solicitudes
