@@ -157,21 +157,7 @@ export class LoginComponent implements OnInit {
 
 
             }
-            else if(res.tipo=="M")
-            {
-              //modulo de movilidad estudiantes
-              localStorage.setItem("id_personal",res.usuario.id);
-
-
-            }
-            else if(res.tipo=="I")
-            {
-              /// modulo de becas docente
-              localStorage.setItem("id_personal",res.usuario.id);
-
-            }
-            
-            
+          
           //Modulo de Movilidad
           else if (res1.tipo=="M"){
             this.snackBar.openFromComponent(MensajeLoginComponent,{
