@@ -15,7 +15,7 @@ export class ExistSesionGuardGuard implements CanActivate {
     
       let cedula = localStorage.getItem('id_personal');
       let tipo=localStorage.getItem('tipo');
-      if(cedula || tipo=="I"){
+      if(cedula && tipo=="I"){
         return true;
         
       }else{

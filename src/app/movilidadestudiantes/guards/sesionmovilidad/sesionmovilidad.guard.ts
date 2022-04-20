@@ -14,10 +14,11 @@ export class ExistSesionmovilidadGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       let cedula = localStorage.getItem('id_personal');
-      if(cedula){
+      let tipo=localStorage.getItem('tipo');
+      if(cedula && tipo=="M"){
         return true;
       }else{
-        this.router.navigateByUrl('/movilidad');
+        this.router.navigateByUrl('/auth');
         return false;
       }
   }

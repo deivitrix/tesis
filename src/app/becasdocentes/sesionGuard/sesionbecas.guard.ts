@@ -14,10 +14,11 @@ export class ExistSesionbecasGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       let cedula = localStorage.getItem('id_personal');
-      if(cedula){
+      let tipo=localStorage.getItem('tipo');
+      if(cedula && tipo=="B"){
         return true;
       }else{
-        this.router.navigateByUrl('/becas');
+        this.router.navigateByUrl('/auth');
         return false;
       }
   }
