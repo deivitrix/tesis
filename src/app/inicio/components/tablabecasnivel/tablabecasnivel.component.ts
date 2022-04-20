@@ -118,7 +118,7 @@ export class TablabecasnivelComponent implements OnInit {
         this.loading=false;
         this.lista_becas=res.data;
         this.verificar=true;
-        console.log(this.lista_becas);
+        //console.log(this.lista_becas);
         
       
       }

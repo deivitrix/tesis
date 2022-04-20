@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d5fccc;" >
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a  class="navbar-brand" routerLink="/principal/inicio">
+      <img src="{{ pathLogo }}"width="80%" lass="d-inline-block align-top" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <!-- <a  routerLink="/movilidad/movilidad" class="nav-link active btn  my-2 my-sm-0"  aria-current="page" href="#">Inicio</a> -->
+          <button routerLink="/movilidad/movilidad" class="btn  btn-outline-dark" style="margin: 5px" type="button">Inicio</button>
+        </li>
+        <li class="nav-item">
+          <!-- <a  routerLink="/movilidad/formulariomovilidad" class="nav-link active btn  my-2 my-sm-0"  href="#">Solicitar</a> -->
+          <button routerLink="/movilidad/formulariomovilidad" class="btn btn-outline-dark" style="margin: 5px" type="button">Solicitar</button>
+        </li>
+        <li class="nav-item">
+          <!-- <a  routerLink="/movilidad/consultarmovilidad" class="nav-link active btn  my-2 my-sm-0"  href="#">Consultar</a> -->
+          <button routerLink="/movilidad/consultarmovilidad" class="btn btn-outline-dark" style="margin: 5px" type="button">Consultar</button>
+        </li>
+      </ul>
+
+        <button style="margin-right: 30px" type="button" class="btn btn-danger d-flex" href="#" (click)="salir()">Salir</button>
+  
+    </div>
+  </div>
+</nav>
+
+ <!-- Add Content Here -->
+ <div class="body1 mt-5">
+  <router-outlet></router-outlet>
+</div>

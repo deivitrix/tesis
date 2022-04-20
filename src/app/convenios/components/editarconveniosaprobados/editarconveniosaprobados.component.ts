@@ -491,7 +491,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
         }}
         this.convenios.modificarconveniosaprobados(json)
              .subscribe((res:any)=>{
-               console.log(res);
+               //console.log(res);
                
                if(res.estado==true)
                {

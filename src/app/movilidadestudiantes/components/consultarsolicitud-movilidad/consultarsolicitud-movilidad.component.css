@@ -1,0 +1,77 @@
+.titulo{
+  margin-top: 2.5%;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.table td{
+font-size: 13.5px;
+}
+
+
+
+.selector{
+  text-align: center;
+  margin-bottom: 3%;
+}
+.container-fill{
+  width: 55%;
+}
+
+.mda-form-msg{
+  color: #f57c74;
+}
+
+table {
+  width: 100%;
+}
+.mat-form-field-filtro{
+  font-size: 14px;
+  width: 100%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.texto-borde-a {
+  -webkit-text-stroke: 1.5px rgb(43, 180, 25);
+  color: transparent;
+}
+.texto-borde-p {
+  -webkit-text-stroke: 1.5px rgb(126, 136, 125);
+  color: transparent;
+}
+.texto-borde-r {
+  -webkit-text-stroke: 1.5px rgb(206, 68, 68);
+  color: transparent;
+}
+
+
+.formContent{
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 20px;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(223, 67, 67, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(184, 119, 119, 0.3);
+}  
+
+.wrapper{
+  /* position: fixed; */
+  justify-content: center;
+  display: flex;
+}
+
+h4.inactive {
+  color: #cccccc;
+  
+}
+
+h4.active {
+  color: gray;
+  border-bottom: 2px solid rgb(187, 216, 190);
+}

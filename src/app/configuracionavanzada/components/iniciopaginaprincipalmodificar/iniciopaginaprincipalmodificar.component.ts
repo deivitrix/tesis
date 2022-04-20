@@ -75,7 +75,7 @@ data:any={id:0,url_escoger:this.url_escoger};
       this.listacarrosel=[];
     this.listainterfaz=[];
     this.listainterfaz=res;
-     console.log(this.listainterfaz);
+     //console.log(this.listainterfaz);
      this.id=this.listainterfaz[0].interfaz.id;
      this.loading=false;
      this.separarcarosel(this.listainterfaz);
@@ -343,7 +343,7 @@ data:any={id:0,url_escoger:this.url_escoger};
 
   guardar(){
     
-      console.log(this.imagen.length);
+      //console.log(this.imagen.length);
       
     for(var i=0;i<this.imagen.length;i++)
     {

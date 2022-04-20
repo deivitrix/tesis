@@ -420,7 +420,7 @@ export class TablamostrarconveniosComponent implements OnInit {
           let json={data:this.myform.value}
      this.convenios.GuardarVistaPDFconvenios(json)
     .subscribe((res:any)=>{
-      console.log(res);
+      //console.log(res);
 
       if(res.estado==true)
       {

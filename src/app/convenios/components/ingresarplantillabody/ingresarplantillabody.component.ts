@@ -678,7 +678,7 @@ escoger(id:number){
       cargo:this.firmaAgregar.cargo,institucion:this.firmaAgregar.institucion}};
       this.convenios.addfirmaconvenios(json)
       .subscribe((res:any)=>{
-        console.log(res);
+        //console.log(res);
         
         if(res.estado==true)
       {
@@ -998,7 +998,7 @@ escoger(id:number){
     
     this.convenios.GuardarVistaPDFconvenios(json)
     .subscribe((res:any)=>{
-      console.log(res);
+      //console.log(res);
 
       if(res.estado==true)
       {

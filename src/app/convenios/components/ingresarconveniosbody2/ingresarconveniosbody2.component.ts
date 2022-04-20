@@ -1149,7 +1149,7 @@ escoger(id:number){
       cargo:this.firmaAgregar.cargo,institucion:this.firmaAgregar.institucion}};
       this.convenios.addfirmaconvenios(json)
       .subscribe((res:any)=>{
-        console.log(res);
+        //console.log(res);
         
         if(res.estado==true)
       {
@@ -1311,7 +1311,7 @@ escoger(id:number){
       
       if(this.clausula.controls[i].value.nombre.length==0)
       {
-        console.log(this.clausula.controls[i].value.nombre);
+       // console.log(this.clausula.controls[i].value.nombre);
         
         this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
           data:{

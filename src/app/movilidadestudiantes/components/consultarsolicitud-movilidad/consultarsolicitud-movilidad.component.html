@@ -1,0 +1,62 @@
+<ng-container *ngIf="loadingspinner==true">
+  <app-spinneringresomovilidad></app-spinneringresomovilidad>
+</ng-container>
+<!-- <div class="separador"></div> -->
+<ng-container *ngIf="loading">
+  <app-loadingingresomovilidad></app-loadingingresomovilidad>
+</ng-container>
+
+<ng-container *ngIf="loading==false">
+  <div mat-dialog-content class="contenido">
+    <div class="container-fluid wrapper">
+    <div class="formContent rounded">
+      <div style="text-align: center;">
+        <h4 class="active"> <span>
+                <h3>Solicitudes</h3>
+            </span></h4>
+    <div class="col-sm m-auto" style="margin-top: 5%;">
+      <table class="table table-bordered table-responsive table-primary" style="margin: 1px; ">
+            <thead>
+              <tr style="text-align: center; font-size: 14px;">
+              <th scope="col">#</th>
+              <th scope="col">Nombre Carrera</th>
+              <th scope="col">Naturaleza Movilidad</th>
+              <th scope="col">Universidad Destino</th>
+              <th scope="col">Fecha Inicio</th>
+              <th scope="col">Fecha Fin</th>
+              <th scope="col">Estado</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align: justify;" *ngFor="let c of listsolicitud | pagination :pageSize :pageNumber">
+              <th scope="row">{{c.position}}</th>
+              <td>{{c.nombre_carrera}}</td>
+              <td>{{c.naturaleza}}</td>
+              <td>{{c.universidad_destino}}</td>
+              <td>{{c.fecha_inicio}}</td>
+              <td>{{c.fecha_fin}}</td>
+              <ng-container *ngIf="c.estado_solicitud=='APROBADO'">
+                  <td class="texto-borde-a">{{c.estado_solicitud}}</td>
+              </ng-container>
+              <ng-container *ngIf="c.estado_solicitud=='PENDIENTE'">
+                  <td class="texto-borde-p" >{{c.estado_solicitud}}</td>
+              </ng-container>
+              <ng-container *ngIf="c.estado_solicitud=='RECHAZADO'">
+                  <td class="texto-borde-r">{{c.estado_solicitud}}</td>
+              </ng-container>
+
+
+            </tr>
+          </tbody>
+        </table>
+         <!-- paginador -->
+         <div>
+          <mat-paginator [length]="listsolicitud.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page" (page)="handlePagePending($event)">
+          </mat-paginator>
+        </div>
+  </div>
+</div>
+
+

@@ -219,7 +219,7 @@ verificar_pdf=false;
     .subscribe((res:any)=>{
       if(res.estado==true)
       {
-        console.log(res.datos);
+       // console.log(res.datos);
 
         this.verificar_pdf=false;
         res.datos.id_modalidad1=res.datos.id_modalidad1+"";

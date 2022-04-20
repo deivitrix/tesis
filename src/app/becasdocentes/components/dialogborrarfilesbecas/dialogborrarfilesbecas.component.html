@@ -1,0 +1,39 @@
+<div mat-dialog-content class="contenido">
+    <p class="titulo">{{data.titulo}}</p>
+    
+    <div class="row">
+      <div class="col-sm">
+        <mat-form-field class="container-fill"  appearance="fill">
+          <mat-label class="label-des">Carta Aceptacion</mat-label>
+          <input disabled matInput [(ngModel)]="data.objeto.carta_aceptacion">
+        </mat-form-field>
+        <ng-container *ngIf="data.objeto.carta_aceptacion.length==1">
+          <a (click)="ondelete(1)" [ngClass]="data.objeto.carta_aceptacion.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+        </ng-container>
+        <ng-container *ngIf="data.objeto.carta_aceptacion.length>1 ||data.objeto.carta_aceptacion.length==0">
+          <a (click)="ondelete(1)" [ngClass]="data.objeto.carta_aceptacion ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+        </ng-container>
+      </div>
+      <div class="col-sm">
+        <mat-form-field class="container-fill"  appearance="fill">
+          <mat-label class="label-des">Titulo</mat-label>
+          <input disabled matInput [(ngModel)]="data.objeto.titulo">
+        </mat-form-field>
+
+        <ng-container *ngIf="data.objeto.titulo.length==1">
+          <a (click)="ondelete(2)" [ngClass]="data.objeto.titulo.length ===1?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+        </ng-container>
+        <ng-container *ngIf="data.objeto.titulo.length>1 ||data.objeto.titulo.length==0">
+          <a (click)="ondelete(2)" [ngClass]="data.objeto.titulo ===''?'disabled':'enable'" style="cursor: pointer; margin: 2%; "><mat-icon style="color: red;">delete</mat-icon> </a>
+        </ng-container>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div mat-dialog-actions class="button-action">
+    <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+    <button mat-button  color="primary" [mat-dialog-close]="data.objeto" cdkFocusInitial>Aceptar</button>
+  </div>

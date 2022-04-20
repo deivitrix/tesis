@@ -50,6 +50,9 @@ import { DialogingresarbecasbodyComponent } from './components/dialogingresarbec
 import { UsuariosDricbComponent } from './paginas/usuarios-dricb/usuarios-dricb.component';
 import { TablausuariosComponent } from './components/tablausuarios/tablausuarios.component';
 import { DialogusuariosComponent } from './components/dialogusuarios/dialogusuarios.component';
+import { LogoSolicitudesComponent } from './paginas/logo-solicitudes/logo-solicitudes.component';
+import { CambiarLogoSolicitudesComponent } from './components/cambiar-logo-solicitudes/cambiar-logo-solicitudes.component';
+import { GalleriaComponent } from './components/galleria/galleria.component';
 
 
 @NgModule({
@@ -74,6 +77,9 @@ import { DialogusuariosComponent } from './components/dialogusuarios/dialogusuar
     UsuariosDricbComponent,
     TablausuariosComponent,
     DialogusuariosComponent,
+    LogoSolicitudesComponent,
+    CambiarLogoSolicitudesComponent,
+    GalleriaComponent
     
   ],
   imports: [
