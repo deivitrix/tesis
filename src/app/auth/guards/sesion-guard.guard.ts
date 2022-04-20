@@ -15,14 +15,21 @@ export class SesionGuardGuard implements CanActivate {
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       let cedula = localStorage.getItem('id_personal');
+      let tipo=localStorage.getItem('tipo');
+      if(cedula && tipo=='I'){
 
-      if(cedula){
         this.router.navigateByUrl('/utmricb');
-        this.router.navigateByUrl('/becas');
-        this.router.navigateByUrl('/movilidad');
-       
         return false;
-      }else{
+      }
+      else if(cedula && tipo=='B'){
+        this.router.navigateByUrl('/becas');
+          return false;
+      }
+      else if(cedula && tipo=='M'){
+        this.router.navigateByUrl('/movilidad');
+          return false;
+      }
+      else{
         return true;
       }
 

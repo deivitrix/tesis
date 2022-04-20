@@ -112,12 +112,18 @@ export class LoginComponent implements OnInit {
         
         this._login.login(res.id_personal)
         .subscribe((res1:any)=>{
+          console.log(res1);
+          
           if(res1.estado==true)
           {
-            if(res.tipo=="I")
+            
+            
+            if(res1.tipo=="I")
             {
-              if(res.usuario.estado=="A")
+              if(res1.usuario.estado=="A")
             {
+          
+              
               this.snackBar.openFromComponent(MensajeLoginComponent,{
                         data:{
                           titulo:'Bienvenido',
@@ -132,8 +138,8 @@ export class LoginComponent implements OnInit {
                       });
                         this.loading=false;
                         // guardar en cache
-                     sessionStorage.setItem('isRedirected','true');
-                     localStorage.setItem("id_personal",res.usuario.id);
+                     localStorage.setItem("id_personal",res1.usuario.id);
+                     localStorage.setItem("tipo",res1.tipo);
                     this.router.navigate(['/utmricb/principal']);
             }
             else{
@@ -176,6 +182,7 @@ export class LoginComponent implements OnInit {
               // guardar en cache
            sessionStorage.setItem('isRedirected','true');
            localStorage.setItem("id_personal",res.id_personal);
+           localStorage.setItem("tipo",res1.tipo);
           this.router.navigate(['/movilidad/movilidad']);
           }
           
@@ -197,6 +204,7 @@ export class LoginComponent implements OnInit {
               // guardar en cache
            sessionStorage.setItem('isRedirected','true');
            localStorage.setItem("id_personal",res.id_personal);
+           localStorage.setItem("tipo",res1.tipo);
           this.router.navigate(['/becas/becas']);
 
           }else{
