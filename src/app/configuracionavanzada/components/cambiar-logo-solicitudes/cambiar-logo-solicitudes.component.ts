@@ -28,8 +28,8 @@ export class CambiarLogoSolicitudesComponent implements OnInit {
 myform:FormGroup;
 
 //listaSolicitudes
-lista:ImagenSolicitudes[]=[];
-listaaux:ImagenSolicitudes[]=[];
+lista:any[]=[];
+listaaux:any[]=[];
 
 
 loading=true;
@@ -65,11 +65,7 @@ constructor(private ingresar:FormBuilder,private _general:GeneralService,
   ) { 
   this.myform=ingresar.group({
     iimagenescon_id:0,
-    imagenes_solicitudes:[_pathimagenes.pathimagendefecto],
-    botonsubir:false,
-    botoneliminar:false,
-    escoger:false,
-    verificar:false
+    imagenes_solicitudes:[""],
   });
   this.pathimagendefecto=_pathimagenes.pathimagendefecto;
   var id;
@@ -88,28 +84,25 @@ getimagenes(){
     this.listaaux=[];
     this.listaaux=res;
     this.loading=false;
-     console.log(this.listaaux);
-    //this.id=this.listaaux[0].imagenes_solicitudes.id;
-    this.separarlista(this.listaaux);
-  })
-}
-
-separarlista(original:ImagenSolicitudes[])
-{
-  original.forEach((item:ImagenSolicitudes)=>{
-    if(item.estado=="A")
+    console.log(res);
+    
+    if(res.estado==true)
     {
       this.myform.patchValue({
-        imagenescon_id:item.imagenescon_id
-       })
-       
-      //this.lista.push(item);
+        iimagenescon_id:res.imagen.id,
+        imagenes_solicitudes:res.imagen.url_imagen
+      })
 
     }
+    else{
+      this.myform.patchValue({
+        imagenes_solicitudes:this._pathimagenes.pathimagendefecto
+      })
+    }
+    console.log(this.listaaux);
+    
   })
-
 }
-
 
 
 //modelo
