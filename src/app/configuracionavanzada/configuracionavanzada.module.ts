@@ -53,6 +53,7 @@ import { DialogusuariosComponent } from './components/dialogusuarios/dialogusuar
 import { LogoSolicitudesComponent } from './paginas/logo-solicitudes/logo-solicitudes.component';
 import { CambiarLogoSolicitudesComponent } from './components/cambiar-logo-solicitudes/cambiar-logo-solicitudes.component';
 import { GalleriaComponent } from './components/galleria/galleria.component';
+import { TablahistorialComponent } from './components/tablahistorial/tablahistorial.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { GalleriaComponent } from './components/galleria/galleria.component';
     DialogusuariosComponent,
     LogoSolicitudesComponent,
     CambiarLogoSolicitudesComponent,
-    GalleriaComponent
+    GalleriaComponent,
+    TablahistorialComponent
     
   ],
   imports: [

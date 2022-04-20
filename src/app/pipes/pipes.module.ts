@@ -7,12 +7,13 @@ import { BuscarBecasBodyPipe } from './buscarBecasBody/buscar-becas-body.pipe';
 import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenionombre.pipe';
 import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
 import { BuscarsolicitudmovilidadPipe } from './buscarsolicitudmovilidad/buscarsolicitudmovilidad.pipe';
+import { BuscarHistorialPipe } from './buscarHistorial/buscarHistorial.pipe';
 
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     PaginationPipe,
     BuscarConvenioPipe,
     BuscarBecasPipe,
@@ -20,9 +21,8 @@ import { BuscarsolicitudmovilidadPipe } from './buscarsolicitudmovilidad/buscars
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
     BuscarsolicitudmovilidadPipe,
-   
-    
-  ],
+    BuscarHistorialPipe
+   ],
   imports: [
     CommonModule,
 
@@ -35,6 +35,7 @@ import { BuscarsolicitudmovilidadPipe } from './buscarsolicitudmovilidad/buscars
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
     BuscarsolicitudmovilidadPipe,
+    BuscarHistorialPipe
   ]
 })
 export class PipesModule { }

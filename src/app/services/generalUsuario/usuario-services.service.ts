@@ -74,5 +74,11 @@ export class UsuarioServicesService {
     return this.http.put(url,data);
   }
 
+  
+  getHistorial(){
+    let url:string = this._base.getUrlLocalApi() + 'historial'
+    return this.http.get<any>(url);
+  }
+
 
 }
