@@ -14,13 +14,8 @@ export class ExistSesionGuardGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       let cedula = localStorage.getItem('id_personal');
-      //let tipo=localStorage.getItem('tipo');
-      if(cedula){
-        // if(tipo=="I")
-        // {
-        //   return true;
-        // }
-        // this.router.navigateByUrl('/auth');
+      let tipo=localStorage.getItem('tipo');
+      if(cedula || tipo=="I"){
         return true;
         
       }else{
