@@ -305,7 +305,7 @@ toBase64 = (file: File) => new Promise((resolve, reject) => {
         
           if(result.url_escoger.length!=0){
             this.myform.patchValue({
-              imagenescon_id:result.id,
+              iimagenescon_id:result.id,
               imagenes_solicitudes:result.url_escoger
             });
           }
