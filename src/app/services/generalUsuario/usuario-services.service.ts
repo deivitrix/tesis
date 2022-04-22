@@ -79,6 +79,11 @@ export class UsuarioServicesService {
     let url:string = this._base.getUrlLocalApi() + 'historial'
     return this.http.get<any>(url);
   }
+  
 
+  getUsuarios(){
+    let url:string = this._base.getUrlLocalApi() + 'usuarios/dricb'
+    return this.http.get<any>(url);
+  }
 
 }

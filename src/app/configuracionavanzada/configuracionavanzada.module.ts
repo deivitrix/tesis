@@ -54,6 +54,8 @@ import { LogoSolicitudesComponent } from './paginas/logo-solicitudes/logo-solici
 import { CambiarLogoSolicitudesComponent } from './components/cambiar-logo-solicitudes/cambiar-logo-solicitudes.component';
 import { GalleriaComponent } from './components/galleria/galleria.component';
 import { TablahistorialComponent } from './components/tablahistorial/tablahistorial.component';
+import { FuncionalidadesUsuariosComponent } from './components/funcionalidades-usuarios/funcionalidades-usuarios.component';
+import { PermisosUsuariosComponent } from './paginas/permisos-usuarios/permisos-usuarios.component';
 
 
 @NgModule({
@@ -81,7 +83,9 @@ import { TablahistorialComponent } from './components/tablahistorial/tablahistor
     LogoSolicitudesComponent,
     CambiarLogoSolicitudesComponent,
     GalleriaComponent,
-    TablahistorialComponent
+    TablahistorialComponent,
+    FuncionalidadesUsuariosComponent,
+    PermisosUsuariosComponent
     
   ],
   imports: [

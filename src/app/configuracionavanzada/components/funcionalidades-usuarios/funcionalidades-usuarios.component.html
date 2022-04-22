@@ -1,0 +1,56 @@
+<ng-container *ngIf="loadingspinner">
+  <app-spinnerconfiguracionavanzada></app-spinnerconfiguracionavanzada>
+</ng-container>
+
+<ng-container *ngIf="loading">
+    <app-loadingconfiguracionavanzada></app-loadingconfiguracionavanzada>    
+</ng-container>
+    <ng-container *ngIf="loading==false">
+    <div class="container-fluid" style="margin-top: 2%;">
+        <div class="row">
+        <div class="col-sm-8 titulo">
+          <h2><mat-icon style="color: rgb(7, 7, 7);">how_to_reg</mat-icon> Asignar Permisos </h2>
+        </div>
+
+    </div>
+        <div class="col-sm">
+            <mat-form-field class="mat-form-field-filtro">
+                <mat-label>Filtro</mat-label>
+                <input matInput [(ngModel)]="filtro" (keyup)="applyFilter($event)" placeholder="Filtro Tabla" />
+                <button *ngIf="filtro" matSuffix mat-icon-button aria-label="Clear" (click)="filtro=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            <table class="table table-bordered table-responsive table-primary" style="margin: 1px; ">
+                <thead>
+                  <tr style="text-align: center; font-size: 14px">
+                    <th scope="col">#</th>
+                    <th style="width: 20%;"scope="col">Cedula</th>
+                    <th style="width: 25%;"scope="col">Apellidos</th>
+                    <th style="width: 25%;"scope="col">Nombres</th>
+                    <th style="width: 25%;"scope="col">Cargo</th>
+              
+                  </tr>
+                </thead>
+                 <tbody>
+                  <tr  *ngFor="let c of listaUsuarios | pagination :pageSize :pageNumber | buscarusuarios :filtro;">
+                        <th scope="row" style="text-align: center;">{{c.position}}</th>
+                        <td style="text-align: justify; text-align: center; font-size: 15px">{{c.cedula}}</td>
+                        <td style="text-align: justify; text-align: center; font-size: 15px">{{c.apellidos}}</td>
+                        <td style="text-align: justify; text-align: center; font-size: 15px">{{c.nombres}}</td>
+                        <td style="text-align: justify; text-align: center; font-size: 15px">{{c.cargo}}</td>
+                     
+                        
+                  </tr>
+                </tbody> 
+              </table>
+          
+              <div>
+                <mat-paginator class="table-primary" [length]="listaUsuarios.length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]"
+                  aria-label="Select page" (page)="handlePagePending($event)">
+                </mat-paginator>
+              </div>
+        </div>   
+    </div>
+    
+    </ng-container>
