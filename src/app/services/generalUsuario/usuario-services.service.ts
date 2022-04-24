@@ -86,4 +86,32 @@ export class UsuarioServicesService {
     return this.http.get<any>(url);
   }
 
+  // funcionalidad usuarios 
+  getFuncionalidadUsuario(id:string)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'funcionalidad-usuario/'+id
+    return this.http.get<any>(url);
+  }
+
+  //actualizar el estado de la funcionalidad del usuario
+  updateFucionalidadEstadoUsuario(data:any)
+  {
+    let url:string = this._base.getUrlLocalApi() + 'update/funcionalidad-usuario';
+    return this.http.post<any>(url,data);
+  }
+
+  //get Funcionalidad Nombre
+  getFuncionalidadNombre()
+  {
+    let url:string = this._base.getUrlLocalApi() + 'funcionalidad/nombre'
+    return this.http.get<any>(url);
+  }
+
+  //agregar funcionalidad al usuario
+  agregarFuncionalidadUsuario(data:any){
+
+    let url:string = this._base.getUrlLocalApi() + 'add/funcionalidad-usuario';
+    return this.http.post<any>(url,data);
+  }
+
 }

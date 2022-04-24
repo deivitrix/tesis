@@ -78,7 +78,7 @@ export class BaseIngresoComponent implements OnInit {
         if(item.funcionalidad[0].estado=="A"){
 
           this.listafuncionalidad.push(item);
-          if(item.funcionalidad[0].funcionalidad=="configuracionavanzada"){
+          if(item.funcionalidad[0].funcionalidad=="Configuracion Avanzada"){
             this.configuracionavanzada=true;
           }
         }

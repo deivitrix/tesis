@@ -51,7 +51,7 @@ export class SubirConveniosPaginaComponent implements OnInit {
     var verificar=false;
     this.listafuncionalidad.forEach((item:FuncionalidadUsuario)=>{
 
-      if(item.funcionalidad[0].funcionalidad=='subirconvenios')
+      if(item.funcionalidad[0].funcionalidad=='Subir Convenios')
       {
        verificar=true;
         

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -35,7 +36,8 @@ export class FuncionalidadesUsuariosComponent implements OnInit {
     this.filtro = event.target.value;
   }
 
-  constructor(private usuario:UsuarioServicesService,public dialog: MatDialog) { 
+  constructor(private usuario:UsuarioServicesService,public dialog: MatDialog,
+    private router:Router) { 
    
   }
 
@@ -62,6 +64,10 @@ getUsuarios(){
   handlePagePending(e: PageEvent) {
     this.pageSize = e.pageSize;
     this.pageNumber = e.pageIndex + 1;
+  }
+
+  permisos(id:string){
+  this.router.navigate(['/utmricb/configuracionavanzada/permisosusuarios-body/'+id]);
   }
 
 

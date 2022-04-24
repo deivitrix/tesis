@@ -1,3 +1,4 @@
+import { PermisoUsuariosBodyComponent } from './components/permiso-usuarios-body/permiso-usuarios-body.component';
 import { TablabecasnivelbodyComponent } from './components/tablabecasnivelbody/tablabecasnivelbody.component';
 import { IngresarbecasComponent } from './components/ingresarbecas/ingresarbecas.component';
 import { ModificarPaginaPrincipalComponent } from './paginas/modificar-pagina-principal/modificar-pagina-principal.component';
@@ -38,6 +39,9 @@ const routes: Routes = [
       {
         path:'logosolicitudes',component:LogoSolicitudesComponent
       },
+      {
+        path:'permisosusuarios-body/:id',component:PermisoUsuariosBodyComponent
+      }
     ]
   }
 ];

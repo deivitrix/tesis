@@ -52,7 +52,7 @@ export class ModificarConveniosPaginaComponent implements OnInit {
     var verificar=false;
     this.listafuncionalidad.forEach((item:FuncionalidadUsuario)=>{
 
-      if(item.funcionalidad[0].funcionalidad=='modificarconvenios')
+      if(item.funcionalidad[0].funcionalidad=='Modificar Convenios')
       {
        verificar=true;
         

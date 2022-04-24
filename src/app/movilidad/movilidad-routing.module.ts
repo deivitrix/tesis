@@ -27,7 +27,7 @@ const routes: Routes = [
         path:'subirdocumentofinalmovilidad',component:SubirDocumentoFinalMovilidadComponent
       },
       {
-        path:'editarsolicitudes-movilidad',component:TablaeditarsolicitudesComponent
+        path:'editarsolicitudes-movilidad',component:EditarsolicitudesMovilidadComponent
 
       },
       {

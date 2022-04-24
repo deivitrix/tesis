@@ -1,1 +1,10 @@
-<app-tablamovilidad-aprobado></app-tablamovilidad-aprobado>
+
+<ng-container *ngIf="loading">
+    <app-loadingmovilidad></app-loadingmovilidad>
+    </ng-container>
+    <ng-container *ngIf="loading==false">
+    <ng-container *ngIf="verificar">
+        <app-tablamovilidad-aprobado></app-tablamovilidad-aprobado>
+    </ng-container>
+    </ng-container>
+

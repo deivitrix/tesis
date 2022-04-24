@@ -52,7 +52,7 @@ export class IngresarPlantillaConveniosPaginasComponent implements OnInit {
     var verificar=false;
     this.listafuncionalidad.forEach((item:FuncionalidadUsuario)=>{
 
-      if(item.funcionalidad[0].funcionalidad=='ingresarplantilla')
+      if(item.funcionalidad[0].funcionalidad=='Ingresar Plantilla')
       {
        verificar=true;
         

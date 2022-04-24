@@ -1,1 +1,10 @@
-<app-tablaeditarsolicitudes></app-tablaeditarsolicitudes>
+<ng-container *ngIf="loading">
+    <app-loadingmovilidad></app-loadingmovilidad>
+    </ng-container>
+    <ng-container *ngIf="loading==false">
+    <ng-container *ngIf="verificar">
+        <app-tablaeditarsolicitudes></app-tablaeditarsolicitudes>
+    </ng-container>
+    </ng-container>
+
+

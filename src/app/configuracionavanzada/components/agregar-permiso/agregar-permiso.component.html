@@ -1,0 +1,21 @@
+<div mat-dialog-content class="contenido">
+    <p class="titulo">{{data.titulo}} <mat-icon>note_add</mat-icon> </p>
+    <div class="col-sm" style="margin-top: 1%;">
+        <mat-form-field class="container-fill" appearance="fill">
+            <mat-label>Funcionalidades</mat-label>
+            <mat-select [(ngModel)]="data.objeto.id_funcion" >
+              <ng-container *ngFor="let funcionalidad of listFuncionalidad">
+                <mat-option value="{{funcionalidad.funcion_id}}">{{funcionalidad.funcionalidad}}</mat-option>
+              </ng-container>
+              
+            </mat-select>
+          </mat-form-field>
+
+      </div>
+
+
+</div>
+<div mat-dialog-actions class="button-action">
+        <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+        <button mat-button  color="primary" [mat-dialog-close]="data" cdkFocusInitial>Guardar</button>
+      </div>

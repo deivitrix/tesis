@@ -56,6 +56,8 @@ import { GalleriaComponent } from './components/galleria/galleria.component';
 import { TablahistorialComponent } from './components/tablahistorial/tablahistorial.component';
 import { FuncionalidadesUsuariosComponent } from './components/funcionalidades-usuarios/funcionalidades-usuarios.component';
 import { PermisosUsuariosComponent } from './paginas/permisos-usuarios/permisos-usuarios.component';
+import { PermisoUsuariosBodyComponent } from './components/permiso-usuarios-body/permiso-usuarios-body.component';
+import { AgregarPermisoComponent } from './components/agregar-permiso/agregar-permiso.component';
 
 
 @NgModule({
@@ -85,7 +87,9 @@ import { PermisosUsuariosComponent } from './paginas/permisos-usuarios/permisos-
     GalleriaComponent,
     TablahistorialComponent,
     FuncionalidadesUsuariosComponent,
-    PermisosUsuariosComponent
+    PermisosUsuariosComponent,
+    PermisoUsuariosBodyComponent,
+    AgregarPermisoComponent
     
   ],
   imports: [

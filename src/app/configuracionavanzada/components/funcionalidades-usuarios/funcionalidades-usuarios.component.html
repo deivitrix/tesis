@@ -26,9 +26,10 @@
                   <tr style="text-align: center; font-size: 14px">
                     <th scope="col">#</th>
                     <th style="width: 20%;"scope="col">Cedula</th>
-                    <th style="width: 25%;"scope="col">Apellidos</th>
-                    <th style="width: 25%;"scope="col">Nombres</th>
-                    <th style="width: 25%;"scope="col">Cargo</th>
+                    <th style="width: 20%;"scope="col">Apellidos</th>
+                    <th style="width: 20%;"scope="col">Nombres</th>
+                    <th style="width: 20%;"scope="col">Cargo</th>
+                    <th style="width: 20%;"scope="col">Acciones</th>
               
                   </tr>
                 </thead>
@@ -39,6 +40,10 @@
                         <td style="text-align: justify; text-align: center; font-size: 15px">{{c.apellidos}}</td>
                         <td style="text-align: justify; text-align: center; font-size: 15px">{{c.nombres}}</td>
                         <td style="text-align: justify; text-align: center; font-size: 15px">{{c.cargo}}</td>
+                        <td class="text-center">
+                          <button title="Agregar Permsisos" (click)="permisos(c.id)" mat-flat-button color="primary"><mat-icon>add</mat-icon></button>
+                          
+                        </td>
                      
                         
                   </tr>

@@ -51,7 +51,7 @@ export class IngresarConveniosPaginasComponent implements OnInit {
     var verificar=false;
     this.listafuncionalidad.forEach((item:FuncionalidadUsuario)=>{
 
-      if(item.funcionalidad[0].funcionalidad=='ingresarconvenios')
+      if(item.funcionalidad[0].funcionalidad=='Ingresar Convenios')
       {
        verificar=true;
         
