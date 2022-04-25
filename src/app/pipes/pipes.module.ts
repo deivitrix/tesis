@@ -8,7 +8,7 @@ import { BuscarconvenionombrePipe } from './buscarconvenionombre/buscarconvenion
 import { BuscarusuariosPipe } from './buscarusuarios/buscarusuarios.pipe';
 import { BuscarsolicitudmovilidadPipe } from './buscarsolicitudmovilidad/buscarsolicitudmovilidad.pipe';
 import { BuscarHistorialPipe } from './buscarHistorial/buscarHistorial.pipe';
-
+import { BuscarFuncionalidadesPipe } from './buscarFuncionalidades/buscarFuncionalidades.pipe';
 
 
 
@@ -21,7 +21,8 @@ import { BuscarHistorialPipe } from './buscarHistorial/buscarHistorial.pipe';
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
     BuscarsolicitudmovilidadPipe,
-    BuscarHistorialPipe
+    BuscarHistorialPipe,
+    BuscarFuncionalidadesPipe
    ],
   imports: [
     CommonModule,
@@ -35,7 +36,8 @@ import { BuscarHistorialPipe } from './buscarHistorial/buscarHistorial.pipe';
     BuscarconvenionombrePipe,
     BuscarusuariosPipe,
     BuscarsolicitudmovilidadPipe,
-    BuscarHistorialPipe
+    BuscarHistorialPipe,
+    BuscarFuncionalidadesPipe
   ]
 })
 export class PipesModule { }

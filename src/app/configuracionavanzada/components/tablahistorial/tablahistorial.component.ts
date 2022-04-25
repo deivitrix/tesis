@@ -8,6 +8,7 @@ import { DialogusuariosComponent } from '../dialogusuarios/dialogusuarios.compon
 //Alertas
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { DialoghistorialComponent } from '../dialoghistorial/dialoghistorial.component';
 
 
 @Component({
@@ -48,10 +49,26 @@ export class TablahistorialComponent implements OnInit {
 getUsuarios(){
   this.usuario.getHistorial()
   .subscribe((res:any)=>{
+    this.loading=false;
     if(res.estado==true){
-      this.loading=false;
       this.listaHistorial=[];
       this.listaHistorial=res.datos;
+      var dato = "";
+      if (res.datos.dato_viejo =="") {
+        dato = "No Data";
+
+      }
+      else {
+        dato = "Data";
+      }
+      if(res.datos.dato_nuevo=="")
+      {
+        dato="No Data";
+      }
+      else{
+        dato="Data";
+
+      }
       this.listaHistorial.map((element, index) => (element.position = index + 1));
     }
   } )
@@ -65,6 +82,16 @@ getUsuarios(){
     this.pageNumber = e.pageIndex + 1;
   }
 
+
+  opendialogInformacion(id:number)
+  {
+    const dialogRef1=this.dialog.open(DialoghistorialComponent,{
+      width:'1300px',
+      data:{titulo:'Datos',objeto:id}
+    });
+    
+
+  }
 
   
 }

@@ -26,27 +26,30 @@
                   <tr style="text-align: center; font-size: 14px">
                     <th scope="col">#</th>
                     <th style="width: 7%;"scope="col">Cedula</th>
-                    <th style="width: 10%;"scope="col">Apellidos</th>
-                    <th style="width: 10%;"scope="col">Nombres</th>
+                    <th style="width: 14%;"scope="col">Apellidos</th>
+                    <th style="width: 14%;"scope="col">Nombres</th>
+                    <th style="width: 10%;"scope="col">Titulo</th>
                     <th style="width: 20%;"scope="col">Detalle</th>
-                    <th style="width: 20%;"scope="col">Dato viejo</th>
-                    <th style="width: 20%;"scope="col">Dato nuevo</th>
-                    <th style="width: 13%;"scope="col">Fecha</th>
-                    <th style="width: 13%;"scope="col"> Acciones</th>
+                    <th style="width: 15%;"scope="col">Dato viejo</th>
+                    <th style="width: 15%;"scope="col">Dato nuevo</th>
+                    <th style="width: 15%;"scope="col">Fecha</th>
+                    <th style="width: 7%;"scope="col"> Acciones</th>
                   </tr>
                 </thead>
                  <tbody>
-                  <tr  *ngFor="let c of listaHistorial | pagination :pageSize :pageNumber | buscarHistorial :filtro;">
+                  <tr  *ngFor="let c of listaHistorial |pagination :pageSize :pageNumber | buscarHistorial :filtro;">
                         <th scope="row" style="text-align: center;">{{c.position}}</th>
                         <td style="text-align: justify; text-align: center; font-size: 13px">{{c.cedula}}</td>
                         <td style="text-align: justify; text-align: center; font-size: 13px">{{c.apellidos}}</td>
                         <td style="text-align: justify; text-align: center; font-size: 13px">{{c.nombres}}</td>
+                        <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.titulo}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.detalle}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.fecha_creacion}}</td>
                         <td>
-                          <button mat-flat-button color="primary"><mat-icon>visibility</mat-icon></button>
+                          <a title="Ver Datos" (click)="opendialogInformacion(c.id)" style="cursor: pointer; margin: 4%; color: cornflowerblue;"><mat-icon>remove_red_eye</mat-icon></a>
+                          <!-- <button mat-flat-button color="primary"><mat-icon>visibility</mat-icon></button> -->
                           </td>
                         
                   </tr>

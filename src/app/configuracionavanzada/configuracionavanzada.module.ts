@@ -58,6 +58,7 @@ import { FuncionalidadesUsuariosComponent } from './components/funcionalidades-u
 import { PermisosUsuariosComponent } from './paginas/permisos-usuarios/permisos-usuarios.component';
 import { PermisoUsuariosBodyComponent } from './components/permiso-usuarios-body/permiso-usuarios-body.component';
 import { AgregarPermisoComponent } from './components/agregar-permiso/agregar-permiso.component';
+import { DialoghistorialComponent } from './components/dialoghistorial/dialoghistorial.component';
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { AgregarPermisoComponent } from './components/agregar-permiso/agregar-pe
     FuncionalidadesUsuariosComponent,
     PermisosUsuariosComponent,
     PermisoUsuariosBodyComponent,
-    AgregarPermisoComponent
+    AgregarPermisoComponent,
+    DialoghistorialComponent
     
   ],
   imports: [

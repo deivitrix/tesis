@@ -14,6 +14,9 @@ padding: 40px;
 .boton{
 text-align: end;
 padding: 40px;
+}
 
-
+.example-button-container{
+    text-align: center;
+    width: 5%;
 }

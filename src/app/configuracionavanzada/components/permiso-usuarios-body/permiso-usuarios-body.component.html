@@ -34,7 +34,7 @@
                   </tr>
                 </thead>
                  <tbody>
-                  <tr  *ngFor="let c of listFuncionalidad | pagination :pageSize :pageNumber ">
+                  <tr  *ngFor="let c of listFuncionalidad | pagination :pageSize :pageNumber | buscarFuncionalidades:filtro;">
                         <th scope="row" style="text-align: center;">{{c.position}}</th>
                         <td style="text-align: justify; text-align: center; font-size: 15px">{{c.funcionalidad}}</td>
                         <td style="text-align: justify; text-align: center; font-size: 15px">
