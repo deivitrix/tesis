@@ -16,6 +16,8 @@ export class DialoghistorialComponent implements OnInit {
 
   listaHistorial: any[] = [];
 
+  // cedula del usuario
+  //id:string;
 
 
   constructor(private usuario:UsuarioServicesService,public dialog: MatDialog,
@@ -26,34 +28,19 @@ export class DialoghistorialComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this.getUsuarios();
+    this.getHistorial();
 
   }
 
-  getUsuarios(){
+  getHistorial(){
+  console.log(this.data.objeto);
   this.usuario.getHistorialxid(this.data.objeto)
+  //this.usuario.getHistorial()
   .subscribe((res:any)=>{
     this.loading=false;
     if(res.estado==true){
       this.listaHistorial=[];
       this.listaHistorial=res.datos;
-      var dato = "";
-      if (res.datos.dato_viejo =="") {
-        dato = "No Data";
-
-      }
-      else {
-        dato = "Data";
-      }
-      if(res.datos.dato_nuevo=="")
-      {
-        dato="No Data";
-      }
-      else{
-        dato="Data";
-
-      }
-      this.listaHistorial.map((element, index) => (element.position = index + 1));
     }
   } )
 

@@ -114,9 +114,10 @@ export class UsuarioServicesService {
     return this.http.post<any>(url,data);
   }
 
-  getHistorialxid(id:string){
-    let url:string = this._base.getUrlLocalApi() + 'historial/'+id
+  //obtener la informacion del historial por id
+  getHistorialxid(id:number){
+    let url:string = this._base.getUrlLocalApi() + 'historial/'+id;
     return this.http.get<any>(url);
   }
-
+    
 }

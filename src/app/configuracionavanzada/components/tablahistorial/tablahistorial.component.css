@@ -17,6 +17,6 @@ padding: 40px;
 }
 
 .example-button-container{
-    text-align: center;
-    width: 5%;
+    text-align: center; 
+    /* margin-top: 10px; */
 }

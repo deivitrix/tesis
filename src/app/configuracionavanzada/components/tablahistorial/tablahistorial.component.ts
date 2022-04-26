@@ -25,6 +25,9 @@ export class TablahistorialComponent implements OnInit {
   //cedula
   cedula="";
 
+  // cedula del usuario
+  //id:string;
+
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -53,22 +56,6 @@ getUsuarios(){
     if(res.estado==true){
       this.listaHistorial=[];
       this.listaHistorial=res.datos;
-      var dato = "";
-      if (res.datos.dato_viejo =="") {
-        dato = "No Data";
-
-      }
-      else {
-        dato = "Data";
-      }
-      if(res.datos.dato_nuevo=="")
-      {
-        dato="No Data";
-      }
-      else{
-        dato="Data";
-
-      }
       this.listaHistorial.map((element, index) => (element.position = index + 1));
     }
   } )
@@ -83,11 +70,11 @@ getUsuarios(){
   }
 
 
-  opendialogInformacion(id:number)
+  opendialogInformacio(id:number)
   {
     const dialogRef1=this.dialog.open(DialoghistorialComponent,{
       width:'1300px',
-      data:{titulo:'Datos',objeto:id}
+      data:{titulo:'Datos Historial',objeto:id}
     });
     
 
