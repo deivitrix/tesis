@@ -813,7 +813,7 @@ export class FormularioBecasComponent implements OnInit {
               title:'Solicitud Guardada con exito',
               icon:'success'
             });
-            this.router.navigate(['/principal/becas'])
+            this.router.navigate(['/becas/becas'])
           }
         });
 
@@ -848,7 +848,7 @@ export class FormularioBecasComponent implements OnInit {
         text:'Se redirecciona a la pagina principal de Becas',
         icon:'success',
       });
-      this.router.navigate(['/principal/becas']);
+      this.router.navigate(['/becas/becas']);
 
 
     }

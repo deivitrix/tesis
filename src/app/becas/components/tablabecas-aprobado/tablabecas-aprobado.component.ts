@@ -18,6 +18,7 @@ export class TablabecasAprobadoComponent implements OnInit {
    loading=true;
    loadingspinner=false;
    
+   id_personal="";
   
    tabla = false;
  
@@ -36,7 +37,11 @@ export class TablabecasAprobadoComponent implements OnInit {
      this.filtro = event.target.value;
    }
 
-  constructor(private becas:BecasnivelService, public dialog: MatDialog) { }
+  constructor(private becas:BecasnivelService, public dialog: MatDialog) {
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
+   }
 
   ngOnInit(): void {
     this.getBecasSolicitud();
@@ -96,6 +101,7 @@ export class TablabecasAprobadoComponent implements OnInit {
        this.loadingspinner=true;
        let json={
          data:{
+           id_personal:this.id_personal,
            id:id,
            tipo:"B",
            estado_solicitud:"A"
@@ -141,6 +147,7 @@ export class TablabecasAprobadoComponent implements OnInit {
         this.loadingspinner=true;
        let json={
          data:{
+           id_personal:this.id_personal,
            id:id,
            tipo:"B",
            estado_solicitud:"R"

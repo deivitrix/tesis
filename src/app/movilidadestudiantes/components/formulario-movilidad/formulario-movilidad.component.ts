@@ -285,7 +285,7 @@ export class FormularioMovilidadComponent implements OnInit {
             title: res.mensaje,
             icon: 'warning'
           });
-          this.router.navigate(['/principal/movilidad'])
+          this.router.navigate(['/movilidad/movilidad'])
           return;
         }
       })
@@ -847,7 +847,7 @@ export class FormularioMovilidadComponent implements OnInit {
           text: 'Se redirecciona a la pagina principal de Movilidad',
           icon: 'success',
         });
-        this.router.navigate(['/principal/movilidad']);
+        this.router.navigate(['/movilidad/movilidad']);
 
 
       }

@@ -25,6 +25,9 @@ export class EditarconveniosaprobadosComponent implements OnInit {
    id="";
    tipo="";
 
+   //id_usuario
+   id_personal="";
+
   loading=true;
   //datos convenio
   datoconvenio:any;
@@ -77,11 +80,18 @@ export class EditarconveniosaprobadosComponent implements OnInit {
     this.archivosubir=editar.group({
      document:['']
     });
+  
+    //this.id_personal="";
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
+
    }
 
   ngOnInit(): void {
   this.getconvenio()
   this.cambiartipo()
+  // console.log(this.id_personal)
   }
 
   cambiartipo(){
@@ -340,7 +350,8 @@ export class EditarconveniosaprobadosComponent implements OnInit {
                   id_convenio:this.myform.get('id')?.value,
                   PDF:this.myform.get('PDF')?.value,
                   fecha_inicio:fechainicio,
-                  fecha_fin:fechafinal
+                  fecha_fin:fechafinal,
+                  id_personal:this.id_personal,
                 }};
                 this.convenios.modificarconveniosguardados(json)
                 .subscribe((res:any)=>{
@@ -437,6 +448,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
             this.nombreArchivo=res.documento;
             this.myform.get('PDF')?.setValue(this.nombreArchivo);
             let json={data:{
+              id_personal:this.id_personal,
               id_convenio:this.myform.get('id')?.value,
               PDF:this.myform.get('PDF')?.value,
               nombre_convenio:this.myform.get('nombre_convenio')?.value
@@ -485,6 +497,7 @@ export class EditarconveniosaprobadosComponent implements OnInit {
       }
       else{
         let json={data:{
+          id_personal:this.id_personal,
           id_convenio:this.myform.get('id')?.value,
           PDF:this.myform.get('PDF')?.value,
           nombre_convenio:this.myform.get('nombre_convenio')?.value

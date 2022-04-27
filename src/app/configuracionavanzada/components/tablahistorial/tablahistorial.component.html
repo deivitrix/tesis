@@ -44,23 +44,24 @@
                         <td style="text-align: justify; text-align: center; font-size: 13px">{{c.nombres}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.titulo}}</td>
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.detalle}}</td>
-                        <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo|| 0}}
+                        <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo}} -->
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo?.length==0}}<p>No data</p> {{c.dato_viejo?.length}} <p>Data</p> </td>  -->
-                       
-                       <ng-container *ngIf="c.dato_viejo?.length==0 || null">
+                      <td  style="text-align: justify; text-align: justify; font-size: 13px">
+                       <ng-container *ngIf="c.dato_viejo==null">
                            <p>
                               No existen Datos 
                            </p>
                        </ng-container>
-                       <ng-container *ngIf="c.dato_viejo?.length">
+                       <ng-container *ngIf="c.dato_viejo?.length>0">
                         <p>
                            Existen Datos 
                         </p>
                     </ng-container>
                       </td>
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo?.length==0}}<p>No data</p> {{c.dato_nuevo?.length}} <p>Data</p></td> -->
-                        <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo?.length|| 0}}
-                        <ng-container *ngIf="c.dato_nuevo?.length==0|| null">
+                        <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo?.length|| 0}} -->
+                       <td  style="text-align: justify; text-align: justify; font-size: 13px"> 
+                        <ng-container *ngIf="c.dato_nuevo==null">
                           <p>
                              No existen Datos 
                           </p>

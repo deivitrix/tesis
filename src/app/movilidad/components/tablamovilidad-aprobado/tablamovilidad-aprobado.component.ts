@@ -20,6 +20,9 @@ export class TablamovilidadAprobadoComponent implements OnInit {
   loadingspinner=false;
   tabla = false;
 
+  //id_usuario
+  id_personal="";
+
   //lista 
   listsolicitud:any[]=[];
 
@@ -40,6 +43,10 @@ export class TablamovilidadAprobadoComponent implements OnInit {
 
   constructor(private movilidad:GeneralMovilidadService, public dialog: MatDialog) { 
 
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
+    
   }
 
   ngOnInit(): void {
@@ -102,6 +109,7 @@ export class TablamovilidadAprobadoComponent implements OnInit {
        this.loadingspinner=true;
         let json={
           data:{
+            id_personal:this.id_personal,
             id:id,
             tipo:"M",
             estado_solicitud:"A"
@@ -149,6 +157,7 @@ export class TablamovilidadAprobadoComponent implements OnInit {
         this.loadingspinner=true;
         let json={
           data:{
+            id_personal:this.id_personal,
             id:id,
             tipo:"M",
             estado_solicitud:"R"

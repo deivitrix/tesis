@@ -1273,7 +1273,7 @@ escoger(id:number){
               this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
                 data:{
                   titulo:'Error.....',
-                  mensaje:"No se puedo ingresar la plantilla",
+                  mensaje:"No se puede ingresar la plantilla",
                 buttonText:'',
                 icon:'warning'
                 },

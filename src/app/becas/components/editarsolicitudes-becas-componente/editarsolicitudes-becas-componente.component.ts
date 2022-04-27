@@ -24,6 +24,8 @@ export class EditarsolicitudesBecasComponenteComponent implements OnInit {
   // tipo
   tipo_estado="";
 
+  id_personal="";
+
   //lista 
   listsolicitud:any[]=[];
 
@@ -103,7 +105,9 @@ verificar_pdf=false;
 
   constructor(private rutaActiva: ActivatedRoute,private becas:BecasnivelService,private mostrar: FormBuilder
     ,public snackBar:MatSnackBar,private router:Router) { 
-    
+      var id_personal;
+      id_personal=localStorage.getItem("id_personal") as string;  
+      this.id_personal=id_personal;
     this.id=rutaActiva.snapshot.params.id;
     this.tipo_estado=rutaActiva.snapshot.params.tipo;
     if(this.tipo_estado=="A")
@@ -112,6 +116,7 @@ verificar_pdf=false;
       this.boton_documentos=true;
       this.myform=mostrar.group({
         //solicitud
+      id_personal:this.id_personal,
       id:this.id,
       tipo_documento:this.tipo_estado,
       nombre_facultad:[{ value: '', disabled: true }],
@@ -159,6 +164,7 @@ verificar_pdf=false;
       this.boton_documentos=false;
       this.myform=mostrar.group({
         //solicitud
+      id_personal:this.id_personal,
       id:this.id,
       tipo_documento:this.tipo_estado,
       nombre_facultad:[{ value: '', disabled: true }],
@@ -199,6 +205,9 @@ verificar_pdf=false;
 
 
     }
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
 
   }
 
@@ -856,7 +865,7 @@ verificar_pdf=false;
         //subir la informacion editar de la solicitud
 
         let json={
-          data:this.myform.value
+          data:this.myform.value  
         }
         this.becas.updateSolicitudBecas(json)
         .subscribe((res:any)=>{

@@ -21,6 +21,9 @@ export class EditarsolicitudesMovilidadComponenteComponent implements OnInit {
 
   //solicitud_id
   id="";
+
+  //id_usuario
+  id_personal="";
   // tipo
   tipo_estado="";
 
@@ -106,6 +109,10 @@ comprobador3=true;
     private router:Router,public snackBar:MatSnackBar) { 
     this.id=rutaActiva.snapshot.params.id;
     this.tipo_estado=rutaActiva.snapshot.params.tipo;
+
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
     
     if(this.tipo_estado=="A")
     {
@@ -115,6 +122,7 @@ comprobador3=true;
       this.boton_documentos=true;
       this.myform = this.mostrar.group({
         //solicitud
+        id_personal:this.id_personal,
         id:this.id,
         tipo_documento:this.tipo_estado,
         nombre_carrera:[{ value: '', disabled: true }],
@@ -201,6 +209,7 @@ comprobador3=true;
       this.boton_documentos=false;
       this.myform = this.mostrar.group({
         //solicitud
+        id_personal:this.id_personal,
         id:this.id,
         tipo_documento:this.tipo_estado,
         nombre_carrera:[{ value: '', disabled: true },Validators.required],
@@ -281,7 +290,9 @@ comprobador3=true;
        });
 
     }
-    
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
    
 
   }
@@ -1717,7 +1728,8 @@ comprobador3=true;
         //subir la informacion editar de la solicitud
 
         let json={
-          data:this.myform.value
+          data:this.myform.value,
+          id_personal:this.id_personal,
         }
         this.movilidad.updateSolicitudMovilidad(json)
         .subscribe((res:any)=>{
@@ -1977,7 +1989,8 @@ comprobador3=true;
       }
 
       let json={
-        data:this.myform.value
+        data:this.myform.value,
+        id_personal:this.id_personal,
       }
       this.movilidad.updateSolicitudMovilidad(json)
       .subscribe((res:any)=>{
