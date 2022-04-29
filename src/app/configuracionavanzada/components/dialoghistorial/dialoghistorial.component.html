@@ -18,16 +18,24 @@
       <table class="table table-bordered table-responsive table-primary" style="margin: 1px; ">
             <thead>
               <tr style="text-align: center; font-size: 14px;">
-                <th scope="col">#</th>
-                <th scope="col">Dato Viejo</th>
-                <th scope="col">Dato Nuevo</th>
+                <!-- <th scope="col">#</th> -->
+                <th style="width: 10%;"scope="col">Dato Viejo</th>
+                <th style="width: 90%;"scope="col">Dato Nuevo</th>
               </tr>
             </thead>
             <tbody>
-              <tr style="text-align: justify;" *ngFor="let c of listaHistorial">
-                <th scope="row">{{c.position}}</th>
-                <td>{{c.dato_viejo}}</td>
-                <td>{{c.dato_nuevo}}</td>
+              <tr style="text-align: justify;" *ngFor="let c of listaHistorial | ObjToArrayPipe">
+                <!-- <th scope="row">{{c.position}}</th> -->
+                <td>
+                  <p [innerHTML]="c.dato_viejo" >
+                  </p>
+                  <!-- {{c.dato_viejo}} -->
+                </td>
+                <td>
+                  <p [innerHTML]="c.dato_nuevo" >
+                  </p>
+                  <!-- {{c.dato_nuevo}} -->
+                </td>
               </tr>
             </tbody>
           </table>
