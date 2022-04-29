@@ -51,7 +51,7 @@ export class TablahistorialComponent implements OnInit {
 
 getUsuarios(){
   this.usuario.getHistorial()
-  .subscribe((res:any)=>{
+  .subscribe((res:any)=>{  
     this.loading=false;
     if(res.estado==true){
       this.listaHistorial=[];

@@ -14,7 +14,7 @@ export class DialoghistorialComponent implements OnInit {
   
   loadingspinner=false;
 
-  listaHistorial: any[] = [];
+  listaHistorial!: any;
 
   // cedula del usuario
   //id:string;
@@ -38,34 +38,25 @@ export class DialoghistorialComponent implements OnInit {
   //this.usuario.getHistorial()
   .subscribe((res:any)=>{
     this.loading=false;
+    console.log(res);
+    
     if(res.estado==true){
-      this.listaHistorial=[];
+      this.listaHistorial={};
       this.listaHistorial=res.datos;
-      
+      this.listaHistorial.dato_viejo=JSON.parse(this.listaHistorial.dato_viejo);
+      this.listaHistorial.dato_nuevo=JSON.parse(this.listaHistorial.dato_nuevo);
 
-      this.listaHistorial.forEach((item:any)=>{
-        const etiquetas=['<p>','</p>','<i>','</i>','<strong>','</strong>','<br>']
-        var etiqueta1="";
-        etiqueta1=item.dato_nuevo.replace("<p>"," ");
-         var etiqueta2=etiqueta1.replace("</p>"," ");
-         var etiqueta3=etiqueta2.replace("<i>"," ");
-         var etiqueta4=etiqueta3.replace("</i>"," ");
-         var etiqueta5=etiqueta4.replace("<strong>"," ");
-         var etiqueta6=etiqueta5.replace("</strong>"," ");
-         var etiqueta7=etiqueta6.replace("&nbsp;"," ");
-         var etiqueta8=etiqueta7.replace("["," ");
-         var etiqueta9=etiqueta8.replace("]"," ");
-         var etiqueta10=etiqueta9.replace("{"," ");
-         var etiqueta11=etiqueta10.replace("}"," ");
-         var etiqueta12=etiqueta11.replace("[{"," ");
-         var etiqueta13=etiqueta12.replace("}]"," ");
-         var etiqueta14=etiqueta13.replace("}"," ");
-         var etiqueta15=etiqueta14.replace(",","\n");
-         item.dato_nuevo=etiqueta15;
-      } ); 
+      
+      // this.listaHistorial.forEach((item:any)=>{
+      //  item.dato_viejo=JSON.parse(item.dato_viejo);
+      // } );
+      console.log(this.listaHistorial);
+       
     }
   } )
 
 }
+
+
 
 }
