@@ -30,10 +30,7 @@
                     <th style="width: 14%;"scope="col">Nombres</th>
                     <th style="width: 10%;"scope="col">Titulo</th>
                     <th style="width: 20%;"scope="col">Detalle</th>
-                    <th style="width: 10%;"scope="col">Dato viejo</th>
-                    <th style="width: 10%;"scope="col">Dato nuevo</th>
                     <th style="width: 20%;"scope="col">Fecha</th>
-                    <th style="width: 7%;"scope="col"> Acciones</th>
                   </tr>
                 </thead>
                  <tbody>
@@ -46,7 +43,7 @@
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.detalle}}</td>
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo}} -->
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo?.length==0}}<p>No data</p> {{c.dato_viejo?.length}} <p>Data</p> </td>  -->
-                      <td  style="text-align: justify; text-align: justify; font-size: 13px">
+                      <!-- <td  style="text-align: justify; text-align: justify; font-size: 13px">
                        <ng-container *ngIf="c.dato_viejo==null">
                            <p>
                               No existen Datos 
@@ -57,10 +54,10 @@
                            Existen Datos 
                         </p>
                     </ng-container>
-                      </td>
+                      </td> -->
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo?.length==0}}<p>No data</p> {{c.dato_nuevo?.length}} <p>Data</p></td> -->
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_nuevo?.length|| 0}} -->
-                       <td  style="text-align: justify; text-align: justify; font-size: 13px"> 
+                       <!-- <td  style="text-align: justify; text-align: justify; font-size: 13px"> 
                         <ng-container *ngIf="c.dato_nuevo==null">
                           <p>
                              No existen Datos 
@@ -71,14 +68,14 @@
                           Existen Datos 
                        </p>
                    </ng-container>
-                     </td>
+                     </td> -->
                         <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.fecha_creacion}}</td>
-                        <td>
+                        <!-- <td>
                           <div class="example-button-container">
-                          <!-- <a title="Ver Datos" (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: rgb(2, 2, 255);"><mat-icon>remove_red_eye</mat-icon></a> -->
+                          <a title="Ver Datos" (click)="opendialogInformacio(c.id)" style="cursor: pointer; margin: 4%; color: rgb(2, 2, 255);"><mat-icon>remove_red_eye</mat-icon></a>
                          <button mat-flat-button color="primary" title="Ver Datos" (click)="opendialogInformacio(c.id)"><mat-icon>visibility</mat-icon></button>
                         </div>
-                        </td>
+                        </td> -->
                         
                   </tr>
                 </tbody> 

@@ -24,14 +24,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr style="text-align: justify;" *ngFor="let c of listaHistorial | ObjToArrayPipe">
+              <tr style="text-align: justify;">
                 <!-- <th scope="row">{{c.position}}</th> -->
                 <td>
                   <!-- <p [innerHTML]="c.dato_viejo" ></p> -->
                   <!-- {{c.dato_viejo}} -->
                 </td>
                 <td>
-                  <!-- <p [innerHTML]="c.dato_nuevo" ></p> -->
+                  {{listaHistorial.dato_viejo.original.id_usuario}}
                   <!-- {{c.dato_nuevo}} -->
                 </td>
               </tr>
