@@ -38,6 +38,10 @@ export class Ingresarconveniosbody2Component implements OnInit {
   // id del convenio plantilla traigo por el url
   id="";
 
+    //id_usuario
+    id_personal="";
+
+
   //tipo ingresar o Modificar
   tipo="";
   // tipo convenio
@@ -123,6 +127,9 @@ export class Ingresarconveniosbody2Component implements OnInit {
       especifico:[{value:'',disabled: true},Validators.required],
 
     });
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
 
     this.myform=this.ingresar.group({
       id_convenio:[''],
@@ -147,6 +154,10 @@ export class Ingresarconveniosbody2Component implements OnInit {
       eliminacion:this.ingresar.array([]),
       PDF:['']
     });
+    //this.id_personal="";
+    var id_personal;
+    id_personal=localStorage.getItem("id_personal") as string;  
+    this.id_personal=id_personal;
    }
 
   ngOnInit(): void {
@@ -220,7 +231,7 @@ getdatosconvenios(){
       id_personal=localStorage.getItem("id_personal") as string;
       this.myform.patchValue({
         id_convenio:this.id,
-        id_usuario:id_personal,
+        id_usuario:this.id_personal,
         id_imagen1:this.datosconvenio.id_imagen1,
         id_imagen2:this.datosconvenio.id_imagen2,
         urlimagen1:this.datosconvenio.urlimagen1,
