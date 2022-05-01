@@ -238,6 +238,27 @@ export class EditarconveniosaprobadosComponent implements OnInit {
 
       }
 
+      if(parseInt(this.myform.get('año')?.value)< 0 || parseInt(this.myform.get('mes')?.value)<0 || parseInt(this.myform.get('dia')?.value) <0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Ingresar numeros positivos",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1000,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+
+      }
+
+
+
       Swal.fire({
         showClass: {
           popup: 'animate__animated animate__fadeInDown'
