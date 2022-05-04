@@ -70,6 +70,9 @@ export class BasemovilidadestudiantesComponent implements OnInit {
     }
     
   ngOnInit(): void {
+    setInterval(()=>{
+      this.salir();
+    },900000);
   }
   salir(){
     this._login.logout();

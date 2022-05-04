@@ -44,6 +44,7 @@ export class GeneralLoginService{
 
   logout(){
     localStorage.removeItem("id_personal");
+    localStorage.clear();
     this.loggedId.next(false);
   }
 

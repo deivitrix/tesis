@@ -117,6 +117,9 @@ export class BaseIngresoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getfuncionalidad();
+    setInterval(()=>{
+      this.salir();
+    },900000);
   }
   
   salir(){

@@ -11,6 +11,7 @@ import { GenerarReporteModel } from 'src/app/models/convenios/generarreporte';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 import { FirmaModel } from 'src/app/models/convenios/firmaconvenio';
+import { GalleriaComponent } from '../galleria/galleria.component';
 
 @Component({
   selector: 'app-tablamostrarconvenios',
@@ -40,6 +41,8 @@ export class TablamostrarconveniosComponent implements OnInit {
 
   firmaconvenio:FirmaModel[]=[];
   firmaAgregar:FirmaModel={id:0,titulo_academico:'',nombres:'',cargo:'',institucion:''};
+
+  data!:string;
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
@@ -82,7 +85,13 @@ export class TablamostrarconveniosComponent implements OnInit {
   ngOnInit(): void {}
 
   cambioConveniosTipos(event: any) {
-    this.generarReporte=false;
+    if(event.value=='A')
+    {
+      this.generarReporte=false;
+    }
+    if(event.value=='G'|| event.value=='P'){
+      this.generarReporte=true;
+    }
     this.convenios.getconveniostipo(event.value).subscribe((res: any) => {
       this.tabla = true;
       this.loading=false;
@@ -143,18 +152,7 @@ export class TablamostrarconveniosComponent implements OnInit {
       if(result!=null)
       {
         this.arrayfecha=result;
-        this.separarFecha();
-      }
-     
-      
-    });
-
-  }
-
-  separarFecha()
-  {
-
-    if(this.arrayfecha.fechainicio.length==0|| this.arrayfecha.fechafin.length==0)
+        if(this.arrayfecha.fechainicio.length==0|| this.arrayfecha.fechafin.length==0)
     {
       this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
         data:{
@@ -170,6 +168,58 @@ export class TablamostrarconveniosComponent implements OnInit {
       });
       return;
     }
+        
+        var data={id:0,url_escoger:""};
+  
+        const dialogRef1=this.dialog.open(GalleriaComponent,{
+          width:'700px',
+          data:{titulo:'Galeria Convenios',url:data}
+        });
+
+        dialogRef1.afterClosed().subscribe(result1 => {
+          console.log('The dialog was closed');
+          if(result1!=null)
+          { 
+            if(result1.url_escoger.length==0)
+            {
+              this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+                data:{
+                  titulo:'Error.....',
+                  mensaje:"Datos Faltantes para Generar el Reporte",
+                 buttonText:'',
+                 icon:'warning'
+                },
+                duration:1500,
+                horizontalPosition:'end',
+                verticalPosition:'bottom',
+                panelClass:'error'     
+              });
+              return;
+
+            }
+            this.separarFecha(result1.url_escoger);
+
+           
+             
+          }
+        
+         
+          
+        });
+
+
+       
+      }
+     
+      
+    });
+
+  }
+
+  separarFecha(imagen:string)
+  {
+
+    
   // obtener la fecha en string
    var fechai=this.arrayfecha.fechainicio;
    var fechaf=this.arrayfecha.fechafin;
@@ -224,15 +274,38 @@ export class TablamostrarconveniosComponent implements OnInit {
    var fechainicio=fechaiaux.getFullYear()+"-"+mesinicio+"-"+diainicio;
    var fechafinal=fechafaux.getFullYear()+"-"+mesfinal+"-"+diafinal;
   
-   this.arrayfecha.fechainicio=fechainicio;
-   this.arrayfecha.fechafin=fechafinal;
-   this.arrayfecha.tipo=this.selector.get('conveniostipo')?.value;
-
    
-   // Mandar a la vista para generar el Reporte 
-   this.arrayfecha.fechainicio="";
-   this.arrayfecha.fechafin="";
-   this.arrayfecha.tipo=""; 
+   // Mandar a la vista para generar el Reporte
+   let json={
+     data:{
+      fecha_inicio:fechainicio,
+      fecha_fin: fechafinal,
+      tipo_documento:this.selector.get('conveniostipo')?.value,
+      imagen1:imagen
+     }
+   }
+   this.generarReporte=true;
+   this.botonvista=true;
+   this.convenios.generar_reporte(json)
+   .subscribe((res:any)=>{
+
+    if(res.estado)
+    {
+      let url1 = this.convenios.VistaPDFconvenios(res.file) as string;
+      let urlToOpen:string=url1;
+     let url: string = '';
+     if (!/^http[s]?:\/\//.test(urlToOpen)) {
+       url += 'http://';
+     }
+     this.botonvista=false;
+     this.generarReporte=false;
+     this.arrayfecha={fechainicio:"",fechafin:"",tipo:""};
+     url += urlToOpen;
+     window.open(url, '_blank');
+    }
+
+   })
+   
 
 
    

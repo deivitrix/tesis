@@ -70,6 +70,9 @@ export class BasebecasdocentesComponent implements OnInit {
     }
     
   ngOnInit(): void {
+    setInterval(()=>{
+      this.salir();
+    },900000);
   }
   salir(){
     this._login.logout();
