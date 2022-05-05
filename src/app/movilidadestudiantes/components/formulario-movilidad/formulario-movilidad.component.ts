@@ -1296,7 +1296,7 @@ export class FormularioMovilidadComponent implements OnInit {
                     title:'Solicitud Guardada con exito',
                     icon:'success'
                   });
-                  this.router.navigate(['/principal/movilidad'])
+                  this.router.navigate(['/movilidad/movilidad'])
 
                 }
               });
