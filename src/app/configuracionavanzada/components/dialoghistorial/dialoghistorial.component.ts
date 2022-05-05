@@ -33,12 +33,10 @@ export class DialoghistorialComponent implements OnInit {
   }
 
   getHistorial(){
-  //console.log(this.data.objeto);
   this.usuario.getDatosHistorialxid(this.data.objeto)
   //this.usuario.getHistorial()
   .subscribe((res:any)=>{
     this.loading=false;
-    console.log(res);
     
     if(res.estado==true){
       this.listaHistorial={};

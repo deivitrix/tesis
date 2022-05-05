@@ -99,7 +99,7 @@ export class DialoginformacionbecasComponent implements OnInit {
 
   }
   getinformacion(){
-    //console.log(this.data.objeto);
+    
     this.becas.getsolicitudid(this.data.objeto)
     .subscribe((res:any)=>{
       this.loading=false;

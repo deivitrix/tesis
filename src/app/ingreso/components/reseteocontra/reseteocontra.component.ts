@@ -40,7 +40,6 @@ export class ReseteocontraComponent implements OnInit {
   {
     this._login.getusuariosearch(this.cedula)
     .subscribe((res:any) => {
-      console.log(res);
       this.datosUsuario.push(res.usuario);
       this.loading=false;
       this.foto=this.datosUsuario[0].foto;

@@ -116,7 +116,9 @@ import { GalleriaComponent } from './components/galleria/galleria.component';
     CKEditorModule
   ],
   exports:[
-    TablamodificarComponent
+    TablamodificarComponent,
+    GalleriaComponent,
+    GenerarreporteconvenioComponent
   ],
   entryComponents:[IngresarCategoriaComponent],
 })

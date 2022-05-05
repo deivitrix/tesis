@@ -73,7 +73,6 @@ export class MostrarConvenioPDFComponent implements OnInit {
       this.listaCon.push(this.datoAprobado);
 
       //this.pdfconvenio=this.url.bypassSecurityTrustResourceUrl(this.datosAprobados.convenio.PDF);
-      console.log(this.datoAprobado);
     });
 
   }

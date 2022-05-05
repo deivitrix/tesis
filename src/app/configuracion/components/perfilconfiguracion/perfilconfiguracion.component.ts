@@ -328,7 +328,6 @@ export class PerfilconfiguracionComponent implements OnInit {
     let json={usuario:this.datos};
     this._usuario.updateusuario(json)
     .subscribe((res:any) => {
-      //console.log(res);
       if(res.estado==true)
       {
         if(res.email==true)

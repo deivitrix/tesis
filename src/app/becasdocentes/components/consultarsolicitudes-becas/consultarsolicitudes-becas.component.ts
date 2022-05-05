@@ -58,7 +58,6 @@ export class ConsultarsolicitudesBecasComponent implements OnInit {
     this.loading=false;
     if(res.estado==true){
    this.listsolicitud=res.datos;
-    //console.log(this.listsolicitud);
     this.listsolicitud.map((element, index) => (element.position = index + 1));
     this.listsolicitud.forEach((item:any)=>{
       this.nombres=item.nombres;

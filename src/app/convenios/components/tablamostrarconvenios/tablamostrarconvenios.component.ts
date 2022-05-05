@@ -173,7 +173,7 @@ export class TablamostrarconveniosComponent implements OnInit {
   
         const dialogRef1=this.dialog.open(GalleriaComponent,{
           width:'700px',
-          data:{titulo:'Galeria Convenios',url:data}
+          data:{titulo:'Galeria ',url:data}
         });
 
         dialogRef1.afterClosed().subscribe(result1 => {
@@ -209,6 +209,10 @@ export class TablamostrarconveniosComponent implements OnInit {
 
 
        
+      }
+      else
+      {
+        this.arrayfecha={fechafin:'',fechainicio:'',tipo:''}
       }
      
       

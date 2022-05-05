@@ -197,7 +197,7 @@ data:any={id:0,url_escoger:this.url_escoger};
                formData.append('img', archivoCapturado);
                general.subirImagenCarroselftp(formData)
                .subscribe((res:any)=>{
-               // console.log(res);
+              
                  if(res.estado==true)
                  { 
                     var url=res.imagen;

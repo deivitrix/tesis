@@ -24,7 +24,6 @@ export class NavbarbecasComponent implements OnInit {
   getfuncionalidad(){
     this._funcionalidad.getfuncionalidad(this.id)
    .subscribe((res:any) => {
-     //console.log(res.data);
      this.loading=false;
      this.listafuncionalidadaux=res.data;
      this.verificarFuncionalidad(this.listafuncionalidadaux)

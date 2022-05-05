@@ -84,7 +84,6 @@ getimagenes(){
     this.listaaux=[];
     this.listaaux=res;
     this.loading=false;
-    console.log(res);
     
     if(res.estado==true)
     {
@@ -99,7 +98,6 @@ getimagenes(){
         imagenes_solicitudes:this._pathimagenes.pathimagendefecto
       })
     }
-    console.log(this.listaaux);
     
   })
 }

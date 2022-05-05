@@ -42,6 +42,7 @@ import { DialogsubirdocumentobecasComponent } from './components/dialogsubirdocu
 import { EditarsolicitudesBecasComponent } from './paginas/editarsolicitudes-becas/editarsolicitudes-becas.component';
 import { TablaeditarsolicitudesbecasComponent } from './components/tablaeditarsolicitudesbecas/tablaeditarsolicitudesbecas.component';
 import { EditarsolicitudesBecasComponenteComponent } from './components/editarsolicitudes-becas-componente/editarsolicitudes-becas-componente.component';
+import { ConveniosModule } from '../convenios/convenios.module';
 
 
 
@@ -91,7 +92,8 @@ import { EditarsolicitudesBecasComponenteComponent } from './components/editarso
     MatDatepickerModule,
     MatNativeDateModule,
     MatCardModule,
-    CKEditorModule
+    CKEditorModule,
+    ConveniosModule
   ]
 })
 export class BecasModule { }

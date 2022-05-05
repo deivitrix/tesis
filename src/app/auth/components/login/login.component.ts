@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
         
         this._login.login(res.id_personal)
         .subscribe((res1:any)=>{
-          console.log(res1);
+        
           
           if(res1.estado==true)
           {

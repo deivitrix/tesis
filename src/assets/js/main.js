@@ -5,7 +5,6 @@ window.onload = () => {
 
   menuHijos.forEach((item) => {
     item.addEventListener("click", () => {
-      console.log('si da click');
       const pos = item.parentElement.getAttribute("menu");
       const identificacion = '.item-submenu[menu="' + pos + '"] .submenu';
       let nodoHijo = document.querySelector(identificacion);

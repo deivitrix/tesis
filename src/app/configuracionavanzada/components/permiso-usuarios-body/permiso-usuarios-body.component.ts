@@ -42,7 +42,6 @@ export class PermisoUsuariosBodyComponent implements OnInit {
     this.usuario.getFuncionalidadUsuario(this.id)
     .subscribe((res:any)=>{
       this.loading=false;
-      console.log(res);
       
       if(res.estado==true)
       {

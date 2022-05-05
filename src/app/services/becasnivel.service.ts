@@ -233,6 +233,16 @@ export class BecasnivelService {
     return this.http.put(url,data);
   }
 
+  //generar el reporte
+  generar_reporte(data:any){
+    let url:string=this._base.getUrlLocalApi()+'becas/reporte/pdf';
+    return this.http.post(url,data); 
+  }
+
+  VistaPDF(nombre:string){
+    let url:string=this._base.getUrlLocalApi()+'archivo/becas/'+nombre;
+    return url;
+  }
 
 
   
