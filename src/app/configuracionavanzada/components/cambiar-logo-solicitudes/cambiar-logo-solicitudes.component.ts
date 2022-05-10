@@ -65,7 +65,7 @@ constructor(private ingresar:FormBuilder,private _general:GeneralService,
   ) { 
   this.myform=ingresar.group({
     iimagenescon_id:0,
-    imagenes_solicitudes:[""],
+    imagenes_solicitudes:[_pathimagenes.pathimagendefecto],
   });
   this.pathimagendefecto=_pathimagenes.pathimagendefecto;
   var id;
@@ -87,10 +87,10 @@ getimagenes(){
     
     if(res.estado==true)
     {
-      this.myform.patchValue({
-        iimagenescon_id:res.imagen.id,
-        imagenes_solicitudes:res.imagen.url_imagen
-      })
+      // this.myform.patchValue({
+      //   iimagenescon_id:res.imagen.id,
+      //   imagenes_solicitudes:res.imagen.url_imagen
+      // })
 
     }
     else{
