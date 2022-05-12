@@ -316,7 +316,8 @@ separarSolicitud(imagen:string)
     // Mandar a la vista para generar el Reporte
     let json={
       data:{
-       id:this.id,
+      id:id,
+       //id:this.id,
        imagen1:imagen
       }
     }
