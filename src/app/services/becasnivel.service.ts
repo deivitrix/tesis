@@ -244,6 +244,23 @@ export class BecasnivelService {
     return url;
   }
 
+   //Obtener PDF de la solicitud de beca
+   solicitud_beca(data:any){
+    let url:string=this._base.getUrlLocalApi()+'pdf-solicitud/becas';
+    return this.http.post(url,data); 
+  }
+
+  VistaBecasPDF(nombre:string){
+    let url:string=this._base.getUrlLocalApi()+'archivo/solicitudbecas/'+nombre;
+    return url;
+  }
+
+  //search convenio de la tabla convenio
+  searchsolicitudtabla(id:string):Observable<any>
+  {
+    let url:string = this._base.getUrlLocalApi() + 'solicitudes/get/'+id;
+    return this.http.get<any>(url);
+  }
 
   
 

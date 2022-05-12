@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseUrlService } from '../base/base-url.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -150,5 +151,23 @@ export class GeneralMovilidadService {
     let url:string=this._base.getUrlLocalApi()+'archivo/movilidad/'+nombre;
     return url;
   }
+
+  //Obtener PDF de la solicitud de movilidad
+  solicitud_movilidad(data:any){
+    let url:string=this._base.getUrlLocalApi()+'pdf-solicitud/movilidad';
+    return this.http.post(url,data); 
+  }
+
+  VistaMovilidadPDF(nombre:string){
+    let url:string=this._base.getUrlLocalApi()+'archivo/solicitudmovilidad/'+nombre;
+    return url;
+  }
+
+   //search convenio de la tabla convenio
+   searchsolicitudtabla(id:string):Observable<any>
+   {
+     let url:string = this._base.getUrlLocalApi() + 'solicitudes/get/'+id;
+     return this.http.get<any>(url);
+   }
 
 }

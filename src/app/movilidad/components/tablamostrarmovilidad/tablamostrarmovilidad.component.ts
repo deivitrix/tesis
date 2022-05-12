@@ -9,6 +9,7 @@ import { GenerarreporteconvenioComponent } from 'src/app/convenios/components/ge
 import { MensajeconfiguracionComponent } from 'src/app/configuracion/components/mensajeconfiguracion/mensajeconfiguracion.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GalleriaComponent } from 'src/app/convenios/components/galleria/galleria.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tablamostrarmovilidad',
@@ -52,12 +53,15 @@ export class TablamostrarmovilidadComponent implements OnInit {
   estado_movilidad="";
 
 
+   // id 
+   id="";
 
-  constructor(private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog, public snackBar:MatSnackBar,) {
+  constructor(private rutaActiva: ActivatedRoute,private mostrar: FormBuilder, private movilidad:GeneralMovilidadService, public dialog: MatDialog, public snackBar:MatSnackBar,) {
     
  this.selector=mostrar.group({
    tipo:['',Validators.required]
  })
+ this.id=rutaActiva.snapshot.params.id as string;
    }
 
   ngOnInit(): void {
@@ -274,6 +278,73 @@ export class TablamostrarmovilidadComponent implements OnInit {
   }
 
 
+PDFsolicitud(id:string){
+  var data={id:0,url_escoger:""};
+  const dialogRef1=this.dialog.open(GalleriaComponent,{
+    width:'700px',
+    data:{titulo:'Galeria ',url:data}
+  });
+  dialogRef1.afterClosed().subscribe(result1 => {
+    console.log('The dialog was closed');
+    if(result1!=null)
+    { 
+      if(result1.url_escoger.length==0)
+      {
+        this.snackBar.openFromComponent(MensajeconfiguracionComponent,{
+          data:{
+            titulo:'Error.....',
+            mensaje:"Datos Faltantes para Generar el Reporte",
+           buttonText:'',
+           icon:'warning'
+          },
+          duration:1500,
+          horizontalPosition:'end',
+          verticalPosition:'bottom',
+          panelClass:'error'     
+        });
+        return;
+
+      }
+      this.separarSolicitud(result1.url_escoger); 
+    }
+  });
+
+}
+
+separarSolicitud(imagen:string)
+  {
+    // Mandar a la vista para generar el Reporte
+    let json={
+      data:{
+      // id:this.id,
+       imagen1:imagen
+      }
+    }
+ 
+    
+    this.botongenerar=true;
+   //  this.botonvista=true;
+    this.movilidad.solicitud_movilidad(json)
+    .subscribe((res:any)=>{
+ 
+     if(res.estado)
+     {
+       let url1 = this.movilidad.VistaMovilidadPDF(res.file) as string;
+       let urlToOpen:string=url1;
+      let url: string = '';
+      if (!/^http[s]?:\/\//.test(urlToOpen)) {
+        url += 'http://';
+      }
+     //  this.botonvista=false;
+      this.botongenerar=false;
+    //  this.arrayfecha={fechainicio:"",fechafin:"",tipo:""};
+      url += urlToOpen;
+      window.open(url, '_blank');
+     }
+ 
+    })
+
+  }
 
 
 
