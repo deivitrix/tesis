@@ -41,7 +41,10 @@
                         <td style="text-align: justify;  font-size: 13px">{{c.apellidos}}</td>
                         <td style="text-align: justify;  font-size: 13px">{{c.nombres}}</td>
                         <td style="text-align: justify;  font-size: 13px">{{c.titulo}}</td>
-                        <td style="text-align: justify;  font-size: 13px">{{c.detalle}}</td>
+                        <td style="text-align: justify;  font-size: 13px">
+                          <div [innerHTML]="c.detalle"></div>
+                          
+                        </td>
                         
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo}} -->
                         <!-- <td style="text-align: justify; text-align: justify; font-size: 13px">{{c.dato_viejo?.length==0}}<p>No data</p> {{c.dato_viejo?.length}} <p>Data</p> </td>  -->

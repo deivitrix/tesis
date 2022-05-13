@@ -305,19 +305,19 @@ PDFsolicitud(id:string){
         return;
 
       }
-      this.separarSolicitud(result1.url_escoger); 
+      this.separarSolicitud(result1.url_escoger,id); 
     }
   });
 
 }
 
-separarSolicitud(imagen:string)
+separarSolicitud(imagen:string,id:string)
   {
     // Mandar a la vista para generar el Reporte
     let json={
       data:{
-      //id:id,
-       id:this.id,
+      id:id,
+      //  id:this.id,
        imagen1:imagen
       }
     }
