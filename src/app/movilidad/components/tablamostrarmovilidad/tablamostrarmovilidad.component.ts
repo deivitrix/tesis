@@ -248,7 +248,7 @@ export class TablamostrarmovilidadComponent implements OnInit {
       fecha_inicio:fechainicio,
       fecha_fin: fechafinal,
       estado:this.estado,
-      tipo:"B",
+      tipo:"M",
       imagen1:imagen
      }
    }
